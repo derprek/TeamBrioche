@@ -12,5 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
+
+Route::get('reports', 'ReportsController@index');
+Route::get('reports/create', 'ReportsController@create');
+Route::get('reports/{report_id}', 'ReportsController@show');
+Route::post('reports', 'ReportsController@store');
+
+Route::controllers([
+
+		'auth'=>'Auth\AuthController',
+		'password' =>'Auth\PasswordController',
+		//'client' =>'Auth\ClientAuthController',
+
+	]);
