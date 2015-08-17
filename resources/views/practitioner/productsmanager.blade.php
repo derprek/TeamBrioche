@@ -55,7 +55,15 @@
                   <th>Price</th>
                   <th>Updated On</th>  					       				       
 					    </tr>
-					
+					   
+             @if(empty($productsmanager))
+
+              <tr>
+                    <td> No Products found. </td>                            
+                  </tr>
+
+            @else
+
 			         	@foreach($productsmanager as $products)
 			         	
 			         		<tr>
@@ -67,7 +75,7 @@
 			         		</tr>
 
 			         	@endforeach
-			         	
+			         	@endif
 		         	</table>
 	         	
       			 

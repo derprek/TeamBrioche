@@ -53,8 +53,16 @@
 		         			<th>Created on</th>
 		         			<th>Modified on</th>					       				       
 					    </tr>
-					
-			         	@foreach($questionlist as $question)
+						
+						@if(empty($questionlist))
+
+							<tr>
+			         			<td> No Questions found. </td>	 	         		         		
+			         		</tr>
+
+						@else
+
+							@foreach($questionlist as $question)
 			         	
 			         		<tr>
 			         			<td> {{ $question->question}} </td>	
@@ -63,6 +71,9 @@
 			         		</tr>
 
 			         	@endforeach
+
+						@endif
+			         	
 			         	
 		         	</table>
 	         	<hr/>

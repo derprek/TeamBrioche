@@ -62,7 +62,14 @@
 					        <th>Updated on</th>
 					        <th>Status</th>
 					    </tr>
-					   		     
+
+					   		@if(empty($latestreport))
+
+					   		    <tr>			         			
+			         				<td> No Recent Reports</td>
+			         			</tr>
+
+					   		     @else
 			         		<tr>			         			
 			         			<td> <a href ="{{ url('/practitioner', $latestreport->id) }}"> {{ $latestreport->id}}</a></td>
 			         			<td> {{ App\User::find($latestreport->userid)->name}}</td>
@@ -70,6 +77,7 @@
 			         			<td> {{ $latestreport->updated_at}}</td>
 			         			<td> {{ $latestreport->status}}</td>
 			         		</tr>
+			         		 @endif
 
                 	  </table>  
                 	 
@@ -89,17 +97,29 @@
 					        <th>Status</th>
 					    </tr>
 
-					    @foreach($pending as $pendinglist)
-			     
-			         		<tr>			         			
+					    @if(empty($pending))
+
+					    	<tr> <td> No Records </td>
+					    	</tr>
+
+					    @else
+					     @foreach($pending as $pendinglist)
+
+					   		<tr>			         			
 			         			<td> <a href ="{{ url('/practitioner', $pendinglist->id) }}"> {{ $pendinglist->id}}</a></td>
 			         			<td> {{ App\User::find($pendinglist->userid)->name}}</td>
 			         			<td> {{ $pendinglist->created_at}}</td>
 			         			<td> {{ $pendinglist->updated_at}}</td>
 			         			<td> {{ $pendinglist->status}}</td>
 			         		</tr>
+			         		@endforeach
+					    @endif
 
-			         	@endforeach
+					   
+			     
+			         		
+
+			         	
 
                 	  </table>
 		  			</div>
@@ -116,6 +136,13 @@
 					        <th>Status</th>
 					    </tr>
 
+					     @if(empty($progress))
+
+					    	<tr> <td> No Records </td>
+					    	</tr>
+
+					    @else
+
 					    @foreach($progress as $progresslist)
 			     
 			         		<tr>			         			
@@ -125,8 +152,11 @@
 			         			<td> {{ $progresslist->updated_at}}</td>
 			         			<td> {{ $progresslist->status}}</td>
 			         		</tr>
+			         	
 
 			         	@endforeach
+
+			         	 @endif
 
                 	  </table>
 				
@@ -144,6 +174,13 @@
 					        <th>Status</th>
 					    </tr>
 
+					    @if(empty($progress))
+
+					    	<tr> <td> No Records </td>
+					    	</tr>
+
+					    @else
+
 					    @foreach($finished as $finishedlist)  
 			 
 			         		<tr>			         			
@@ -155,6 +192,7 @@
 			         		</tr>
 
 			         	@endforeach
+			         	@endif
 
                 	  </table>
 		  	</div>
