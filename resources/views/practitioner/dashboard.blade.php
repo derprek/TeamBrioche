@@ -63,7 +63,7 @@
 					        <th>Status</th>
 					    </tr>
 
-					   		@if(empty($latestreport))
+					   		@if(empty($latestreport->id))
 
 					   		    <tr>			         			
 			         				<td> No Recent Reports</td>
