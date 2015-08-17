@@ -55,6 +55,13 @@ class ReportsController extends Controller
 
         }
 
+        if($latestreport->status = 'Dummy Record')
+        {
+
+        }
+
+        else
+        {
         $managers = DB::table('question_report')  //
                 ->where('report_id', '=', $latestreport->id)
                 ->get();
@@ -89,7 +96,7 @@ class ReportsController extends Controller
         // End
 
         //dd($productlist[0]->name);
-
+        }
 
         return view('reports.index', compact ('reports', 'products','latestreport','managers','questions','questionslength','patproductarray','pracproductarray'));
     }
