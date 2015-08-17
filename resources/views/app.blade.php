@@ -12,17 +12,23 @@ Released   : 20140216
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="/css/metro.css" rel="stylesheet">
-<link href="/css/metro-icons.css" rel="stylesheet">
-<link href="/css/metro-responsive.css" rel="stylesheet">
-<link href="/css/metro-schemes.css" rel="stylesheet">
- <link href="/css/docs.css" rel="stylesheet">
-  <link href="/css/main.css" rel="stylesheet">
+  <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/atest.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+
+ <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
 
   <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">

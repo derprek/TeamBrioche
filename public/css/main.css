@@ -7,3 +7,8 @@ body{
 	margin:auto;
 	margin-top:10px;
 }
+
+#categorygetter{
+
+	visibility: visible;
+}

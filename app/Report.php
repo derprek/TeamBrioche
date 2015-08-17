@@ -18,4 +18,14 @@ class Report extends Model
     {
     	return $this->belongsToMany('App\Question')->withTimestamps();
     }
+
+    public function users()
+    {
+        return $this->belongsTo('App\User')->withTimestamps();
+    }
+
+    public function products() // get articles associated with the given tag
+    {
+        return $this->belongsToMany('App\Product');
+    }
 }

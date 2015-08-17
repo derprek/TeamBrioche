@@ -1,53 +1,78 @@
-@extends('app')
+@extends('patientmaster')
+
+@section('sidemenubar')
+  <ul class="nav navbar-nav side-nav">
+    <li class="active">
+          <a href="/../reports"><i class="fa fa-fw fa-dashboard"></i> Reports</a>
+      </li>
+      <li>
+          <a href="userhistory"><i class="fa fa-fw fa-bar-chart-o"></i> History</a>
+      </li>
+      </ul>
+@endsection
 
 @section('content')
- <div class="dashboardbody">
-@foreach($questions as $question)
-<article>
 
+    <div id="page-wrapper">
 
- <div class="tile-wide bg-red fg-white" data-role="tile" data-toggle="modal" data-target=<?php echo '#myModal' . $question->question_id ?>
->
-                <div class="tile-content iconic">
-                    <span class="icon mif-cloud"></span>
-                    <span class="tile-label">Question: {{ $question->question_id }}</span>
+      <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1 class="page-header">
+                      &nbsp;
+                  </h1>
+                  <ol class="breadcrumb">
+                      <li>
+                          <i class="fa fa-dashboard"></i>  <a href="/../reports">Dashboard</a>
+                      </li>  
+                      <li class="active">
+                          <i class="fa fa-desktop"></i> Create a new Report
+                      </li>                            
+                  </ol>
+              </div>
+          </div>
+
+    {!! Form::open(['url' => 'reports/summary']) !!}
+    @foreach($questions as $question)
+    <article>
+
+   <!-- <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Question: {{ $question->id }}</h3>
                 </div>
+                <div class="panel-body" data-toggle="modal" data-target=<?php echo '#myModal' . $question->id ?> style="text-align: center;">
+                    {{ $question->question }}<br><br>              
+                    <button type="button" class="btn btn-primary">Click to Answer</button>
+                </div>
+            <div class="panel-footer">
+                Status: 
             </div>
-           
-			</a>
-</article>
+        </div>
+    </div> -->
 
-{!! Form::open(['url' => 'reports']) !!}
-<div class="modal fade" role="dialog" id=<?php echo 'myModal' . $question->question_id ?>>
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"> Edit Question {{ $question->question_id }}</h4>
-      </div>
-      <div class="modal-body">
-        <p>Question: {{ $question->question }}</p>
-        <label 
-        {!! Form::label('answer', 'Answer:') !!}
-		{!! Form::textarea('answer', null, ['class' => 'form-control']) !!}
-      </div>
-      <div class="modal-footer">
-      	<button type="submit" class="btn btn-success" data-dismiss="modal">Save</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+    <div class="form-group">
+        <label for = <?php echo 'answersid' . $question->id; ?>>Question {{ $question->id }}: {{ $question->question }}</label>
+        <textarea name =<?php echo 'answersid' . $question->id; ?> class="form-control" rows="7"></textarea>
     </div>
+    </article>
 
-  </div>
-</div>
+    <hr/>
+
+
+
+
+
 
 
 @endforeach
 
-{!! Form:: submit('Upload' , ['class' => 'btn btn-primary form-control']) !!}
+{!! Form:: submit('View a Summary' , ['class' => 'btn btn-primary form-control']) !!}
 
 {!! Form::close() !!}
+</div>
 </div>
 
 @stop

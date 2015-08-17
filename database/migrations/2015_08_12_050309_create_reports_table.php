@@ -18,6 +18,7 @@ class CreateReportsTable extends Migration
             $table->integer('step');
             $table->timestamp('date');
             $table->string('status');
+            $table->string('prac_notes');
             $table->timestamps();
 
 

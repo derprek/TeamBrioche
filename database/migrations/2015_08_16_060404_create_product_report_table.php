@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionReportTable extends Migration
+class CreateProductReportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,21 +12,19 @@ class CreateQuestionReportTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_report', function(Blueprint $table)
+        Schema::create('product_report', function(Blueprint $table)
             {
-                $table->integer('rqid');
+                $table->increments('prid');
                 $table->integer('report_id')->unsigned()->index();
                 $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
 
-                $table->integer('question_id')->unsigned()->index();
-                $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+                $table->integer('product_id')->unsigned()->index();
+                $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
-                $table->text('answers');
-                $table->timestamps();
+                $table->timestamp('updated_on');
 
             }); //articles and tag
     }
-    
 
     /**
      * Reverse the migrations.
@@ -35,6 +33,6 @@ class CreateQuestionReportTable extends Migration
      */
     public function down()
     {
-        Schema::drop('question_report');
+        Schema::drop('product_report');
     }
 }
