@@ -38,7 +38,7 @@ class ReportsController extends Controller
 
         $reports = Report::where('userid', '=', Auth::User()->id)->get();
        
-        $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('id', 'desc')->first();
+        $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
 
         if(empty($latestreport->id))
         {
@@ -55,7 +55,7 @@ class ReportsController extends Controller
 
         }
 
-        if($latestreport->status = 'Dummy Record')
+        if($latestreport->status == 'Dummy Record')
         {
 
         }

@@ -138,7 +138,7 @@
                                 @if(empty($managers[0]))
                                 	<tr>
 						     			<td> Create a new Report </td>	        
-								    </tr>)
+								    </tr>
                                    @else             	            
                                 <tbody>
 

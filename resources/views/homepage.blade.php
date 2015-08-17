@@ -12,7 +12,7 @@
                         <hr class="star-light">
                         <span class="skills">Assitive Technology Evaluation and Selection Tool</span>
                     </div><br>
-                    <a href="auth/login" class="btn btn-primary" role="button">Are you seeking help <br> from a practitioner?</a>
+                    <a href="auth/login" class="btn btn-primary" role="button">Are you seeking help <br> as a patient?</a>
                     <a href="auth/register" class="btn btn-info" role="button">Register as  <br>  a new patient</a> 
                     <hr/>
                       <a href="practitioner" class="btn btn-primary" role="button">Are you a <br>  practitioner?</a> 

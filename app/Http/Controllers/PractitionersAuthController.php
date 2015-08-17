@@ -92,13 +92,25 @@ class PractitionersAuthController extends Controller
          $password = MD5($_POST['password']);
          $email = $_POST['email'];
 
-         $matchme = ['email' => $email, 'password' => $password];
-         
-         $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
-         Session::put('userid', $practitionerinfo->id);
-         $prac_reports = Report::all();
+         $loginchecker = Practitioner::where('email', '=' ,$email)->where('password','=',$password)->get();
 
-         return Redirect::action('PractitionersController@index');
+         if(empty($loginchecker[0]))
+         {
+             $errors[] = 'Invalid Credentials';   
+             return view('login.practitioner', compact ('errors'));      
+         }
+
+          else{
+             $matchme = ['email' => $email, 'password' => $password];
+         
+             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
+             Session::put('userid', $practitionerinfo->id);
+             $prac_reports = Report::all();
+
+             return Redirect::action('PractitionersController@index');   
+             
+        }
+        
         // return view('practitioner.dashboard', compact ('practitionerinfo', 'prac_reports'));
     }
 
