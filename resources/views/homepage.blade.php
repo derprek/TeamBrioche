@@ -108,7 +108,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>ATEST  is an onlinebla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla  </p>
+                    <p>ATEST  is an online assistive tool</p>
                 </div>
                 <div class="col-lg-4">
                     <p> This project will assist many people with disabilities who require assistive technologies to match their lifestyle and needs. At the present moment people who need assistive technologies have to go through a system to attain these technologies which can take up to a year. This process despite its length does not guarantee that people are matched with the appropriate assistive technology. The application asks the users questions in order to generate a report.  </p>
