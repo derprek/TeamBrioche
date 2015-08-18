@@ -70,7 +70,7 @@ class PractitionersAuthController extends Controller
             $newPrac->save();
 
             $matchme = ['email' => $pracemail, 'password' => MD5($pracpw)];
-             
+            
             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
             Session::put('userid', $practitionerinfo->id);
 
@@ -79,46 +79,46 @@ class PractitionersAuthController extends Controller
 
         else{
 
-             $errors[] = 'Email already exists';   
-             return view('login.pracregister', compact ('errors'));
-        }
+           $errors[] = 'Email already exists';   
+           return view('login.pracregister', compact ('errors'));
+       }
 
-        
-    }
+       
+   }
 
-      public function login()
-    {
+   public function login()
+   {
 
-         $password = MD5($_POST['password']);
-         $email = $_POST['email'];
+       $password = MD5($_POST['password']);
+       $email = $_POST['email'];
 
-         $loginchecker = Practitioner::where('email', '=' ,$email)->where('password','=',$password)->get();
+       $loginchecker = Practitioner::where('email', '=' ,$email)->where('password','=',$password)->get();
 
-         if(empty($loginchecker[0]))
-         {
-             $errors[] = 'Invalid Credentials';   
-             return view('login.practitioner', compact ('errors'));      
-         }
+       if(empty($loginchecker[0]))
+       {
+           $errors[] = 'Invalid Credentials';   
+           return view('login.practitioner', compact ('errors'));      
+       }
 
-          else{
-             $matchme = ['email' => $email, 'password' => $password];
-         
-             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
-             Session::put('userid', $practitionerinfo->id);
-             $prac_reports = Report::all();
+       else{
+           $matchme = ['email' => $email, 'password' => $password];
+           
+           $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
+           Session::put('userid', $practitionerinfo->id);
+           $prac_reports = Report::all();
 
-             return Redirect::action('PractitionersController@index');   
-             
-        }
-        
+           return Redirect::action('PractitionersController@index');   
+           
+       }
+       
         // return view('practitioner.dashboard', compact ('practitionerinfo', 'prac_reports'));
-    }
+   }
 
-    public function logout()
-    {
-        Session::flush();
-        return redirect('/../');
-    }
+   public function logout()
+   {
+    Session::flush();
+    return redirect('/../');
+}
 
     /**
      * Display the specified resource.
@@ -139,7 +139,7 @@ class PractitionersAuthController extends Controller
      */
     public function edit($id)
     {
-       
+     
     }
 
     /**
