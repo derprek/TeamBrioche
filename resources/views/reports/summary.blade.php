@@ -14,15 +14,6 @@
 @section('content')
 
 {!! Form::open(['url' => 'reports']) !!}
-<input type="hidden" name="Finalanswersid1" value ={{ $arrayAnswer[0]}}>
-<input type="hidden" name="Finalanswersid2" value ={{ $arrayAnswer[1]}}>
-<input type="hidden" name="Finalanswersid3" value ={{ $arrayAnswer[2]}}>
-<input type="hidden" name="Finalanswersid4" value ={{ $arrayAnswer[3]}}>
-<input type="hidden" name="Finalanswersid5" value ={{ $arrayAnswer[4]}}>
-<input type="hidden" name="Finalanswersid6" value ={{ $arrayAnswer[5]}}>
-<input type="hidden" name="Finalanswersid7" value ={{ $arrayAnswer[6]}}>
-<input type="hidden" name="Finalanswersid8" value ={{ $arrayAnswer[7]}}>
-<input type="hidden" name="Finalanswersid9" value ={{ $arrayAnswer[8]}}>
 
 <div id="page-wrapper">
 

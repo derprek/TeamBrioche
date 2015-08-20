@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Auth;
 use Carbon\Carbon;
+use Session;
 
 class ReportsController extends Controller
 {
@@ -178,16 +179,16 @@ class ReportsController extends Controller
      * @return Response
      */
     public function store()
-    {
-        $finalanswers1 = $_POST['Finalanswersid1'];
-        $finalanswers2 = $_POST['Finalanswersid2'];
-        $finalanswers3 = $_POST['Finalanswersid3'];
-        $finalanswers4 = $_POST['Finalanswersid4'];
-        $finalanswers5 = $_POST['Finalanswersid5'];
-        $finalanswers6 = $_POST['Finalanswersid6'];
-        $finalanswers7 = $_POST['Finalanswersid7'];
-        $finalanswers8 = $_POST['Finalanswersid8'];
-        $finalanswers9 = $_POST['Finalanswersid9'];
+    {   
+        $finalanswers1 = Session::get('answer1');
+        $finalanswers2 = Session::get('answer2');
+        $finalanswers3 = Session::get('answer3');
+        $finalanswers4 = Session::get('answer4');
+        $finalanswers5 = Session::get('answer5');
+        $finalanswers6 = Session::get('answer6');
+        $finalanswers7 = Session::get('answer7');
+        $finalanswers8 = Session::get('answer8');
+        $finalanswers9 = Session::get('answer9');
 
         $AnswerArray = array($finalanswers1,$finalanswers2,$finalanswers3,$finalanswers4,$finalanswers5,$finalanswers6,$finalanswers7,$finalanswers8,$finalanswers9);
         $userid = Auth::User()->id;
@@ -281,6 +282,16 @@ class ReportsController extends Controller
 
         return redirect('/../auth/login');
     }
+
+    Session::put('answer1', $_POST['answersid1']);
+    Session::put('answer2', $_POST['answersid2']);
+    Session::put('answer3', $_POST['answersid3']);
+    Session::put('answer4', $_POST['answersid4']);
+    Session::put('answer5', $_POST['answersid5']);
+    Session::put('answer6', $_POST['answersid6']);
+    Session::put('answer7', $_POST['answersid7']);
+    Session::put('answer8', $_POST['answersid8']);
+    Session::put('answer9', $_POST['answersid9']);
 
     $answers1 = $_POST['answersid1'];
     $answers2 = $_POST['answersid2'];
