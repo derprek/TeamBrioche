@@ -43,12 +43,23 @@ Route::post('reports', 'ReportsController@store');
 Route::post('reports/update', 'ReportsController@update');
 Route::post('reports/newproducts', 'ReportsController@addnewproducts');
 
+
+// registration 
+Route::get('auth/registration', 'PractitionersAuthController@registration');
+
+
+// login 
+Route::get('login/login', 'PractitionersAuthController@showlogin');
+
 Route::get('practitioner/register', 'PractitionersAuthController@showregisterpage');
+
+
 Route::get('prac/logout', 'PractitionersAuthController@logout');
 Route::post('practitioner/register', 'PractitionersAuthController@register');
 
 Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
+
 
 
 

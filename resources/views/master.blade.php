@@ -43,9 +43,6 @@
         <script src="/js/classie.js"></script>
         <script src="/js/cbpAnimatedHeader.js"></script>
 
-        <!-- Contact Form JavaScript -->
-        <script src="/js/jqBootstrapValidation.js"></script>
-        <script src="/js/contact_me.js"></script>
 
         <!-- Custom Theme JavaScript -->
         <script src="/js/freelancer.js"></script>
@@ -74,14 +71,12 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#client">About Us</a>
+                            <a href="#about">About Us</a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#about">Our Mission</a>
+                            <a href="#mission">Our Mission</a>
                         </li>
-                        <li class="page-scroll">
-                            <a href="auth/register">Patients Sign Up</a>
-                        </li>
+                       
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
