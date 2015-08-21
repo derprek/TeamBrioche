@@ -122,7 +122,7 @@
                         <th>Answer</th>	
                     </tr>
                 </thead>
-                @if($qrarraylength < 1)
+                @if(empty($qrarraylength))
                 <tr>
                   <td> Create a new Report </td>	        
               </tr>
