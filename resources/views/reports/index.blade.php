@@ -58,7 +58,7 @@
                                 </a>
                             </div>
                             <div class="panel-footer">
-                                Status: 
+                                Status: Working
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                                 </a>
                             </div>
                             <div class="panel-footer">
-                                Status: 
+                                Status: Not working
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                                 </a>
                             </div>
                             <div class="panel-footer">
-                                Status: 
+                                Status: Not working
                             </div>
                         </div>
                     </div>
@@ -243,7 +243,7 @@
 </table>
 
 <label for ="pracnotes" >Practitioner's Notes</label>
-<textarea name ='pracnotes'class="form-control" rows="7" disabled> {{ $latestreport->prac_notes }}</textarea>
+<textarea name ='pracnotes'class="form-control" rows="7" readonly=""> {{ $latestreport->prac_notes }}</textarea>
 
 </div>	
 
