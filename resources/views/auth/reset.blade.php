@@ -8,14 +8,14 @@
 				<div class="panel-heading">Reset Password</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
+					<div class="alert alert-danger">
+						<strong>Whoops!</strong> There were some problems with your input.<br><br>
+						<ul>
+							@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
 					@endif
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
@@ -56,5 +56,5 @@
 		</div>
 	</div>
 </div>
-	@endsection
+@endsection
 @stop

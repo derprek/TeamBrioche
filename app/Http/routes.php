@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+<<<<<<< HEAD
+=======
+Route::get('auth/login', function () {
+    return redirect('/../');
+});
+
+>>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
 Route::get('home', 'ReportsController@index');
 Route::get('reports/reports/create/products', 'ReportsController@newproducts');
 
@@ -44,12 +51,22 @@ Route::post('reports', 'ReportsController@store');
 Route::post('reports/update', 'ReportsController@update');
 Route::post('reports/newproducts', 'ReportsController@addnewproducts');
 
+
+// registration 
+Route::get('auth/registration', 'PractitionersAuthController@registration');
+
+
+// login 
+Route::get('login/login', 'PractitionersAuthController@showlogin');
 Route::get('practitioner/register', 'PractitionersAuthController@showregisterpage');
+
+
 Route::get('prac/logout', 'PractitionersAuthController@logout');
 Route::post('practitioner/register', 'PractitionersAuthController@register');
 
 Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
+
 
 
 

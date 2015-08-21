@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title> A T E S T</title>
 
     <!-- Bootstrap Core CSS -->
@@ -29,13 +28,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
     </head>
 
     <body>
-
         <div id="wrapper">
-
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -72,16 +68,14 @@
                 </ul>
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    
-                     @yield('sidemenubar')
-                      
-                </div>
-                <!-- /.navbar-collapse -->
-            </nav>
+                   @yield('sidemenubar')
+               </div>
+               <!-- /.navbar-collapse -->
+           </nav>
 
-          <div class = "body">
+           <div class = "body">
             @yield('content')
-          </div>
+        </div>
         <!-- /#page-wrapper -->
 
     </div>
