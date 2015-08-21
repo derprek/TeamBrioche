@@ -26,6 +26,6 @@ class Report extends Model
 
     public function products() // get articles associated with the given tag
     {
-        return $this->belongsToMany('App\Product');
+        return $this->belongsToMany('App\Product')->withPivot('request_by');
     }
 }

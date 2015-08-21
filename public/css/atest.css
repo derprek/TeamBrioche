@@ -202,6 +202,11 @@ section.success a.active {
     }
 }
 
+.tagslist{
+
+    width:500px;
+}
+
 #client .portfolio-item {
     right: 0;
     margin: 0 0 15px;

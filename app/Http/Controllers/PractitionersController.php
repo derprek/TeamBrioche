@@ -18,6 +18,9 @@ use App\Manager;
 use App\Practitioner;
 use App\User;
 use App\Product;
+use App\Tag;
+use App\Category;
+use App\SubcategoryF;
 
 
 class PractitionersController extends Controller
@@ -100,6 +103,8 @@ class PractitionersController extends Controller
              return redirect('/../');
         }
 
+        $prodtags = $_POST['tag_list'];
+        dd($prodtags);
         $newprodname = $_POST['prodname'];
         $newprodmanu = $_POST['prodmanu'];
         $newprodcat = $_POST['prodcat'];
@@ -138,6 +143,8 @@ class PractitionersController extends Controller
             echo "hi";
 
          }
+
+
 
          else{
 
@@ -244,6 +251,7 @@ class PractitionersController extends Controller
 
        $updatestatus =  $_POST['ReportStatus'];
 
+       dd($_POST['prac_notes']);
        $prac_notes =  $_POST['prac_notes'];
 
        $reports->status = $updatestatus;
@@ -278,7 +286,7 @@ class PractitionersController extends Controller
         return view('practitioner.products', compact('products'));
     }
 
-    public function productsmanager()
+    public function productsmanager()  //load product manager page
     {
         $value = Session::get('userid');
         if(empty($value))
@@ -286,8 +294,10 @@ class PractitionersController extends Controller
              return redirect('/../');
         }
 
+        $categories = Category::all();
+        $tags = Tag::lists('name');
         $productsmanager = Product::all();
-        return view('practitioner.productsmanager', compact('productsmanager'));
+        return view('practitioner.productsmanager', compact('productsmanager', 'tags','categories'));
     }
 
     public function generatereport($id)
@@ -297,7 +307,7 @@ class PractitionersController extends Controller
         {
              return redirect('/../');
         }
-        
+
         $report = Report::find($id);      
         $managers = DB::table('question_report')  //
                 ->where('report_id', '=', $id)

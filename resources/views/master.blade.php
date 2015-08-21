@@ -80,9 +80,7 @@
                     <li class="page-scroll">
                         <a href="#about">Our Mission</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="auth/register">Patients Sign Up</a>
-                    </li>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -14,7 +14,7 @@ class CreateQuestionReportTable extends Migration
     {
         Schema::create('question_report', function(Blueprint $table)
             {
-                $table->integer('rqid');
+                $table->increments('rqid');
                 $table->integer('report_id')->unsigned()->index();
                 $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
 

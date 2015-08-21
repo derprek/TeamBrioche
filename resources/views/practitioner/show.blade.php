@@ -206,7 +206,6 @@
                  <!--<option onclick="mycatFunction()">Pending Review</option> -->
                  <option value = 'In Progress'>In Progress</option>
                  <option value="Finished">Finished</option>
-
           </select>
 
            <hr/>

@@ -16,7 +16,13 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('manufactorer');
-            $table->string('category');
+
+            $table->integer('category_id')->unsigned()->index();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
+            $table->integer('subcategory_id')->unsigned()->index();
+            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
+
             $table->string('price');
             $table->timestamp('updated_on');
             $table->timestamp('updated_at');

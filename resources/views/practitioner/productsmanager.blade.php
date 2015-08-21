@@ -78,7 +78,7 @@
 			         	@endif
 		         	</table>
 	         	
-      			 
+      			  
 		<button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#newprod">Upload a new Product</button>     	
 	<!-- End New Products Modal -->
 
@@ -107,20 +107,41 @@
 
 			    <div class="form-group" id ="qntable">
 			        <label for ="newquestion"> Product</label>
-			        <textarea required name = "prodname" class="form-control" rows="7" placeholder="Enter a new product"></textarea>
+			        <textarea required name = "prodname" class="form-control" rows="3" placeholder="Enter the product's name"></textarea>
               <hr/>
 
               <label for ="prodcat"> Manufactorer:</label>
-             <input required type="text" name="prodmanu" class="form-control" placeholder="Enter the manufactorer's name">
+              <input required type="text" name="prodmanu" class="form-control" placeholder="Enter the manufactorer's name">
               <hr/>
 
-              <label for ="prodcat"> Category:</label>
-             <input required type="text" name="prodcat" class="form-control" placeholder="Enter the product category">
+              <label for ="cat_list"> Category:</label>
+                <select id= "cat_list" name = "Catselect" class ="form-control" >
+                 <option value = 'General' disabled selected>Please select a category</option>       
+                          @foreach($categories as $cat)
+                            <option value = {{ $cat->id}}>{{ $cat->name }}</option>
+                          @endforeach                      
+                </select>
               <hr/>
 
-              <label for ="prodcat"> Price:</label>
+              <label for ="cat_list"> Sub-category:</label>
+                <select id= "subcat_list" name = "Subcatselect" class ="form-control" >
+                 <option value = 'General' disabled selected>Please select a sub-category</option>       
+                          @foreach($categories as $cat)
+                            <option value = {{ $cat->id}}>{{ $cat->name }}</option>
+                          @endforeach                      
+                </select>
+              <hr/>
+
+              <label for ="prodcat"> Price($):</label>
              <input required type="number" step="any" name="prodprice" class="form-control" placeholder="Enter the selling price of this product">
               <hr/>
+
+              <div class = "form-group"> 
+               <label for ="tag_list"> Tags:</label>
+               <br>
+              {!! Form::select('tag_list[]', $tags, null, ['id' => 'tag_list', 'class' => 'tagslist', 'multiple']) !!}
+               </div>
+             
 
 			    </div>
 
@@ -143,7 +164,11 @@
   
 </div>
 		 
-		       
+	<script>
+
+    $('#tag_list').select2();
+
+  </script>        
 
 @endsection
 @stop
