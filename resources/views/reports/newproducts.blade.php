@@ -11,7 +11,6 @@
 </ul>
 @endsection
 
-
 @section('content')
 
 <div id="page-wrapper">
@@ -35,8 +34,6 @@
 			</div>
 		</div>
 		<!-- /.row -->
-
-
 
 		<h4> What Assistive Technology do you desire?</h4>
 

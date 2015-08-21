@@ -38,13 +38,13 @@
     </div>
     <!-- /.row -->          
 
-    <h2>Report: {{$reports->id}}</h2>
-    <input type="hidden" name="reportid" value ={{$reports->id}}>
-    <a href= "{{ url('/practitioner/generate', $reports->id) }}"> generate report </a>
+    <h2>Report: {{$report->id}}</h2>
+    <input type="hidden" name="reportid" value ={{$report->id}}>
+    <a href= "{{ url('/practitioner/generate', $report->id) }}"> generate report </a>
     <div class="dashboardbody">
      <div class="table-responsive">
       <table class="table table-bordered table-hover table-striped">
-        <p style ="float:right"> Client's name: {{ $client-> name}} </p>
+        <p style ="float:right"> Client's name: {{ $client->name}} </p>
         <thead>
           <tr>
             <th>Question </th>
@@ -52,12 +52,23 @@
           </tr>
         </thead>
         <tbody>
-          @for ($i = 0; $i < $questionlistlength; $i++)
+        @if (empty($answerlist))
+
           <tr>
-            <td>{{ $questions[$i] }} </td>
-            <td>{{ $managers[$i]->answers}} </td>           
+            <td>No Reports</td>     
+          </tr>
+
+        @else
+
+          @for ($i = 0; $i < $qrarraylength; $i++)
+          <tr>
+            <td>{{ $questionlist[$i]->question }} </td>
+            <td>{{ $answerlist[$i]}} </td>           
           </tr>
           @endfor
+
+        @endif
+          
         </tbody>
       </table>
     </div>
@@ -74,7 +85,7 @@
          </tr>
        </thead>
 
-       @if(empty($patproductarray))
+       @if(empty($patprodarray))
 
        <tbody>
         <tr> 
@@ -84,7 +95,7 @@
 
       @else
 
-      @foreach($patproductarray as $patlist)
+      @foreach($patprodarray as $patlist)
       <tbody>                     
         <tr>
           <td>{{ $patlist->name }} </td>
@@ -135,7 +146,7 @@
      </tr>
    </thead>
 
-   @if(empty($pracproductarray))
+   @if(empty($pracprodarray))
    <tbody>
     <tr> 
       <td>No Items Listed yet</td>
@@ -144,7 +155,7 @@
 
   @else
 
-  @foreach($pracproductarray as $praclist)
+  @foreach($pracprodarray as $praclist)
   <tbody>                     
     <tr>
       <td>{{ $praclist->name }} </td>
@@ -161,7 +172,7 @@
 
 {!! Form::open(['url' => 'practitioner/products']) !!}
 <h4>
- <input type="hidden" name="reportid" value ={{$reports->id}}>
+ <input type="hidden" name="reportid" value ={{$report->id}}>
  {!! Form:: submit('Add a Product' , ['class' => 'btn btn-primary']) !!}
 </h4>
 </div> 
@@ -171,13 +182,13 @@
 {!! Form::open(['url' => 'practitioner/update']) !!}
 <div class="form-group">
   <label for = "prac_notes"> Practitioner's Notes: </label>
-  <textarea name ="prac_notes" class="form-control" rows="7">{{ $reports->prac_notes }}</textarea>
+  <textarea name ="prac_notes" class="form-control" rows="7">{{ $report->prac_notes }}</textarea>
 </div>
 
 <hr/>
 <label for = "ReportStatus"> Report Status: </label>
 <select id= "status" name = "ReportStatus" >
- <option value = 'Pending Review' selected>{{ $reports-> status }}</option>
+ <option value = 'Pending Review' selected>{{ $report-> status }}</option>
  <!--<option onclick="mycatFunction()">Pending Review</option> -->
  <option value = 'In Progress'>In Progress</option>
  <option value="Finished">Finished</option>
@@ -186,215 +197,12 @@
 <hr/>
 {!! Form:: submit('Update Report' , ['class' => 'btn btn-primary form-control']) !!}
 <!--{!! Form:: submit('Summarize Report', ['class' => 'btn btn-primary form-control']) !!}-->
-<input type="hidden" name="reportid" value ={{$reports->id}}>
+<input type="hidden" name="reportid" value ={{$report->id}}>
 
 {!! Form::close() !!}
 </div>
 </div>
 </div>
-
-<<<<<<< HEAD
-        <div id="page-wrapper">
-
-          <div class="container-fluid">
-
-              <!-- Page Heading -->
-              <div class="row">
-                  <div class="col-lg-12">
-                      <h1 class="page-header">
-                          &nbsp;
-                      </h1>
-                      <ol class="breadcrumb">
-                          <li>
-                              <i class="fa fa-dashboard"></i>  <a href="/../practitioner/dashboard">Dashboard</a>
-                          </li>                  
-
-                          <li class="active">
-                              <i class="fa fa-desktop"></i> View Report
-                          </li>
-                      </ol>
-                  </div>
-              </div>
-              <!-- /.row -->          
-
-           <h2>Report: {{$reports->id}}</h2>
-            <input type="hidden" name="reportid" value ={{$reports->id}}>
-                   <a href= "{{ url('/practitioner/generate', $reports->id) }}"> generate report </a>
-
-
-             <div class="dashboardbody">
-              
-
-             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <p style ="float:right"> Client's name: {{ $client-> name}} </p>
-                  <thead>
-                    <tr>
-                      <th>Question </th>
-                      <th>Answer</th>  
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    @for ($i = 0; $i < $questionlistlength; $i++)
-
-                    <tr>
-                      <td>{{ $questions[$i] }} </td>
-                      <td>{{ $managers[$i]->answers}} </td>           
-                    </tr>
-
-                   @endfor
-              
-                  </tbody>
-                  
-                </table>
-              </div>
-
-              <hr/>
-               <div class="table-responsive">
-                <h4> Products ordered by the patient </h4>
-                <table class="table table-bordered table-hover table-striped">  <!-- client's products -->                
-                
-                  <thead>
-                    <tr>
-                     <th>Product </th>
-                     <th>Manufactorer</th>  
-                     <th>Category</th>
-                     <th>Price</th>   
-                    </tr>
-                  </thead>
-              
-                     @if(empty($patproductarray))
-                    
-                       <tbody>
-                          <tr> 
-                            <td>No Items Listed yet</td>
-                          </tr>
-                       </tbody>
-
-                    @else
-                        
-                        @foreach($patproductarray as $patlist)
-                          <tbody>                     
-                              <tr>
-                                <td>{{ $patlist->name }} </td>
-                                <td>{{ $patlist->manufactorer}} </td>
-                                <td>{{ $patlist->category }} </td>
-                                <td>{{ $patlist->price}} </td>            
-                              </tr>                                      
-                          </tbody>
-                        @endforeach    
-
-                     @endif
-
-                  </table>
-
-                </div> 
-
-                 <hr/>
-
-                <!-- Previous Products Table --> 
-               <div class="table-responsive">
-                <h4> Products tried previously by the patient </h4>
-                <table class="table table-bordered table-hover table-striped">  <!-- client's products -->                
-                
-                  <thead>
-                    <tr>
-                     <th>Product </th>
-                     <th>Manufactorer</th>  
-                     <th>Category</th>
-                     <th>Price</th>   
-                    </tr>
-                  </thead>
-              
-                   <tbody>
-                      <tr> 
-                        <td>No Items Listed yet</td>
-                      </tr>
-                   </tbody>
-
-                 </table>
-
-                </div> 
-
-                <!-- Recommend products table -->
-                <hr/>
-                <div class="table-responsive" id ="recommendproducttable">
-                <h4> Recommend a product to the patient </h4>
-                <table class="table table-bordered table-hover table-striped">  <!-- client's products -->                
-                
-                  <thead>
-                    <tr>
-                     <th>Product </th>
-                     <th>Manufactorer</th>  
-                     <th>Category</th>
-                     <th>Price</th>   
-                    </tr>
-                  </thead>
-                
-                @if(empty($pracproductarray))
-                   <tbody>
-                      <tr> 
-                        <td>No Items Listed yet</td>
-                      </tr>
-                   </tbody>
-
-                   @else
-                        
-                        @foreach($pracproductarray as $praclist)
-                          <tbody>                     
-                              <tr>
-                                <td>{{ $praclist->name }} </td>
-                                <td>{{ $praclist->manufactorer}} </td>
-                                <td>{{ $praclist->category }} </td>
-                                <td>{{ $praclist->price}} </td>            
-                              </tr>                                      
-                          </tbody>
-                        @endforeach    
-
-                     @endif
-
-                 </table>
-
-       {!! Form::open(['url' => 'practitioner/products']) !!}
-          <h4>
-                 <input type="hidden" name="reportid" value ={{$reports->id}}>
-           {!! Form:: submit('Add a Product' , ['class' => 'btn btn-primary']) !!}
-          </h4>
-                </div> 
-        {!! Form::close() !!}
-                 <hr/>
-
-         {!! Form::open(['url' => 'practitioner/update']) !!}
-                <div class="form-group">
-                    <label for = "prac_notes"> Practitioner's Notes: </label>
-                    <textarea name ="prac_notes" class="form-control" rows="7">{{ $reports->prac_notes }}</textarea>
-                </div>
-               
-
-              <hr/>
-
-          <label for = "ReportStatus"> Report Status: </label>
-          <select id= "status" name = "ReportStatus" >
-                 <option value = 'Pending Review' selected>{{ $reports-> status }}</option>
-                 <!--<option onclick="mycatFunction()">Pending Review</option> -->
-                 <option value = 'In Progress'>In Progress</option>
-                 <option value="Finished">Finished</option>
-          </select>
-
-           <hr/>
-         {!! Form:: submit('Update Report' , ['class' => 'btn btn-primary form-control']) !!}
-          <!--{!! Form:: submit('Summarize Report', ['class' => 'btn btn-primary form-control']) !!}-->
-          <input type="hidden" name="reportid" value ={{$reports->id}}>
-
-         {!! Form::close() !!}
-        </div>
-                              
-       </div>
-       </div>
-     
-=======
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
 
 @endsection
 @stop

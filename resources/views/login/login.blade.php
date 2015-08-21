@@ -8,8 +8,8 @@
 		<div class="col-md-8 col-md-offset-2">
 
 			<ul class="nav nav-pills">
-				<li class="active"><a data-toggle="tab" href="#client"><h5>Log in as client</h5></a></li>
-				<li><a data-toggle="tab" href="#practitioner"><h5>Log in as pra</h5></a></li>
+				<li class="active"><a data-toggle="tab" href="#client"><h5>Log in as a Client</h5></a></li>
+				<li><a data-toggle="tab" href="#practitioner"><h5>Log in as a Practitioner</h5></a></li>
 			</ul>
 
 			<div class="tab-content">

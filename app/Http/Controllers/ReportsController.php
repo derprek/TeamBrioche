@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-<<<<<<< HEAD
 
-use Session;
-=======
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
 use App\Report;
 use App\Question;
 use App\Manager;
@@ -64,46 +60,40 @@ class ReportsController extends Controller
     }
 
     else
-    {
-        $managers = DB::table('question_report')  //
-        ->where('report_id', '=', $latestreport->id)
-        ->get();
+    {   
 
-        $questions = Question::lists('question')->toArray();
-        $questionslength = count($questions);
+        // Get report and its qns/ans
+        $questionreport = $latestreport->questions()
+                        ->where('report_id', '=',$latestreport->id)
+                        ->get();
+                
+        $questionlist = array();
+        $answerlist = array();
+            foreach($questionreport as $ans)
+            {
+                $questionlist[] = Question::find($ans->pivot->question_id);
+                $answerlist[] = $ans->pivot->answers;
+            }
 
-        // Retrieve Patient Products
-        $patientproductslist = DB::table('product_report')  //
-        ->where('report_id', '=', $latestreport->id)
-        ->where('request_by','=', 'Patient')
-                ->get();  //array
-
-                $patproductarray = array();
-                foreach($patientproductslist as $patproductlist)
-                {
-                    $patproductarray[] = Product::find($patproductlist->product_id);
-                }
+        $qrarraylength = count($answerlist);
         // End 
 
-        // Retrieve Prac Products
-        $pracproductslist = DB::table('product_report')  //
-        ->where('report_id', '=', $latestreport->id)
-        ->where('request_by','=', 'Practitioner')
-                ->get();  //array
-
-                $pracproductarray = array();
-                foreach($pracproductslist as $pracproductlist)
-                {
-                    $pracproductarray[] = Product::find($pracproductlist->product_id);
-                }
+        // Retrieve Patient Products
+        $patprodarray = $latestreport->products()->where('request_by','=','Patient')->get();
+        // End 
+       
+       // Retrieve Prac Products
+        $pracprodarray = $latestreport->products()->where('request_by','=','Practitioner')->get();
         // End
+
 
         //dd($productlist[0]->name);
             }
-            return view('reports.index', compact ('reports', 'products','latestreport','managers','questions','questionslength','patproductarray','pracproductarray'));
+            return view('reports.index', compact ('reports', 'products','latestreport','answerlist','questionlist','qrarraylength','patprodarray','pracprodarray'));
         }
 
-        public function newproducts()
+    
+    public function newproducts()
         {
             if(Auth::guest()){
 
@@ -200,16 +190,7 @@ class ReportsController extends Controller
        // $arrayAnswer = array('1');
         //dd($username);
         
-<<<<<<< HEAD
-                    $reports = new Report;
-                    $reports->userid = $userid;
-                    $reports->step = '1';
-                    $reports->date = Carbon::now();
-                    $reports->status = 'Pending Review';
-                    $reports->updated_at = Carbon::now();
-                    $reports->save();
-                  
-=======
+
         $reports = new Report;
         $reports->userid = $userid;
         $reports->step = '1';
@@ -218,7 +199,6 @@ class ReportsController extends Controller
         $reports->updated_at = Carbon::now();
         $reports->save();
 
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
         $reportid = Report::where('userid', $userid)->orderBy('date', 'desc')->first();
 
         $arraycounter = count($AnswerArray);
@@ -231,21 +211,13 @@ class ReportsController extends Controller
                   'question_id'   =>   Question::find($qncounter)->id,
                   'created_at'   =>   Carbon::now(), 
                   'answers' =>    $AnswerArray[$x])
-<<<<<<< HEAD
 
-                );
-            $qncounter++;
-        }
-        
-       return redirect('reports');
-=======
 
                 );
             $qncounter++;
         }
 
         return redirect('reports');
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
     }
 
     /**
@@ -301,32 +273,9 @@ class ReportsController extends Controller
 
  }
 
-<<<<<<< HEAD
-        Session::put('answer1', $_POST['answersid1']);
-        Session::put('answer2', $_POST['answersid2']);
-        Session::put('answer3', $_POST['answersid3']);
-        Session::put('answer4', $_POST['answersid4']);
-        Session::put('answer5', $_POST['answersid5']);
-        Session::put('answer6', $_POST['answersid6']);
-        Session::put('answer7', $_POST['answersid7']);
-        Session::put('answer8', $_POST['answersid8']);
-        Session::put('answer9', $_POST['answersid9']);
-
-        $answers1 = $_POST['answersid1'];
-        $answers2 = $_POST['answersid2'];
-        $answers3 = $_POST['answersid3'];
-        $answers4 = $_POST['answersid4'];
-        $answers5 = $_POST['answersid5'];
-        $answers6 = $_POST['answersid6'];
-        $answers7 = $_POST['answersid7'];
-        $answers8 = $_POST['answersid8'];
-        $answers9 = $_POST['answersid9'];
-=======
  public function summary()
  {
      if(Auth::guest()){
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
-
         return redirect('/../auth/login');
     }
 

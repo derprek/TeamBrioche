@@ -84,32 +84,8 @@
             <!-- /.container-fluid -->
         </nav>
 
-<<<<<<< HEAD
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#client">About Us</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">Our Mission</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-    <div class = "body">
-
 =======
         <div class = "body">
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
             @yield('content')
         </div>
 

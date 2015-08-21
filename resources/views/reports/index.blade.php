@@ -122,17 +122,17 @@
                         <th>Answer</th>	
                     </tr>
                 </thead>
-                @if(empty($managers[0]))
+                @if($qrarraylength < 1)
                 <tr>
                   <td> Create a new Report </td>	        
               </tr>
               @else             	            
               <tbody>
 
-                  @for ($i = 0; $i < $questionslength; $i++)
+                  @for ($i = 0; $i < $qrarraylength; $i++)
                   <tr>
-                      <td>{{ $questions[$i] }} </td>
-                      <td>{{ $managers[$i]->answers}} </td>		        
+                      <td>{{ $questionlist[$i]->question }} </td>
+                      <td>{{ $answerlist[$i]}} </td>		        
                   </tr>
                   @endfor
 
@@ -156,7 +156,7 @@
                     <th>Price</th>		
                 </tr>
             </thead>
-            @if(empty($patproductarray[0]))
+            @if(empty($patprodarray[0]))
             <tbody>
               <tr> 
                  <td>No Items Listed yet</td>
@@ -165,7 +165,7 @@
          @else
          <tbody>
 
-          @foreach($patproductarray as $patproductlist)
+          @foreach($patprodarray as $patproductlist)
           <tr>
             <td>{{ $patproductlist->name }} </td>
             <td>{{ $patproductlist->manufactorer}} </td>
@@ -217,7 +217,7 @@
         </tr>
     </thead>
 
-    @if(empty($pracproductarray[0]))
+    @if(empty($pracprodarray[0]))
 
     <tbody>
       <tr> 
@@ -227,7 +227,7 @@
  @else
  <tbody>
 
-  @foreach($pracproductarray as $pracproductlist)
+  @foreach($pracprodarray as $pracproductlist)
   <tr>
     <td>{{ $pracproductlist->name }} </td>
     <td>{{ $pracproductlist->manufactorer}} </td>

@@ -20,7 +20,7 @@ use App\User;
 use App\Product;
 use App\Tag;
 use App\Category;
-use App\SubcategoryF;
+use App\Subcategory;
 
 
 class PractitionersController extends Controller
@@ -94,10 +94,8 @@ class PractitionersController extends Controller
    return redirect('practitioner/questions' . '#qntable');
 }
 
-public function addproduct()
+public function addproduct() //add product to DB
 {
-
-<<<<<<< HEAD
         $value = Session::get('userid');
         if(empty($value))
         {
@@ -105,45 +103,29 @@ public function addproduct()
         }
 
         $prodtags = $_POST['tag_list'];
-        dd($prodtags);
         $newprodname = $_POST['prodname'];
         $newprodmanu = $_POST['prodmanu'];
         $newprodcat = $_POST['prodcat'];
+        $newprodsubcat = $_POST['prodsubcat'];
         $newprodprice = $_POST['prodprice'];
 
         $newprod = new Product;
             $newprod->name = $newprodname;
             $newprod->manufactorer = $newprodmanu;
-            $newprod->category = $newprodcat;
+            $newprod->category_id = $newprodcat;
+            $newprod->subcategory_id = $newprodsubcat;
             $newprod->price = $newprodprice;
             $newprod->updated_on = Carbon::now();
             $newprod->save();
 
+        foreach($prodtags as $prodtag)
+        {
+
+            $newprod->tags()->attach($prodtag);
+        }
+
         return redirect('practitioner/productsmanager' . '#prodtable');
     }
-=======
-    $value = Session::get('userid');
-    if(empty($value))
-    {
-       return redirect('/../');
-   }
-
-   $newprodname = $_POST['prodname'];
-   $newprodmanu = $_POST['prodmanu'];
-   $newprodcat = $_POST['prodcat'];
-   $newprodprice = $_POST['prodprice'];
-
-   $newprod = new Product;
-   $newprod->name = $newprodname;
-   $newprod->manufactorer = $newprodmanu;
-   $newprod->category = $newprodcat;
-   $newprod->price = $newprodprice;
-   $newprod->updated_on = Carbon::now();
-   $newprod->save();
-
-   return redirect('practitioner/productsmanager' . '#prodtable');
-}
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
 
     /**
      * Store a newly created resource in storage.
@@ -168,13 +150,8 @@ public function addproduct()
 
     }
 
-<<<<<<< HEAD
 
-
-         else{
-=======
     else{
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
 
         $addnewitems = $_POST['productlist'];
 
@@ -205,46 +182,33 @@ public function addproduct()
         {
            return redirect('/../');
        }
+        $report = Report::find($report_id);
+        $questionreport = $report->questions()
+                        ->where('report_id', '=',$report->id)
+                        ->get();
+                
+        $questionlist = array();
+        $answerlist = array();
+            foreach($questionreport as $ans)
+            {
+                $questionlist[] = Question::find($ans->pivot->question_id);
+                $answerlist[] = $ans->pivot->answers;
+            }
 
-        $managers = DB::table('question_report')  //
-        ->where('report_id', '=', $report_id)
-        ->get();
+        $qrarraylength = count($answerlist);
 
-        $questions = Question::lists('question')->toArray(); // $questions[1];
-        $questionlistlength = count($questions);
-
-        $reports = Report::find($report_id);  
-
-        $client = User::find($reports->userid);
-
+        $client = User::find($report->userid);
+        
         // Retrieve Patient Products
-        $patientproductslist = DB::table('product_report')  //
-        ->where('report_id', '=', $report_id)
-        ->where('request_by','=', 'Patient')
-                ->get();  //array
-
-                $patproductarray = array();
-                foreach($patientproductslist as $patproductlist)
-                {
-                    $patproductarray[] = Product::find($patproductlist->product_id);
-                }
+        $patprodarray = $report->products()->where('request_by','=','Patient')->get();
         // End 
 
         // Retrieve Prac Products
-        $pracproductslist = DB::table('product_report')  //
-        ->where('report_id', '=', $report_id)
-        ->where('request_by','=', 'Practitioner')
-                ->get();  //array
-
-                $pracproductarray = array();
-                foreach($pracproductslist as $pracproductlist)
-                {
-                    $pracproductarray[] = Product::find($pracproductlist->product_id);
-                }
+        $pracprodarray = $report->products()->where('request_by','=','Practitioner')->get();
         // End
                 
 
-                return view('practitioner.show', compact('questions', 'reports', 'client','managers','questionlistlength','patproductarray','pracproductarray'));
+                return view('practitioner.show', compact('questions', 'report', 'client','questionlist','answerlist','qrarraylength','patprodarray','pracprodarray'));
             }
             
 
@@ -279,7 +243,6 @@ public function addproduct()
 
        $updatestatus =  $_POST['ReportStatus'];
 
-       dd($_POST['prac_notes']);
        $prac_notes =  $_POST['prac_notes'];
 
        $reports->status = $updatestatus;
@@ -314,23 +277,18 @@ public function addproduct()
        return view('practitioner.products', compact('products'));
    }
 
-<<<<<<< HEAD
     public function productsmanager()  //load product manager page
-=======
-   public function productsmanager()
    {
     $value = Session::get('userid');
     if(empty($value))
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
     {
        return redirect('/../');
    }
-
-<<<<<<< HEAD
         $categories = Category::all();
-        $tags = Tag::lists('name');
+        $subcategories = Subcategory::all();
+        $tags = Tag::lists('name','id');
         $productsmanager = Product::all();
-        return view('practitioner.productsmanager', compact('productsmanager', 'tags','categories'));
+        return view('practitioner.productsmanager', compact('productsmanager', 'tags','categories','subcategories'));
     }
 
     public function generatereport($id)
@@ -342,21 +300,7 @@ public function addproduct()
         }
 
         $report = Report::find($id);      
-=======
-   $productsmanager = Product::all();
-   return view('practitioner.productsmanager', compact('productsmanager'));
-}
 
-public function generatereport($id)
-{        
- $value = Session::get('userid');
- if(empty($value))
- {
-   return redirect('/../');
-}
-
-$report = Report::find($id);      
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
         $managers = DB::table('question_report')  //
         ->where('report_id', '=', $id)
         ->get();

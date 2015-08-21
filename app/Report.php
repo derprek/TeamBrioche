@@ -16,7 +16,7 @@ class Report extends Model
 
     public function questions()
     {
-    	return $this->belongsToMany('App\Question')->withTimestamps();
+    	return $this->belongsToMany('App\Question')->withTimestamps()->withPivot('answers');
     }
 
     public function users()

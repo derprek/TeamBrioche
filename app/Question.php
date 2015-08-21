@@ -16,7 +16,7 @@ class Question extends Model
 
  	public function reports() // get articles associated with the given tag
     {
-    	return $this->belongsTo('App\Report');
+    	return $this->belongsTo('App\Report')->withPivot('request_by');
     }
 
     public function managers() // get articles associated with the given tag

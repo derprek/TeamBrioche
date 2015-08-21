@@ -15,13 +15,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-<<<<<<< HEAD
-=======
 Route::get('auth/login', function () {
     return redirect('/../');
 });
 
->>>>>>> 3c00e1864af4c1527a437ba6531445b18f6cbd47
 Route::get('home', 'ReportsController@index');
 Route::get('reports/reports/create/products', 'ReportsController@newproducts');
 
