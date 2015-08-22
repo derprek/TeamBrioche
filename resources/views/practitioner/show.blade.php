@@ -161,7 +161,7 @@
       <td>{{ $praclist->name }} </td>
       <td>{{ $praclist->manufactorer}} </td>
       <td>{{ $praclist->category }} </td>
-      <td>{{ $praclist->price}} </td>            
+      <td>$ {{ $praclist->price}} </td>            
     </tr>                                      
   </tbody>
   @endforeach    

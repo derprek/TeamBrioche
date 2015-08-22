@@ -10,4 +10,9 @@ class Category extends Model
     {
     	return $this->belongsToMany('App\Subcategory')->withTimestamps();
     }
+
+    public function products() // get articles associated with the given tag
+    {
+        return $this->belongsToMany('App\Product');
+    }
 }

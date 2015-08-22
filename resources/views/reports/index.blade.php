@@ -169,8 +169,8 @@
           <tr>
             <td>{{ $patproductlist->name }} </td>
             <td>{{ $patproductlist->manufactorer}} </td>
-            <td>{{ $patproductlist->category }} </td>
-            <td>{{ $patproductlist->price}} </td>		        
+            <td>{{ App\Category::find($patproductlist->id)->name  }} </td>
+            <td> ${{ $patproductlist->price}} </td>		        
         </tr>
         @endforeach
     </tbody>
@@ -232,7 +232,7 @@
     <td>{{ $pracproductlist->name }} </td>
     <td>{{ $pracproductlist->manufactorer}} </td>
     <td>{{ $pracproductlist->category }} </td>
-    <td>{{ $pracproductlist->price}} </td>		        
+    <td> ${{ $pracproductlist->price}} </td>		        
 </tr>
 @endforeach
 

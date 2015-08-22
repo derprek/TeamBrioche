@@ -288,6 +288,7 @@ public function addproduct() //add product to DB
         $subcategories = Subcategory::all();
         $tags = Tag::lists('name','id');
         $productsmanager = Product::all();
+        
         return view('practitioner.productsmanager', compact('productsmanager', 'tags','categories','subcategories'));
     }
 

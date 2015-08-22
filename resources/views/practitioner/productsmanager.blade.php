@@ -61,8 +61,8 @@
     <tr>
      <td>  {{ $products->name}} </td>	
      <td> {{ $products->manufactorer}} </td>	
-     <td> {{ $products->category}} </td>	
-     <td> $ {{ $products->price}} </td> 
+     <td> {{ App\Category::find($products->id)->name}} </td>	
+     <td> ${{ $products->price}} </td> 
      <td> {{ $products->updated_on}} </td>	         		         		
    </tr>
 

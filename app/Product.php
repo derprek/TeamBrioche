@@ -15,4 +15,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Tag');
     }
+
+    public function categories() // get articles associated with the given tag
+    {
+        return $this->belongsToMany('App\Category');
+    }
 }
