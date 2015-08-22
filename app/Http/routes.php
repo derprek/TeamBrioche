@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('auth/login', function () {
-    return redirect('/../');
-});
-
 Route::get('home', 'ReportsController@index');
 Route::get('reports/reports/create/products', 'ReportsController@newproducts');
 
