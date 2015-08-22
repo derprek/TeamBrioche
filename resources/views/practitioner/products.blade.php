@@ -59,7 +59,7 @@
        <td> <input type ="checkbox" name ="productlist[]" value={{ $product->id}} </td>
        <td> {{ $product->name}}</td>
        <td> {{ $product->manufactorer}}</td>
-       <td> {{ App\Category::find($product->id)->name}}</td>
+       <td> {{ App\Category::find($product->category_id)->name}}</td>
        <td> ${{ $product->price}}</td>
    </tr>
    @endforeach

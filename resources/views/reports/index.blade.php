@@ -33,9 +33,9 @@
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Create a New Report</a></li>
-                @if($latestreport->prac_notes != 'dummy record')
+                @unless(empty($reports))
                 <li><a data-toggle="tab" href="#menu1">Current Report</a></li>  
-                @endif               
+                @endunless          
             </ul>
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
@@ -103,7 +103,7 @@
         <!-- /.container-fluid -->
 
         <div id="menu1" class="tab-pane fade">  <!-- Second tab -->
-          @if (empty($latestreport->id))
+          @if (empty($reports))
 
 
 
@@ -169,7 +169,7 @@
           <tr>
             <td>{{ $patproductlist->name }} </td>
             <td>{{ $patproductlist->manufactorer}} </td>
-            <td>{{ App\Category::find($patproductlist->id)->name  }} </td>
+            <td>{{ App\Category::find($patproductlist->category_id)->name  }} </td>
             <td> ${{ $patproductlist->price}} </td>		        
         </tr>
         @endforeach
@@ -231,7 +231,7 @@
   <tr>
     <td>{{ $pracproductlist->name }} </td>
     <td>{{ $pracproductlist->manufactorer}} </td>
-    <td>{{ $pracproductlist->category }} </td>
+    <td>{{ App\Category::find($pracproductlist->category_id)->name}} </td>
     <td> ${{ $pracproductlist->price}} </td>		        
 </tr>
 @endforeach

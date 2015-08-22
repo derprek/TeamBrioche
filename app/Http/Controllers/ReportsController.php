@@ -38,29 +38,15 @@ class ReportsController extends Controller
 
     $reports = Report::where('userid', '=', Auth::User()->id)->get();
 
-    $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
-
-    if(empty($latestreport->id))
+    if(empty($reports))
     {
-        $dummyreport = New Report;
-        $dummyreport->userid = Auth::User()->id;
-        $dummyreport->step = '0';
-        $dummyreport->date = Carbon::now();
-        $dummyreport->status = 'Dummy Record';
-        $dummyreport->prac_notes = 'dummy record';
-        $dummyreport->created_at = Carbon::now();
-        $dummyreport->save();
-        $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
-
-    }
-
-    if($latestreport->status == 'Dummy Record')
-    {
-
+       
     }
 
     else
     {   
+
+        $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
 
         // Get report and its qns/ans
         $questionreport = $latestreport->questions()
@@ -89,7 +75,8 @@ class ReportsController extends Controller
 
         //dd($productlist[0]->name);
             }
-            return view('reports.index', compact ('reports', 'products','latestreport','answerlist','questionlist','qrarraylength','patprodarray','pracprodarray'));
+        
+        return view('reports.index', compact ('reports', 'products','latestreport','answerlist','questionlist','qrarraylength','patprodarray','pracprodarray'));
         }
 
     
