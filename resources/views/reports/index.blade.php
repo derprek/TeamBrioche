@@ -33,7 +33,7 @@
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Create a New Report</a></li>
-                @unless(empty($reports))
+                @unless(empty($reports->id))
                 <li><a data-toggle="tab" href="#menu1">Current Report</a></li>  
                 @endunless          
             </ul>
@@ -103,7 +103,7 @@
         <!-- /.container-fluid -->
 
         <div id="menu1" class="tab-pane fade">  <!-- Second tab -->
-          @if (empty($reports))
+          @if (empty($reports->id))
 
 
 

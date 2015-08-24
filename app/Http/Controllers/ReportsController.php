@@ -36,16 +36,16 @@ class ReportsController extends Controller
         return redirect('/../auth/login');
     }
 
-    $reports = Report::where('userid', '=', Auth::User()->id)->get();
+    $reports = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
 
-    if(empty($reports))
+    if(empty($reports->id))
     {
-       
+        
     }
 
     else
     {   
-
+       
         $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
 
         // Get report and its qns/ans
@@ -204,7 +204,7 @@ class ReportsController extends Controller
             $qncounter++;
         }
 
-        return redirect('reports');
+        return Redirect::action('ReportsController@index'); 
     }
 
     /**
