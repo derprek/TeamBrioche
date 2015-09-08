@@ -12,3 +12,9 @@ body{
 
 	visibility: visible;
 }
+
+.row .thumbnail {
+    border:1;
+    box-shadow:0;
+    border-radius:0;
+}

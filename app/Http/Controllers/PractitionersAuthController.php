@@ -118,7 +118,7 @@ class PractitionersAuthController extends Controller
          Session::put('userid', $practitionerinfo->id);
          $prac_reports = Report::all();
 
-         return Redirect::action('PractitionersController@index');   
+        return redirect('practitioner/dashboard');
 
      }
 

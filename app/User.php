@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Session;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +25,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+
+    public function scopeMyclient($query)
+    {
+        $query->where('prac_id', '=', Session::get('userid'));
+    }
+
+    protected $fillable = ['fname','sname','gender','prac_id', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.

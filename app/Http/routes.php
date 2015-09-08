@@ -15,14 +15,11 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('home', 'ReportsController@index');
-Route::get('reports/reports/create/products', 'ReportsController@newproducts');
+Route::get('home', 'ClientsController@index');
 
-Route::get('reports', 'ReportsController@index');
-Route::get('reports/reports', 'ReportsController@index');
 
 Route::get('reports/create', 'ReportsController@create');
-Route::get('reports/reports/create', 'ReportsController@create');
+Route::get('reports/createstepthree', 'ReportsController@createstepthree');
 
 Route::get('reports/create/products', 'ReportsController@newproducts');
 Route::get('reports/reports/create/products', 'ReportsController@newproducts');
@@ -36,35 +33,37 @@ Route::get('reports/reports/create/producthistory', 'ReportsController@previousp
 Route::get('reports/summary', 'ReportsController@summary');
 Route::get('reports/reports/summary', 'ReportsController@summary');
 
+Route::get('reports/createsteptwo/{report_id}', 'ReportsController@createsteptwo');
 Route::get('reports/{report_id}', 'ReportsController@edit');
-Route::get('reports/reports/{report_id}', 'ReportsController@edit');
 
 Route::post('reports/summary', 'ReportsController@summary');
+Route::post('reports/createsteptwo', 'ReportsController@storeStepTwo');
 Route::post('reports', 'ReportsController@store');
 Route::post('reports/update', 'ReportsController@update');
 Route::post('reports/newproducts', 'ReportsController@addnewproducts');
 
 
 // registration 
-Route::get('auth/registration', 'PractitionersAuthController@registration');
-
 
 // login 
 Route::get('login/login', 'PractitionersAuthController@showlogin');
-Route::get('practitioner/register', 'PractitionersAuthController@showregisterpage');
+
 
 
 Route::get('prac/logout', 'PractitionersAuthController@logout');
-Route::post('practitioner/register', 'PractitionersAuthController@register');
+
 
 Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
 
-
+Route::post('reports/pracAnswersUpdate', 'ReportsController@pracAnswersUpdate');
+Route::post('reports/pracSubUpdate', 'ReportsController@pracSubUpdates');
 
 
 Route::get('practitioner/dashboard', 'PractitionersController@index');
-Route::get('practitioner/practitioner/dashboard', 'PractitionersController@index');
+
+Route::get('practitioner/reports', 'PractitionersController@history');
+
 
 Route::get('practitioner/questions', 'PractitionersController@questionspage');
 Route::get('practitioner/practitioner/questions', 'PractitionersController@questionspage');
@@ -73,17 +72,13 @@ Route::get('practitioner/generatereport', 'PractitionersController@generaterepor
 Route::get('practitioner/practitioner/generatereport', 'PractitionersController@generatereport');
 
 Route::get('practitioner/productsmanager', 'PractitionersController@productsmanager');
-Route::get('practitioner/practitioner/productsmanager', 'PractitionersController@productsmanager');
 
 Route::get('practitioner/generate/{id}', 'PractitionersController@generatereport');
-Route::get('practitioner/practitioner/generate/{id}', 'PractitionersController@generatereport');
 
-Route::get('practitioner/{report_id}', 'PractitionersController@show');
-Route::get('practitioner/practitioner/{report_id}', 'PractitionersController@show');
-
-Route::post('practitioner/products', 'PractitionersController@addproductspage');
+Route::get('practitioner/{report_id}', 'PractitionersController@showreport');
+Route::get('practitioner/overview/{report_id}', 'PractitionersController@reportOverview');
+Route::get('practitioner/client/{report_id}', 'PractitionersController@viewclient');
 Route::post('practitioner/addquestion', 'PractitionersController@addquestion');
-Route::post('practitioner/addproduct', 'PractitionersController@addproduct');
 Route::post('practitioner/add', 'PractitionersController@store');
 Route::post('practitioner/update', 'PractitionersController@update');
 

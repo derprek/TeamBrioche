@@ -1,4 +1,4 @@
-@extends('patientmaster')
+@extends('practitionermaster')
 
 @section('sidemenubar')
 <ul class="nav navbar-nav side-nav">

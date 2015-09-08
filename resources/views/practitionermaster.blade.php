@@ -9,7 +9,9 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link href="/css/bootstrap-select.css" rel="stylesheet">
+     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
 
     <!-- Custom CSS -->
     <link href="/css/atest.css" rel="stylesheet">
@@ -19,9 +21,13 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/js/bootstrap-dialog.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,9 +35,30 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        
+
     </head>
 
     <body>
+    @if(Session::has('flash_message')) 
+            <script>
+                 BootstrapDialog.show({
+
+                    title: 'Success',
+                    message: '{{ Session::get('flash_message')}}',
+                    buttons: [{
+                        label: 'Close',
+                        cssClass: 'btn-info',
+                        action: function(dialogItself){
+                            dialogItself.close();
+                        }                 
+                      
+                    }]
+                });
+            </script>
+            @endif
+
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -49,7 +76,7 @@
                 <ul class="nav navbar-right top-nav">
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Practitioner Account <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Welcome, <?php $prac = App\Practitioner::where('id','=', Session::get('userid'))->get(); echo $prac[0]->name; ?> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -69,8 +96,19 @@
                 </ul>
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
+         
+                    <ul class="nav navbar-nav side-nav">
+                        <li class="active">
+                            <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Home</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('practitioner/reports') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Report Manager</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('practitioner/questions') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Question Manager</a>
+                        </li>
+                    </ul>
 
-                   @yield('sidemenubar')
 
                </div>
                <!-- /.navbar-collapse -->
@@ -84,11 +122,9 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-select.js"></script>
+
 
 </body>
 </html>

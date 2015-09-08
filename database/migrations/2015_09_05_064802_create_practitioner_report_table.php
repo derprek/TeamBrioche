@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManagerQuestionTable extends Migration
+class CreatePractitionerReportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,16 @@ class CreateManagerQuestionTable extends Migration
      */
     public function up()
     {
-       Schema::create('manager_question', function(Blueprint $table)
+        Schema::create('practitioner_report', function(Blueprint $table)
             {
+                $table->integer('prac_id')->unsigned()->index();
+                $table->foreign('prac_id')->references('id')->on('practitioners')->onDelete('cascade');
+
                 $table->integer('report_id')->unsigned()->index();
                 $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
 
-                $table->integer('question_id')->unsigned()->index();
-                $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 
-                $table->text('answers')->nullable();
-                $table->timestamps();
-
-            }); //articles and tag
+            }); //product and tag
     }
 
     /**
@@ -33,6 +31,6 @@ class CreateManagerQuestionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('manager_question');
+         Schema::drop('practitioner_report');
     }
 }

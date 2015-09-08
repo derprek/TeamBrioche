@@ -10,4 +10,10 @@ class Practitioner extends Model
     {
     	return $this->belongsToMany('App\Product');
     }
+
+     public function reports() // get articles associated with the given tag
+    {
+    	return $this->belongsToMany('App\Report');
+    }
+
 }

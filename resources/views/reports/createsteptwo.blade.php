@@ -25,62 +25,46 @@
             <i class="fa fa-dashboard"></i>  <a href="/../reports">Dashboard</a>
           </li>  
           <li class="active">
-            <i class="fa fa-desktop"></i> Create a new Report
+            <i class="fa fa-desktop"></i> Create Step two
           </li>                            
         </ol>
       </div>
     </div>
       <div class = "form-group"> 
-           <label for ="client_list"> Client:</label>
-        
-     
+      <hr>
 
-      {!! Form::open(['url' => 'reports']) !!}
-
-      <select id= "client_list" name = "client" class = "form-control">
-
-      @unless($clients->isEmpty())
-       @foreach($clients as $client)
-
-        <option value = {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }}  </br>  Email: {{ $client-> email }} </option>
-
-       @endforeach
-      @endunless
-     
-    </select>
-
-    <hr>
+       {!! Form::open(['url' => 'reports/createsteptwo']) !!}
 
     @unless($questions->isEmpty())
 
       <div class="row" >
-
-      @foreach($answerlist as $test)
+      <input type="hidden" name="reportid" value = {{ $report_id }}>
+      @foreach($questionslist as $questionlist)
           
-          @foreach($test as $tester)
+          @foreach($questionlist as $questions)
 
-                @if($tester->type === "thumbnail")
+                @if($questions->type === "thumbnail")
 
                   <div class="col-sm-6 col-md-6" style="padding-top:40px;border-spacing: 10px 50px;">
                     <div class="thumbnail" style="border: 1px outset black;padding:10px;">
                       <br>
-                      <img style = "width:20%" src={{ $tester->imgpath }} >
+                      <img style = "width:20%" src={{ $questions->imgpath }} >
                       <br>
-                      <h4>{{ $tester->question }}</h4>
+                      <h4>{{ $questions->question }}</h4>
                       <hr>
                       <div class="caption">
-                        <textarea class="form-control" name ="answersid[{{ $tester->id }}]" rows="3" placeholder="{{ $tester->placeholder }}"></textarea>
+                        <textarea class="form-control" name ="answersid[{{ $questions->id }}]" rows="3" placeholder="{{ $questions->placeholder }}"></textarea>
                         <hr>
                       </div>
                     
                   
                 @else
                     <div class="form-group" style="padding:10px;">
-                      <label for = "answersid[{{ $tester->id }}]">{{ $tester->question }}</label>
-                         @if($tester->type === "tall")
-                            <textarea name ="answersid[{{ $tester->id }}]" class="form-control" rows="3" placeholder="{{ $tester->placeholder }}"></textarea>
-                           @elseif($tester->type === "regular")
-                            <input type="text" name="answersid[{{ $tester->id }}]" class="form-control" placeholder="{{ $tester->placeholder }}">
+                      <label for = "answersid[{{ $questions->id }}]">{{ $questions->question }}</label>
+                         @if($questions->type === "tall")
+                            <textarea name ="answersid[{{ $questions->id }}]" class="form-control" rows="3" placeholder="{{ $questions->placeholder }}"></textarea>
+                           @elseif($questions->type === "regular")
+                            <input type="text" name="answersid[{{ $questions->id }}]" class="form-control" placeholder="{{ $questions->placeholder }}">
                          @endif
                     </div>  
                 @endif
@@ -93,7 +77,7 @@
   </div>
   <hr>
   <div class="form-group" style="padding:3%;">
-  {!! Form:: submit('Submit Report' , ['class' => 'btn btn-info form-control']) !!}
+  {!! Form:: submit('Submit Step Two' , ['class' => 'btn btn-info form-control']) !!}
     {!! Form::close() !!}
     </div>
     </div>

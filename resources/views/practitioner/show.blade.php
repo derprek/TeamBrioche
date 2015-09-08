@@ -17,6 +17,7 @@
 @endsection
 
 @section('content')
+
 <div id="page-wrapper">
   <div class="container-fluid">
     <!-- Page Heading -->
@@ -40,146 +41,49 @@
 
     <h2>Report: {{$report->id}}</h2>
     <input type="hidden" name="reportid" value ={{$report->id}}>
-    <a href= "{{ url('/practitioner/generate', $report->id) }}"> generate report </a>
+    
+    <div>
+    <a class = "btn btn-info" href= "{{ url('/practitioner/generate', $report->id) }}"> generate report </a>
+    <p style ="float:right"> Client's name: {{ $clientinfo->fname}} {{ $clientinfo->sname}} </p>
+    <br>
+    <br>
+    <p style ="float:right"> Practitioner's name: {{ $pracinfo->name }} </p>
+    <br>
+    </div>
     <div class="dashboardbody">
+
+    <hr>
+
+    @foreach($answerlist as $reportinfo)
      <div class="table-responsive">
       <table class="table table-bordered table-hover table-striped">
-        <p style ="float:right"> Client's name: {{ $client->name}} </p>
+        
         <thead>
           <tr>
             <th>Question </th>
             <th>Answer</th>  
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-        @if (empty($answerlist))
 
-          <tr>
-            <td>No Reports</td>     
-          </tr>
-
-        @else
-
-          @for ($i = 0; $i < $qrarraylength; $i++)
-          <tr>
-            <td>{{ $questionlist[$i]->question }} </td>
-            <td>{{ $answerlist[$i]}} </td>           
-          </tr>
-          @endfor
-
-        @endif
+           @foreach($reportinfo as $reportlist)
+            <tr>
+              <td style="width:25%">{{ $reportlist->question }} </td>
+              <td style="width:65%">{{ $reportlist->pivot->answers}} </td> 
+              <td style="width:10%">    <button type="button" id ="regbtn" class="btn btn-info form-control" data-toggle="modal" data-target=<?php echo "#update". $reportlist->pivot->rqid;?>>Edit</button> </td>          
+            </tr>
+          @endforeach
           
         </tbody>
       </table>
     </div>
     <hr/>
-    <div class="table-responsive">
-      <h4> Products ordered by the patient </h4>
-      <table class="table table-bordered table-hover table-striped">  <!-- client's products -->                
-        <thead>
-          <tr>
-           <th>Product </th>
-           <th>Manufactorer</th>  
-           <th>Category</th>
-           <th>Price</th>   
-         </tr>
-       </thead>
+    @endforeach
+    <hr/>
+    
 
-       @if(empty($patprodarray))
-
-       <tbody>
-        <tr> 
-          <td>No Items Listed yet</td>
-        </tr>
-      </tbody>
-
-      @else
-
-      @foreach($patprodarray as $patlist)
-      <tbody>                     
-        <tr>
-          <td>{{ $patlist->name }} </td>
-          <td>{{ $patlist->manufactorer}} </td>
-          <td>{{ $patlist->category }} </td>
-          <td>{{ $patlist->price}} </td>            
-        </tr>                                      
-      </tbody>
-      @endforeach    
-
-      @endif
-
-    </table>
-  </div> 
-  <hr/>
-
-  <!-- Previous Products Table --> 
-  <div class="table-responsive">
-    <h4> Products tried previously by the patient </h4>
-    <table class="table table-bordered table-hover table-striped">  <!-- client's products -->                
-      <thead>
-        <tr>
-         <th>Product </th>
-         <th>Manufactorer</th>  
-         <th>Category</th>
-         <th>Price</th>   
-       </tr>
-     </thead>
-     <tbody>
-      <tr> 
-        <td>No Items Listed yet</td>
-      </tr>
-    </tbody>
-  </table>
-</div> 
-
-<!-- Recommend products table -->
-<hr/>
-<div class="table-responsive" id ="recommendproducttable">
-  <h4> Recommend a product to the patient </h4>
-  <table class="table table-bordered table-hover table-striped">  <!-- client's products -->                
-    <thead>
-      <tr>
-       <th>Product </th>
-       <th>Manufactorer</th>  
-       <th>Category</th>
-       <th>Price</th>   
-     </tr>
-   </thead>
-
-   @if(empty($pracprodarray))
-   <tbody>
-    <tr> 
-      <td>No Items Listed yet</td>
-    </tr>
-  </tbody>
-
-  @else
-
-  @foreach($pracprodarray as $praclist)
-  <tbody>                     
-    <tr>
-      <td>{{ $praclist->name }} </td>
-      <td>{{ $praclist->manufactorer}} </td>
-      <td>{{ $praclist->category }} </td>
-      <td>$ {{ $praclist->price}} </td>            
-    </tr>                                      
-  </tbody>
-  @endforeach    
-
-  @endif
-
-</table>
-
-{!! Form::open(['url' => 'practitioner/products']) !!}
-<h4>
- <input type="hidden" name="reportid" value ={{$report->id}}>
- {!! Form:: submit('Add a Product' , ['class' => 'btn btn-primary']) !!}
-</h4>
-</div> 
-{!! Form::close() !!}
-<hr/>
-
-{!! Form::open(['url' => 'practitioner/update']) !!}
+{!! Form::open(['url' => 'reports/pracSubUpdate']) !!}
 <div class="form-group">
   <label for = "prac_notes"> Practitioner's Notes: </label>
   <textarea name ="prac_notes" class="form-control" rows="7">{{ $report->prac_notes }}</textarea>
@@ -187,12 +91,9 @@
 
 <hr/>
 <label for = "ReportStatus"> Report Status: </label>
-<select id= "status" name = "ReportStatus" >
- <option value = 'Pending Review' selected>{{ $report-> status }}</option>
- <!--<option onclick="mycatFunction()">Pending Review</option> -->
- <option value = 'In Progress'>In Progress</option>
- <option value="Finished">Finished</option>
-
+<select id= "status" name = "ReportStatus">
+  <option value = 'In Progress'>In Progress</option>
+  <option value="Finished">Finished</option>]
 </select>
 <hr/>
 {!! Form:: submit('Update Report' , ['class' => 'btn btn-primary form-control']) !!}
@@ -204,13 +105,52 @@
 </div>
 </div>
 
+@foreach($answerlist as $reportinfo)
+  <input type="hidden" name="reportid" value ={{$report->id}}>
+    @foreach($reportinfo as $reportlist)
+      
+      <div class="container">
+  <!-- Modal -->
+  <div class="modal fade" role="dialog" id =<?php echo "update" . $reportlist->pivot->rqid ?> >
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><span style="color:#000000">Update Report</span></h4>
+        </div>
+
+        <div class="modal-body">
+          
+        
+        <form role="form" method="POST" action="{{ url('/reports/pracAnswersUpdate') }}">
+
+          <div class="form-group" id ="qntable">
+              <input type='hidden' name='rqid' value= {{ $reportlist->pivot->rqid }}> 
+              <input type="hidden" name="reportid" value ={{$report->id}}>
+              <label for ="fname"> {{ $reportlist->question}}</label>
+              <textarea class="form-control" name ="answersid[{{ $reportlist->pivot->rqid }}]" rows="5">{{ $reportlist->pivot->answers}}</textarea>
+                <br>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+        
+        <button type="submit" class="btn btn-info form-control">Update</button>
+        <hr/>
+        <button type="button" class="btn btn-danger form-control" data-dismiss="modal">Close</button>
+
+       
+        </div>
+      </div>
+       </form>
+    </div>
+  </div>
+
+    @endforeach
+          
+@endforeach
+
 @endsection
 @stop
-
-
-<script>
-function mycatFunction() {
-  var x = document.getElementById("status").selectedIndex;
-  document.getElementById("categorygetter").value  =   (document.getElementsByTagName("option")[x].value);
-}
-</script>

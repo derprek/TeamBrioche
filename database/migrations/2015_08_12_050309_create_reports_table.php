@@ -13,19 +13,22 @@ class CreateReportsTable extends Migration
     public function up()
     {
          Schema::create('reports', function (Blueprint $table) {
+           
             $table->increments('id');
-            $table->integer('userid')->unsigned();
+
+            $table->integer('userid')->unsigned()->index();
+            $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
+
             $table->integer('step');
             $table->timestamp('date');
             $table->string('status');
+
+            $table->integer('prac_id')->unsigned()->index();
+            $table->foreign('prac_id')->references('id')->on('practitioners');
+
             $table->string('prac_notes');
-            $table->timestamps();
+            $table->timestamps();         
 
-
-            $table->foreign('userid')
-                   ->references('id')
-                   ->on('users')
-                   ->onDelete('cascade');
         });
     }
 

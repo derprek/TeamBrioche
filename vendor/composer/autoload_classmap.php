@@ -7,10 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2015_08_11_034104_create_categories_table.php',
-    'CreateManagerQuestionTable' => $baseDir . '/database/migrations/2015_08_12_164019_create_manager_question_table.php',
-    'CreateManagerTable' => $baseDir . '/database/migrations/2015_08_12_120906_create_manager_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePractitionerProductTable' => $baseDir . '/database/migrations/2015_08_17_042322_create_practitioner_product_table.php',
+    'CreatePractitionerReportTable' => $baseDir . '/database/migrations/2015_09_05_064802_create_practitioner_report_table.php',
     'CreatePractitionersTable' => $baseDir . '/database/migrations/2015_08_15_102156_create_practitioners_table.php',
     'CreateProductReportTable' => $baseDir . '/database/migrations/2015_08_16_060404_create_product_report_table.php',
     'CreateProductTagTable' => $baseDir . '/database/migrations/2015_08_20_041611_create_product_tag_table.php',
