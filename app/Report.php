@@ -47,7 +47,7 @@ class Report extends Model
 
     public function practitioners()
     {
-        return $this->belongsTo('App\Practitioner')->withTimestamps();
+        return $this->belongsToMany('App\Practitioner')->withPivot('prid');
     }
 
     public function products() // get articles associated with the given tag

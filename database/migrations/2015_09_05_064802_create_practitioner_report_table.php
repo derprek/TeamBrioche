@@ -13,9 +13,10 @@ class CreatePractitionerReportTable extends Migration
     public function up()
     {
         Schema::create('practitioner_report', function(Blueprint $table)
-            {
-                $table->integer('prac_id')->unsigned()->index();
-                $table->foreign('prac_id')->references('id')->on('practitioners')->onDelete('cascade');
+            {   
+                $table->increments('prid');
+                $table->integer('practitioner_id')->unsigned()->index();
+                $table->foreign('practitioner_id')->references('id')->on('practitioners');
 
                 $table->integer('report_id')->unsigned()->index();
                 $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');

@@ -16,8 +16,54 @@
 
         <div class="modal-body">
         
-          
-          <div class="col-sm-4 col-md-4" style="padding-top:40px;border-spacing: 10px 50px;">
+        <ul class="nav nav-tabs">
+
+        @if(Session::has('banner_message'))
+          @if(Session::get('banner_message') === "Report successfully updated!")
+
+              <li><a data-toggle="tab" href="#home">Report</a></li>   
+              <li class="active"><a data-toggle="tab" href="#menu1">Other Information</a></li>
+              <li><a data-toggle="tab" href="#menu2">Sharing</a></li>
+          @else
+               <li><a data-toggle="tab" href="#home">Report</a></li>   
+              <li><a data-toggle="tab" href="#menu1">Other Information</a></li>
+              <li class="active"><a data-toggle="tab" href="#menu2">Sharing</a></li>
+          @endif
+
+         @else
+
+              <li class="active"><a data-toggle="tab" href="#home">Report</a></li>   
+              <li><a data-toggle="tab" href="#menu1">Other Information</a></li>
+              <li><a data-toggle="tab" href="#menu2">Sharing</a></li>
+
+         @endif
+
+        </ul>
+
+        <div class="tab-content">
+
+        @if(Session::has('banner_message'))
+          <br>
+          <div class="alert alert-success fade in">
+              {{Session::get('banner_message')}}
+          </div>
+        @endif
+
+         @if(Session::has('banner_message'))
+          @if(Session::get('banner_message') === "Report successfully updated!")
+
+              <div id="home" class="tab-pane fade ">
+          @else
+               <div id="home" class="tab-pane fade ">
+          @endif
+
+         @else
+
+              <div id="home" class="tab-pane fade in active">
+
+         @endif
+            
+            <div class="col-sm-4 col-md-4" style="padding-top:40px;border-spacing: 10px 50px;">
               <div class="thumbnail" style="border: 1px outset black;padding:10px;">
                 <br>
                 <h3> Assessment</h3>
@@ -29,14 +75,12 @@
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                     Completed
                 </label>
-                <a href ="{{ url('/practitioner',$report_id) }}"><button type="button" id ="regbtn" class="btn btn-info form-control">View</button></a>
+                <a href ="{{ url('/practitioner/stepone',$report_id) }}"><button type="button" id ="updatebtn" class="btn btn-primary form-control">View</button></a>
               </div>
                   <hr>
                 </div>
               </div>
             </div>
-
-
 
             <div class="col-sm-4 col-md-4" style="padding-top:40px;border-spacing: 10px 50px;">
               <div class="thumbnail" style="border: 1px outset black;padding:10px;">
@@ -52,13 +96,13 @@
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                     Completed   
                     </label>
-                    <button type="button" id ="regbtn" class="btn btn-info form-control">View</button>               
+                   <a href ="{{ url('/practitioner/steptwo',$report_id) }}"><button type="button" id ="updatebtn" class="btn btn-primary form-control">View</button></a>              
                 @else 
                     <input type="checkbox" disabled value="" >
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                     Incomplete
                     </label>
-                   <a href ="{{ url('/reports/createsteptwo',$report_id) }}"> <button type="button" id ="regbtn" class="btn btn-info form-control">Create</button></a>
+                   <a href ="{{ url('/reports/createsteptwo',$report_id) }}"> <button type="button" id ="createbtn" class="btn btn-info form-control">Create</button></a>
                 @endif
                    
                 </label>
@@ -67,8 +111,8 @@
                 </div>
               </div>
             </div>
-
-            <div class="col-sm-4 col-md-4" style="padding-top:40px;border-spacing: 10px 50px;">
+         
+          <div class="col-sm-4 col-md-4" style="padding-top:40px;border-spacing: 10px 50px;">
               <div class="thumbnail" style="border: 1px outset black;padding:10px;">
                 <br>
                 <h3> Selection </h3>
@@ -82,13 +126,13 @@
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                   Completed   
                   </label>
-                  <button type="button" id ="regbtn" class="btn btn-info form-control">View</button>               
+                  <button type="button" id ="updatebtn" class="btn btn-primary form-control">View</button>               
                 @else 
                   <input type="checkbox" disabled value="" >
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                   Incomplete
                   </label>
-                  <button type="button" id ="regbtn" class="btn btn-info form-control">Create</button>
+                  <button type="button" id ="createbtn" class="btn btn-info form-control">Create</button>
                 @endif
 
                 </label>
@@ -96,11 +140,136 @@
                   <hr>
                 </div>
               </div>
+            </div>   
             </div>
-            
-          
-        </div>
 
+            @if(Session::has('banner_message'))
+
+              @if(Session::get('banner_message') === "Report successfully updated!")
+
+                    <div id="menu1" class="tab-pane fade in active">
+                 @else
+                    <div id="menu1" class="tab-pane fade">
+              @endif
+              
+             @else
+                  <div id="menu1" class="tab-pane fade">
+             @endif
+
+                {!! Form::open(['url' => 'reports/pracSubUpdate']) !!}
+                <div class="form-group">
+                  <br>
+                   <input type="hidden" name="reportid" value ={{$report->id}}>
+                  <label for = "prac_notes"> Practitioner's Notes: </label>
+                  <textarea name ="prac_notes" class="form-control" rows="7">{{ $report->prac_notes }}</textarea>
+                </div>
+
+                <hr/>
+
+                <div class="checkbox">
+                  <label style="font-size: 1.5em">
+                  @if($report->status === "Finished")
+                      <input type="checkbox" name="ReportStatus" value="Finished" checked>
+                  @else
+                      <input type="checkbox" name="ReportStatus" value="Finished">
+                  @endif
+                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                Finished
+                 </label>
+                </div>
+
+                <hr/>
+                {!! Form:: submit('Update Report' , ['class' => 'btn btn-primary form-control']) !!}
+                {!! Form::close() !!}
+            </div> 
+
+             @if(Session::has('banner_message'))
+
+              @if(Session::get('banner_message') === "Report successfully updated!")
+
+                    <div id="menu2" class="tab-pane fade">
+                 @else
+                    <div id="menu2" class="tab-pane fade in active">
+              @endif
+              
+             @else
+                  <div id="menu2" class="tab-pane fade">
+             @endif
+
+                @if($reportowner === $reportviewer)
+                <div class="jumbotron">
+                   <div class="container">
+                    <h3>Sharing</h3>
+                    <p>Who shall we share this report with?</p>
+                    <hr>
+
+                    <div class = "form-group"> 
+                    <div class="row" >
+
+                    {!! Form::open(['url' => 'reports/shareReport']) !!}
+                      <div class="col-sm-6 col-md-8" style="border-spacing: 10px 50px;">
+                     <label for ="prac_list"> Practitioners:</label>
+                     <br>
+                    {!! Form::select('prac_list[]', $pracs, null, ['id' => 'prac_list', 'style' => 'width:70%', 'multiple','required']) !!}
+                    <hr>
+                    <input type="hidden" name="reportid" value ={{$report->id}}>
+                   <button type="submit" class="btn btn-info">Share now</button>
+                     </div>
+                      {!! Form::close() !!}
+
+                      <div class="col-sm-6 col-md-4" style="border-spacing: 10px 50px;">
+                          <h6> You are currently sharing this report with: </h6>
+                          <table class="table table-bordered table-hover table-striped">
+
+
+                             @if(empty($sharerslist))
+                              <tr>  Nobody :) 
+                              </tr>
+
+                              @else
+
+                              <tr>
+                                <th>Name </th>
+                                <th>Remove</th>
+                                
+                              </tr>
+
+
+                              
+                              
+                              @foreach($sharerslist as $pracinfo)
+                                
+                                 {!! Form::open(['url' => 'reports/removeSharer']) !!}
+                                 <input type="hidden" name="reportid" value ={{$report->id}}>
+                                  <input type="hidden" name="prid" value ={{$pracinfo->pivot->prid}}>
+                                  <tr>                    
+                                    <td> {{ $pracinfo->name}}</td>
+                                    <td> <button type="submit" class="btn btn-warning">Remove</button></td>
+                                  </tr>
+                                 {!! Form::close() !!}
+                                
+                              @endforeach
+                              
+                            @endif
+
+                          </table>
+                     </div>
+
+                     </div>
+                     </div>
+                  </div>
+                </div>
+              @else
+                  <div class="col-sm-6 col-md-12" style="border-spacing: 10px 50px;">
+                    <br>
+                   <h4> Only the owner can share this report! </h4>
+                  </div>
+              @endif
+
+             </div> 
+
+        </div>
+          
         <div class="modal-footer">
         
         <hr/>
@@ -121,6 +290,24 @@
       keyboard: true
     })
  </script>
+
+ <script>
+
+$('.status').selectpicker();
+
+  </script> 
+
+  <script>
+
+    $('#prac_list').select2();
+
+  </script> 
+
+  <script>
+
+    $('div.alert').delay(3000).slideUp(300);
+
+  </script> 
 
 @endsection
 @stop

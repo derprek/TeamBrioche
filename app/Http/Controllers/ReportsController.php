@@ -151,24 +151,6 @@ class ReportsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($report_id)
-    {
-
-        $managers = DB::table('question_report')  //
-        ->where('report_id', '=', $report_id)
-        ->get();
-        $questions = Question::all(); // $questions[1];
-        $reports = Report::find($report_id);
-       // $manager = Manager::find($report_idz);
-        return view('reports.edit', compact('managers', 'questions', 'reports'));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
@@ -197,7 +179,7 @@ class ReportsController extends Controller
     DB::update("update question_report set answers ='" . $answer. "' where rqid = ?", array($rqid));
     Session::flash('flash_message', 'Report successfully updated!');
 
-    return redirect("practitioner/" . $reportid);
+    return redirect("practitioner/stepone/" . $reportid);
     }
 
     public function pracSubUpdates()
@@ -211,18 +193,25 @@ class ReportsController extends Controller
        $reportid = $_POST['reportid'];
        $reports = Report::find($reportid);
 
-       $updatestatus =  $_POST['ReportStatus'];
+       if(isset($_POST['ReportStatus']))
+       {    
+            $status = $_POST['ReportStatus'];
+       }
+
+       else {
+             $status = "In Progress";
+       }
 
        $prac_notes =  $_POST['prac_notes'];
 
-       $reports->status = $updatestatus;
+       $reports->status = $status;
        $reports->updated_at = Carbon::now();
        $reports->prac_notes = $prac_notes;
        
        $reports->save();
 
-       Session::flash('flash_message', 'Report successfully updated!');
-       return redirect("practitioner/" . $reportid);
+       Session::flash('banner_message', 'Report successfully updated!');
+       return redirect("practitioner/overview/" . $reportid);
     }
 
      public function summary()

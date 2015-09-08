@@ -111,13 +111,16 @@ class PractitionersController extends Controller
            return redirect('/../');
         }
 
+       $pracid = Session::get('userid'); 
+       $pracinfo = Practitioner::find($pracid);
        $prac_reports = Report::latest('created_at')->practitioner()->get();
 
        $stepcount = Question::distinct()->lists('step');
        $progress = Report::latest('created_at')->practitioner()->progress()->get();
        $finished = Report::latest('created_at')->practitioner()->finished()->get();
+       $shared = $pracinfo->reports()->get();
 
-       return view('practitioner.reportmanager', compact ('pracinfo', 'prac_reports', 'latestreport','stepcount', 'progress', 'finished'));  
+       return view('practitioner.reportmanager', compact ('pracinfo', 'prac_reports', 'latestreport','stepcount', 'progress', 'finished','shared'));  
     }
 
 
@@ -127,20 +130,19 @@ class PractitionersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function showreport($report_id)
+    public function showStepOne($report_id)
     
     {   
         $value = Session::get('userid');
         if(empty($value))
         {
            return redirect('/../');
-       }
-       dd($report_id);
+        }
         $report = Report::find($report_id);
         $clientinfo = User::find($report->userid);
         $pracinfo = Practitioner::find($report->prac_id);
 
-        $arraycount = Category::distinct()->lists('id');
+        $arraycount = $report->questions()->distinct()->where('step','=',1)->orderBy('category_id','ASC')->lists('category_id');
 
          $answerlist = array();
           foreach($arraycount as $ans)
@@ -149,9 +151,7 @@ class PractitionersController extends Controller
                                    ->where('category_id','=', $ans)
                                    ->orderBy('type','DESC')
                                    ->get();
-          }
-
-                        
+          }          
             
       return view('practitioner.show', compact('answerlist','report','clientinfo','pracinfo'));
     }
@@ -166,11 +166,16 @@ class PractitionersController extends Controller
 
     public function reportOverview($report_id)
     
-    {
+    {   
         $report = Report::find($report_id);
+        $reportviewer = Session::get('userid');
+        $reportowner = $report->prac_id;
         $reportstepcount = $report->questions()->distinct()->lists('step');
+        $pracs = Practitioner::lists('name','id');
+        $sharerslist = $report->practitioners()->get();
+       // dd($sharerslist[0]->pivot->prid);
 
-      return view('practitioner.reportoverview', compact('reportstepcount','report_id'));
+      return view('practitioner.reportoverview', compact('reportstepcount','report_id','report','reportowner','reportviewer','pracs','sharerslist'));
        
     }
 

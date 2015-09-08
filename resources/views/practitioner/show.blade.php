@@ -82,25 +82,6 @@
     @endforeach
     <hr/>
     
-
-{!! Form::open(['url' => 'reports/pracSubUpdate']) !!}
-<div class="form-group">
-  <label for = "prac_notes"> Practitioner's Notes: </label>
-  <textarea name ="prac_notes" class="form-control" rows="7">{{ $report->prac_notes }}</textarea>
-</div>
-
-<hr/>
-<label for = "ReportStatus"> Report Status: </label>
-<select id= "status" name = "ReportStatus">
-  <option value = 'In Progress'>In Progress</option>
-  <option value="Finished">Finished</option>]
-</select>
-<hr/>
-{!! Form:: submit('Update Report' , ['class' => 'btn btn-primary form-control']) !!}
-<!--{!! Form:: submit('Summarize Report', ['class' => 'btn btn-primary form-control']) !!}-->
-<input type="hidden" name="reportid" value ={{$report->id}}>
-
-{!! Form::close() !!}
 </div>
 </div>
 </div>

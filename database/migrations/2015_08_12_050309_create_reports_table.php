@@ -17,14 +17,14 @@ class CreateReportsTable extends Migration
             $table->increments('id');
 
             $table->integer('userid')->unsigned()->index();
-            $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('userid')->references('id')->on('users');
 
             $table->integer('step');
             $table->timestamp('date');
             $table->string('status');
 
             $table->integer('prac_id')->unsigned()->index();
-            $table->foreign('prac_id')->references('id')->on('practitioners');
+            $table->foreign('prac_id')->references('id')->on('practitioners')->onDelete('cascade');
 
             $table->string('prac_notes');
             $table->timestamps();         

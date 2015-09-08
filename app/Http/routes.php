@@ -37,11 +37,12 @@ Route::get('reports/createsteptwo/{report_id}', 'ReportsController@createsteptwo
 Route::get('reports/{report_id}', 'ReportsController@edit');
 
 Route::post('reports/summary', 'ReportsController@summary');
+
 Route::post('reports/createsteptwo', 'ReportsController@storeStepTwo');
 Route::post('reports', 'ReportsController@store');
-Route::post('reports/update', 'ReportsController@update');
+Route::post('reports/pracAnswersUpdate', 'ReportsController@pracAnswersUpdate');
+Route::post('reports/pracSubUpdate', 'ReportsController@pracSubUpdates');
 Route::post('reports/newproducts', 'ReportsController@addnewproducts');
-
 
 // registration 
 
@@ -56,8 +57,7 @@ Route::get('prac/logout', 'PractitionersAuthController@logout');
 Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
 
-Route::post('reports/pracAnswersUpdate', 'ReportsController@pracAnswersUpdate');
-Route::post('reports/pracSubUpdate', 'ReportsController@pracSubUpdates');
+
 
 
 Route::get('practitioner/dashboard', 'PractitionersController@index');
@@ -75,12 +75,19 @@ Route::get('practitioner/productsmanager', 'PractitionersController@productsmana
 
 Route::get('practitioner/generate/{id}', 'PractitionersController@generatereport');
 
-Route::get('practitioner/{report_id}', 'PractitionersController@showreport');
+Route::get('practitioner/stepone/{report_id}', 'PractitionersController@showStepOne');
+Route::get('practitioner/steptwo/{report_id}', 'PractitionersController@showStepTwo');
 Route::get('practitioner/overview/{report_id}', 'PractitionersController@reportOverview');
 Route::get('practitioner/client/{report_id}', 'PractitionersController@viewclient');
+
+
 Route::post('practitioner/addquestion', 'PractitionersController@addquestion');
 Route::post('practitioner/add', 'PractitionersController@store');
 Route::post('practitioner/update', 'PractitionersController@update');
+
+
+Route::post('reports/removeSharer', 'SharingController@removeSharer');
+Route::post('reports/shareReport', 'SharingController@addNewSharer');
 
 
 Route::controllers([

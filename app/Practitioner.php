@@ -13,7 +13,7 @@ class Practitioner extends Model
 
      public function reports() // get articles associated with the given tag
     {
-    	return $this->belongsToMany('App\Report');
+    	return $this->belongsToMany('App\Report')->withPivot('prid');;
     }
 
 }
