@@ -94,7 +94,7 @@
                                                                                         class="cr-icon fa fa-check"></i></span>
                                                                             Completed
                                                                         </label>
-                                                                        <a href="{{ url('/practitioner/stepone',$report_id) }}">
+                                                                        <a href="{{ url('/reports/stepone',$report_id) }}">
                                                                             <button type="button" id="updatebtn"
                                                                                     class="btn btn-primary form-control">
                                                                                 View
@@ -125,7 +125,7 @@
                                                                                             class="cr-icon fa fa-check"></i></span>
                                                                                 Completed
                                                                         </label>
-                                                                        <a href="{{ url('/practitioner/steptwo',$report_id) }}">
+                                                                        <a href="{{ url('/reports/steptwo',$report_id) }}">
                                                                             <button type="button" id="updatebtn"
                                                                                     class="btn btn-primary form-control">
                                                                                 View
@@ -164,19 +164,24 @@
                                                                         <label style="font-size: 2em">
 
                                                                             @if ($reportstepcount->contains(3))
-                                                                                <input type="checkbox" disabled value="" >
-                                                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                                <input type="checkbox" disabled
+                                                                                       value="">
+                                                                                <span class="cr"><i
+                                                                                            class="cr-icon fa fa-check"></i></span>
                                                                                 Completed
                                                                         </label>
-                                                                        <button type="button" id="updatebtn" class="btn btn-primary form-control">
+                                                                        <button type="button" id="updatebtn"
+                                                                                class="btn btn-primary form-control">
                                                                             View
                                                                         </button>
                                                                         @else
                                                                             <input type="checkbox" disabled value="">
-                                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                            <span class="cr"><i
+                                                                                        class="cr-icon fa fa-check"></i></span>
                                                                             Incomplete
                                                                             </label>
-                                                                            <button type="button" id="createbtn" class="btn btn-primary form-control">
+                                                                            <button type="button" id="createbtn"
+                                                                                    class="btn btn-primary form-control">
                                                                                 Create
                                                                             </button>
                                                                         @endif
@@ -201,7 +206,7 @@
                                                                             <div id="menu1" class="tab-pane fade">
                                                                                 @endif
 
-                                                                                {!! Form::open(['url' => 'reports/pracSubUpdate']) !!}
+                                                                                {!! Form::open(['url' => 'reports/overview/update']) !!}
                                                                                 <div class="form-group">
                                                                                     <br>
                                                                                     <input type="hidden" name="reportid"

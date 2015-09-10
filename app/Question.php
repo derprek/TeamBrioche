@@ -18,4 +18,19 @@ class Question extends Model
     {
         return $this->belongsTo('App\Report')->withPivot('answers', 'rqid');
     }
+
+    public function scopeSteptwo($query)
+    {
+        $query->where('step', '=', '2');
+    }
+
+    public function scopeStepone($query)
+    {
+        $query->where('step', '=', '1');
+    }
+
+    public function scopeGetquestionsbycat($query,$ans)
+    {
+        $query->where('category_id', '=', $ans);
+    }
 }

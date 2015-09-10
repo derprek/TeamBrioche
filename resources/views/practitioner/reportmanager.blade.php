@@ -60,7 +60,7 @@
 
 						<tr>
 							<th>Report Number </th>
-							<th>Patient Name</th>
+							<th>Client Name</th>
 							<th>Created on</th>
 							<th>Updated on</th>
 							<th>Status</th>
@@ -70,7 +70,7 @@
 						@foreach($prac_reports as $reportlist)
 						<tr>       			         			
 							<td> {{ $reportlist->id}}</td>
-							<td> {{ App\User::find($reportlist->userid)->name}}</td>
+							<td> {{ App\User::find($reportlist->userid)->fname}}</td>
 							<td> {{ $reportlist->created_at}}</td>
 							<td> {{ $reportlist->updated_at}}</td>
 							<td> {{ $reportlist->status}}</td>
@@ -89,7 +89,7 @@
 						@else
 						<tr>
 							<th>Report Number </th>
-							<th>Patient Name</th>
+							<th>Client Name</th>
 							<th>Created on</th>
 							<th>Updated on</th>
 							<th>Status</th>
@@ -99,7 +99,7 @@
 						@foreach($progress as $progresslist)
 						<tr>			         			
 							<td> {{ $progresslist->id}} </td>
-							<td> {{ App\User::find($progresslist->userid)->name}}</td>
+							<td> {{ App\User::find($progresslist->userid)->fname}}</td>
 							<td> {{ $progresslist->created_at}}</td>
 							<td> {{ $progresslist->updated_at}}</td>
 							<td> {{ $progresslist->status}}</td>
@@ -119,7 +119,7 @@
 						@else
 						<tr>
 							<th>Report Number </th>
-							<th>Patient Name</th>
+							<th>Client Name</th>
 							<th>Created on</th>
 							<th>Updated on</th>
 							<th>Status</th>
@@ -129,7 +129,7 @@
 						@foreach($finished as $finishedlist)  
 						<tr>			         			
 							<td> {{ $finishedlist->id}} </td>
-							<td> {{ App\User::find($finishedlist->userid)->name}}</td>
+							<td> {{ App\User::find($finishedlist->userid)->fname}}</td>
 							<td> {{ $finishedlist->created_at}}</td>
 							<td> {{ $finishedlist->updated_at}}</td>
 							<td> {{ $finishedlist->status}}</td>
@@ -150,7 +150,7 @@
 
 						<tr>
 							<th>Report Number </th>
-							<th>Patient Name</th>
+							<th>Client Name</th>
 							<th>Created on</th>
 							<th>Updated on</th>
 							<th>Status</th>

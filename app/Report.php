@@ -16,11 +16,6 @@ class Report extends Model
         'status'
     ];
 
-    public function scopePending($query)
-    {
-        $query->where('status', '=', 'Pending Review');
-    }
-
     public function scopeProgress($query)
     {
         $query->where('status', '=', 'In Progress');

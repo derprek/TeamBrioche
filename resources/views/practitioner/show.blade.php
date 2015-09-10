@@ -109,7 +109,7 @@
                             <div class="modal-body">
 
 
-                                <form role="form" method="POST" action="{{ url('/reports/pracAnswersUpdate') }}">
+                                <form role="form" method="POST" action="{{ url('reports/stepone/update') }}">
 
                                     <div class="form-group" id="qntable">
                                         <input type='hidden' name='rqid' value= {{ $reportlist->pivot->rqid }}>

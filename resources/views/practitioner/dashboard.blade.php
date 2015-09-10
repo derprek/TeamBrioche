@@ -159,7 +159,7 @@
                                     </div>
                                 @endif
 
-                                <form role="form" method="POST" action="{{ url('/auth/register') }}">
+                                <form role="form" method="POST" action="{{ url('/practitioner/createUser') }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                     <div class="form-group" id="qntable">

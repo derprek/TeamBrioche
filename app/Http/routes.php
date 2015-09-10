@@ -17,32 +17,40 @@ Route::get('/', function () {
 
 Route::get('home', 'ClientsController@index');
 
+Route::post('client/login', 'ClientAuthController@login');
 
-Route::get('reports/create', 'ReportsController@create');
-Route::get('reports/createstepthree', 'ReportsController@createstepthree');
+// Reports
 
-Route::get('reports/create/products', 'ReportsController@newproducts');
-Route::get('reports/reports/create/products', 'ReportsController@newproducts');
+/* Report Get Requests */
+Route::get('reports/create', 'ReportStepOneController@index');
+Route::get('reports/stepone/{report_id}', 'ReportStepOneController@show');
 
-Route::get('reports/userhistory', 'ReportsController@userhistory');
-Route::get('reports/reports/userhistory', 'ReportsController@userhistory');
+    /* Report Wild Cards */
+    Route::get('reports/createsteptwo/{report_id}', 'ReportStepTwoController@index');
+    Route::get('reports/{report_id}', 'ReportStepOneController@edit');
+    /* End Report Wild cards */
 
-Route::get('reports/create/producthistory', 'ReportsController@previousproducts');
-Route::get('reports/reports/create/producthistory', 'ReportsController@previousproducts');
+/* End Report Get Requests */
 
-Route::get('reports/summary', 'ReportsController@summary');
-Route::get('reports/reports/summary', 'ReportsController@summary');
 
-Route::get('reports/createsteptwo/{report_id}', 'ReportsController@createsteptwo');
-Route::get('reports/{report_id}', 'ReportsController@edit');
+/* Report Post Requests */
 
-Route::post('reports/summary', 'ReportsController@summary');
+    Route::post('reports/overview/update', 'ReportOverviewController@update');
 
-Route::post('reports/createsteptwo', 'ReportsController@storeStepTwo');
-Route::post('reports', 'ReportsController@store');
-Route::post('reports/pracAnswersUpdate', 'ReportsController@pracAnswersUpdate');
-Route::post('reports/pracSubUpdate', 'ReportsController@pracSubUpdates');
-Route::post('reports/newproducts', 'ReportsController@addnewproducts');
+    /* Step One */
+    Route::post('reports', 'ReportStepOneController@store');
+    Route::post('reports/stepone/update', 'ReportStepOneController@update');
+    /* End Step Two */
+
+    /* Step Two */
+    Route::post('reports/createsteptwo', 'ReportStepTwoController@store');
+    /* End Step Two */
+
+/* End Report Post Requests */
+
+// End Reports
+
+
 
 // registration 
 
@@ -53,6 +61,10 @@ Route::get('prac/logout', 'PractitionersAuthController@logout');
 
 Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
+//
+
+Route::post('practitioner/createUser', 'PractitionersController@createClient');
+
 
 Route::get('practitioner/dashboard', 'PractitionersController@index');
 
@@ -62,14 +74,12 @@ Route::get('practitioner/questions', 'PractitionersController@questionspage');
 Route::get('practitioner/practitioner/questions', 'PractitionersController@questionspage');
 
 Route::get('practitioner/generatereport', 'PractitionersController@generatereport');
-Route::get('practitioner/practitioner/generatereport', 'PractitionersController@generatereport');
 
 Route::get('practitioner/productsmanager', 'PractitionersController@productsmanager');
 
 Route::get('practitioner/generate/{id}', 'PractitionersController@generatereport');
 
-Route::get('practitioner/stepone/{report_id}', 'PractitionersController@showStepOne');
-Route::get('practitioner/steptwo/{report_id}', 'PractitionersController@showStepTwo');
+
 Route::get('practitioner/overview/{report_id}', 'PractitionersController@reportOverview');
 Route::get('practitioner/client/{report_id}', 'PractitionersController@viewclient');
 

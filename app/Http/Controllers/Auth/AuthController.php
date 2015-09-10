@@ -25,7 +25,7 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     
-    protected $redirectTo = 'home';
+    protected $redirectTo = '/home';
         
 
 
@@ -63,16 +63,11 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $pracid = Session::get('userid');
-
-        Session::flash('flash_message', 'Client was successful registered!');
-
         return User::create([
             'fname' => $data['fname'],
             'sname' => $data['sname'],
             'email' => $data['email'],
             'gender' => $data['gender'],
-            'prac_id' => $pracid,
             'password' => bcrypt($data['password']),
 
 

@@ -25,6 +25,10 @@ class ClientsController extends Controller
      */
     public function index()
     {
+
+                dd($errors);
+
+
         if (Auth::guest()) {
 
             return redirect('auth/login');
@@ -65,7 +69,6 @@ class ClientsController extends Controller
         return view('client.index', compact('reports', 'reporthistory', 'products', 'latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
 
     }
-
     /**
      * Show the form for creating a new resource.
      *
