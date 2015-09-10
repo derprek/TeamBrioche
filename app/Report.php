@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use Session;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,10 +10,10 @@ class Report extends Model
 {
     protected $fillable = [
 
-    	'userid',
-    	'step',
-    	'date',
-    	'status'
+        'userid',
+        'step',
+        'date',
+        'status'
     ];
 
     public function scopePending($query)
@@ -37,7 +38,7 @@ class Report extends Model
 
     public function questions()
     {
-    	return $this->belongsToMany('App\Question')->withTimestamps()->withPivot('answers','rqid');
+        return $this->belongsToMany('App\Question')->withTimestamps()->withPivot('answers', 'rqid');
     }
 
     public function users()

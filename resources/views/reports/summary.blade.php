@@ -1,14 +1,17 @@
 @extends('practitionermaster')
 
 @section('sidemenubar')
-<ul class="nav navbar-nav side-nav">
-	<li class="active">
-		<a href="/../reports"><i class="fa fa-fw fa-dashboard"></i> Reports</a>
-	</li>
-	<li>
-		<a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> History</a>
-	</li>
-</ul>
+	<ul class="nav navbar-nav side-nav">
+		<li>
+			<a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Home</a>
+		</li>
+		<li class="active">
+			<a href="{{ url('practitioner/reports') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+		</li>
+		<li>
+			<a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
+		</li>
+	</ul>
 @endsection
 
 @section('content')
@@ -60,7 +63,7 @@
 		</table>
 
 		<a href="/../reports" class="btn btn-info">Back</a>
-		{!! Form:: submit('Submit Report' , ['class' => 'btn btn-primary',]) !!}
+		{!! Form:: submit('Submit Report' , ['class' => 'btn btn-success',]) !!}
 		{!! Form::close() !!}
 
 	</div>

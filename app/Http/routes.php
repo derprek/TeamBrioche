@@ -49,21 +49,14 @@ Route::post('reports/newproducts', 'ReportsController@addnewproducts');
 // login 
 Route::get('login/login', 'PractitionersAuthController@showlogin');
 
-
-
 Route::get('prac/logout', 'PractitionersAuthController@logout');
-
 
 Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
 
-
-
-
 Route::get('practitioner/dashboard', 'PractitionersController@index');
 
 Route::get('practitioner/reports', 'PractitionersController@history');
-
 
 Route::get('practitioner/questions', 'PractitionersController@questionspage');
 Route::get('practitioner/practitioner/questions', 'PractitionersController@questionspage');
@@ -80,20 +73,17 @@ Route::get('practitioner/steptwo/{report_id}', 'PractitionersController@showStep
 Route::get('practitioner/overview/{report_id}', 'PractitionersController@reportOverview');
 Route::get('practitioner/client/{report_id}', 'PractitionersController@viewclient');
 
-
 Route::post('practitioner/addquestion', 'PractitionersController@addquestion');
 Route::post('practitioner/add', 'PractitionersController@store');
 Route::post('practitioner/update', 'PractitionersController@update');
 
-
 Route::post('reports/removeSharer', 'SharingController@removeSharer');
 Route::post('reports/shareReport', 'SharingController@addNewSharer');
 
-
 Route::controllers([
 
-		'auth'=>'Auth\AuthController',
-		'password' =>'Auth\PasswordController',
-		//'client' =>'Auth\ClientAuthController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+    //'client' =>'Auth\ClientAuthController',
 
-	]);
+]);

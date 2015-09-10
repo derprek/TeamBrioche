@@ -8,7 +8,7 @@ class Category extends Model
 {
     public function subcategories()
     {
-    	return $this->belongsToMany('App\Subcategory')->withTimestamps();
+        return $this->belongsToMany('App\Subcategory')->withTimestamps();
     }
 
     public function products() // get articles associated with the given tag

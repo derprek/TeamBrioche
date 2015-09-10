@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -24,50 +25,44 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        if(Auth::guest()){
+        if (Auth::guest()) {
 
-        return redirect('auth/login');
-    }
-
-     if(Session::has('userid'))
-        { 
-          Session::reflash();
-          return redirect('practitioner/dashboard');
+            return redirect('auth/login');
         }
-       
 
-    $reports = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
-    $reporthistory = Report::where('userid', '=', Auth::User()->id)->get();
+        if (Session::has('userid')) {
+            Session::reflash();
+            return redirect('practitioner/dashboard');
+        }
 
-    if(empty($reports->id))
-    {
-        
-    }
 
-    else
-    {   
-       
-        $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
+        $reports = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
+        $reporthistory = Report::where('userid', '=', Auth::User()->id)->get();
 
-        // Get report and its qns/ans
-        $questionreport = $latestreport->questions()
-                        ->where('report_id', '=',$latestreport->id)
-                        ->get();
-                
-        $questionlist = array();
-        $answerlist = array();
-            foreach($questionreport as $ans)
-            {
+        if (empty($reports->id)) {
+
+        } else {
+
+            $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
+
+            // Get report and its qns/ans
+            $questionreport = $latestreport->questions()
+                ->where('report_id', '=', $latestreport->id)
+                ->get();
+
+            $questionlist = array();
+            $answerlist = array();
+            foreach ($questionreport as $ans) {
                 $questionlist[] = Question::find($ans->pivot->question_id);
                 $answerlist[] = $ans->pivot->answers;
             }
 
-        $qrarraylength = count($answerlist);
-        // End 
+            $qrarraylength = count($answerlist);
+            // End
 
-            }
-        
-        return view('client.index', compact ('reports','reporthistory', 'products','latestreport','answerlist','questionlist','qrarraylength'));
+        }
+
+        return view('client.index', compact('reports', 'reporthistory', 'products', 'latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
 
     }
 
@@ -84,7 +79,7 @@ class ClientsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -95,7 +90,7 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -106,7 +101,7 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -117,8 +112,8 @@ class ClientsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -129,7 +124,7 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)

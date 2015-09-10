@@ -10,17 +10,13 @@
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-select.css" rel="stylesheet">
-     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
 
     <!-- Custom CSS -->
     <link href="/css/atest.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="/css/plugins/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>
@@ -32,98 +28,86 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-        
 
-    </head>
+</head>
 
-    <body>
-    @if(Session::has('flash_message')) 
-            <script>
-                 BootstrapDialog.show({
+<body>
+@if(Session::has('flash_message'))
+    <script>
+        BootstrapDialog.show({
 
-                    title: 'Success',
-                    message: '{{ Session::get('flash_message')}}',
-                    buttons: [{
-                        label: 'Close',
-                        cssClass: 'btn-info',
-                        action: function(dialogItself){
-                            dialogItself.close();
-                        }                 
-                      
-                    }]
-                });
-            </script>
-            @endif
+            title: 'Success',
+            message: '{{ Session::get('flash_message')}}',
+            buttons: [{
+                label: 'Close',
+                cssClass: 'btn-info',
+                action: function (dialogItself) {
+                    dialogItself.close();
+                }
 
-        <div id="wrapper">
-            <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">ATEST</a>
-                </div>
-                <!-- Top Menu Items -->
-                <ul class="nav navbar-right top-nav">
+            }]
+        });
+    </script>
+@endif
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Welcome, <?php $prac = App\Practitioner::where('id','=', Session::get('userid'))->get(); echo $prac[0]->name; ?> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                            </li>
-                        </ul>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="dashboard">A T E S T</a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                    Welcome, <?php $prac = App\Practitioner::where('id', '=', Session::get('userid'))->get(); echo $prac[0]->name; ?>
+                    <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                     </li>
                 </ul>
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-         
-                    <ul class="nav navbar-nav side-nav">
-                        <li class="active">
-                            <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-fw fa-dashboard"></i>Home</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('practitioner/reports') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Report Manager</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('practitioner/questions') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Question Manager</a>
-                        </li>
-                    </ul>
-
-
-               </div>
-               <!-- /.navbar-collapse -->
-           </nav>
-
-           <div class = "body">
-            @yield('content')
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="body">
+            @yield('sidemenubar')
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.navbar-collapse -->
+    </nav>
 
+    <div class="body">
+        @yield('content')
     </div>
-    <!-- /#wrapper -->
+    <!-- /#page-wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap-select.js"></script>
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap-select.js"></script>
 
 
 </body>

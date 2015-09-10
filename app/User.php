@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use Session;
 
 use Illuminate\Auth\Authenticatable;
@@ -31,7 +32,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $query->where('prac_id', '=', Session::get('userid'));
     }
 
-    protected $fillable = ['fname','sname','gender','prac_id', 'email', 'password'];
+    protected $fillable = ['fname', 'sname', 'gender', 'prac_id', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -40,7 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-     public function reports()
+    public function reports()
     {
         return $this->hasMany('App\Report'); // form relation
 
