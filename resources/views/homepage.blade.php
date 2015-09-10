@@ -7,12 +7,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <img class="img-responsive" src="img/logo.png" alt="">
-
                 <div class="intro-text">
                     <span class="name">A T E S T </span>
                     <hr class="star-light">
                     <span class="skills">Assitive Technology Evaluation and Selection Tool</span>
-                    <i class="fa fa-spinner fa-pulse"></i>
                 </div>
                 <br>
                 <button type="button" id="regbtn" class="btn btn-success"
@@ -33,7 +31,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>Our Mission</h2>
-                <hr class="star-light">
+                <hr>
             </div>
         </div>
         <div class="row">

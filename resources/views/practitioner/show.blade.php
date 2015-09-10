@@ -11,6 +11,9 @@
         <li>
             <a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
         </li>
+        <li>
+            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+        </li>
     </ul>
 @endsection
 @section('content')
@@ -49,10 +52,9 @@
                 <p style="float:right"> Practitioner's name: {{ $pracinfo->name }} </p>
                 <br>
             </div>
+
             <div class="dashboardbody">
-
                 <hr>
-
                 @foreach($answerlist as $reportinfo)
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover table-striped">
@@ -65,7 +67,6 @@
                             </tr>
                             </thead>
                             <tbody>
-
                             @foreach($reportinfo as $reportlist)
                                 <tr>
                                     <td style="width:25%">{{ $reportlist->question }} </td>
@@ -78,22 +79,19 @@
                                     </td>
                                 </tr>
                             @endforeach
-
                             </tbody>
                         </table>
                     </div>
                     <hr/>
                 @endforeach
                 <hr/>
-
             </div>
         </div>
     </div>
-
     @foreach($answerlist as $reportinfo)
-        <input type="hidden" name="reportid" value={{$report->id}}>
-        @foreach($reportinfo as $reportlist)
 
+        @foreach($reportinfo as $reportlist)
+            <input type="hidden" name="reportid" value={{$report->id}}>
             <div class="container">
                 <!-- Modal -->
                 <div class="modal fade" role="dialog" id=<?php echo "update" . $reportlist->pivot->rqid ?> >
@@ -107,8 +105,6 @@
                             </div>
 
                             <div class="modal-body">
-
-
                                 <form role="form" method="POST" action="{{ url('reports/stepone/update') }}">
 
                                     <div class="form-group" id="qntable">
@@ -119,25 +115,25 @@
                                                   rows="5">{{ $reportlist->pivot->answers}}</textarea>
                                         <br>
                                     </div>
+
+
+                                    <div class="modal-footer">
+
+                                        <button type="submit" class="btn btn-success form-control">Update</button>
+                                        <hr/>
+                                        <button type="button" class="btn btn-danger form-control" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
 
-                            <div class="modal-footer">
-
-                                <button type="submit" class="btn btn-default form-control">Update</button>
-                                <hr/>
-                                <button type="button" class="btn btn-danger form-control" data-dismiss="modal">Close
-                                </button>
-
-
-                            </div>
                         </div>
-                        </form>
                     </div>
                 </div>
+                @endforeach
+            </div>
 
         @endforeach
-
-    @endforeach
-
 @endsection
 @stop

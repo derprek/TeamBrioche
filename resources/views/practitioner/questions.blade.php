@@ -11,6 +11,9 @@
         <li class="active">
             <a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
         </li>
+        <li>
+            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+        </li>
     </ul>
 @endsection
 
@@ -27,7 +30,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="/../practitioner/dashboard">Dashboard</a>
+                            <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-pencil"></i> Question Manager
@@ -37,34 +40,51 @@
             </div>
             <!-- /.row -->
 
-            <h3>Question Manager</h3>
+
+            <div class="col-lg-12">
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#assessment"><strong>Assessment</strong></a></li>
+                    <li><a data-toggle="tab" href="#typology">Typology</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="assessment" class="tab-pane fade in active">
+                        <table class="table table-bordered table-hover table-striped">
+                            @if(empty($questionStepOne))
+                                <tr>
+                                    <td> No Questions found.</td>
+                                </tr>
+                            @else
+                                @foreach($questionStepOne as $question)
+                                    <tr>
+                                        <td> {{ $question->question}} </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </table>
+                    </div>
+                    <div id="typology" class="tab-pane">
+                        <table class="table table-bordered table-hover table-striped">
+                            @if(empty($questionStepTwo))
+                                <tr>
+                                    <td> No Questions found.</td>
+                                </tr>
+                            @else
+                                @foreach($questionStepTwo as $question)
+                                    <tr>
+                                        <td> {{ $question->question}} </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </table>
+                    </div>
+                </div>
+            </div>
             <hr/>
 
-            <table class="table table-bordered table-hover table-striped">
-                <tr>
-                    <th>Question</th>
-                    <th>Created on</th>
-                    <th>Modified on</th>
-                </tr>
-                @if(empty($questionlist))
-                    <tr>
-                        <td> No Questions found.</td>
-                    </tr>
-                @else
-                    @foreach($questionlist as $question)
-                        <tr>
-                            <td> {{ $question->question}} </td>
-                            <td> {{ $question->created_at}} </td>
-                            <td> {{ $question->updated_at}} </td>
-                        </tr>
-
-                    @endforeach
-                @endif
-
-            </table>
-            <hr/>
-
-            <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#newqn">Add a
+            <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#newqn">Add
+                a
                 Question
             </button>
             <!-- End New Products Modal -->

@@ -32,18 +32,12 @@ class PractitionersController extends Controller
      */
     public function index()
     {
-        if (!empty(Auth::User()->id)) {
-            Auth::logout();
-        }
-
         $value = Session::get('userid');
         if (empty($value)) {
             return redirect('/../');
         }
 
-        $clients = User::latest('created_at')->Myclient()->get();
-
-        return view('practitioner.dashboard', compact('clients'));
+        return view('practitioner.dashboard');
     }
 
     /**
@@ -68,25 +62,7 @@ class PractitionersController extends Controller
      *
      * @return Response
      */
-    public function createClient()
-    {
 
-        $pracid = Session::get('userid');
-
-        $user = new User;
-        $user->fname = $_POST['fname'];
-        $user->sname = $_POST['sname'];
-        $user->email = $_POST['email'];
-        $user->gender = $_POST['gender'];
-        $user->prac_id = $pracid;
-        $user->password = bcrypt($_POST['password']);
-        $user->save();
-
-
-
-        Session::flash('flash_message', 'Client was successful registered!');
-
-    }
 
     public function questionspage()
     {
@@ -95,9 +71,10 @@ class PractitionersController extends Controller
             return redirect('/../');
         }
 
-        $questionlist = Question::all();
+        $questionStepOne = Question::Stepone()->get();
+        $questionStepTwo = Question::Steptwo()->get();
 
-        return view('practitioner.questions', compact('questionlist'));
+        return view('practitioner.questions', compact('questionStepOne','questionStepTwo'));
     }
 
     public function history()
@@ -119,14 +96,6 @@ class PractitionersController extends Controller
 
         return view('practitioner.reportmanager', compact('pracinfo', 'prac_reports', 'latestreport', 'stepcount', 'progress', 'finished', 'shared'));
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
 
 
     /**
@@ -156,15 +125,13 @@ class PractitionersController extends Controller
         if (empty($value)) {
             return redirect('/../');
         }
-
         $report = Report::find($id);
-
         $managers = DB::table('question_report')//
         ->where('report_id', '=', $id)
             ->get();
         $questions = Question::all();
-
         return view('practitioner.test', compact('report', 'managers', 'questions'));
     }
+
 
 }

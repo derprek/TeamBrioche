@@ -39,7 +39,6 @@
 @if(Session::has('flash_message'))
     <script>
         BootstrapDialog.show({
-
             title: 'Success',
             message: '{{ Session::get('flash_message')}}',
             buttons: [{
@@ -65,7 +64,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="dashboard">A T E S T</a>
+            <a class="navbar-brand" href="{{url('practitioner/dashboard')}}">A T E S T</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">

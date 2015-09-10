@@ -11,13 +11,14 @@
         <li>
             <a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
         </li>
+        <li>
+            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+        </li>
     </ul>
 @endsection
 @section('content')
 
     <div class="container">
-
-
         <!-- Modal -->
         <div class="modal fade" role="dialog" id="reportoverview">
             <div class="modal-dialog modal-lg">
@@ -55,7 +56,6 @@
                         </ul>
 
                         <div class="tab-content">
-
                             @if(Session::has('banner_message'))
                                 <br>
                                 <div class="alert alert-success fade in">
@@ -74,9 +74,7 @@
                                                 @else
 
                                                     <div id="home" class="tab-pane fade in active">
-
                                                         @endif
-
                                                         <div class="col-sm-4 col-md-4"
                                                              style="padding-top:40px;border-spacing: 10px 50px;">
                                                             <div class="thumbnail"
@@ -307,7 +305,7 @@
                                                                                                                                     this
                                                                                                                                     report
                                                                                                                                     with: </h6>
-                                                                                                                                <table class="table table-bordered table-hover table-striped">
+                                                                                                                                <table class="table table-striped">
 
 
                                                                                                                                     @if(empty($sharerslist))
@@ -344,7 +342,7 @@
                                                                                                                                                 <td> {{ $pracinfo->name}}</td>
                                                                                                                                                 <td>
                                                                                                                                                     <button type="submit"
-                                                                                                                                                            class="btn btn-warning">
+                                                                                                                                                            class="btn btn-warning btn-xs">
                                                                                                                                                         Remove
                                                                                                                                                     </button>
                                                                                                                                                 </td>

@@ -21,7 +21,7 @@ a:hover,
 a:focus,
 a.active {
     outline: 0;
-    color: #81D8D0;
+    color: #18bc9c;
 }
 
 h1,
@@ -61,7 +61,7 @@ hr.star-light {
 
 hr.star-light:after {
     color: #2c3131;
-    background-color: #81D8D0;
+    background-color: #fff;
 }
 
 hr.star-primary {
@@ -176,7 +176,7 @@ section h2 {
 
 section.success {
     color: #fff;
-    background: #81D8D0;
+    background: #18bc9c;
 }
 
 section.success a,
@@ -226,7 +226,7 @@ section.success a.active {
 .btn-outline:active,
 .btn-outline.active {
     border: solid 2px #fff;
-    color: #81D8D0;
+    color: #18bc9c;
     background: #fff;
 }
 
@@ -279,7 +279,7 @@ section.success a.active {
 }
 
 .floating-label-form-group-with-focus label {
-    color: #81D8D0;
+    color: #18bc9c;
 }
 
 form .row:first-child .floating-label-form-group {
@@ -362,9 +362,7 @@ footer .footer-below {
     font-size: 3em;
 }
 
-.portfolio-modal .modal-content img {
-    margin-bottom: 30px;
-}
+
 
 .portfolio-modal .modal-content .item-details {
     margin: 30px 0;

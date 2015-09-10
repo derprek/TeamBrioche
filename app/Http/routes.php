@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('home', 'ClientsController@index');
 
 Route::post('client/login', 'ClientAuthController@login');
+Route::get('reportarchives', 'ClientsReportController@index');
 
 // Reports
 
@@ -63,11 +64,11 @@ Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
 //
 
-Route::post('practitioner/createUser', 'PractitionersController@createClient');
+Route::post('practitioner/createUser', 'PractitionersClientManagerController@store');
 
 
 Route::get('practitioner/dashboard', 'PractitionersController@index');
-
+Route::get('practitioner/clientmanager', 'PractitionersClientManagerController@index');
 Route::get('practitioner/reports', 'PractitionersController@history');
 
 Route::get('practitioner/questions', 'PractitionersController@questionspage');
@@ -89,6 +90,7 @@ Route::post('practitioner/update', 'PractitionersController@update');
 
 Route::post('reports/removeSharer', 'SharingController@removeSharer');
 Route::post('reports/shareReport', 'SharingController@addNewSharer');
+
 
 Route::controllers([
 
