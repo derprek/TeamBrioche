@@ -1,9 +1,13 @@
 @extends('practitionermaster')
 
+
 @section('sidemenubar')
     <ul class="nav navbar-nav side-nav">
         <li>
             <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Home</a>
+        </li>
+        <li>
+            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
         </li>
         <li class="active">
             <a href="{{ url('practitioner/reports') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
@@ -25,7 +29,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="/../reports">Dashboard</a>
+                            <i class="fa fa-dashboard"></i> <a href="#">Dashboard</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-pencil"></i> Create a new Report
@@ -38,7 +42,6 @@
 
 
                 {!! Form::open(['url' => 'reports']) !!}
-
                 <select id="client_list" name="client" class="form-control">
 
                     @unless($clients->isEmpty())

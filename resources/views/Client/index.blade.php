@@ -32,7 +32,7 @@
             <div class="col-lg-12">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#">Notification</a></li>
+                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
                 </ul>
                 <div class="tab-content">
                     <!-- 1st tab -->
@@ -50,6 +50,16 @@
                                       role="button">View Reports</a></p>
                             </div>
 
+                        </div>
+                    </div>
+                    <div id="notification" class="tab-pane fade ">
+                        <br>
+
+                        <div class="jumbotron">
+                            <div class="container">
+                                <h3>Notification will be implemented here</h3>
+                                <hr>
+                            </div>
                         </div>
                     </div>
 

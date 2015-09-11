@@ -22,10 +22,19 @@ use App\Tag;
 use App\Category;
 use App\Subcategory;
 
+/**
+ * Class PractitionersClientManagerController
+ * @package App\Http\Controllers
+ */
 class PractitionersClientManagerController extends Controller
 {
     //
 
+    /**
+     * Display the list of clients.
+     *
+     * @return Response
+     */
     public function index()
     {
         $value = Session::get('userid');
@@ -33,14 +42,18 @@ class PractitionersClientManagerController extends Controller
             return redirect('/../');
         }
         $clients = User::latest('created_at')->Myclient()->get();
-        return view('practitioner.clientmanager',compact('clients'));
+        return view('practitioner.clientmanager', compact('clients'));
 
     }
+
+    /**
+     *Store client information.
+     *
+     * @return Response
+     */
     public function store()
     {
-
         $pracid = Session::get('userid');
-
         $user = new User;
         $user->fname = $_POST['fname'];
         $user->sname = $_POST['sname'];
@@ -51,8 +64,6 @@ class PractitionersClientManagerController extends Controller
         $user->save();
         return redirect("practitioner/clientmanager/");
         Session::flash('flash_message', 'Client was successful registered!');
-
-
     }
 
 }

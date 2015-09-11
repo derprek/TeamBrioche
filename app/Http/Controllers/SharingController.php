@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -16,8 +17,17 @@ use Auth;
 use Carbon\Carbon;
 use Session;
 
+/**
+ * Class SharingController
+ * @package App\Http\Controllers
+ */
 class SharingController extends Controller
 {
+    /**
+     * Add a new sharer to report.
+     *
+     * @return Response
+     */
     public function addNewSharer()
     {
         $newsharers = $_POST['prac_list'];
@@ -25,8 +35,7 @@ class SharingController extends Controller
 
         $report = Report::find($reportid);
 
-        foreach($newsharers as $prac)
-        {
+        foreach ($newsharers as $prac) {
             $report->practitioners()->attach($prac);
         }
 
@@ -35,21 +44,26 @@ class SharingController extends Controller
 
     }
 
+    /**
+     * Remove a sharer in the report.
+     *
+     * @return Redirect
+     */
     public function removeSharer()
     {
         $reportid = $_POST['reportid'];
         $prid = $_POST['prid'];
-       
+
         $report = Report::find($reportid);
         $prac = $report->practitioners()->get();
         $pracname = $prac[0]->name;
 
         $report->practitioners()
-               ->newPivotStatement()
-               ->where('prid','=',$prid)
-               ->delete();
+            ->newPivotStatement()
+            ->where('prid', '=', $prid)
+            ->delete();
 
         Session::flash('banner_message', " $pracname has been removed from the sharing list.");
-        return redirect("practitioner/overview/" . $reportid);       
+        return redirect("practitioner/overview/" . $reportid);
     }
 }

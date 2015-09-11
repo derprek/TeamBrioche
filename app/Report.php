@@ -6,6 +6,10 @@ use Session;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Report
+ * @package App
+ */
 class Report extends Model
 {
     protected $fillable = [

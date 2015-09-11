@@ -16,9 +16,18 @@ use Auth;
 use Carbon\Carbon;
 use Session;
 
+/**
+ * Class ClientsReportController
+ * @package App\Http\Controllers
+ */
 class ClientsReportController extends Controller
 {
 
+    /**
+     * Display a listing of the client reports.
+     *
+     * @return Response
+     */
     public function index()
     {
 

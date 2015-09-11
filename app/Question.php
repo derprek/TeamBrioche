@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Question
+ * @package App
+ */
 class Question extends Model
 {
     protected $fillable = [
@@ -14,7 +18,12 @@ class Question extends Model
 
     ];
 
-    public function reports() // get articles associated with the given tag
+    /**
+     * Get articles associated with the given tag.
+     *
+     * @return mixed
+     */
+    public function reports()
     {
         return $this->belongsTo('App\Report')->withPivot('answers', 'rqid');
     }
@@ -29,7 +38,7 @@ class Question extends Model
         $query->where('step', '=', '1');
     }
 
-    public function scopeGetquestionsbycat($query,$ans)
+    public function scopeGetquestionsbycat($query, $ans)
     {
         $query->where('category_id', '=', $ans);
     }

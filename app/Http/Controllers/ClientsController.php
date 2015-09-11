@@ -16,10 +16,14 @@ use Auth;
 use Carbon\Carbon;
 use Session;
 
+/**
+ * Class ClientsController
+ * @package App\Http\Controllers
+ */
 class ClientsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the client reports.
      *
      * @return Response
      */
@@ -27,10 +31,8 @@ class ClientsController extends Controller
     {
 
         if (Auth::guest()) {
-
             return redirect('homepage');
         }
-
 
         $reports = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
         $reporthistory = Report::where('userid', '=', Auth::User()->id)->get();

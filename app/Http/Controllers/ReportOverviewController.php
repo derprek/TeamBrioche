@@ -16,8 +16,17 @@ use Carbon\Carbon;
 use Session;
 use App\Practitioner;
 
+/**
+ * Class ReportOverviewController
+ * @package App\Http\Controllers
+ */
 class ReportOverviewController extends Controller
 {
+    /**
+     * Update a report.
+     *
+     * @return Redirect
+     */
     public function update()
     {
         $value = Session::get('userid');

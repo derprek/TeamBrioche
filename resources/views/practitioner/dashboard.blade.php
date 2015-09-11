@@ -6,13 +6,13 @@
             <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Home</a>
         </li>
         <li>
+            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+        </li>
+        <li>
             <a href="{{ url('practitioner/reports') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
         </li>
         <li>
             <a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
         </li>
     </ul>
 @endsection
@@ -39,8 +39,8 @@
             <div class="col-lg-12">
 
                 <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                        <li><a data-toggle="tab" href="#">Notification</a></li>
+                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
 
                 </ul>
 
@@ -62,12 +62,19 @@
                                             <p><a class="btn btn-success btn-lg" href="{{ url('reports/create') }}"
                                                   role="button">Create a new Report</a></p>
                                         </div>
+                                    </div>
+                                </div>
+                                <div id="notification" class="tab-pane fade ">
+                                    <br>
 
+                                    <div class="jumbotron">
+                                        <div class="container">
+                                            <h3>Notification will be implemented here</h3>
+                                            <hr>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr>
-
-
                         </div>
                 </div>
             </div>

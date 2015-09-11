@@ -23,6 +23,10 @@ use App\Category;
 use App\Subcategory;
 
 
+/**
+ * Class PractitionersController
+ * @package App\Http\Controllers
+ */
 class PractitionersController extends Controller
 {
     /**
@@ -42,8 +46,9 @@ class PractitionersController extends Controller
 
     /**
      * view  a client
+     *
      * @param $id
-     * @return Redirect|\Illuminate\View\View
+     * @return Response
      */
     public function viewclient($id)
     {
@@ -58,12 +63,10 @@ class PractitionersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new question.
      *
      * @return Response
      */
-
-
     public function questionspage()
     {
         $value = Session::get('userid');
@@ -74,9 +77,14 @@ class PractitionersController extends Controller
         $questionStepOne = Question::Stepone()->get();
         $questionStepTwo = Question::Steptwo()->get();
 
-        return view('practitioner.questions', compact('questionStepOne','questionStepTwo'));
+        return view('practitioner.questions', compact('questionStepOne', 'questionStepTwo'));
     }
 
+    /**
+     * Display the report history.
+     *
+     * @return Response
+     */
     public function history()
     {
 
@@ -104,7 +112,6 @@ class PractitionersController extends Controller
      * @param  int $id
      * @return Response
      */
-
     public function reportOverview($report_id)
 
     {
@@ -119,6 +126,12 @@ class PractitionersController extends Controller
 
     }
 
+    /**
+     * Generate a report.
+     *
+     * @param $id
+     * @return Response
+     */
     public function generatereport($id)
     {
         $value = Session::get('userid');

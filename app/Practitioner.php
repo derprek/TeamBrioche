@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Practitioner
+ * @package App
+ */
 class Practitioner extends Model
 {
     public function products() // get articles associated with the given tag

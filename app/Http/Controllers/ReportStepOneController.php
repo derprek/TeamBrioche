@@ -16,6 +16,10 @@ use Carbon\Carbon;
 use Session;
 use App\Practitioner;
 
+/**
+ * Class ReportStepOneController
+ * @package App\Http\Controllers
+ */
 class ReportStepOneController extends Controller
 {
     /**
@@ -23,7 +27,6 @@ class ReportStepOneController extends Controller
      *
      * @return Response
      */
-
     public function index()
     {
         $questions = Question::Stepone()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
@@ -44,6 +47,11 @@ class ReportStepOneController extends Controller
         return view('reports.create', compact('questions', 'clients', 'answerlist'));
     }
 
+    /**
+     * Store a report in step one.
+     *
+     * @return Response
+     */
     public function store()
     {
 
@@ -68,6 +76,12 @@ class ReportStepOneController extends Controller
         return redirect('practitioner/reports');
     }
 
+    /**
+     * Display a report.
+     *
+     * @param $report_id
+     * @return Response
+     */
     public function show($report_id)
 
     {
@@ -92,6 +106,10 @@ class ReportStepOneController extends Controller
         return view('practitioner.show', compact('answerlist', 'report', 'clientinfo', 'pracinfo'));
     }
 
+    /**
+     *
+     * @return Redirect
+     */
     public function update()
     {
 

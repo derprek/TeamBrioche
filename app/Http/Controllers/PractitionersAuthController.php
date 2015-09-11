@@ -13,6 +13,10 @@ use App\Question;
 use Session;
 use Carbon\Carbon;
 
+/**
+ * Class PractitionersAuthController
+ * @package App\Http\Controllers
+ */
 class PractitionersAuthController extends Controller
 {
     /**
@@ -22,12 +26,12 @@ class PractitionersAuthController extends Controller
      */
     public function index()
     {
-        return view('login.practitioner', compact ('reports'));
+        return view('login.practitioner', compact('reports'));
     }
 
     public function showregisterpage()
     {
-        return view('login.pracregister', compact ('reports'));
+        return view('login.pracregister', compact('reports'));
     }
 
 
@@ -54,7 +58,7 @@ class PractitionersAuthController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -63,15 +67,14 @@ class PractitionersAuthController extends Controller
     }
 
     public function register()
-    {   
+    {
         $pracname = $_POST['name'];
         $pracemail = $_POST['email'];
         $pracpw = $_POST['password'];
 
-        $emailchecker = Practitioner::where('email', '=' ,$pracemail)->get();
+        $emailchecker = Practitioner::where('email', '=', $pracemail)->get();
 
-        if (empty($emailchecker[0]))
-        {
+        if (empty($emailchecker[0])) {
             $newPrac = New Practitioner;
             $newPrac->name = $pracname;
             $newPrac->email = $pracemail;
@@ -81,60 +84,54 @@ class PractitionersAuthController extends Controller
             $newPrac->save();
 
             $matchme = ['email' => $pracemail, 'password' => MD5($pracpw)];
-            
+
             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
             Session::put('userid', $practitionerinfo->id);
 
             return Redirect::action('PractitionersController@index');
+        } else {
+
+            $errors[] = 'Email already exists';
+            return view('login.pracregister', compact('errors'));
         }
 
-        else{
 
-         $errors[] = 'Email already exists';   
-         return view('login.pracregister', compact ('errors'));
-     }
+    }
 
+    public function login()
+    {
 
- }
+        $password = MD5($_POST['password']);
+        $email = $_POST['email'];
 
- public function login()
- {
+        $loginchecker = Practitioner::where('email', '=', $email)->where('password', '=', $password)->get();
 
-     $password = MD5($_POST['password']);
-     $email = $_POST['email'];
+        if (empty($loginchecker[0])) {
+            $errors[] = 'Invalid Credentials';
+            return view('login.practitioner', compact('errors'));
+        } else {
+            $matchme = ['email' => $email, 'password' => $password];
 
-     $loginchecker = Practitioner::where('email', '=' ,$email)->where('password','=',$password)->get();
+            $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
+            Session::put('userid', $practitionerinfo->id);
+            $prac_reports = Report::all();
 
-     if(empty($loginchecker[0]))
-     {
-         $errors[] = 'Invalid Credentials';   
-         return view('login.practitioner', compact ('errors'));      
-     }
+            return redirect('practitioner/dashboard');
 
-     else{
-         $matchme = ['email' => $email, 'password' => $password];
-
-         $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
-         Session::put('userid', $practitionerinfo->id);
-         $prac_reports = Report::all();
-
-        return redirect('practitioner/dashboard');
-
-     }
-
+        }
         // return view('practitioner.dashboard', compact ('practitionerinfo', 'prac_reports'));
- }
+    }
 
- public function logout()
- {
-    Session::flush();
-    return redirect('/../');
-}
+    public function logout()
+    {
+        Session::flush();
+        return redirect('/../');
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -145,7 +142,7 @@ class PractitionersAuthController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -156,8 +153,8 @@ class PractitionersAuthController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -168,7 +165,7 @@ class PractitionersAuthController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
