@@ -68,6 +68,6 @@ class ClientsController extends Controller
             $qrarraylength = count($answerlist);
         }
 
-        return view('client.index', compact('reports', 'reporthistory', 'products', 'latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
+        return view('Client.index', compact('reports', 'reporthistory', 'products', 'latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
     }
 }
