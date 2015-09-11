@@ -26,6 +26,8 @@
     </div>
 </header>
 
+@include('modalerror')
+
 <section class="success" id="mission">
     <div class="container">
         <div class="row">
@@ -99,12 +101,22 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">Login</button>
-
-                                <a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your
-                                    Password?</a>
                             </div>
                         </div>
                     </form>
+                    @if ($errors-> any())
+                        @foreach ($errors->all() as $error)
+                            @if($error === "Invalid Credentials. Please try again!")
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        <li>{{ $error }}</li>    
+                                    </ul>
+                                </div>
+                            @endif
+                         @endforeach
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -148,12 +160,21 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">Login</button>
-
-                                <a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your
-                                    Password?</a>
                             </div>
                         </div>
                     </form>
+                     @if ($errors-> any())
+                        @foreach ($errors->all() as $error)
+                            @if($error === "Invalid Credentials! Please try again")
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        <li>{{ $error }}</li>    
+                                    </ul>
+                                </div>
+                            @endif
+                         @endforeach
+                    @endif
                 </div>
             </div>
         </div>

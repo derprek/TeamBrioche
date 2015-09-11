@@ -21,7 +21,23 @@ use App\Practitioner;
  * @package App\Http\Controllers
  */
 class ReportOverviewController extends Controller
-{
+{   
+    /**
+     *Check if user is logged in
+     *
+     * @return Response
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+            $value = Session::get('userid');
+                if (empty($value)) 
+                {
+                    return redirect('/../');
+                }
+        });
+    }
+
     /**
      * Update a report.
      *
@@ -29,17 +45,15 @@ class ReportOverviewController extends Controller
      */
     public function update()
     {
-        $value = Session::get('userid');
-        if (empty($value)) {
-            return redirect('/../');
-        }
-
         $reportid = $_POST['reportid'];
         $reports = Report::find($reportid);
 
-        if (isset($_POST['ReportStatus'])) {
+        if (isset($_POST['ReportStatus'])) 
+        {
             $status = $_POST['ReportStatus'];
-        } else {
+        } 
+        else 
+        {
             $status = "In Progress";
         }
 

@@ -10,92 +10,70 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::controllers([
+
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+
+]);
 
 Route::get('/', function () {
     return view('homepage');
 });
 
+
+    /**
+     * Client routes
+     *
+     * @return Response
+     */
 Route::get('home', 'ClientsController@index');
-
+Route::get('client/reportarchives', 'ClientsReportController@index');
 Route::post('client/login', 'ClientAuthController@login');
-Route::get('reportarchives', 'ClientsReportController@index');
 
-// Reports
 
-/* Report Get Requests */
-Route::get('reports/create', 'ReportStepOneController@index');
+    /**
+     * Report routes
+     *
+     * @return Response
+     */
+Route::get('reports/createstepone', 'ReportStepOneController@index');
 Route::get('reports/stepone/{report_id}', 'ReportStepOneController@show');
+Route::get('reports/createsteptwo/{report_id}', 'ReportStepTwoController@index');
+Route::get('reports/{report_id}', 'ReportStepOneController@edit');
 
-    /* Report Wild Cards */
-    Route::get('reports/createsteptwo/{report_id}', 'ReportStepTwoController@index');
-    Route::get('reports/{report_id}', 'ReportStepOneController@edit');
-    /* End Report Wild cards */
-
-/* End Report Get Requests */
-
-
-/* Report Post Requests */
-
-    Route::post('reports/overview/update', 'ReportOverviewController@update');
-
-    /* Step One */
-    Route::post('reports', 'ReportStepOneController@store');
-    Route::post('reports/stepone/update', 'ReportStepOneController@update');
-    /* End Step Two */
-
-    /* Step Two */
-    Route::post('reports/createsteptwo', 'ReportStepTwoController@store');
-    /* End Step Two */
-
-/* End Report Post Requests */
-
-// End Reports
+Route::post('reports/overview/update', 'ReportOverviewController@update');
+Route::post('reports', 'ReportStepOneController@store');
+Route::post('reports/stepone/update', 'ReportStepOneController@update');
+Route::post('reports/createsteptwo', 'ReportStepTwoController@store');
 
 
-
-// registration 
-
-// login 
-Route::get('login/login', 'PractitionersAuthController@showlogin');
-
-Route::get('prac/logout', 'PractitionersAuthController@logout');
-
-Route::get('practitioner', 'PractitionersAuthController@index');
-Route::post('practitioner/login', 'PractitionersAuthController@login');
-//
-
-Route::post('practitioner/createUser', 'PractitionersClientManagerController@store');
-
-
+    /**
+     * Practitioner Account Routes
+     *
+     * @return Response
+     */
 Route::get('practitioner/dashboard', 'PractitionersController@index');
-Route::get('practitioner/clientmanager', 'PractitionersClientManagerController@index');
-Route::get('practitioner/reports', 'PractitionersController@history');
-
-Route::get('practitioner/questions', 'PractitionersController@questionspage');
-Route::get('practitioner/practitioner/questions', 'PractitionersController@questionspage');
-
-Route::get('practitioner/generatereport', 'PractitionersController@generatereport');
-
-Route::get('practitioner/productsmanager', 'PractitionersController@productsmanager');
-
-Route::get('practitioner/generate/{id}', 'PractitionersController@generatereport');
-
-
-Route::get('practitioner/overview/{report_id}', 'PractitionersController@reportOverview');
+Route::get('practitioner/clientmanager', 'ClientManagerController@index');
+Route::get('practitioner/reportmanager', 'ReportManagerController@index');
+Route::get('practitioner/questionmanager', 'QuestionManagerController@index');
+Route::get('practitioner/overview/{report_id}', 'ReportManagerController@overview');
 Route::get('practitioner/client/{report_id}', 'PractitionersController@viewclient');
 
-Route::post('practitioner/addquestion', 'PractitionersController@addquestion');
 Route::post('practitioner/add', 'PractitionersController@store');
 Route::post('practitioner/update', 'PractitionersController@update');
-
+Route::post('practitioner/createUser', 'ClientManagerController@store');
 Route::post('reports/removeSharer', 'SharingController@removeSharer');
 Route::post('reports/shareReport', 'SharingController@addNewSharer');
 
 
-Route::controllers([
+    /**
+     * Authentication routes
+     *
+     * @return Response
+     */
+Route::get('login/login', 'PractitionersAuthController@showlogin');
+Route::get('prac/logout', 'PractitionersAuthController@logout');
+Route::get('practitioner', 'PractitionersAuthController@index');
 
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-    //'client' =>'Auth\ClientAuthController',
-
-]);
+Route::post('practitioner/login', 'PractitionersAuthController@login');

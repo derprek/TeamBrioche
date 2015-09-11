@@ -9,10 +9,10 @@
             <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
         </li>
         <li class="active">
-            <a href="{{ url('practitioner/reports') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
         </li>
         <li>
-            <a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
+            <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
         </li>
     </ul>
 @endsection
@@ -123,7 +123,7 @@
                                                                                             class="cr-icon fa fa-check"></i></span>
                                                                                 Completed
                                                                         </label>
-                                                                        <a href="{{ url('/reports/steptwo',$report_id) }}">
+                                                                        <a href="#">
                                                                             <button type="button" id="updatebtn"
                                                                                     class="btn btn-primary form-control">
                                                                                 View
@@ -137,7 +137,7 @@
                                                                             </label>
                                                                             <a href="{{ url('/reports/createsteptwo',$report_id) }}">
                                                                                 <button type="button" id="createbtn"
-                                                                                        class="btn btn-primary form-control">
+                                                                                        class="btn btn-success form-control">
                                                                                     Create
                                                                                 </button>
                                                                             </a>
@@ -179,7 +179,7 @@
                                                                             Incomplete
                                                                             </label>
                                                                             <button type="button" id="createbtn"
-                                                                                    class="btn btn-primary form-control">
+                                                                                    class="btn btn-success form-control">
                                                                                 Create
                                                                             </button>
                                                                         @endif
@@ -382,7 +382,7 @@
                                                                                             <div class="modal-footer">
 
                                                                                                 <hr/>
-                                                                                                <a href="{{ url('practitioner/reports') }}">
+                                                                                                <a href="{{ url('practitioner/reportmanager') }}">
                                                                                                     <button type="button"
                                                                                                             class="btn btn-danger form-control">
                                                                                                         Back
@@ -402,27 +402,11 @@
                                                                 $('#reportoverview').modal({
                                                                     backdrop: 'static',
                                                                     keyboard: true
-                                                                })
-                                                            </script>
-
-                                                            <script>
-
-                                                                $('.status').selectpicker();
-
-                                                            </script>
-
-                                                            <script>
-
-                                                                $('#prac_list').select2();
-
-                                                            </script>
-
-                                                            <script>
-
+                                                                })                                                   
+                                                                $('.status').selectpicker();                                                       
+                                                                $('#prac_list').select2();                                                  
                                                                 $('div.alert').delay(3000).slideUp(300);
-
                                                             </script>
 
 @endsection
 @stop
-

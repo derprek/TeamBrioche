@@ -21,7 +21,22 @@ use App\Practitioner;
  * @package App\Http\Controllers
  */
 class ReportStepTwoController extends Controller
-{
+{    
+    /**
+     *Check if user is logged in
+     *
+     * @return Response
+     */   
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+            $value = Session::get('userid');
+                if (empty($value)) {
+                    return redirect('/../');
+                }
+        });
+    }
+
     /**
      * Display report in step two.
      *
@@ -62,6 +77,4 @@ class ReportStepTwoController extends Controller
 
         return redirect()->action('PractitionersController@reportOverview', [$report_id]);
     }
-
-
 }

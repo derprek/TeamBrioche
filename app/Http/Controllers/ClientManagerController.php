@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests;
@@ -26,9 +25,22 @@ use App\Subcategory;
  * Class PractitionersClientManagerController
  * @package App\Http\Controllers
  */
-class PractitionersClientManagerController extends Controller
-{
-    //
+class ClientManagerController extends Controller
+{   
+    /**
+     *Check if user is logged in
+     *
+     * @return Response
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+            $value = Session::get('userid');
+                if (empty($value)) {
+                    return redirect('/../');
+                }
+        });
+    }
 
     /**
      * Display the list of clients.
@@ -37,13 +49,8 @@ class PractitionersClientManagerController extends Controller
      */
     public function index()
     {
-        $value = Session::get('userid');
-        if (empty($value)) {
-            return redirect('/../');
-        }
         $clients = User::latest('created_at')->Myclient()->get();
         return view('practitioner.clientmanager', compact('clients'));
-
     }
 
     /**
@@ -51,19 +58,13 @@ class PractitionersClientManagerController extends Controller
      *
      * @return Response
      */
-    public function store()
-    {
-        $pracid = Session::get('userid');
-        $user = new User;
-        $user->fname = $_POST['fname'];
-        $user->sname = $_POST['sname'];
-        $user->email = $_POST['email'];
-        $user->gender = $_POST['gender'];
-        $user->prac_id = $pracid;
-        $user->password = bcrypt($_POST['password']);
-        $user->save();
-        return redirect("practitioner/clientmanager/");
+    public function store(Requests\CreateClientRequest $request)
+    {   
+        User::create($request->all());
+        
         Session::flash('flash_message', 'Client was successful registered!');
+        return redirect("practitioner/clientmanager/");
+        
     }
 
 }

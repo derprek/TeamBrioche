@@ -9,10 +9,10 @@
             <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
         </li>
         <li>
-            <a href="{{ url('practitioner/reports') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
         </li>
         <li>
-            <a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
+            <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
         </li>
     </ul>
 @endsection
@@ -111,6 +111,7 @@
 
                                 <form role="form" method="POST" action="{{ url('/practitioner/createUser') }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="prac_id" value="{{ Session::get('userid') }}">
 
                                     <div class="form-group" id="qntable">
                                         <label for="fname"> Given name:*</label>
@@ -124,18 +125,18 @@
                                         <br>
 
                                         <label for="email"> Email Address:*</label>
-                                        <input required type="text" name="email" class="form-control"
+                                        <input required type="email" name="email" class="form-control"
                                                placeholder="Enter the client's email address"
                                                value="{{ old('email') }}">
                                         <br>
 
                                         <label for="password"> Password:*</label>
-                                        <input required type="text" name="password" class="form-control"
+                                        <input required type="password" name="password" class="form-control"
                                                placeholder="Enter a password">
                                         <br>
 
                                         <label for="password_confirmation"> Confirm Password:*</label>
-                                        <input required type="text" name="password_confirmation" class="form-control"
+                                        <input required type="password" name="password_confirmation" class="form-control"
                                                placeholder="Re-enter the password">
                                         <br>
 

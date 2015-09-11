@@ -21,7 +21,21 @@ use Session;
  * @package App\Http\Controllers
  */
 class ClientsReportController extends Controller
-{
+{   
+    /**
+     *Check if user is logged in
+     *
+     * @return Response
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+            if (Auth::guest()) 
+                {
+                    return redirect('/../');
+                }
+        });
+    }
 
     /**
      * Display a listing of the client reports.
@@ -30,41 +44,29 @@ class ClientsReportController extends Controller
      */
     public function index()
     {
+        $reports = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
+        $reporthistory = Report::GetUserReports()->get();
 
-        if (Auth::guest()) {
+        $latestreport = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
 
-            return redirect('homepage');
-        }
-
-        $reports = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
-        $reporthistory = Report::where('userid', '=', Auth::User()->id)->get();
-
-        if (empty($reports->id)) {
-
-        } else {
-
-            $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
-
-            // Get report and its qns/ans
+        if(!empty($latestreport))
+        {
             $questionreport = $latestreport->questions()
-                ->where('report_id', '=', $latestreport->id)
-                ->get();
+            ->where('report_id', '=', $latestreport->id)
+            ->get();
 
             $questionlist = array();
             $answerlist = array();
-            foreach ($questionreport as $ans) {
+            foreach ($questionreport as $ans) 
+            {
                 $questionlist[] = Question::find($ans->pivot->question_id);
                 $answerlist[] = $ans->pivot->answers;
             }
 
             $qrarraylength = count($answerlist);
-            // End
-
         }
 
         return view('client.reportarchives', compact('reports', 'reporthistory', 'products', 'latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
 
     }
-
-
 }

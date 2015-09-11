@@ -15,7 +15,22 @@ use Illuminate\Support\MessageBag;
  * @package App\Http\Controllers
  */
 class ClientAuthController extends Controller
-{
+{   
+    /**
+     *Check if user is logged in
+     *
+     * @return Response
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+            if (Auth::check()) 
+                {
+                    return redirect('home');
+                }
+        });
+    }
+
     /**
      *Client login.
      *
@@ -31,11 +46,8 @@ class ClientAuthController extends Controller
         }
         else
         {
-
-            $errors = new MessageBag(['password' => ['Email and/or password invalid.']]);
-            dd($errors);
-            //return Redirect::back()->withErrors($errors)->withInput(Input::except('password'));
-            return Redirect()->action('ClientsController@index')->withErrors($errors);
+            $errors[] = 'Invalid Credentials! Please try again';
+            return Redirect()->back()->withErrors($errors);
         }
 
     }

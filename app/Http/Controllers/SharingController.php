@@ -22,7 +22,22 @@ use Session;
  * @package App\Http\Controllers
  */
 class SharingController extends Controller
-{
+{   
+    /**
+     *Check if user is logged in
+     *
+     * @return Response
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+            $value = Session::get('userid');
+                if (empty($value)) {
+                    return redirect('/../');
+                }
+        });
+    }
+    
     /**
      * Add a new sharer to report.
      *
@@ -39,7 +54,7 @@ class SharingController extends Controller
             $report->practitioners()->attach($prac);
         }
 
-        Session::flash('banner_message', 'Report is now shared!');
+        Session::flash('banner_message', "Report is now shared!");
         return redirect("practitioner/overview/" . $reportid);
 
     }

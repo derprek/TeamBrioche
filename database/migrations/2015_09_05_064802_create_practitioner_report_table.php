@@ -16,7 +16,7 @@ class CreatePractitionerReportTable extends Migration
             {   
                 $table->increments('prid');
                 $table->integer('practitioner_id')->unsigned()->index();
-                $table->foreign('practitioner_id')->references('id')->on('practitioners');
+                $table->foreign('practitioner_id')->references('id')->on('practitioners')->onDelete('cascade');
 
                 $table->integer('report_id')->unsigned()->index();
                 $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');

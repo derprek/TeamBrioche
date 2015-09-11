@@ -5,14 +5,14 @@
         <li>
             <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Home</a>
         </li>
-        <li class="active">
-            <a href="{{ url('practitioner/reports') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/questions') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-        </li>
         <li>
             <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+        </li>
+        <li class="active">
+            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+        </li>
+        <li>
+            <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
         </li>
     </ul>
 @endsection
@@ -43,7 +43,8 @@
             <input type="hidden" name="reportid" value={{$report->id}}>
 
             <div>
-                <a class="btn btn-success" href="{{ url('/practitioner/generate', $report->id) }}"> generate report </a>
+              <!--  <a class="btn btn-success" href="{{ url('/practitioner/generate', $report->id) }}"> Generate Report </a> Disabled for this build-->
+                <a class="btn btn-default" href="{{ url('/practitioner/overview', $report->id) }}"> Back to Overview </a>
 
                 <p style="float:right"> Client's name: {{ $clientinfo->fname}} {{ $clientinfo->sname}} </p>
                 <br>

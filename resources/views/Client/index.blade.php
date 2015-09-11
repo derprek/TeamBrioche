@@ -6,7 +6,7 @@
             <a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
         </li>
         <li>
-            <a href="{{ url('reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
+            <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
         </li>
     </ul>
 @endsection
@@ -46,7 +46,7 @@
 
                                 <p> Welcome to ATEST </p>
                                 <hr>
-                                <p><a class="btn btn-success btn-lg" href="{{ url('reportarchives') }}"
+                                <p><a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}"
                                       role="button">View Reports</a></p>
                             </div>
 

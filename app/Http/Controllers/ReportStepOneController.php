@@ -21,7 +21,21 @@ use App\Practitioner;
  * @package App\Http\Controllers
  */
 class ReportStepOneController extends Controller
-{
+{   
+    /**
+     *Check if user is logged in
+     *
+     * @return Response
+     */
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+            $value = Session::get('userid');
+                if (empty($value)) {
+                    return redirect('/../');
+                }
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,17 +48,15 @@ class ReportStepOneController extends Controller
         $questions_category = Question::Stepone()->distinct()->lists('category_id');
 
         $answerlist = array();
-        foreach ($questions_category as $ans) {
+        foreach ($questions_category as $ans) 
+        {
             $answerlist[] = Question::Stepone()
                 ->Getquestionsbycat($ans)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
 
-        if (!$clients->isEmpty()) {
-
-        }
-        return view('reports.create', compact('questions', 'clients', 'answerlist'));
+        return view('reports.createstepone', compact('questions', 'clients', 'answerlist'));
     }
 
     /**
@@ -54,7 +66,6 @@ class ReportStepOneController extends Controller
      */
     public function store()
     {
-
         $client = $_POST['client'];
         $pracid = Session::get('userid');
 
@@ -69,11 +80,12 @@ class ReportStepOneController extends Controller
 
         $totalAnswers = count(Question::Stepone()->lists('id'));
 
-        for ($a = 1; $a < $totalAnswers + 1; $a++) {
+        for ($a = 1; $a < $totalAnswers + 1; $a++) 
+        {
             $reports->questions()->attach($a, array('answers' => $_POST['answersid'][$a]));
         }
 
-        return redirect('practitioner/reports');
+        return redirect('practitioner/reportmanager');
     }
 
     /**
@@ -83,12 +95,7 @@ class ReportStepOneController extends Controller
      * @return Response
      */
     public function show($report_id)
-
     {
-        $value = Session::get('userid');
-        if (empty($value)) {
-            return redirect('/../');
-        }
         $report = Report::find($report_id);
         $clientinfo = User::find($report->userid);
         $pracinfo = Practitioner::find($report->prac_id);
@@ -96,7 +103,8 @@ class ReportStepOneController extends Controller
         $arraycount = $report->questions()->distinct()->Stepone()->orderBy('category_id', 'ASC')->lists('category_id');
 
         $answerlist = array();
-        foreach ($arraycount as $ans) {
+        foreach ($arraycount as $ans) 
+        {
             $answerlist[] = $report->questions()
                 ->Getquestionsbycat($ans)
                 ->orderBy('type', 'DESC')
@@ -112,12 +120,6 @@ class ReportStepOneController extends Controller
      */
     public function update()
     {
-
-        $value = Session::get('userid');
-        if (empty($value)) {
-            return redirect('/../');
-        }
-
         $rqid = $_POST['rqid'];
         $reportid = $_POST['reportid'];
         $answer = $_POST['answersid'][$rqid];

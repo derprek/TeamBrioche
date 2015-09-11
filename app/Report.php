@@ -3,6 +3,7 @@
 namespace App;
 
 use Session;
+use Auth;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,11 @@ class Report extends Model
     public function scopePractitioner($query)
     {
         $query->where('prac_id', '=', Session::get('userid'));
+    }
+
+    public function scopeGetUserReports($query)
+    {
+        $query->where('userid', '=', Auth::User()->id);
     }
 
     public function questions()

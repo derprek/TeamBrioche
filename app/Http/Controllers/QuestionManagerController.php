@@ -22,12 +22,7 @@ use App\Tag;
 use App\Category;
 use App\Subcategory;
 
-
-/**
- * Class PractitionersController
- * @package App\Http\Controllers
- */
-class PractitionersController extends Controller
+class QuestionManagerController extends Controller
 {   
     /**
      *Check if user is logged in
@@ -43,13 +38,17 @@ class PractitionersController extends Controller
                 }
         });
     }
+    
     /**
-     * Display the practitioner dashboard page.
+     * Show the form for creating a new question.
      *
      * @return Response
      */
     public function index()
     {
-        return view('practitioner.dashboard');
+        $questionStepOne = Question::Stepone()->get();
+        $questionStepTwo = Question::Steptwo()->get();
+
+        return view('practitioner.questionmanager', compact('questionStepOne', 'questionStepTwo'));
     }
 }
