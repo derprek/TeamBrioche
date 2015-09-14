@@ -73,7 +73,7 @@ class ReportStepOneController extends Controller
         $reports->userid = $client;
         $reports->step = '1';
         $reports->date = Carbon::now();
-        $reports->status = 'Pending Review';
+        $reports->status = 'In Progress';
         $reports->prac_id = $pracid;
         $reports->updated_at = Carbon::now();
         $reports->save();
