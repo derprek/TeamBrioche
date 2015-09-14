@@ -35,7 +35,7 @@ class ClientManagerController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('userid');
+            $value = Session::get('prac_id');
                 if (empty($value)) {
                     return redirect('/../');
                 }
@@ -49,7 +49,7 @@ class ClientManagerController extends Controller
      */
     public function index()
     {
-        $clients = User::latest('created_at')->Myclient()->get();
+        $clients = User::latest('created_at')->MyClient()->get();
         return view('practitioner.clientmanager', compact('clients'));
     }
 

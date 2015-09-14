@@ -44,30 +44,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $reports = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
-        $reporthistory = Report::where('userid', '=', Auth::User()->id)->get();
-
-        if (empty($reports->id)) {
-
-        } else {
-
-            $latestreport = Report::where('userid', '=', Auth::User()->id)->orderBy('updated_at', 'desc')->first();
-
-            $questionreport = $latestreport->questions()
-                ->where('report_id', '=', $latestreport->id)
-                ->get();
-
-            $questionlist = array();
-            $answerlist = array();
-            foreach ($questionreport as $ans) 
-            {
-                $questionlist[] = Question::find($ans->pivot->question_id);
-                $answerlist[] = $ans->pivot->answers;
-            }
-
-            $qrarraylength = count($answerlist);
-        }
-
-        return view('Client.index', compact('reports', 'reporthistory', 'products', 'latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
+        $username = Auth::User()->fname;
+        return view('Client.index', compact('username'));
     }
 }

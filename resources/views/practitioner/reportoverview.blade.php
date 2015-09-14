@@ -282,7 +282,7 @@
                                                                                                                                 <label for="prac_list">
                                                                                                                                     Practitioners:</label>
                                                                                                                                 <br>
-                                                                                                                                {!! Form::select('prac_list[]', $pracs, null, ['id' => 'prac_list', 'style' => 'width:70%', 'multiple','required']) !!}
+                                                                                                                                {!! Form::select('prac_list[]', $pracslist, null, ['id' => 'prac_list', 'style' => 'width:70%', 'multiple','required']) !!}
                                                                                                                                 <hr>
                                                                                                                                 <input type="hidden"
                                                                                                                                        name="reportid"
@@ -325,9 +325,6 @@
                                                                                                                                             </th>
 
                                                                                                                                         </tr>
-
-
-
 
                                                                                                                                         @foreach($sharerslist as $pracinfo)
 

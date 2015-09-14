@@ -46,32 +46,31 @@
 
       <div class="row" >
       <input type="hidden" name="reportid" value = {{ $report_id }}>
-      @foreach($questionslist as $questionlist)
+      @foreach($questionslist as $questionbycat)
           
-          @foreach($questionlist as $questions)
+          @foreach($questionbycat as $questionbytype)
 
-                @if($questions->type === "thumbnail")
+                @if($questionbytype->type === "thumbnail")
 
                   <div class="col-sm-6 col-md-6" style="padding-top:40px;border-spacing: 10px 50px;">
                     <div class="thumbnail" style="border: 1px outset black;padding:10px;">
                       <br>
-                      <img style = "width:20%" src={{ $questions->imgpath }} >
+                      <img style = "width:20%" src={{ $questionbytype->imgpath }} >
                       <br>
-                      <h4>{{ $questions->question }}</h4>
+                      <h4>{{ $questionbytype->question }}</h4>
                       <hr>
                       <div class="caption">
-                        <textarea class="form-control" name ="answersid[{{ $questions->id }}]" rows="3" placeholder="{{ $questions->placeholder }}"></textarea>
+                        <textarea class="form-control" name ="answersid[{{ $questionbytype->id }}]" rows="3" placeholder="{{ $questionbytype->placeholder }}"></textarea>
                         <hr>
                       </div>
-                    
-                  
+
                 @else
                     <div class="form-group" style="padding:10px;">
-                      <label for = "answersid[{{ $questions->id }}]">{{ $questions->question }}</label>
-                         @if($questions->type === "tall")
-                            <textarea name ="answersid[{{ $questions->id }}]" class="form-control" rows="3" placeholder="{{ $questions->placeholder }}"></textarea>
-                           @elseif($questions->type === "regular")
-                            <input type="text" name="answersid[{{ $questions->id }}]" class="form-control" placeholder="{{ $questions->placeholder }}">
+                      <label for = "answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
+                         @if($questionbytype->type === "tall")
+                            <textarea name ="answersid[{{ $questionbytype->id }}]" class="form-control" rows="3" placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                           @elseif($questionbytype->type === "regular")
+                            <input type="text" name="answersid[{{ $questionbytype->id }}]" class="form-control" placeholder="{{ $questionbytype->placeholder }}">
                          @endif
                     </div>  
                 @endif
@@ -89,11 +88,5 @@
     </div>
     </div>
     <br>
-   
-<script>
-
-    $('#client_list').select2();
-
-  </script>  
 
 @stop

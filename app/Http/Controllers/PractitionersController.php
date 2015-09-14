@@ -37,7 +37,7 @@ class PractitionersController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('userid');
+            $value = Session::get('prac_id');
                 if (empty($value)) {
                     return redirect('/../');
                 }

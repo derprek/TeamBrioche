@@ -12,8 +12,6 @@
 
 </head>
 
-
-
 <body id="page-top" class="index">
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -27,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">A T E S T</a>
+            <a class="navbar-brand" href="/../">A T E S T</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

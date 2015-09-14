@@ -30,7 +30,7 @@ class ReportStepOneController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('userid');
+            $value = Session::get('prac_id');
                 if (empty($value)) {
                     return redirect('/../');
                 }
@@ -43,20 +43,20 @@ class ReportStepOneController extends Controller
      */
     public function index()
     {
-        $questions = Question::Stepone()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
-        $clients = User::latest('created_at')->Myclient()->get();
-        $questions_category = Question::Stepone()->distinct()->lists('category_id');
+        $questions = Question::StepOne()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
+        $clients = User::latest('created_at')->MyClient()->get();
+        $questions_category = Question::StepOne()->distinct()->lists('category_id');
 
-        $answerlist = array();
-        foreach ($questions_category as $ans) 
+        $questionslist = array();
+        foreach ($questions_category as $category)
         {
-            $answerlist[] = Question::Stepone()
-                ->Getquestionsbycat($ans)
+            $questionslist[] = Question::StepOne()
+                ->Getquestionsbycat($category)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
 
-        return view('reports.createstepone', compact('questions', 'clients', 'answerlist'));
+        return view('reports.createstepone', compact('questions', 'clients', 'questionslist'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ReportStepOneController extends Controller
     public function store()
     {
         $client = $_POST['client'];
-        $pracid = Session::get('userid');
+        $pracid = Session::get('prac_id');
 
         $reports = new Report;
         $reports->userid = $client;
@@ -78,7 +78,7 @@ class ReportStepOneController extends Controller
         $reports->updated_at = Carbon::now();
         $reports->save();
 
-        $totalAnswers = count(Question::Stepone()->lists('id'));
+        $totalAnswers = count(Question::StepOne()->lists('id'));
 
         for ($a = 1; $a < $totalAnswers + 1; $a++) 
         {
@@ -100,7 +100,7 @@ class ReportStepOneController extends Controller
         $clientinfo = User::find($report->userid);
         $pracinfo = Practitioner::find($report->prac_id);
 
-        $arraycount = $report->questions()->distinct()->Stepone()->orderBy('category_id', 'ASC')->lists('category_id');
+        $arraycount = $report->questions()->distinct()->StepOne()->orderBy('category_id', 'ASC')->lists('category_id');
 
         $answerlist = array();
         foreach ($arraycount as $ans) 
@@ -111,7 +111,7 @@ class ReportStepOneController extends Controller
                 ->get();
         }
 
-        return view('practitioner.show', compact('answerlist', 'report', 'clientinfo', 'pracinfo'));
+        return view('practitioner.showstepone', compact('answerlist', 'report', 'clientinfo', 'pracinfo'));
     }
 
     /**

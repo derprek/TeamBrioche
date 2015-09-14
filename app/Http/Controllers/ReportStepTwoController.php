@@ -30,7 +30,7 @@ class ReportStepTwoController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('userid');
+            $value = Session::get('prac_id');
                 if (empty($value)) {
                     return redirect('/../');
                 }
@@ -45,19 +45,18 @@ class ReportStepTwoController extends Controller
      */
     public function index($report_id)
     {
-        $questions = Question::Steptwo()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
-        $clients = User::latest('created_at')->Myclient()->get();
-        $questions_category = Question::Steptwo()->distinct()->lists('category_id');
+        $questions = Question::StepTwo()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
+        $questions_category = Question::StepTwo()->distinct()->lists('category_id');
 
         $questionslist = array();
-        foreach ($questions_category as $ans) {
-            $questionslist[] = Question::Steptwo()
-                ->Getquestionsbycat($ans)
+        foreach ($questions_category as $category) {
+            $questionslist[] = Question::StepTwo()
+                ->Getquestionsbycat($category)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
 
-        return view('reports.createsteptwo', compact('questions', 'clients', 'questionslist', 'report_id'));
+        return view('reports.createsteptwo', compact('questions', 'questionslist', 'report_id'));
     }
 
     /**
@@ -69,12 +68,12 @@ class ReportStepTwoController extends Controller
     {
         $report_id = $_POST['reportid'];
         $report = Report::find($report_id);
-        $questioncount = Question::Steptwo()->lists('id');
+        $questioncount = Question::StepTwo()->lists('id');
 
         foreach ($questioncount as $questionid) {
             $report->questions()->attach($questionid, array('answers' => $_POST['answersid'][$questionid]));
         }
 
-        return redirect()->action('PractitionersController@reportOverview', [$report_id]);
+        return redirect()->action('ReportManagerController@overview', [$report_id]);
     }
 }

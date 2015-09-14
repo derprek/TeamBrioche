@@ -33,7 +33,7 @@ class Report extends Model
 
     public function scopePractitioner($query)
     {
-        $query->where('prac_id', '=', Session::get('userid'));
+        $query->where('prac_id', '=', Session::get('prac_id'));
     }
 
     public function scopeGetUserReports($query)

@@ -42,7 +42,7 @@
 
                         <div class="jumbotron">
                             <div class="container">
-                                <h3>Greetings , {{ Auth::User()->fname}}!</h3>
+                                <h3>Greetings , {{ $username }}!</h3>
 
                                 <p> Welcome to ATEST </p>
                                 <hr>

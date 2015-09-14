@@ -19,7 +19,7 @@ class Question extends Model
     ];
 
     /**
-     * Get articles associated with the given tag.
+     * Get
      *
      * @return mixed
      */
@@ -28,12 +28,12 @@ class Question extends Model
         return $this->belongsTo('App\Report')->withPivot('answers', 'rqid');
     }
 
-    public function scopeSteptwo($query)
+    public function scopeStepTwo($query)
     {
         $query->where('step', '=', '2');
     }
 
-    public function scopeStepone($query)
+    public function scopeStepOne($query)
     {
         $query->where('step', '=', '1');
     }

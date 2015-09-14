@@ -35,9 +35,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function scopeMyclient($query)
+    public function scopeMyClient($query)
     {
-        $query->where('prac_id', '=', Session::get('userid'));
+        $query->where('prac_id', '=', Session::get('prac_id'));
     }
 
     protected $fillable = ['fname', 'sname', 'gender', 'prac_id', 'email', 'password'];

@@ -30,7 +30,7 @@ class PractitionersAuthController extends Controller
         $password = MD5($_POST['password']);
         $email = $_POST['email'];
 
-        $loginchecker = Practitioner::where('email', '=', $email)->where('password', '=', $password)->get();
+        $loginchecker = Practitioner::ValidateEmail($email)->ValidatePassword($password)->get();
 
         if (empty($loginchecker[0])) {
 
@@ -41,8 +41,8 @@ class PractitionersAuthController extends Controller
             $matchme = ['email' => $email, 'password' => $password];
 
             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
-            Session::put('userid', $practitionerinfo->id);
-            $prac_reports = Report::all();
+            Session::put('prac_id', $practitionerinfo->id);
+            Session::put('prac_name', $practitionerinfo->name);
 
             return redirect('practitioner/dashboard');
 

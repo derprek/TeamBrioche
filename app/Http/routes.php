@@ -72,8 +72,6 @@ Route::post('reports/shareReport', 'SharingController@addNewSharer');
      *
      * @return Response
      */
-Route::get('login/login', 'PractitionersAuthController@showlogin');
 Route::get('prac/logout', 'PractitionersAuthController@logout');
 Route::get('practitioner', 'PractitionersAuthController@index');
-
 Route::post('practitioner/login', 'PractitionersAuthController@login');

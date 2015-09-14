@@ -48,7 +48,7 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                    Welcome,  <?php $prac = App\Practitioner::GetCurrent()->first() ?> {{$prac->name}}
+                    Welcome, {{ Session::get('prac_name')  }}
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>

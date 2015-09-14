@@ -109,7 +109,7 @@
                                         <td> {{ $progresslist->updated_at}}</td>
                                         <td> {{ $progresslist->status}}</td>
                                         <td style="width:10%"><a
-                                                    href="{{ url('/practitioner/overview', $reportlist->id) }}"
+                                                    href="{{ url('/practitioner/overview', $progresslist->id) }}"
                                                     class="btn btn-success form-control"> Edit</a></td>
                                     </tr>
                                 @endforeach
@@ -141,7 +141,7 @@
                                         <td> {{ $finishedlist->updated_at}}</td>
                                         <td> {{ $finishedlist->status}}</td>
                                         <td style="width:10%"><a
-                                                    href="{{ url('/practitioner/overview', $reportlist->id) }}"
+                                                    href="{{ url('/practitioner/overview', $finishedlist->id) }}"
                                                     class="btn btn-success form-control"> Edit</a></td>
                                     </tr>
                                 @endforeach
@@ -166,15 +166,15 @@
                                     <th>Edit</th>
                                 </tr>
 
-                                @foreach($shared as $sharedreports)
+                                @foreach($shared as $sharedlist)
                                     <tr>
-                                        <td> {{ $sharedreports->id}} </td>
-                                        <td> {{ App\User::find($sharedreports->userid)->fname}}</td>
-                                        <td> {{ $sharedreports->created_at}}</td>
-                                        <td> {{ $sharedreports->updated_at}}</td>
-                                        <td> {{ $sharedreports->status}}</td>
+                                        <td> {{ $sharedlist->id}} </td>
+                                        <td> {{ App\User::find($sharedlist->userid)->fname}}</td>
+                                        <td> {{ $sharedlist->created_at}}</td>
+                                        <td> {{ $sharedlist->updated_at}}</td>
+                                        <td> {{ $sharedlist->status}}</td>
                                         <td style="width:10%"><a
-                                                    href="{{ url('/practitioner/overview', $sharedreports->id) }}"
+                                                    href="{{ url('/practitioner/overview', $sharedlist->id) }}"
                                                     class="btn btn-success form-control"> Edit</a></td>
                                     </tr>
                                 @endforeach

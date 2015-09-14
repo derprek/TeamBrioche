@@ -32,7 +32,7 @@ class QuestionManagerController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('userid');
+            $value = Session::get('prac_id');
                 if (empty($value)) {
                     return redirect('/../');
                 }
@@ -46,8 +46,8 @@ class QuestionManagerController extends Controller
      */
     public function index()
     {
-        $questionStepOne = Question::Stepone()->get();
-        $questionStepTwo = Question::Steptwo()->get();
+        $questionStepOne = Question::StepOne()->get();
+        $questionStepTwo = Question::StepTwo()->get();
 
         return view('practitioner.questionmanager', compact('questionStepOne', 'questionStepTwo'));
     }

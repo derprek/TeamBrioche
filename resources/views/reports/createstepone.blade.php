@@ -47,7 +47,7 @@
                     @unless($clients->isEmpty())
                         @foreach($clients as $client)
 
-                            <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }}  </br>
+                            <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} </br>
                                 Email: {{ $client-> email }} </option>
 
                         @endforeach
@@ -61,37 +61,37 @@
 
                     <div class="row">
 
-                        @foreach($answerlist as $test)
+                        @foreach($questionslist as $questionbycat)
 
-                            @foreach($test as $tester)
+                            @foreach($questionbycat as $questionbytype)
 
-                                @if($tester->type === "thumbnail")
+                                @if($questionbytype->type === "thumbnail")
 
                                     <div class="col-sm-6 col-md-6" style="padding-top:40px;border-spacing: 10px 50px;">
                                         <div class="thumbnail" style="border: 1px outset black;padding:10px;">
                                             <br>
-                                            <img style="width:20%" src={{ $tester->imgpath }} >
+                                            <img style="width:20%" src={{ $questionbytype->imgpath }} >
                                             <br>
-                                            <h4>{{ $tester->question }}</h4>
+                                            <h4>{{ $questionbytype->question }}</h4>
                                             <hr>
                                             <div class="caption">
-                                                <textarea class="form-control" name="answersid[{{ $tester->id }}]"
-                                                          rows="3" placeholder="{{ $tester->placeholder }}"></textarea>
+                                                <textarea class="form-control" name="answersid[{{ $questionbytype->id }}]"
+                                                          rows="3" placeholder="{{ $questionbytype->placeholder }}"></textarea>
                                                 <hr>
                                             </div>
 
 
                                             @else
                                                 <div class="form-group" style="padding:10px;">
-                                                    <label for="answersid[{{ $tester->id }}]">{{ $tester->question }}</label>
-                                                    @if($tester->type === "tall")
-                                                        <textarea name="answersid[{{ $tester->id }}]"
+                                                    <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
+                                                    @if($questionbytype->type === "tall")
+                                                        <textarea name="answersid[{{ $questionbytype->id }}]"
                                                                   class="form-control" rows="3"
-                                                                  placeholder="{{ $tester->placeholder }}"></textarea>
-                                                    @elseif($tester->type === "regular")
-                                                        <input type="text" name="answersid[{{ $tester->id }}]"
+                                                                  placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                                                    @elseif($questionbytype->type === "regular")
+                                                        <input type="text" name="answersid[{{ $questionbytype->id }}]"
                                                                class="form-control"
-                                                               placeholder="{{ $tester->placeholder }}">
+                                                               placeholder="{{ $questionbytype->placeholder }}">
                                                     @endif
                                                 </div>
                                             @endif

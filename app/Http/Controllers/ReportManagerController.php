@@ -32,7 +32,7 @@ class ReportManagerController extends Controller
 	public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('userid');
+            $value = Session::get('prac_id');
                 if (empty($value)) {
                     return redirect('/../');
                 }
@@ -46,7 +46,7 @@ class ReportManagerController extends Controller
      */
     public function index()
     {
-        $pracid = Session::get('userid');
+        $pracid = Session::get('prac_id');
         $pracinfo = Practitioner::find($pracid);
         $prac_reports = Report::latest('created_at')->practitioner()->get();
 
@@ -67,12 +67,12 @@ class ReportManagerController extends Controller
     public function overview($report_id)
     {
         $report = Report::find($report_id);
-        $reportviewer = Session::get('userid');
+        $reportviewer = Session::get('prac_id');
         $reportowner = $report->prac_id;
         $reportstepcount = $report->questions()->distinct()->lists('step');
-        $pracs = Practitioner::lists('name', 'id');
+        $pracslist = Practitioner::lists('name', 'id');
         $sharerslist = $report->practitioners()->get();
 
-        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner', 'reportviewer', 'pracs', 'sharerslist'));
+        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner', 'reportviewer', 'pracslist', 'sharerslist'));
     }
 }

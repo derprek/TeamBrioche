@@ -111,7 +111,7 @@
 
                                 <form role="form" method="POST" action="{{ url('/practitioner/createUser') }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="prac_id" value="{{ Session::get('userid') }}">
+                                    <input type="hidden" name="prac_id" value="{{ Session::get('prac_id') }}">
 
                                     <div class="form-group" id="qntable">
                                         <label for="fname"> Given name:*</label>
