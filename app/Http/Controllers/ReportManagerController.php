@@ -54,6 +54,7 @@ class ReportManagerController extends Controller
         $progress = Report::latest('created_at')->practitioner()->progress()->get();
         $finished = Report::latest('created_at')->practitioner()->finished()->get();
         $shared = $pracinfo->reports()->get();
+        dd($shared);
 
         return view('practitioner.reportmanager', compact('pracinfo', 'prac_reports', 'latestreport', 'stepcount', 'progress', 'finished', 'shared'));
     }

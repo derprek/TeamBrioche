@@ -152,7 +152,7 @@
                     <div id="menu3" class="tab-pane fade">  <!-- 4th tab -->
                         <table class="table table-bordered table-hover table-striped">
 
-                            @if($finished->isEmpty())
+                            @if($shared->isEmpty())
                                 <th> No Records
                                 </th>
                             @else
