@@ -45,7 +45,7 @@
         </div>
         <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.container -->
 </nav>
 <div class="body">
     @yield('content')

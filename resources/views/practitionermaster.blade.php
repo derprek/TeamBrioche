@@ -9,7 +9,7 @@
 
     @include('cssreferences')
     @include('jsreferences')
-    
+
 </head>
 
 <body>
@@ -67,19 +67,19 @@
                 </ul>
             </li>
         </ul>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <!-- Sidebar Menu Items -->
         <div class="body">
             @yield('sidemenubar')
         </div>
-        <!-- /.navbar-collapse -->
+        <!-- /.body -->
     </nav>
 
     <div class="body">
         @yield('content')
     </div>
-    <!-- /#page-wrapper -->
 
 </div>
+<!-- /#wrapper -->
 
 </body>
 </html>

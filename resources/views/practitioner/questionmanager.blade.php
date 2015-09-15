@@ -40,9 +40,7 @@
             </div>
             <!-- /.row -->
 
-
             <div class="col-lg-12">
-
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#assessment"><strong>Assessment</strong></a></li>
                     <li><a data-toggle="tab" href="#typology">Typology</a></li>
@@ -80,12 +78,14 @@
                         </table>
                     </div>
                 </div>
+                <!-- /.tab-content -->
             </div>
+            <!-- /.col-lg-12 -->
             <hr/>
 
-            <button type="button" class="btn btn-success form-control" disabled="disabled" data-toggle="modal" data-target="#newqn">Add a Question
+            <button type="button" class="btn btn-success form-control" disabled="disabled" data-toggle="modal"
+                    data-target="#newqn">Add a Question
             </button>
-            <!-- End New Products Modal -->
 
         </div>
     </div>
@@ -94,7 +94,6 @@
         <!-- Modal -->
         <div class="modal fade" id="newqn" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -119,10 +118,13 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <!-- /.modal-content -->
                 </form>
             </div>
         </div>
+        <!-- /.modal -->
     </div>
+    <!-- /.container -->
 @endsection
 @stop
 

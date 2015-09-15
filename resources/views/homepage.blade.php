@@ -7,6 +7,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <img class="img-responsive" src="img/logo.png" alt="">
+
                 <div class="intro-text">
                     <span class="name">A T E S T </span>
                     <hr class="star-light">
@@ -19,8 +20,6 @@
                 <button type="button" id="regbtn" class="btn btn-success"
                         data-toggle="modal" data-target="#clientlogin">Client Login
                 </button>
-
-
             </div>
         </div>
     </div>
@@ -28,7 +27,8 @@
 
 @include('modalerror')
 
-<section class="success" id="mission">
+        <!-- Introduction Section -->
+<section class="intro" id="mission">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -64,7 +64,8 @@
         </div>
     </div>
 </footer>
-<!-- prac login -->
+
+<!-- Practitioner login -->
 <div class="container">
     <!-- Modal -->
     <div class="modal fade" id="praclogin" role="dialog">
@@ -110,20 +111,25 @@
                                 <div class="alert alert-danger">
                                     <strong>Whoops!</strong> There were some problems with your input.<br><br>
                                     <ul>
-                                        <li>{{ $error }}</li>    
+                                        <li>{{ $error }}</li>
                                     </ul>
                                 </div>
                             @endif
-                         @endforeach
+                        @endforeach
                     @endif
 
                 </div>
+                <!-- /.modal-body -->
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
     </div>
+    <!-- /.modal -->
 </div>
+<!-- /.container -->
 
-<!-- client login -->
+<!-- Client login -->
 <div class="container">
     <!-- Modal -->
     <div class="modal fade" id="clientlogin" role="dialog">
@@ -136,8 +142,8 @@
                 </div>
                 <div class="modal-body">
 
-                        <form class="form-horizontal" role="form" method="POST"
-                              action="{{ url('client/login') }}">
+                    <form class="form-horizontal" role="form" method="POST"
+                          action="{{ url('client/login') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
@@ -163,23 +169,28 @@
                             </div>
                         </div>
                     </form>
-                     @if ($errors-> any())
+                    @if ($errors-> any())
                         @foreach ($errors->all() as $error)
                             @if($error === "Invalid Credentials! Please try again")
                                 <div class="alert alert-danger">
                                     <strong>Whoops!</strong> There were some problems with your input.<br><br>
                                     <ul>
-                                        <li>{{ $error }}</li>    
+                                        <li>{{ $error }}</li>
                                     </ul>
                                 </div>
                             @endif
-                         @endforeach
+                        @endforeach
                     @endif
                 </div>
+                <!-- /.modal-body -->
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
     </div>
+    <!-- /.modal -->
 </div>
+<!-- /.container -->
 @endsection
 
 @stop

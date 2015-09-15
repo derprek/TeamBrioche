@@ -37,9 +37,9 @@
                     </ol>
                 </div>
             </div>
+            <!-- /.row -->
             <div class="form-group">
                 <label for="client_list"> Client:</label>
-
 
                 {!! Form::open(['url' => 'reports']) !!}
                 <select id="client_list" name="client" class="form-control">
@@ -59,6 +59,7 @@
 
                 @unless($questions->isEmpty())
 
+                    <!-- Display question in step one by  category -->
                     <div class="row">
 
                         @foreach($questionslist as $questionbycat)
@@ -75,11 +76,12 @@
                                             <h4>{{ $questionbytype->question }}</h4>
                                             <hr>
                                             <div class="caption">
-                                                <textarea class="form-control" name="answersid[{{ $questionbytype->id }}]"
-                                                          rows="3" placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                                                <textarea class="form-control"
+                                                          name="answersid[{{ $questionbytype->id }}]"
+                                                          rows="3"
+                                                          placeholder="{{ $questionbytype->placeholder }}"></textarea>
                                                 <hr>
                                             </div>
-
 
                                             @else
                                                 <div class="form-group" style="padding:10px;">
@@ -94,27 +96,35 @@
                                                                placeholder="{{ $questionbytype->placeholder }}">
                                                     @endif
                                                 </div>
+                                                <!-- /.form-group -->
                                             @endif
                                             @endforeach
                                         </div>
+                                        <!-- /.thumbnail -->
                                     </div>
                                     @endforeach
 
                                     @endunless
                     </div>
+                    <!-- /.row -->
                     <hr>
                     <div class="form-group" style="padding:3%;">
                         {!! Form:: submit('Submit Report' , ['class' => 'btn btn-success form-control']) !!}
                         {!! Form::close() !!}
                     </div>
             </div>
-            <br>
+            <!-- /.form-group -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+    <br>
 
-            <script>
+    <script>
 
-                $('#client_list').select2();
+        $('#client_list').select2();
 
-            </script>
-@endsection            
+    </script>
+@endsection
 
 @stop

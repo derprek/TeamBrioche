@@ -10,9 +10,11 @@
         </li>
     </ul>
 @endsection
+
 @section('content')
 
     <div id="page-wrapper">
+
         <div class="container-fluid">
             <!-- Page Heading -->
             <div class="row">
@@ -27,7 +29,7 @@
                     </ol>
                 </div>
             </div>
-            <!-- /.row -->
+            <!-- /.row-->
 
             <div class="col-lg-12">
                 <ul class="nav nav-tabs">
@@ -35,11 +37,9 @@
                     <li><a data-toggle="tab" href="#notification">Notification</a></li>
                 </ul>
                 <div class="tab-content">
-                    <!-- 1st tab -->
-
+                    <!-- home tab -->
                     <div id="home" class="tab-pane fade in active">
                         <br>
-
                         <div class="jumbotron">
                             <div class="container">
                                 <h3>Greetings , {{ $username }}!</h3>
@@ -49,12 +49,13 @@
                                 <p><a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}"
                                       role="button">View Reports</a></p>
                             </div>
-
                         </div>
                     </div>
+                    <!-- /.home-->
+
+                    <!-- Notifacation tab-->
                     <div id="notification" class="tab-pane fade ">
                         <br>
-
                         <div class="jumbotron">
                             <div class="container">
                                 <h3>Notification will be implemented here</h3>
@@ -62,13 +63,14 @@
                             </div>
                         </div>
                     </div>
-
+                    <!-- /.notification-->
                 </div>
             </div>
-
-
         </div>
+        <!-- /.container-fluid -->
     </div>
+    <!-- #page-wrapper -->
+
 
 
 

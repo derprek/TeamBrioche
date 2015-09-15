@@ -21,6 +21,7 @@
 
     <div id="page-wrapper">
         <div class="container-fluid">
+            <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -36,6 +37,7 @@
                     </ol>
                 </div>
             </div>
+            <!-- /.row -->
 
             @if (count($errors) >0)
 
@@ -45,12 +47,9 @@
                     });
                 </script>
 
-            @endif
+                @endif
 
-
-
-
-            <div id="menu1" class="tab-pane fade in active">
+                        <!-- Client list table -->
                 <table class="table table-bordered table-hover table-striped">
                     <br>
                     <button type="button" id="regbtn" class="btn btn-success"
@@ -81,97 +80,102 @@
                         @endforeach
                     @endif
                 </table>
+                <!-- /.table -->
 
-            </div>
 
-            <div class="container">
-                <!-- Modal -->
-                <div class="modal fade" id="newclient" role="dialog">
-                    <div class="modal-dialog modal-lg">
+                <div class="container">
+                    <!-- Create new client Modal -->
+                    <div class="modal fade" id="newclient" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><span style="color:#000000">New Client</span></h4>
+                                </div>
 
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><span style="color:#000000">New Client</span></h4>
+                                <div class="modal-body">
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
+
+                                                <!-- Registration form -->
+                                        <form role="form" method="POST" action="{{ url('/practitioner/createUser') }}">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="prac_id" value="{{ Session::get('prac_id') }}">
+
+                                            <label for="fname"> Given name:*</label>
+                                            <input required type="text" name="fname" class="form-control"
+                                                   placeholder="Enter the client's given name"
+                                                   value="{{ old('fname') }}">
+                                            <br>
+
+                                            <label for="sname"> Family name:*</label>
+                                            <input required type="text" name="sname" class="form-control"
+                                                   placeholder="Enter the client's family name"
+                                                   value="{{ old('sname') }}">
+                                            <br>
+
+                                            <label for="email"> Email Address:*</label>
+                                            <input required type="email" name="email" class="form-control"
+                                                   placeholder="Enter the client's email address"
+                                                   value="{{ old('email') }}">
+                                            <br>
+
+                                            <label for="password"> Password:*</label>
+                                            <input required type="password" name="password" class="form-control"
+                                                   placeholder="Enter a password">
+                                            <br>
+
+                                            <label for="password_confirmation"> Confirm Password:*</label>
+                                            <input required type="password" name="password_confirmation"
+                                                   class="form-control"
+                                                   placeholder="Re-enter the password">
+                                            <br>
+
+                                            <select id="genderselect" name="gender" class="selectpicker"
+                                                    data-style="btn-inverse">
+                                                <option value='Male'>Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                            <br><br>
+
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-info form-control">Register
+                                                    Client
+                                                </button>
+                                                <hr/>
+                                                <button type="button" class="btn btn-danger form-control"
+                                                        data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                            <!-- /.modal-footer -->
+                                        </form>
+                                </div>
+                                <!-- /.modal-body -->
                             </div>
-
-                            <div class="modal-body">
-
-                                @if (count($errors) > 0)
-                                    <div class="alert alert-danger">
-                                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
-                                <form role="form" method="POST" action="{{ url('/practitioner/createUser') }}">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="prac_id" value="{{ Session::get('prac_id') }}">
-
-                                    <div class="form-group" id="qntable">
-                                        <label for="fname"> Given name:*</label>
-                                        <input required type="text" name="fname" class="form-control"
-                                               placeholder="Enter the client's given name" value="{{ old('fname') }}">
-                                        <br>
-
-                                        <label for="sname"> Family name:*</label>
-                                        <input required type="text" name="sname" class="form-control"
-                                               placeholder="Enter the client's family name" value="{{ old('sname') }}">
-                                        <br>
-
-                                        <label for="email"> Email Address:*</label>
-                                        <input required type="email" name="email" class="form-control"
-                                               placeholder="Enter the client's email address"
-                                               value="{{ old('email') }}">
-                                        <br>
-
-                                        <label for="password"> Password:*</label>
-                                        <input required type="password" name="password" class="form-control"
-                                               placeholder="Enter a password">
-                                        <br>
-
-                                        <label for="password_confirmation"> Confirm Password:*</label>
-                                        <input required type="password" name="password_confirmation" class="form-control"
-                                               placeholder="Re-enter the password">
-                                        <br>
-
-
-                                        <select id="genderselect" name="gender" class="selectpicker"
-                                                data-style="btn-inverse">
-                                            <option value='Male'>Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-
-                                    </div>
-
-
-                            </div>
-
-
-                            <div class="modal-footer">
-
-                                <button type="submit" class="btn btn-info form-control">Register Client</button>
-
-                                <hr/>
-                                <button type="button" class="btn btn-danger form-control" data-dismiss="modal">Close
-                                </button>
-
-
-                            </div>
+                            <!-- /.modal-content -->
                         </div>
-                        </form>
+                        <!-- /.modal-dialog -->
                     </div>
+                    <!-- /.modal -->
                 </div>
-
-
-            </div>
-
+                <!-- /.container -->
         </div>
+        <!-- /.container-fluid -->
     </div>
+    <!-- #page-wrapper -->
+    <script>
+
+        $('.selectpicker').selectpicker();
+
+    </script>
 @endsection
 

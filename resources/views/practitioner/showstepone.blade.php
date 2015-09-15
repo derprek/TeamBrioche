@@ -42,9 +42,10 @@
             <h2>Report: {{$report->id}}</h2>
             <input type="hidden" name="reportid" value={{$report->id}}>
 
+            <!-- Display client and practitioner name -->
             <div>
-              <!--  <a class="btn btn-success" href="{{ url('/practitioner/generate', $report->id) }}"> Generate Report </a> Disabled for this build-->
-                <a class="btn btn-default" href="{{ url('/practitioner/overview', $report->id) }}"> Back to Overview </a>
+                <a class="btn btn-default" href="{{ url('/practitioner/overview', $report->id) }}"> Back to
+                    Overview </a>
 
                 <p style="float:right"> Client's name: {{ $clientinfo->fname}} {{ $clientinfo->sname}} </p>
                 <br>
@@ -53,6 +54,7 @@
                 <p style="float:right"> Practitioner's name: {{ $pracinfo->name }} </p>
                 <br>
             </div>
+
 
             <div class="dashboardbody">
                 <hr>
@@ -68,6 +70,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <!-- Display answers in the report -->
                             @foreach($reportinfo as $reportlist)
                                 <tr>
                                     <td style="width:25%">{{ $reportlist->question }} </td>
@@ -83,12 +86,16 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- /.table-responsive -->
                     <hr/>
                 @endforeach
                 <hr/>
             </div>
+            <!-- /.dashboardbody -->
         </div>
+        <!-- /.container-fluid -->
     </div>
+    <!-- /#page-wrapper -->
     @foreach($answerlist as $reportinfo)
 
         @foreach($reportinfo as $reportlist)
@@ -97,7 +104,6 @@
                 <!-- Modal -->
                 <div class="modal fade" role="dialog" id=<?php echo "update" . $reportlist->pivot->rqid ?> >
                     <div class="modal-dialog modal-lg">
-
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
@@ -117,7 +123,6 @@
                                         <br>
                                     </div>
 
-
                                     <div class="modal-footer">
 
                                         <button type="submit" class="btn btn-success form-control">Update</button>
@@ -126,15 +131,20 @@
                                             Close
                                         </button>
                                     </div>
+                                    <!-- /.modal-footer -->
                                 </form>
                             </div>
-
+                            <!-- modal-body -->
                         </div>
+                        <!-- modal-content -->
                     </div>
+                    <!-- modal-dialog -->
                 </div>
+                <!-- modal -->
                 @endforeach
             </div>
-
+            <!-- container -->
         @endforeach
+
 @endsection
 @stop

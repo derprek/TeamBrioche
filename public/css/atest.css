@@ -174,16 +174,16 @@ section h2 {
     font-size: 3em;
 }
 
-section.success {
+section.intro {
     color: #fff;
     background: #18bc9c;
 }
 
-section.success a,
-section.success a:hover,
-section.success a:focus,
-section.success a:active,
-section.success a.active {
+section.intro a,
+section.intro a:hover,
+section.intro a:focus,
+section.intro a:active,
+section.intro a.active {
     outline: 0;
     color: #2c3131;
 }

@@ -20,7 +20,6 @@
 @section('content')
 
     <div id="page-wrapper">
-
         <div class="container-fluid">
             <!-- Page Heading -->
             <div class="row">
@@ -41,7 +40,6 @@
             <!-- /.row -->
 
             <div class="col-lg-12">
-
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home"><strong>View all Reports</strong></a></li>
                     <li><a data-toggle="tab" href="#menu1">In Progress</a></li>
@@ -49,12 +47,10 @@
                     <li><a data-toggle="tab" href="#menu3">Shared with me </a></li>
                 </ul>
 
-
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                         <!-- 1st tab -->
                         <table class="table table-bordered table-hover table-striped">
-
                             @if($prac_reports->isEmpty())
                                 <tr> No Records
                                 </tr>
@@ -70,6 +66,7 @@
                                     <th>Edit</th>
                                 </tr>
 
+                                <!-- List out reports -->
                                 @foreach($prac_reports as $reportlist)
                                     <tr>
                                         <td> {{ $reportlist->id}}</td>
@@ -86,7 +83,8 @@
                         </table>
                     </div>
 
-                    <div id="menu1" class="tab-pane fade">  <!-- in progress tab -->
+                    <!-- in progress tab -->
+                    <div id="menu1" class="tab-pane fade">
                         <table class="table table-bordered table-hover table-striped">
                             @if($progress->isEmpty())
                                 <th> No Records
@@ -117,7 +115,8 @@
                         </table>
                     </div>
 
-                    <div id="menu2" class="tab-pane fade">  <!-- finished tab -->
+                    <!-- finished tab -->
+                    <div id="menu2" class="tab-pane fade">
                         <table class="table table-bordered table-hover table-striped">
 
                             @if($finished->isEmpty())
@@ -149,7 +148,8 @@
                         </table>
                     </div>
 
-                    <div id="menu3" class="tab-pane fade">  <!-- 4th tab -->
+                    <!-- share with me tab -->
+                    <div id="menu3" class="tab-pane fade">
                         <table class="table table-bordered table-hover table-striped">
 
                             @if($shared->isEmpty())
@@ -182,12 +182,13 @@
                         </table>
                     </div>
                 </div>
-
+                <!-- /.tab-content -->
             </div>
+            <!-- /.col-lg-12 -->
         </div>
+        <!-- /.container-fluid -->
     </div>
-    </div>
-
+    <!-- #page-wrapper -->
 @endsection
 @stop
 
