@@ -49,12 +49,12 @@
                 <div class="tab-content">
                     <div id="assessment" class="tab-pane fade in active">
                         <table class="table table-bordered table-hover table-striped">
-                            @if(empty($questionStepOne))
+                            @if(empty($assessment_qns))
                                 <tr>
                                     <td> No Questions found.</td>
                                 </tr>
                             @else
-                                @foreach($questionStepOne as $question)
+                                @foreach($assessment_qns as $question)
                                     <tr>
                                         <td> {{ $question->question}} </td>
                                     </tr>
@@ -64,12 +64,12 @@
                     </div>
                     <div id="typology" class="tab-pane">
                         <table class="table table-bordered table-hover table-striped">
-                            @if(empty($questionStepTwo))
+                            @if(empty($typology_qns))
                                 <tr>
                                     <td> No Questions found.</td>
                                 </tr>
                             @else
-                                @foreach($questionStepTwo as $question)
+                                @foreach($typology_qns as $question)
                                     <tr>
                                         <td> {{ $question->question}} </td>
                                     </tr>

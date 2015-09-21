@@ -57,9 +57,19 @@ class ReportOverviewController extends Controller
             $status = "In Progress";
         }
 
+         if (isset($_POST['PublishedStatus'])) 
+        {
+            $publishstatus = $_POST['PublishedStatus'];
+        } 
+        else 
+        {
+            $publishstatus = "0";
+        }
+
         $prac_notes = $_POST['prac_notes'];
 
         $reports->status = $status;
+        $reports->published = $publishstatus;   
         $reports->updated_at = Carbon::now();
         $reports->prac_notes = $prac_notes;
 

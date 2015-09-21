@@ -46,9 +46,9 @@ class QuestionManagerController extends Controller
      */
     public function index()
     {
-        $questionStepOne = Question::StepOne()->get();
-        $questionStepTwo = Question::StepTwo()->get();
+        $assessment_qns = Question::Assessment()->get();
+        $typology_qns = Question::Typology()->get();
 
-        return view('practitioner.questionmanager', compact('questionStepOne', 'questionStepTwo'));
+        return view('practitioner.questionmanager', compact('assessment_qns', 'typology_qns'));
     }
 }

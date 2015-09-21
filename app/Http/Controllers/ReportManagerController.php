@@ -21,6 +21,7 @@ use App\Product;
 use App\Tag;
 use App\Category;
 use App\Subcategory;
+use App\Selection;
 
 class ReportManagerController extends Controller
 {   
@@ -70,9 +71,11 @@ class ReportManagerController extends Controller
         $reportviewer = Session::get('prac_id');
         $reportowner = $report->prac_id;
         $reportstepcount = $report->questions()->distinct()->lists('step');
+        $reportselection = Selection::GetReports($report_id)->get();
+        $reportselectioncount = count($reportselection);
         $pracslist = Practitioner::lists('name', 'id');
         $sharerslist = $report->practitioners()->get();
 
-        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner', 'reportviewer', 'pracslist', 'sharerslist'));
+        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner','reportselection','reportselectioncount', 'reportviewer', 'pracslist', 'sharerslist'));
     }
 }

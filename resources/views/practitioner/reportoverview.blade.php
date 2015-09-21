@@ -18,17 +18,34 @@
 @endsection
 @section('content')
 
-    <div class="container">
-        <!-- Modal -->
-        <div class="modal fade" role="dialog" id="reportoverview">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><span style="color:#000000">Report Overview: {{ $report_id}}</span></h4>
-                    </div>
+ <div id="page-wrapper">
+        <div class="container-fluid">
 
-                    <div class="modal-body">
+ <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        &nbsp;
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report Manager</a>
+                        </li>
+                        <li>
+                            <i></i> Report Overview
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+
+
+                        <h4><span style="color:#000000">Report Overview: {{ $report_id}}</span></h4>
+                        <br>
+
                         <ul class="nav nav-tabs">
                             @if(Session::has('banner_message'))
                                 @if(Session::get('banner_message') === "Report successfully updated!")
@@ -68,11 +85,8 @@
                                                     <div id="home" class="tab-pane fade in active">
                                                         @endif
                                                                 <!-- Assessment tab -->
-                                                        <div class="col-sm-4 col-md-4"
-                                                             style="padding-top:40px;border-spacing: 10px 50px;">
-                                                            <div class="thumbnail"
-                                                                 style="border: 1px outset black;padding:10px;">
-                                                                <br>
+                                                        <div class="col-sm-4 col-md-4" id ="statuswindow">
+                                                            <div class="thumbnail" id ="statusthumbnail">
 
                                                                 <h3> Assessment</h3>
                                                                 <hr>
@@ -83,9 +97,9 @@
                                                                                    checked="">
                                                                                 <span class="cr"><i
                                                                                             class="cr-icon fa fa-check"></i></span>
-                                                                            Completed
+                                                                            <p>Completed</p>
                                                                         </label>
-                                                                        <a href="{{ url('/reports/stepone',$report_id) }}">
+                                                                        <a href="{{ url('/reports/Assessment',$report_id) }}">
                                                                             <button type="button" id="updatebtn"
                                                                                     class="btn btn-primary form-control">
                                                                                 View
@@ -98,11 +112,8 @@
                                                         </div>
 
                                                         <!-- Typology tab -->
-                                                        <div class="col-sm-4 col-md-4"
-                                                             style="padding-top:40px;border-spacing: 10px 50px;">
-                                                            <div class="thumbnail"
-                                                                 style="border: 1px outset black;padding:10px;">
-                                                                <br>
+                                                       <div class="col-sm-4 col-md-4" id ="statuswindow">
+                                                            <div class="thumbnail" id ="statusthumbnail">
 
                                                                 <h3> Typology</h3>
                                                                 <hr>
@@ -114,9 +125,9 @@
                                                                                        checked>
                                                                                 <span class="cr"><i
                                                                                             class="cr-icon fa fa-check"></i></span>
-                                                                                Completed
+                                                                                <p>Completed</p>
                                                                         </label>
-                                                                        <a href="#">
+                                                                        <a href="{{ url('/reports/Typology',$report_id) }}">
                                                                             <button type="button" id="updatebtn"
                                                                                     class="btn btn-primary form-control">
                                                                                 View
@@ -126,9 +137,9 @@
                                                                             <input type="checkbox" disabled value="">
                                                                             <span class="cr"><i
                                                                                         class="cr-icon fa fa-check"></i></span>
-                                                                            Incomplete
+                                                                           <p>Incomplete</p>
                                                                             </label>
-                                                                            <a href="{{ url('/reports/createsteptwo',$report_id) }}">
+                                                                            <a href="{{ url('/reports/createTypology',$report_id) }}">
                                                                                 <button type="button" id="createbtn"
                                                                                         class="btn btn-success form-control">
                                                                                     Create
@@ -142,38 +153,52 @@
                                                         </div>
 
                                                         <!-- Selection tab -->
-                                                        <div class="col-sm-4 col-md-4"
-                                                             style="padding-top:40px;border-spacing: 10px 50px;">
-                                                            <div class="thumbnail"
-                                                                 style="border: 1px outset black;padding:10px;">
-                                                                <br>
+                                                       <div class="col-sm-4 col-md-4" id ="statuswindow">
+                                                            <div class="thumbnail" id ="statusthumbnail">
 
                                                                 <h3> Selection </h3>
                                                                 <hr>
                                                                 <div class="caption">
                                                                     <div class="checkbox">
                                                                         <label style="font-size: 2em">
-                                                                            @if ($reportstepcount->contains(3))
+                                                                            @if ($reportselectioncount >= 1)
                                                                                 <input type="checkbox" disabled
-                                                                                       value="">
+                                                                                       checked value="">
                                                                                 <span class="cr"><i
                                                                                             class="cr-icon fa fa-check"></i></span>
-                                                                                Completed
+                                                                                <p>You have {{$reportselectioncount}} Selection report(s).</p>
                                                                         </label>
-                                                                        <button type="button" id="updatebtn"
-                                                                                class="btn btn-primary form-control">
-                                                                            View
-                                                                        </button>
-                                                                        @else
-                                                                            <input type="checkbox" disabled value="">
-                                                                            <span class="cr"><i
-                                                                                        class="cr-icon fa fa-check"></i></span>
-                                                                            Incomplete
-                                                                            </label>
+                                                                         <a href="{{ url('/reports/createSelection',$report_id) }}">
                                                                             <button type="button" id="createbtn"
                                                                                     class="btn btn-success form-control">
                                                                                 Create
-                                                                            </button>
+                                                                            </button> </a>
+                                                                                <br>
+                                                                         <a href="{{ url('/reports/selection/overview',$report_id) }}">
+                                                                        <button type="button" id="updatebtn"
+                                                                                class="btn btn-primary form-control">
+                                                                            View
+                                                                        </button></a>
+                                                                        @else
+                                                                            @if($reportstepcount->contains(2))
+                                                                            <input type="checkbox" disabled value="">
+                                                                            <span class="cr"><i
+                                                                                        class="cr-icon fa fa-check"></i></span>
+                                                                            <p>Incomplete</p>
+                                                                            </label>
+                                                                             <a href="{{ url('/reports/createSelection',$report_id) }}">
+                                                                            <button type="button" id="createbtn"
+                                                                                    class="btn btn-success form-control">
+                                                                                Create
+                                                                            </button> </a>
+                                                                            @else
+                                                                            <input type="checkbox" disabled value="">
+                                                                            <span class="cr"><i
+                                                                                        class="cr-icon fa fa-check"></i></span>
+                                                                            <p>Incomplete</p>
+                                                                            </label>
+                                                                                <h6 style = "color:red;">*You need to complete a typology first.</h6>
+                                                                            @endif
                                                                         @endif
                                                                     </div>
                                                                     <hr>
@@ -218,7 +243,26 @@
                                                                                                value="Finished">
                                                                                     @endif
                                                                                     <span class="cr"><i
-                                                                                                class="cr-icon fa fa-check"></i></span>Finished
+                                                                                                class="cr-icon fa fa-check"></i></span>
+                                                                                                Finished
+                                                                                </label>
+                                                                            </div>
+
+                                                                            <div class="checkbox">
+                                                                                <label style="font-size: 1.5em">
+                                                                                    @if($report->published === 1)
+                                                                                        <input type="checkbox"
+                                                                                               name="PublishedStatus"
+                                                                                               value="1"
+                                                                                               checked>
+                                                                                    @else
+                                                                                        <input type="checkbox"
+                                                                                               name="PublishedStatus"
+                                                                                               value="1">
+                                                                                    @endif
+                                                                                    <span class="cr"><i
+                                                                                                class="cr-icon fa fa-check"></i></span>
+                                                                                                Publish this report
                                                                                 </label>
                                                                             </div>
 
@@ -354,44 +398,22 @@
                                                                                                 @endif
 
                                                                                             </div>
-                                                                                        </div>
-
-                                                                                        <div class="modal-footer">
-                                                                                            <hr/>
-                                                                                            <a href="{{ url('practitioner/reportmanager') }}">
-                                                                                                <button type="button"
-                                                                                                        class="btn btn-danger form-control">
-                                                                                                    Back
-                                                                                                </button>
-                                                                                            </a>
-                                                                                        </div>
+                                                                                      
                                                                                 </div>
                                                                                 </form>
-                                                                    </div>
-                                                            </div>
-                                            </div>
-                                    </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                                                  
+                                   </div>
+                                   </div>       
+            
     <!-- /.container -->
 
 
     <script>
-        $(document).ready(function () {
-            $("#reportoverview").modal('show');
-        });
-
-        $('#reportoverview').modal({
-            backdrop: 'static',
-            keyboard: true
-        })
         $('.status').selectpicker();
         $('#prac_list').select2();
         $('div.alert').delay(3000).slideUp(300);
+
+        $(".thumbnail").height(Math.max.apply(null, $(".thumbnail").map(function() { return $(this).height(); })));
     </script>
 
 @endsection

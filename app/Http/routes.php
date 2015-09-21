@@ -37,15 +37,22 @@ Route::post('client/login', 'ClientAuthController@login');
  *
  * @return Response
  */
-Route::get('reports/createstepone', 'ReportStepOneController@index');
-Route::get('reports/stepone/{report_id}', 'ReportStepOneController@show');
-Route::get('reports/createsteptwo/{report_id}', 'ReportStepTwoController@index');
-Route::get('reports/{report_id}', 'ReportStepOneController@edit');
+Route::get('reports/createAssessment', 'ReportAssessmentController@index');
+Route::get('reports/selection/overview/{report_id}', 'ReportSelectionController@overview');
+Route::get('reports/Assessment/{report_id}', 'ReportAssessmentController@show');
+Route::get('reports/createTypology/{report_id}', 'ReportTypologyController@index');
+Route::get('reports/Typology/{report_id}', 'ReportTypologyController@show');
+Route::get('reports/createSelection/{report_id}', 'ReportSelectionController@index');
+Route::get('reports/Selection/{report_id}', 'ReportSelectionController@show');
 
+Route::post('reports/selection/delete', 'ReportSelectionController@delete');
 Route::post('reports/overview/update', 'ReportOverviewController@update');
-Route::post('reports', 'ReportStepOneController@store');
-Route::post('reports/stepone/update', 'ReportStepOneController@update');
-Route::post('reports/createsteptwo', 'ReportStepTwoController@store');
+Route::post('reports', 'ReportAssessmentController@store');
+Route::post('reports/stepAssessment/update', 'ReportAssessmentController@update');
+Route::post('reports/Typology/update', 'ReportTypologyController@update');
+Route::post('reports/Selection/update', 'ReportSelectionController@update');
+Route::post('reports/Typology', 'ReportTypologyController@store');
+Route::post('reports/Selection', 'ReportSelectionController@store');
 
 
 /**

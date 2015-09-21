@@ -66,6 +66,11 @@ class Report extends Model
         $query->where('userid', '=', Auth::User()->id);
     }
 
+    public function scopePublished($query)
+    {
+        $query->where('published', '=', 1);
+    }
+
     /**
      * Form the relationship between the report and the Question model.
      *
