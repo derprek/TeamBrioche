@@ -73,7 +73,7 @@ class ReportManagerController extends Controller
 
     public function getAllReports()
     {
-        $prac_reports = Report::latest('created_at')->practitioner()->get();
+        $prac_reports = Report::latest('updated_at')->practitioner()->get();
 
         $reportlist = array();
         foreach($prac_reports as $report)
@@ -101,7 +101,7 @@ class ReportManagerController extends Controller
      public function getProgressReports()
     {
 
-        $progress = Report::latest('created_at')->practitioner()->progress()->get();
+        $progress = Report::latest('updated_at')->practitioner()->progress()->get();
 
         $reportlist = array();
         foreach($progress as $report)
@@ -131,7 +131,7 @@ class ReportManagerController extends Controller
     public function getFinishedReports()
     {
 
-        $finished = Report::latest('created_at')->practitioner()->finished()->get();
+        $finished = Report::latest('updated_at')->practitioner()->finished()->get();
 
         $reportlist = array();
         foreach($finished as $report)

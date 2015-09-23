@@ -18,9 +18,10 @@
 @endsection
 
 @section('content')
+@include('clients_angularjs')
 
-    <div id="page-wrapper">
-        <div class="container-fluid">
+    <div ng-app="clientApp" id="page-wrapper">
+        <div ng-controller="AllClientsController" class="container-fluid">
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
@@ -49,36 +50,60 @@
 
                 @endif
 
-                        <!-- Client list table -->
-                <table class="table table-bordered table-hover table-striped">
-                    <br>
+                <br>
                     <button type="button" id="regbtn" class="btn btn-success"
                             data-toggle="modal" data-target="#newclient">Register a new
                         Client
                     </button>
                     <hr>
-                    @if($clients->isEmpty())
-                        <tr> No Clients
-                        </tr>
-                    @else
-                        <tr>
+
+                    <div id = "allClientsLoad" style = "width:100%; ">
+                            <br><br><br>
+                                <div style="margin:auto;"  class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            <br>
+                            <div id = "allClientsLoad_text" style="margin-left:45%;">
+                                 <small style="margin:auto;"  >
+                                    Fetching your Clients....
+                                </small>
+                            </div>
+                             </div>
+
+                        <div id="emptymsg" style="visibility:hidden;">
+                            <h2>No Clients found.</h2>
+                        </div>
+
+                         <!-- Client list table -->
+                         <table ng-show="AllClients" class="table table-bordered table-hover table-striped">
+
+                        <input ng-show="AllClients" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
+                        <br>
+
+                        <tr ng-show="AllClients">
                             <th>Client Name</th>
                             <th>Client Email</th>
                             <th>Joined on</th>
                             <th>Edit</th>
                         </tr>
-                        @foreach($clients as $client)
-                            <tr>
-                                <td> {{ $client->fname}} {{ $client->sname}}</td>
-                                <td> {{ $client->email}}</td>
-                                <td> {{ $client->created_at}}</td>
+                       
+                            <tr ng-repeat="client in AllClients | filter:search">
+                                <td> @{{ client.fname }}</td>
+                                <td> @{{ client.email }}</td>
+                                <td> @{{ client.created_at }}</td>
                                 <td>
                                     <a href="#"
                                        class="btn btn-success btn-sm"> Edit </a>
                                 </td>
                             </tr>
-                        @endforeach
-                    @endif
+                       
                 </table>
                 <!-- /.table -->
 

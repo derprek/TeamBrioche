@@ -49,7 +49,6 @@ class ClientManagerController extends Controller
      */
     public function index()
     {
-        $clients = User::latest('created_at')->MyClient()->get();
         return view('practitioner.clientmanager', compact('clients'));
     }
 
@@ -65,6 +64,20 @@ class ClientManagerController extends Controller
         Session::flash('flash_message', 'Client was successful registered!');
         return redirect("practitioner/clientmanager/");
         
+    }
+
+    public function getAllClients()
+    {
+        $clients = User::latest('created_at')->MyClient()->get();
+
+        if(count($clients) < 1)
+        {
+            return null;
+        }
+        else
+        {
+            return $clients;
+        }
     }
 
 }

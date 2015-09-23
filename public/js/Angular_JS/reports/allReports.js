@@ -1,4 +1,4 @@
-myApp.controller('ReportsController', ['$scope', '$http', function($scope, $http){
+reportApp.controller('ReportsController', ['$scope', '$http', function($scope, $http){
 
  $http.get('/getAllReports').success(function(fetchAllReports){
 

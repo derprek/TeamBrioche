@@ -89,4 +89,7 @@ Route::get('getAllReports', 'ReportManagerController@getAllReports');
 Route::get('getProgressReports', 'ReportManagerController@getProgressReports');
 Route::get('getFinishedReports', 'ReportManagerController@getFinishedReports');
 Route::get('getSharedReports', 'ReportManagerController@getSharedReports');
+
+Route::get('getAllClients', 'ClientManagerController@getAllClients');
+
 Route::post('todos', 'PractitionersController@newtodos');

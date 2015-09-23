@@ -1,4 +1,4 @@
-myApp.controller('ProgressReportsController', ['$scope', '$http', function($scope, $http){
+reportApp.controller('ProgressReportsController', ['$scope', '$http', function($scope, $http){
 
  $http.get('/getProgressReports').success(function(fetchProgressReports){
 

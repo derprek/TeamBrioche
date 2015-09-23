@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+@include('reports_angularjs')
 
 <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css' type='text/css' media='all' />
  <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script>
@@ -53,7 +54,7 @@
 
                
 
-                <div ng-app="myApp" class="tab-content">
+                <div ng-app="reportApp" class="tab-content">
                     <div ng-controller="ReportsController" id="home" class="tab-pane fade in active">
                         
                          <div id = "allReportsLoad" style = "width:100%; ">
@@ -105,8 +106,7 @@
                                         <td style="width:10%"><a
                                                     href="/practitioner/overview/@{{ report.id }}"
                                                     class="btn btn-success btn-sm form-control"> Edit</a></td>
-                                    </tr>
-                              
+                                    </tr>      
                             
                         </table>
                     

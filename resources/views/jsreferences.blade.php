@@ -7,8 +7,3 @@
 <script src="/js/bootstrap-dialog.js"></script> 
 <script src="/js/select2.min.js"></script>
 
-<script src="/js/Angular_JS/myApp.js"></script>
-<script src="/js/Angular_JS/allReports.js"></script>
-<script src="/js/Angular_JS/finishedReports.js"></script>
-<script src="/js/Angular_JS/progressReports.js"></script>
-<script src="/js/Angular_JS/sharedReports.js"></script>
