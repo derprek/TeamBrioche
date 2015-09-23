@@ -5,3 +5,5 @@
 <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/css/select2.min.css"/>
 <link rel="stylesheet" href="/css/bootstrap-dialog.min.css">
+<link rel="stylesheet" href="/css/cog.css">
+<link rel="stylesheet" href="/css/ball-spin.css">

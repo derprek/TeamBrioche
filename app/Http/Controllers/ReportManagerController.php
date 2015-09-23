@@ -21,6 +21,7 @@ use App\Product;
 use App\Tag;
 use App\Category;
 use App\Subcategory;
+use App\Selection;
 
 class ReportManagerController extends Controller
 {   
@@ -46,16 +47,8 @@ class ReportManagerController extends Controller
      */
     public function index()
     {
-        $pracid = Session::get('prac_id');
-        $pracinfo = Practitioner::find($pracid);
-        $prac_reports = Report::latest('created_at')->practitioner()->get();
 
-        $stepcount = Question::distinct()->lists('step');
-        $progress = Report::latest('created_at')->practitioner()->progress()->get();
-        $finished = Report::latest('created_at')->practitioner()->finished()->get();
-        $shared = $pracinfo->reports()->get();
-
-        return view('practitioner.reportmanager', compact('pracinfo', 'prac_reports', 'latestreport', 'stepcount', 'progress', 'finished', 'shared'));
+        return view('practitioner.reportmanager');
     }
 
      /**
@@ -70,9 +63,127 @@ class ReportManagerController extends Controller
         $reportviewer = Session::get('prac_id');
         $reportowner = $report->prac_id;
         $reportstepcount = $report->questions()->distinct()->lists('step');
+        $reportselection = Selection::GetReports($report_id)->get();
+        $reportselectioncount = count($reportselection);
         $pracslist = Practitioner::lists('name', 'id');
         $sharerslist = $report->practitioners()->get();
 
-        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner', 'reportviewer', 'pracslist', 'sharerslist'));
+        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner','reportselection','reportselectioncount', 'reportviewer', 'pracslist', 'sharerslist'));
+    }
+
+    public function getAllReports()
+    {
+        $prac_reports = Report::latest('created_at')->practitioner()->get();
+
+        $reportlist = array();
+        foreach($prac_reports as $report)
+        {       
+            $username = User::find($report->userid);
+           
+            $reportlist[] = ['id'=>$report->id,
+                                'name'=>$username->fname . " " . $username->sname,
+                                'updated_at'=>$report->updated_at->diffForHumans(),
+                                'status'=>$report->status,
+                                'created_at'=>$report->created_at->diffForHumans()];
+                      
+        }
+
+        if(count($reportlist) < 1)
+        {
+            return null;
+        }
+        else
+        {
+            return $reportlist;
+        }
+    }
+
+     public function getProgressReports()
+    {
+
+        $progress = Report::latest('created_at')->practitioner()->progress()->get();
+
+        $reportlist = array();
+        foreach($progress as $report)
+        {       
+            $username = User::find($report->userid);
+           
+            $reportlist[] = ['id'=>$report->id,
+                                'name'=>$username->fname . " " . $username->sname,
+                                'updated_at'=>$report->updated_at->diffForHumans(),
+                                'status'=>$report->status,
+                                'created_at'=>$report->created_at->diffForHumans()];
+                      
+        }
+
+        if(count($reportlist) < 1)
+        {
+            return null;
+        }
+        else
+        {
+            return $reportlist;
+        }
+        
+        //return Todo::all();
+    }
+
+    public function getFinishedReports()
+    {
+
+        $finished = Report::latest('created_at')->practitioner()->finished()->get();
+
+        $reportlist = array();
+        foreach($finished as $report)
+        {       
+            $username = User::find($report->userid);
+           
+            $reportlist[] = ['id'=>$report->id,
+                                'name'=>$username->fname . " " . $username->sname,
+                                'updated_at'=>$report->updated_at->diffForHumans(),
+                                'status'=>$report->status,
+                                'created_at'=>$report->created_at->diffForHumans()];
+                      
+        }
+       
+        if(count($reportlist) < 1)
+        {
+            return null;
+        }
+        else
+        {
+            return $reportlist;
+        }
+    }
+
+    public function getSharedReports()
+    {
+
+        $pracid = Session::get('prac_id');
+        $pracinfo = Practitioner::find($pracid);
+       
+        $shared = $pracinfo->reports()->get();
+
+
+        $reportlist = array();
+        foreach($shared as $report)
+        {       
+            $username = User::find($report->userid);
+           
+            $reportlist[] = ['id'=>$report->id,
+                                'name'=>$username->fname . " " . $username->sname,
+                                'updated_at'=>$report->updated_at->diffForHumans(),
+                                'status'=>$report->status,
+                                'created_at'=>$report->created_at->diffForHumans()];
+                      
+        }
+        if(count($reportlist) < 1)
+        {
+            return null;
+        }
+        else
+        {
+            return $reportlist;
+        }
     }
 }

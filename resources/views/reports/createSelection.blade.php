@@ -31,30 +31,35 @@
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
                         </li>
+                        <li>
+                            <i></i> <a href="{{ url('practitioner/reportmanager') }}">Report Manager</a>
+                        </li>
                         <li class="active">
-                            <i class="fa fa-pencil"></i> Create a new Report
+                            <i class="fa fa-pencil"></i> Create a new Selection report
                         </li>
                     </ol>
                 </div>
             </div>
             <!-- /.row -->
             <div class="form-group">
-                <label for="client_list"> Client:</label>
+            <a class="btn btn-default" href="{{ URL::previous() }}"> Back to
+                    Overview </a>
 
-                {!! Form::open(['url' => 'reports']) !!}
-                <select id="client_list" name="client" class="form-control">
+                <a class="btn btn-primary" role="button" data-toggle="collapse" href="#stakeholders" aria-expanded="false" aria-controls="collapseExample">
+                     Stakeholders
+                    </a>
 
-                    @unless($clients->isEmpty())
-                        @foreach($clients as $client)
+                    <div class="collapse" id="stakeholders">
+                      <div class="well">
+                            <h4>Report No: {{ $report_id }}</h4>
+                            <h4>Client: {{ $clientname }}</h4>
+                            <h4>Practitioner-in-charge: {{ $pracname }}</h4>
+                      </div>
+                    </div>
 
-                            <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} </br>
-                                Email: {{ $client-> email }} </option>
-
-                        @endforeach
-                    @endunless
-
-                </select>
-
+                {!! Form::open(['url' => 'reports/Selection']) !!}
+                 <input type="hidden" name="reportid" value= {{ $report_id }}>
+                 <input type="hidden" name="clientid" value= {{ $client_id }}>
                 <hr>
 
                 @unless($questions->isEmpty())
@@ -68,18 +73,21 @@
 
                                 @if($questionbytype->type === "thumbnail")
 
-                                    <div class="col-sm-6 col-md-6" style="padding-top:40px;border-spacing: 10px 50px;">
-                                        <div class="thumbnail" style="border: 1px outset black;padding:10px;">
+                                    <div class="col-sm-6 col-md-6" style="padding-top:10px;border-spacing: 10px 50px;">
+                                        <div class="selectthumbnail" id ="questionthumbnail" style ="height:50%;">
                                             <br>
-                                            <img style="width:20%" src={{ $questionbytype->imgpath }} >
+                                            <img style="width:10%;" src={{ $questionbytype->imgpath }} >
                                             <br>
                                             <h4>{{ $questionbytype->question }}</h4>
                                             <hr>
                                             <div class="caption">
-                                                <textarea class="form-control"
-                                                          name="answersid[{{ $questionbytype->id }}]"
-                                                          rows="3"
-                                                          placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                                                @if($questionbytype->category_id < 6)
+                                                 <textarea class="form-control"
+                                                    rows="3" readonly="" >{{$questionbytype->pivot->answers}}</textarea>
+                                               @else                          
+                                                 <textarea class="form-control" name="answersid[{{ $questionbytype->id }}]"
+                                                    rows="5" ></textarea>
+                                               @endif
                                                 <hr>
                                             </div>
 
@@ -109,7 +117,7 @@
                     <!-- /.row -->
                     <hr>
                     <div class="form-group" style="padding:3%;">
-                        {!! Form:: submit('Submit Report' , ['class' => 'btn btn-success form-control']) !!}
+                        {!! Form:: submit('Create Selection' , ['class' => 'btn btn-success form-control']) !!}
                         {!! Form::close() !!}
                     </div>
             </div>
@@ -120,10 +128,8 @@
     <!-- /#page-wrapper -->
     <br>
 
-    <script>
-
-        $('#client_list').select2();
-
+    <script type="text/javascript">
+       $(".selectthumbnail").height(Math.max.apply(null, $(".selectthumbnail").map(function() { return $(this).height(); })));
     </script>
 @endsection
 

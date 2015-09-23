@@ -4,6 +4,7 @@ namespace App;
 
 use Session;
 use Auth;
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -65,6 +66,22 @@ class Report extends Model
     {
         $query->where('userid', '=', Auth::User()->id);
     }
+
+    public function scopePublished($query)
+    {
+        $query->where('published', '=', 1);
+    }
+
+    public function getPublishedAttribute($value)
+    {
+        return(boolean) $value;
+    }
+
+    public function getHumanUpdatedAtAttribute()
+    {
+         return $this->getHumanTimestampAttribute("updated_at");
+    }
+
 
     /**
      * Form the relationship between the report and the Question model.

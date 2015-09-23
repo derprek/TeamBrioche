@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Input;
 
 use Session;
 use DB;
@@ -21,6 +22,7 @@ use App\Product;
 use App\Tag;
 use App\Category;
 use App\Subcategory;
+use App\Todo;
 
 
 /**
@@ -51,5 +53,15 @@ class PractitionersController extends Controller
     public function index()
     {
         return view('practitioner.dashboard');
+    }
+
+    public function angular()
+    {   
+        return view('angulartest');
+    }
+
+    public function newtodos()
+    {   
+        return Todo::create(Input::all());
     }
 }

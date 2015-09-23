@@ -42,12 +42,21 @@
             <div class="form-group">
                 <hr>
 
-                {!! Form::open(['url' => 'reports/createsteptwo']) !!}
+                {!! Form::open(['url' => 'reports/Typology']) !!}
 
                 @unless($questions->isEmpty())
 
                         <!-- display the questions for step two by category -->
                 <div class="row">
+
+
+                <div class="form-group" style="padding:10px;">
+                    <label for="goals_typology">Goals:</label>
+                     <textarea readonly name="goals_typology"
+                      class="form-control" rows="5"
+                       placeholder="Goals + Typology"> {{ $goals}}</textarea>
+                </div>
+
                     <input type="hidden" name="reportid" value= {{ $report_id }}>
                     @foreach($questionslist as $questionbycat)
 
@@ -70,7 +79,7 @@
                                         </div>
 
                                         @else
-                                            <div class="form-group" style="padding:10px;">
+                                            <div class="form-group" style="padding-left:10px;">
                                                 <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
                                                 @if($questionbytype->type === "tall")
                                                     <textarea name="answersid[{{ $questionbytype->id }}]"
@@ -92,7 +101,7 @@
                 </div>
                 <hr>
                 <div class="form-group" style="padding:3%;">
-                    {!! Form:: submit('Submit Step Two' , ['class' => 'btn btn-info form-control']) !!}
+                    {!! Form:: submit('Create Typology' , ['class' => 'btn btn-info form-control']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>

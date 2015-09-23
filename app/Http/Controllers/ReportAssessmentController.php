@@ -17,10 +17,10 @@ use Session;
 use App\Practitioner;
 
 /**
- * Class ReportStepOneController
+ * Class ReportAssessmentController
  * @package App\Http\Controllers
  */
-class ReportStepOneController extends Controller
+class ReportAssessmentController extends Controller
 {   
     /**
      *Check if user is logged in
@@ -43,20 +43,20 @@ class ReportStepOneController extends Controller
      */
     public function index()
     {
-        $questions = Question::StepOne()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
+        $questions = Question::Assessment()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
         $clients = User::latest('created_at')->MyClient()->get();
-        $questions_category = Question::StepOne()->distinct()->lists('category_id');
+        $questions_category = Question::Assessment()->distinct()->lists('category_id');
 
         $questionslist = array();
         foreach ($questions_category as $category)
         {
-            $questionslist[] = Question::StepOne()
+            $questionslist[] = Question::Assessment()
                 ->Getquestionsbycat($category)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
 
-        return view('reports.createstepone', compact('questions', 'clients', 'questionslist'));
+        return view('reports.createAssessment', compact('questions', 'clients', 'questionslist'));
     }
 
     /**
@@ -78,7 +78,7 @@ class ReportStepOneController extends Controller
         $reports->updated_at = Carbon::now();
         $reports->save();
 
-        $totalAnswers = count(Question::StepOne()->lists('id'));
+        $totalAnswers = count(Question::Assessment()->lists('id'));
 
         for ($a = 1; $a < $totalAnswers + 1; $a++) 
         {
@@ -100,7 +100,7 @@ class ReportStepOneController extends Controller
         $clientinfo = User::find($report->userid);
         $pracinfo = Practitioner::find($report->prac_id);
 
-        $arraycount = $report->questions()->distinct()->StepOne()->orderBy('category_id', 'ASC')->lists('category_id');
+        $arraycount = $report->questions()->distinct()->Assessment()->orderBy('category_id', 'ASC')->lists('category_id');
 
         $answerlist = array();
         foreach ($arraycount as $ans) 
@@ -111,7 +111,7 @@ class ReportStepOneController extends Controller
                 ->get();
         }
 
-        return view('practitioner.showstepone', compact('answerlist', 'report', 'clientinfo', 'pracinfo'));
+        return view('reports.showAssessment', compact('answerlist', 'report', 'clientinfo', 'pracinfo'));
     }
 
     /**
@@ -122,11 +122,21 @@ class ReportStepOneController extends Controller
     {
         $rqid = $_POST['rqid'];
         $reportid = $_POST['reportid'];
-        $answer = $_POST['answersid'][$rqid];
+        $answers = $_POST['answersid'];
 
-        DB::update("update question_report set answers ='" . $answer . "' where rqid = ?", array($rqid));
+        $report = Report::find($reportid);
+        $report->updated_at = Carbon::now();
+        $report->save();
+
+        $i = 0;
+        foreach($answers as $updatedanswer)
+        {
+            DB::update("update question_report set answers ='" . $updatedanswer . "' where rqid = ?", array($rqid[$i]));
+            $i++;
+        }
+
         Session::flash('flash_message', 'Report successfully updated!');
 
-        return redirect("reports/stepone/" . $reportid);
+        return redirect("reports/Assessment/" . $reportid);
     }
 }

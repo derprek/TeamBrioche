@@ -675,3 +675,79 @@ ul.alert-dropdown {
 }
 
 
+.incompletestatus
+{
+    color:red;
+    font-style: bold;
+}
+
+.completestatus
+{
+    color:green;
+}
+
+#statuswindow
+{   
+    padding-top:40px;
+    border-spacing: 10px 50px;
+}
+
+#statusthumbnail
+{   
+     border: 3px solid #eee;
+     border-spacing: 10px 50px; 
+     padding:30px   ;
+}
+
+.thumbimage
+{
+    width:20%;
+    height:20%;
+}
+
+
+.img-selectthumbnail{
+    padding:4px;
+    line-height:1.42857143;
+    background-color:#ffffff;
+    border:1px solid #ecf0f1;
+    border-radius:4px;
+    -webkit-transition:all .2s ease-in-out;
+    -o-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out;
+    display:inline-block;
+    max-width:100%;
+    height:auto;
+    margin:0 auto;
+}
+
+
+.selectthumbnail
+{   
+    border: 3px solid #B6B6B4;
+     border-spacing: 10px 50px; 
+     padding:30px;
+    display:block;
+    margin-bottom:21px;
+    line-height:1.42857143;
+    background-color:#ffffff;
+   
+    border-radius:4px;
+    -webkit-transition:border .2s ease-in-out;
+    -o-transition:border .2s ease-in-out;
+    transition:border .2s ease-in-out;
+    }
+
+.selectthumbnail>img
+{   
+    width:100%; 
+    margin:0 auto;
+    }
+
+a.selectthumbnail:hover,
+a.selectthumbnail:focus,
+a.selectthumbnail.active{border-color:#18bc9c}
+
+.media-object.img-selectthumbnail {
+  max-width: none;
+}
