@@ -193,7 +193,7 @@
                                     <th>Edit</th>
                                 </tr>
 
-                                <tr dir-paginate="report in SharedReports| filter:search.text | filter:search.type | itemsPerPage: 3" pagination-id="sharedReportsPagination">
+                                <tr dir-paginate="report in SharedReports| filter:search.text | filter:search.type | itemsPerPage: 5" pagination-id="sharedReportsPagination">
                                     <td> @{{ report.id }} </td>
                                     <td> @{{ report.name }} </td>
                                     <td> @{{ report.created_at }} </td>
