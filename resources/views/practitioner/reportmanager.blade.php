@@ -45,17 +45,15 @@
 
             <div class="col-lg-12">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home"><strong>View all Reports</strong></a></li>
-                    <li><a data-toggle="tab" href="#menu1">In Progress</a></li>
-                    <li><a data-toggle="tab" href="#menu2">Finished </a></li>
-                    <li><a data-toggle="tab" href="#menu3">Shared with me </a></li>
+                    <li class="active"><a data-toggle="tab" href="#home"><strong>View my Reports</strong></a></li>
+                    <li><a data-toggle="tab" href="#menu1">Shared with me </a></li>
 
                 </ul>
 
                
 
                 <div ng-app="reportApp" class="tab-content">
-                    <div ng-controller="ReportsController" id="home" class="tab-pane fade in active">
+                    <div ng-controller="MyReportsController" id="home" class="tab-pane fade in active">
                         
                          <div id = "allReportsLoad" style = "width:100%; ">
                             <br><br><br>
@@ -84,8 +82,27 @@
                         <table ng-show="AllReports" class="table table-bordered table-hover table-striped">
                         <br>
                            
-                                <input ng-show="AllReports" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
-                                <br>
+                            <input ng-show="AllReports" type ="text" placeholder ="Search...." class = "form-control" ng-model="search.text">
+
+                            <div class ="row">
+                            <div ng-show="AllReports" class="checkbox" style = "display: inline-block;">
+                                <label style="font-size: 1em">
+                                    <input type="checkbox" value="" checked ng-model='search.type' ng-true-value="'In Progress'" ng-false-value=''>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                    In Progress
+                                </label>
+                            </div>
+
+                            <div ng-show="AllReports" class="checkbox" style = "display: inline-block;">
+                                <label style="font-size: 1em">
+                                    <input type="checkbox" value="" ng-model='search.type' ng-true-value="'Finished'" ng-false-value=''>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                    Finished
+                                </label>
+                            </div>
+                            </div>
+                            <hr>
+                                
                                 <tr ng-show="AllReports">
                                     <th>Report Number @{{remaining()}}</th>
                                     <th>Client Name</th>
@@ -96,8 +113,7 @@
                                 </tr>
 
                                 <!-- List out reports -->
-                                
-                                    <tr ng-repeat="report in AllReports| filter:search">
+                                    <tr dir-paginate="report in AllReports| filter:search.text | filter:search.type | itemsPerPage: 8" pagination-id="allReportsPagination">
                                         <td> @{{ report.id }} </td>
                                         <td> @{{ report.name }} </td>
                                         <td> @{{ report.created_at }} </td>
@@ -109,123 +125,17 @@
                                     </tr>      
                             
                         </table>
+
+                        <dir-pagination-controls template-url="/dirPagination.tpl.html" pagination-id="allReportsPagination"> </dir-pagination-controls>
+                       
                     
                     </div> 
                     <!-- in home tab -->
 
-                    <!-- in progress tab -->
-                    <div id="menu1" ng-controller="ProgressReportsController" class="tab-pane fade">
 
-                         <div id = "progressReportsLoad" style = "width:100%; ">
-                            <br><br><br>
-                                <div style="margin:auto;"  class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            <br>
-                            <div id = "progressReportsLoad_text" style="margin-left:45%;">
-                                 <small style="margin:auto;"  >
-                                    Fetching your Reports....
-                                </small>
-                            </div>
-                             </div>
-
-                             <div id="progress_emptymsg" style="visibility:hidden;">
-                            <h2>No Reports found.</h2>
-                        </div>
-
-                        <table ng-show="ProgressReports" class="table table-bordered table-hover table-striped">
-                            <br>
-                             <input ng-show="ProgressReports" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
-                             <br>
-                                <tr ng-show="ProgressReports">
-                                    <th>Report Number </th>
-                                    <th>Client Name</th>
-                                    <th>Created on</th>
-                                    <th>Updated on</th>
-                                    <th>Status</th>
-                                    <th>Edit</th>
-                                </tr>
-
-                               
-                                    <tr ng-repeat="report in ProgressReports| filter:search">
-                                        <td> @{{ report.id }} </td>
-                                        <td> @{{ report.name }} </td>
-                                        <td> @{{ report.created_at }} </td>
-                                        <td> @{{ report.updated_at }} </td>
-                                        <td> @{{ report.status }} </td>
-                                        <td style="width:10%"><a
-                                                    href="/practitioner/overview/@{{ report.id }}"
-                                                    class="btn btn-success btn-sm form-control"> Edit</a></td>
-                                    </tr>
-                              
-                            
-                        </table>
-                    </div>
-
-                    <!-- finished tab -->
-                    <div ng-controller="ProgressFinishedController" id="menu2" class="tab-pane fade">
-
-                        <div id = "finishedReportsLoad" style = "width:100%; ">
-                            <br><br><br>
-                                <div style="margin:auto;"  class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            <br>
-                            <div id = "finishedReportsLoad_text" style="margin-left:45%;">
-                                 <small style="margin:auto;"  >
-                                    Fetching your Reports....
-                                </small>
-                            </div>
-                             </div>
-
-                             <div id="finished_emptymsg" style="visibility:hidden;">
-                            <h2>No Reports found.</h2>
-                        </div>
-
-                        <table ng-show="FinishedReports" class="table table-bordered table-hover table-striped">
-
-                            <br>
-                             <input ng-show="FinishedReports" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
-                             <br>
-                                <tr ng-show="FinishedReports">
-                                    <th>Report Number</th>
-                                    <th>Client Name</th>
-                                    <th>Created on</th>
-                                    <th>Updated on</th>
-                                    <th>Status</th>
-                                    <th>Edit</th>
-                                </tr>
-
-                               <tr ng-repeat="report in FinishedReports| filter:search">
-                                        <td> @{{ report.id }} </td>
-                                        <td> @{{ report.name }} </td>
-                                        <td> @{{ report.created_at }} </td>
-                                        <td> @{{ report.updated_at }} </td>
-                                        <td> @{{ report.status }} </td>
-                                        <td style="width:10%"><a
-                                        href="/practitioner/overview/@{{ report.id }}"
-                                        class="btn btn-success btn-sm form-control"> Edit</a></td>
-                                </tr>
-                            
-                        </table>
-                    </div>
 
                     <!-- share with me tab -->
-                    <div ng-controller="SharedReportsController" id="menu3" class="tab-pane fade">
+                    <div ng-controller="SharedReportsController" id="menu1" class="tab-pane fade">
 
                      <div id = "sharedReportsLoad" style = "width:100%; ">
                             <br><br><br>
@@ -253,8 +163,26 @@
 
                         <table ng-show="SharedReports" class="table table-bordered table-hover table-striped">
                             <br>
-                             <input ng-show="SharedReports" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
-                             <br>
+                             <input ng-show="SharedReports" type ="text" placeholder ="Search...." class = "form-control" ng-model="search.text">
+
+                            <div class ="row">
+                            <div ng-show="SharedReports" class="checkbox" style = "display: inline-block;">
+                                <label style="font-size: 1em">
+                                    <input type="checkbox" value="" checked ng-model='search.type' ng-true-value="'In Progress'" ng-false-value=''>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                    In Progress
+                                </label>
+                            </div>
+
+                            <div ng-show="SharedReports" class="checkbox" style = "display: inline-block;">
+                                <label style="font-size: 1em">
+                                    <input type="checkbox" value="" ng-model='search.type' ng-true-value="'Finished'" ng-false-value=''>
+                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                    Finished
+                                </label>
+                            </div>
+                            </div>
+                            <hr>
 
                                 <tr ng-show="SharedReports">
                                     <th>Report Number</th>
@@ -265,7 +193,7 @@
                                     <th>Edit</th>
                                 </tr>
 
-                                <tr ng-repeat="report in SharedReports| filter:search">
+                                <tr dir-paginate="report in SharedReports| filter:search.text | filter:search.type | itemsPerPage: 3" pagination-id="sharedReportsPagination">
                                     <td> @{{ report.id }} </td>
                                     <td> @{{ report.name }} </td>
                                     <td> @{{ report.created_at }} </td>
@@ -277,6 +205,9 @@
                                 </tr>
                                 
                         </table>
+
+                        <dir-pagination-controls template-url="/dirPagination.tpl.html" pagination-id="sharedReportsPagination"> </dir-pagination-controls>
+
                     </div>
                 </div>
                 <!-- /.tab-content -->

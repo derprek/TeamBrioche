@@ -119,7 +119,6 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
-    <br>
 
     <script>
 

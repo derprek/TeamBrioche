@@ -34,7 +34,7 @@ class Report extends Model
      */
     public function scopeProgress($query)
     {
-        $query->where('status', '=', 'In Progress');
+        $query->where('status', '=', '0');
     }
 
     /**
@@ -44,7 +44,7 @@ class Report extends Model
      */
     public function scopeFinished($query)
     {
-        $query->where('status', '=', 'Finished');
+        $query->where('status', '=', '1');
     }
 
     /**

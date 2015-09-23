@@ -93,7 +93,7 @@ class ReportManagerController extends Controller
             return null;
         }
         else
-        {
+        {   
             return $reportlist;
         }
     }
