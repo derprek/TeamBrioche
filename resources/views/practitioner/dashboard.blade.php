@@ -1,20 +1,23 @@
 @extends('practitionermaster')
 
 @section('sidemenubar')
-    <ul class="nav navbar-nav side-nav">
-        <li class="active">
-            <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Home</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-        </li>
-    </ul>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+        <ul class="nav navbar-nav side-nav">
+            <li class="active">
+                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+            </li>
+            <li>
+                <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+            </li>
+            <li>
+                <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+            </li>
+            <li>
+                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
+            </li>
+        </ul>
+    </div>
 @endsection
 
 @section('content')
@@ -30,7 +33,7 @@
                     <ol class="breadcrumb">
 
                         <li class="active">
-                            <i class="fa fa-dashboard"></i> Dashboard
+                            <i class="fa fa-home"></i> Home
                         </li>
                     </ol>
                 </div>
