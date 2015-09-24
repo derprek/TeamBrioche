@@ -15,6 +15,7 @@ use Auth;
 use Carbon\Carbon;
 use Session;
 use App\Practitioner;
+use App\Category;
 
 /**
  * Class ReportAssessmentController
@@ -138,5 +139,25 @@ class ReportAssessmentController extends Controller
         Session::flash('flash_message', 'Report successfully updated!');
 
         return redirect("reports/Assessment/" . $reportid);
+    }
+
+    public function test()
+    {
+        $questions = Question::Assessment()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
+        $clients = User::latest('created_at')->MyClient()->get();
+        $questions_category = Question::Assessment()->distinct()->lists('category_id');
+
+        $questionslist = array();
+        $categories = array();
+        foreach ($questions_category as $category_id)
+        {
+            $categories[] = Category::find($category_id);
+            $questionslist[] = Question::Assessment()
+                ->Getquestionsbycat($category_id)
+                ->orderBy('type', 'DESC')
+                ->get();
+        }
+        //dd($questionslist[0][0]);
+        return view('reports.createTest', compact('questions', 'categories','clients', 'questionslist'));
     }
 }

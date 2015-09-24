@@ -93,3 +93,5 @@ Route::get('getSharedReports', 'ReportManagerController@getSharedReports');
 Route::get('getAllClients', 'ClientManagerController@getAllClients');
 
 Route::post('todos', 'PractitionersController@newtodos');
+
+Route::get('createTest', 'ReportAssessmentController@test');
