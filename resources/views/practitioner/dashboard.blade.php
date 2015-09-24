@@ -68,6 +68,11 @@
                                         <p><a class="btn btn-success btn-lg"
                                               href="{{ url('reports/createAssessment') }}"
                                               role="button">Create a new Report</a></p>
+
+                                         <p><a class="btn btn-success btn-lg"
+                                              href="{{ url('showtest') }}"
+                                              role="button">Create new report test</a></p>
+
                                     </div>
                                 </div>
                             </div>

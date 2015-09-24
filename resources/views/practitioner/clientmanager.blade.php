@@ -53,112 +53,33 @@
                     data-toggle="modal" data-target="#newclient">
                 <i class="fa fa-user"></i> Register a new Client
             </button>
-
             <hr>
 
-            <div id="allClientsLoad" style="width:100%; ">
-                <br><br><br>
+            <div id = "allClientsLoad" style = "width:100%; ">
+                    <br><br><br>
+                        <div style="margin:auto;"  class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    <br>
+                    <div id = "allClientsLoad_text" style="margin-left:45%;">
+                         <small style="margin:auto;"  >
+                            Fetching your Clients....
+                        </small>
+                    </div>
+                     </div>
 
-                <div style="margin:auto;" class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <br>
-<<<<<<< HEAD
-                    <button ng-cloak type="button" id="regbtn" class="btn btn-success"
-                            data-toggle="modal" data-target="#newclient">Register a new
-                        Client
-                    </button>
-                    <hr>
-
-                    <div id = "allClientsLoad" style = "width:100%; ">
-                            <br><br><br>
-                                <div style="margin:auto;"  class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            <br>
-                            <div id = "allClientsLoad_text" style="margin-left:45%;">
-                                 <small style="margin:auto;"  >
-                                    Fetching your Clients....
-                                </small>
-                            </div>
-                             </div>
-=======
->>>>>>> a8ae6c61eeac99612645a7bd386d49f9884d4144
-
-                <div id="allClientsLoad_text" style="margin-left:45%;">
-                    <small style="margin:auto;">
-                        Fetching your Clients....
-                    </small>
-                </div>
-            </div>
-
-            <div id="emptymsg" style="visibility:hidden;">
-                <h2>No Clients found.</h2>
-            </div>
-
-<<<<<<< HEAD
-                         <!-- Client list table -->
-                         <table ng-cloak ng-show="AllClients" class="table table-bordered table-hover table-striped">
-
-                        <input ng-cloak ng-show="AllClients" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
-                        <br>
-
-                        <tr ng-cloak ng-show="AllClients">
-                            <th>Client Name</th>
-                            <th>Client Email</th>
-                            <th>Joined on</th>
-                            <th>Edit</th>
-                        </tr>
-                       
-                            <tr ng-cloak ng-repeat="client in AllClients | filter:search">
-                                <td> @{{ client.fname }}</td>
-                                <td> @{{ client.email }}</td>
-                                <td> @{{ client.created_at }}</td>
-                                <td>
-                                    <a href="#"
-                                       class="btn btn-success btn-sm"> Edit </a>
-                                </td>
-                            </tr>
-                       
-                </table>
-                <!-- /.table -->
+                    <div id="emptymsg" style="visibility:hidden;">
+                        <h2>No Clients found.</h2>
+                    </div>
 
 
-                <div class="container">
-                    <!-- Create new client Modal -->
-                    <div class="modal fade" id="newclient" role="dialog">
-                        <div class="modal-dialog modal-lg">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title"><span style="color:#000000">New Client</span></h4>
-                                </div>
-
-                                <div class="modal-body">
-                                    @if (count($errors) > 0)
-                                        <div class="alert alert-danger">
-                                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-=======
             <!-- Client list table -->
             <table ng-show="AllClients" class="table table-bordered table-hover table-striped">
 
@@ -259,7 +180,7 @@
                                                     data-dismiss="modal">
                                                 <i class="fa fa-times"></i> Cancel
                                             </button>
->>>>>>> a8ae6c61eeac99612645a7bd386d49f9884d4144
+
                                         </div>
                                         <!-- /.modal-footer -->
                                     </form>

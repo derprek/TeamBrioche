@@ -184,7 +184,6 @@
                                     </label>
                                 </div>
 
-<<<<<<< HEAD
                             <div ng-cloak ng-show="SharedReports" class="checkbox" style = "display: inline-block;">
                                 <label style="font-size: 1em">
                                     <input type="checkbox" value="" ng-model='search.type' ng-true-value="'Finished'" ng-false-value=''>
@@ -215,40 +214,6 @@
                                     class="btn btn-success btn-sm form-control"> Edit</a></td>
                                 </tr>
                                 
-=======
-                                <div ng-show="SharedReports" class="checkbox" style="display: inline-block;">
-                                    <label style="font-size: 1em">
-                                        <input type="checkbox" value="" ng-model='search.type'
-                                               ng-true-value="'Finished'" ng-false-value=''>
-                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        Finished
-                                    </label>
-                                </div>
-                            </div>
-                            <hr>
-
-                            <tr ng-show="SharedReports">
-                                <th>Report Number</th>
-                                <th>Client Name</th>
-                                <th>Created on</th>
-                                <th>Updated on</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                            </tr>
-
-                            <tr dir-paginate="report in SharedReports| filter:search.text | filter:search.type | itemsPerPage: 5"
-                                pagination-id="sharedReportsPagination">
-                                <td> @{{ report.id }} </td>
-                                <td> @{{ report.name }} </td>
-                                <td> @{{ report.created_at }} </td>
-                                <td> @{{ report.updated_at }} </td>
-                                <td> @{{ report.status }} </td>
-                                <td style="width:10%"><a
-                                            href="/practitioner/overview/@{{ report.id }}"
-                                            class="btn btn-success btn-sm form-control"> Edit</a></td>
-                            </tr>
-
->>>>>>> a8ae6c61eeac99612645a7bd386d49f9884d4144
                         </table>
 
                         <dir-pagination-controls template-url="/dirPagination.tpl.html"

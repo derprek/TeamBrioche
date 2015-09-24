@@ -50,7 +50,7 @@
             @endforeach                  
 
                     <div class="col-sm-6 col-md-12"  style="padding:3%;">
-                            {!! Form:: submit('Submit Report' , ['class' => 'btn btn-success form-control']) !!}
+                            {!! Form:: submit('Update Changes' , ['class' => 'btn btn-success form-control']) !!}
                             {!! Form::close() !!}
                         </div>
         <script type="text/javascript">
