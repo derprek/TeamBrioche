@@ -95,3 +95,4 @@ Route::get('getAllClients', 'ClientManagerController@getAllClients');
 Route::post('todos', 'PractitionersController@newtodos');
 
 Route::get('createTest', 'ReportAssessmentController@test');
+Route::get('showtest', 'ReportAssessmentController@showtest');

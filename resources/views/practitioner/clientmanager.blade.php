@@ -51,7 +51,7 @@
                 @endif
 
                 <br>
-                    <button type="button" id="regbtn" class="btn btn-success"
+                    <button ng-cloak type="button" id="regbtn" class="btn btn-success"
                             data-toggle="modal" data-target="#newclient">Register a new
                         Client
                     </button>
@@ -82,19 +82,19 @@
                         </div>
 
                          <!-- Client list table -->
-                         <table ng-show="AllClients" class="table table-bordered table-hover table-striped">
+                         <table ng-cloak ng-show="AllClients" class="table table-bordered table-hover table-striped">
 
-                        <input ng-show="AllClients" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
+                        <input ng-cloak ng-show="AllClients" type ="text" placeholder ="Search...." class = "form-control" ng-model="search">
                         <br>
 
-                        <tr ng-show="AllClients">
+                        <tr ng-cloak ng-show="AllClients">
                             <th>Client Name</th>
                             <th>Client Email</th>
                             <th>Joined on</th>
                             <th>Edit</th>
                         </tr>
                        
-                            <tr ng-repeat="client in AllClients | filter:search">
+                            <tr ng-cloak ng-repeat="client in AllClients | filter:search">
                                 <td> @{{ client.fname }}</td>
                                 <td> @{{ client.email }}</td>
                                 <td> @{{ client.created_at }}</td>

@@ -1,6 +1,5 @@
 @extends('practitionermaster')
 
-
 @section('sidemenubar')
     <ul class="nav navbar-nav side-nav">
         <li>
@@ -19,65 +18,71 @@
 @endsection
 
 @section('content')
-    <div id="page-wrapper">
+<link href="/css/main.css" rel="stylesheet">
+         <div id="page-wrapper">
         <div class="container-fluid">
-            <!-- Page Heading -->
-            <div class="row">
+
+        <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
-                        </li>
+
                         <li class="active">
-                            <i class="fa fa-pencil"></i> Create a new Report
+                            <i class="fa fa-dashboard"></i> Dashboard
                         </li>
                     </ol>
                 </div>
             </div>
             <!-- /.row -->
 
-            <div class="form-group">
-               
-
-                {!! Form::open(['url' => 'reports']) !!}
-
-                <h3> Create a New Report </h3>
-                <hr>
-
-                @unless(empty($categories))
+        <div class="row">
+                <div class="col-lg-12">
+                <div class="well">
+                 
+                   @unless(empty($categories))
                 
-                <div class="form-group">
-                <ul class="nav nav-tabs">
+                
+                <ul class="nav nav-tabs" id="myTab">
 
                 @foreach($categories as $category)
                   
                     @if($category === reset($categories))
 
-                      <li class="active"><a data-toggle="tab" href="#{{$category->id}}"> <small> {{$category->name}} </small></a></li>
-                   
+                      <li class="active"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                      <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
+                      </span> </a></li>
+
                     @else
 
-                      <li><a data-toggle="tab" href="#{{$category->id}}"> <small> {{$category->name}} </small></a></li>    
+                     <li><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                     <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
+                     </span> </a></li>    
 
                     @endif
 
                 @endforeach
                 </ul>
-                </div>
+               
                 @endunless
+                 </div>
 
-                <div class="tab-content">
+                {!! Form::open(['url' => 'reports']) !!} 
+                <div class="tab-content" >
 
+                <?php $i = 0; ?>
                 @foreach($questionslist as $questionbycat)
 
                     @if ($questionbycat === reset($questionslist))  
 
                          <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade in active">
-                         <div class="form-group" style="padding:10px;">
-                          <label for="client_list"> Client:</label>
+                          <h3> {{$categories[$i]->name}}</h3>
+                          <hr>
+                        <div class="form-group" style="padding-left:10px;padding-right:10px;">
+                        
+                         
+                          <label for="client_list"> Select a Client:</label>
                           <select id="client_list" name="client" class="form-control">
 
                             @unless($clients->isEmpty())
@@ -89,13 +94,17 @@
                                 @endforeach
                             @endunless
 
-                          </select>
-                         </div>
+                          </select>    
+                          </div>                  
 
-                    @else <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade"> @endif
+                    @else
 
-                   
+                      <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade"> 
+                      <h3> {{$categories[$i]->name}}</h3>
+                      <hr>
 
+                    @endif
+  
                 @foreach($questionbycat as $questionbytype)
 
                      @if($questionbytype->type === "thumbnail")
@@ -121,17 +130,15 @@
                                 @endif
                             </div>
                             <!-- /.form-group -->
-                        @endif
+                      @endif
 
                 @endforeach
-
+               
                     @if ($questionbycat == end($questionslist)) 
 
-
                     <div class="form-group" style="padding:10px;">
-                    <a class="btn btn-primary btnPrevious" href="#" data-toggle="tooltip" data-placement="top" title="Hooray!" >Previous Section</a>
-                    <hr>
-                        {!! Form:: submit('Create Assessment' , ['class' => 'btn btn-success form-control']) !!}
+                    <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
+                        {!! Form:: submit('Create Assessment' , ['class' => 'btn btn-success ']) !!}
                         {!! Form::close() !!}
                     </div> 
 
@@ -151,18 +158,17 @@
                     @endif
 
                     </div>
+                     <?php $i++; ?>
                 @endforeach
                 </div>
                 
-                    
-            </div>
-            <!-- /.form-group -->
-        </div>
-        <!-- /.container-fluid -->
-    </div>
-    <!-- /#page-wrapper -->
+                <!-- old -->
 
-    <script>
+                  
+
+</div>
+
+<script>
 
     $('.btnNext').click(function(){
       $('.nav-tabs > .active').next('li').find('a').trigger('click');
@@ -175,7 +181,10 @@
         $('#client_list').select2();    
        $(".selectthumbnail").height(Math.max.apply(null, $(".selectthumbnail").map(function() { return $(this).height(); })) +30);
     
-    </script>
-@endsection
+    $(function(){
+$('a[title]').tooltip();
+});
 
-@stop
+    </script>
+
+@endsection

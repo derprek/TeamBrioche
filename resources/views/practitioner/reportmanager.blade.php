@@ -161,7 +161,7 @@
                             <h2>No Reports found.</h2>
                         </div>
 
-                        <table ng-show="SharedReports" class="table table-bordered table-hover table-striped">
+                        <table ng-cloak ng-show="SharedReports" class="table table-bordered table-hover table-striped">
                             <br>
                              <input ng-show="SharedReports" type ="text" placeholder ="Search...." class = "form-control" ng-model="search.text">
 
@@ -174,7 +174,7 @@
                                 </label>
                             </div>
 
-                            <div ng-show="SharedReports" class="checkbox" style = "display: inline-block;">
+                            <div ng-cloak ng-show="SharedReports" class="checkbox" style = "display: inline-block;">
                                 <label style="font-size: 1em">
                                     <input type="checkbox" value="" ng-model='search.type' ng-true-value="'Finished'" ng-false-value=''>
                                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
@@ -184,7 +184,7 @@
                             </div>
                             <hr>
 
-                                <tr ng-show="SharedReports">
+                                <tr ng-cloak ng-show="SharedReports">
                                     <th>Report Number</th>
                                     <th>Client Name</th>
                                     <th>Created on</th>
@@ -193,7 +193,7 @@
                                     <th>Edit</th>
                                 </tr>
 
-                                <tr dir-paginate="report in SharedReports| filter:search.text | filter:search.type | itemsPerPage: 5" pagination-id="sharedReportsPagination">
+                                <tr ng-cloak dir-paginate="report in SharedReports| filter:search.text | filter:search.type | itemsPerPage: 5" pagination-id="sharedReportsPagination">
                                     <td> @{{ report.id }} </td>
                                     <td> @{{ report.name }} </td>
                                     <td> @{{ report.created_at }} </td>
