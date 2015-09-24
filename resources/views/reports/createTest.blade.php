@@ -2,20 +2,22 @@
 
 
 @section('sidemenubar')
-    <ul class="nav navbar-nav side-nav">
-        <li>
-            <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Home</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-        </li>
-        <li class="active">
-            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-        </li>
-    </ul>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li>
+                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+            </li>
+            <li>
+                <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+            </li>
+            <li class="active">
+                <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+            </li>
+            <li>
+                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
+            </li>
+        </ul>
+    </div>
 @endsection
 
 @section('content')
@@ -48,6 +50,7 @@
                 <hr>
 
                 @unless(empty($categories))
+<<<<<<< HEAD
                 
                 <div class="form-group">
                 <ul class="nav nav-tabs">
@@ -55,22 +58,35 @@
                 @foreach($categories as $category)
                   
                     @if($category === reset($categories))
+=======
+                    <div class="form-group">
+                        <ul class="nav nav-tabs">
 
-                      <li class="active"><a data-toggle="tab" href="#{{$category->id}}"> <small> {{$category->name}} </small></a></li>
-                   
-                    @else
+                            @foreach($categories as $category)
 
-                      <li><a data-toggle="tab" href="#{{$category->id}}"> <small> {{$category->name}} </small></a></li>    
+                                @if($category->id === 1)
+>>>>>>> a8ae6c61eeac99612645a7bd386d49f9884d4144
 
-                    @endif
+                                    <li class="active"><a data-toggle="tab" href="#{{$category->id}}">
+                                            <small> {{$category->name}} </small>
+                                        </a></li>
 
-                @endforeach
-                </ul>
-                </div>
+                                @else
+
+                                    <li><a data-toggle="tab" href="#{{$category->id}}">
+                                            <small> {{$category->name}} </small>
+                                        </a></li>
+
+                                @endif
+
+                            @endforeach
+                        </ul>
+                    </div>
                 @endunless
 
                 <div class="tab-content">
 
+<<<<<<< HEAD
                 @foreach($questionslist as $questionbycat)
 
                     @if ($questionbycat === reset($questionslist))  
@@ -119,10 +135,46 @@
                                            class="form-control"
                                            placeholder="{{ $questionbytype->placeholder }}">
                                 @endif
-                            </div>
-                            <!-- /.form-group -->
-                        @endif
+=======
+                    @foreach($questionslist as $questionbycat)
 
+                        @if ($questionbycat === reset($questionslist))
+                            <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade in active">
+                                @else
+                                    <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade"> @endif
+
+                                        @foreach($questionbycat as $questionbytype)
+
+                                            @if($questionbytype->type === "thumbnail")
+
+                                                <textarea class="form-control"
+                                                          name="answersid[{{ $questionbytype->id }}]"
+                                                          rows="3"
+                                                          placeholder="{{ $questionbytype->placeholder }}"></textarea>
+
+                                            @else
+                                                <div class="form-group" style="padding:10px;">
+                                                    <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
+                                                    @if($questionbytype->type === "tall")
+                                                        <textarea name="answersid[{{ $questionbytype->id }}]"
+                                                                  class="form-control" rows="3"
+                                                                  placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                                                    @elseif($questionbytype->type === "regular")
+                                                        <input type="text" name="answersid[{{ $questionbytype->id }}]"
+                                                               class="form-control"
+                                                               placeholder="{{ $questionbytype->placeholder }}">
+                                                    @endif
+                                                </div>
+                                                <!-- /.form-group -->
+                                            @endif
+
+                                        @endforeach
+                                    </div>
+                                    @endforeach
+>>>>>>> a8ae6c61eeac99612645a7bd386d49f9884d4144
+                            </div>
+
+<<<<<<< HEAD
                 @endforeach
 
                     @if ($questionbycat == end($questionslist)) 
@@ -155,15 +207,28 @@
                 </div>
                 
                     
+=======
+                            <hr>
+                            <div class="form-group" style="padding:3%;">
+                                {!! Form:: submit('Create Assessment' , ['class' => 'btn btn-success form-control']) !!}
+                                {!! Form::close() !!}
+                            </div>
+                </div>
+                <!-- /.form-group -->
+>>>>>>> a8ae6c61eeac99612645a7bd386d49f9884d4144
             </div>
-            <!-- /.form-group -->
+            <!-- /.container-fluid -->
         </div>
-        <!-- /.container-fluid -->
-    </div>
-    <!-- /#page-wrapper -->
+        <!-- /#page-wrapper -->
 
-    <script>
+        <script>
 
+            $('#client_list').select2();
+            $(".selectthumbnail").height(Math.max.apply(null, $(".selectthumbnail").map(function () {
+                        return $(this).height();
+                    })) + 30);
+
+<<<<<<< HEAD
     $('.btnNext').click(function(){
       $('.nav-tabs > .active').next('li').find('a').trigger('click');
     });
@@ -176,6 +241,9 @@
        $(".selectthumbnail").height(Math.max.apply(null, $(".selectthumbnail").map(function() { return $(this).height(); })) +30);
     
     </script>
+=======
+        </script>
+>>>>>>> a8ae6c61eeac99612645a7bd386d49f9884d4144
 @endsection
 
 @stop

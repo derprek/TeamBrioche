@@ -69,12 +69,12 @@
 <div class="container">
     <!-- Modal -->
     <div class="modal fade" id="praclogin" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span style="color:#000000">Practitioner Login</span></h4>
+                    <h3 class="modal-title"><span style="color:#000000">Practitioner Login</span></h3>
                 </div>
                 <div class="modal-body">
 
@@ -83,24 +83,23 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input type="email" class="form-control" required name="email"
-                                       value="{{ old('email') }}">
+                                       value="{{ old('email') }}" placeholder="&#xF007; E-mail Address"
+                                       style="font-family:Arial, FontAwesome" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" required class="form-control" name="password">
+                            <div class="col-md-12">
+                                <input type="password" required class="form-control" placeholder="&#xF023; Password"
+                                       style="font-family:Arial, FontAwesome" name="password">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </div>
                         </div>
@@ -133,12 +132,12 @@
 <div class="container">
     <!-- Modal -->
     <div class="modal fade" id="clientlogin" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span style="color:#000000">Client Login</span></h4>
+                    <h3 class="modal-title"><span style="color:#000000">Client Login</span></h3>
                 </div>
                 <div class="modal-body">
 
@@ -147,24 +146,23 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input type="email" class="form-control" required name="email"
-                                       value="{{ old('email') }}">
+                                       value="{{ old('email') }}" placeholder="&#xF007; E-mail Address"
+                                       style="font-family:Arial, FontAwesome" autofocus>
+
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" required class="form-control" name="password">
+                            <div class="col-md-12">
+                                <input type="password" required class="form-control" placeholder="&#xF023; Password"
+                                       style="font-family:Arial, FontAwesome" name="password">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </div>
                         </div>
