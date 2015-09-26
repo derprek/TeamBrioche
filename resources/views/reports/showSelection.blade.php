@@ -78,7 +78,7 @@
                     <hr>
 
 
-                    @include('showform')
+                    @include('show_report')
 
 
                 </div>

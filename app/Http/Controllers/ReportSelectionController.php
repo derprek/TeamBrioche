@@ -59,23 +59,25 @@ class ReportSelectionController extends Controller
         $envfactors = $report->questions()->Assessment()->GetEnvFactors()->get();
         $personalfactors = $report->questions()->Assessment()->GetPersonalFactors()->get();
         
+        $categories = array();
         $questionslist = array();
-        foreach ($questions_category as $category)
+        foreach ($questions_category as $category_id)
         {   
-            if($category === 2)
+            $categories[] = Category::find($category_id);
+            if($category_id === 2)
             {   
                 $cat2 = Question::Selection()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
                 $bodyfunctions = $bodyfunctions->merge($cat2);
                 $questionslist[] =  $bodyfunctions;
             }
-            elseif($category === 3)
+            elseif($category_id === 3)
             {
                 $cat3 = Question::Selection()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
@@ -83,10 +85,10 @@ class ReportSelectionController extends Controller
                 $questionslist[] =  $activities;
 
             }
-            elseif($category === 4)
+            elseif($category_id === 4)
             {   
                  $cat4 = Question::Selection()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
@@ -94,10 +96,10 @@ class ReportSelectionController extends Controller
                 $questionslist[] =  $envfactors;
 
             }   
-            elseif($category === 5)
+            elseif($category_id === 5)
             {   
                 $cat5 = Question::Selection()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
@@ -109,13 +111,15 @@ class ReportSelectionController extends Controller
             {
 
              $questionslist[] = Question::Selection()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
             }
         }
-
-        return view('reports.createSelection', compact('questions', 'clientname', 'questionslist','pracname','report_id','client_id'));
+        $submitButtonText = "Upload Evaluation Report";
+        $evaluation ="true";
+        $thumbnail_dist = 100 /count($questions_category);
+        return view('reports.createSelection', compact('questions', 'clientname','evaluation','questionslist','pracname','report_id','client_id','thumbnail_dist','categories','submitButtonText'));
     }
 
      /**
@@ -190,7 +194,7 @@ class ReportSelectionController extends Controller
         //$report = Report::find($report_id);
         
         $client_id = User::find($report->userid)->id;
-       $clientname = User::find($report->userid)->fname ." ". User::find($report->userid)->sname;
+        $clientname = User::find($report->userid)->fname ." ". User::find($report->userid)->sname;
 
         $arraycount = $selection->questions()->distinct()->Selection()->orderBy('category_id', 'ASC')->lists('category_id');
         //dd($arraycount);
@@ -200,23 +204,25 @@ class ReportSelectionController extends Controller
         $envfactors = $report->questions()->Assessment()->GetEnvFactors()->get();
         $personalfactors = $report->questions()->Assessment()->GetPersonalFactors()->get();
         
+        $categories = array();
         $answerlist = array();
-        foreach ($arraycount as $category)
+        foreach ($arraycount as $category_id)
         {   
-            if($category === 2)
+            $categories[] = Category::find($category_id);
+            if($category_id === 2)
             {   
                 $cat2 = $selection->questions()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
                 $bodyfunctions = $bodyfunctions->merge($cat2);
                 $answerlist[] =  $bodyfunctions;
             }
-            elseif($category === 3)
+            elseif($category_id === 3)
             {
                 $cat3 = $selection->questions()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
@@ -224,10 +230,10 @@ class ReportSelectionController extends Controller
                 $answerlist[] =  $activities;
 
             }
-            elseif($category === 4)
+            elseif($category_id === 4)
             {   
                  $cat4 = $selection->questions()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
@@ -235,10 +241,10 @@ class ReportSelectionController extends Controller
                 $answerlist[] =  $envfactors;
 
             }   
-            elseif($category === 5)
+            elseif($category_id === 5)
             {   
                 $cat5 = $selection->questions()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
 
@@ -250,19 +256,20 @@ class ReportSelectionController extends Controller
             {
 
              $answerlist[] = $selection->questions()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
             }
             
         }
-        //dd($answerlist);
-        return view('reports.showSelection', compact('selection', 'clientname', 'answerlist','report','client_id','pracname'));
+        $evaluation ="true";
+        $thumbnail_dist = 100 /count($arraycount);
+        return view('reports.showSelection', compact('selection', 'clientname', 'answerlist','report','client_id','pracname','evaluation','thumbnail_dist','categories'));
     }
 
      public function update()
     {
-        $qsid = $_POST['qsid'];
+        $rqid = $_POST['rqid'];
         $reportid = $_POST['reportid'];
         $answers = $_POST['answersid'];
         $selectid = $_POST['selectid'];
@@ -271,7 +278,7 @@ class ReportSelectionController extends Controller
         $i = 0;
         foreach($answers as $updatedanswer)
         {
-            DB::update("update question_selection set answers ='" . $updatedanswer . "' where qsid = ?", array($qsid[$i]));
+            DB::update("update question_selection set answers ='" . $updatedanswer . "' where rqid = ?", array($rqid[$i]));
             $i++;
         }
 

@@ -8,7 +8,7 @@ class Selection extends Model
 {
     public function questions()
     {
-        return $this->belongsToMany('App\Question')->withPivot('answers', 'qsid');
+        return $this->belongsToMany('App\Question')->withPivot('answers', 'rqid');
     }
 
     public function scopeGetReports($query,$report_id)

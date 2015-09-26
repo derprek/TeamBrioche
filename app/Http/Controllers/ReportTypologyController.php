@@ -15,6 +15,7 @@ use Auth;
 use Carbon\Carbon;
 use Session;
 use App\Practitioner;
+use App\Category;
 
 /**
  * Class ReportTypologyController
@@ -52,15 +53,20 @@ class ReportTypologyController extends Controller
         $questions = Question::Typology()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
         $questions_category = Question::Typology()->distinct()->lists('category_id');
 
+        $categories = array();
         $questionslist = array();
-        foreach ($questions_category as $category) {
+        foreach ($questions_category as $category_id) {
+
+            $categories[] = Category::find($category_id);
             $questionslist[] = Question::Typology()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
-
-        return view('reports.createTypology', compact('questions', 'goals','questionslist', 'report_id'));
+        
+        $submitButtonText = "Upload Typology Report";
+        $thumbnail_dist = 100 /count($questions_category);
+        return view('reports.createTypology', compact('questions', 'goals','questionslist', 'report_id','thumbnail_dist','categories','submitButtonText'));
     }
 
      public function show($report_id)
@@ -74,16 +80,19 @@ class ReportTypologyController extends Controller
 
         $arraycount = $report->questions()->distinct()->Typology()->orderBy('category_id', 'ASC')->lists('category_id');
 
+        $categories = array();
         $answerlist = array();
         foreach ($arraycount as $ans) 
         {
+            $categories[] = Category::find($ans);
             $answerlist[] = $report->questions()
                 ->Getquestionsbycat($ans)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
 
-        return view('reports.showTypology', compact('answerlist','report','goals', 'clientinfo', 'pracinfo'));
+        $thumbnail_dist = 100 /count($arraycount);
+        return view('reports.showTypology', compact('answerlist','report','goals', 'clientinfo', 'pracinfo','thumbnail_dist','categories'));
     }
 
     /**

@@ -20,6 +20,7 @@
 @endsection
 
 @section('content')
+<link href="/css/main.css" rel="stylesheet">
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- Page Heading -->
@@ -39,73 +40,15 @@
                 </div>
             </div>
             <!-- /.row -->
-            <a class="btn btn-default" href="{{ url('/practitioner/overview', $report_id) }}"> Back to Overview </a>
-
-            <div class="form-group">
-                <hr>
+            <a class="btn btn-default" href="{{ url('/practitioner/overview', $report_id) }}"> Back to Overview </a>       
 
                 {!! Form::open(['url' => 'reports/Typology']) !!}
+                <input type="hidden" name="reportid" value= {{ $report_id }}>
 
-                @unless($questions->isEmpty())
-
-                        <!-- display the questions for step two by category -->
-                <div class="row">
-
-
-                    <div class="form-group" style="padding:10px;">
-                        <label for="goals_typology">Goals:</label>
-                     <textarea readonly name="goals_typology"
-                               class="form-control" rows="5"
-                               placeholder="Goals + Typology"> {{ $goals}}</textarea>
-                    </div>
-
-                    <input type="hidden" name="reportid" value= {{ $report_id }}>
-                    @foreach($questionslist as $questionbycat)
-
-                        @foreach($questionbycat as $questionbytype)
-
-                            @if($questionbytype->type === "thumbnail")
-
-                                <div class="col-sm-6 col-md-6" style="padding-top:40px;border-spacing: 10px 50px;">
-                                    <div class="thumbnail" style="border: 1px outset black;padding:10px;">
-                                        <br>
-                                        <img style="width:20%" src={{ $questionbytype->imgpath }} >
-                                        <br>
-                                        <h4>{{ $questionbytype->question }}</h4>
-                                        <hr>
-                                        <div class="caption">
-                                                <textarea class="form-control"
-                                                          name="answersid[{{ $questionbytype->id }}]" rows="3"
-                                                          placeholder="{{ $questionbytype->placeholder }}"></textarea>
-                                            <hr>
-                                        </div>
-
-                                        @else
-                                            <div class="form-group" style="padding-left:10px;">
-                                                <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
-                                                @if($questionbytype->type === "tall")
-                                                    <textarea name="answersid[{{ $questionbytype->id }}]"
-                                                              class="form-control" rows="3"
-                                                              placeholder="{{ $questionbytype->placeholder }}"></textarea>
-                                                @elseif($questionbytype->type === "regular")
-                                                    <input type="text" name="answersid[{{ $questionbytype->id }}]"
-                                                           class="form-control"
-                                                           placeholder="{{ $questionbytype->placeholder }}">
-                                                @endif
-                                            </div>
-                                        @endif
-                                        @endforeach
-                                    </div>
-                                </div>
-                                @endforeach
-
-                                @endunless
-                </div>
+                <div class="form-group">
                 <hr>
-                <div class="form-group" style="padding:3%;">
-                    {!! Form:: submit('Create Typology' , ['class' => 'btn btn-info form-control']) !!}
-                    {!! Form::close() !!}
-                </div>
+
+                @include('create_report')
             </div>
             <!-- /.form-group -->
         </div>

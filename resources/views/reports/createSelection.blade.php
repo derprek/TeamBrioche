@@ -65,66 +65,8 @@
                 <input type="hidden" name="clientid" value= {{ $client_id }}>
                 <hr>
 
-                @unless($questions->isEmpty())
-
-                        <!-- Display question in step one by  category -->
-                <div class="row">
-
-                    @foreach($questionslist as $questionbycat)
-
-                        @foreach($questionbycat as $questionbytype)
-
-                            @if($questionbytype->type === "thumbnail")
-
-                                <div class="col-sm-6 col-md-6" style="padding-top:10px;border-spacing: 10px 50px;">
-                                    <div class="selectthumbnail" id="questionthumbnail" style="height:50%;">
-                                        <br>
-                                        <img style="width:10%;" src={{ $questionbytype->imgpath }} >
-                                        <br>
-                                        <h4>{{ $questionbytype->question }}</h4>
-                                        <hr>
-                                        <div class="caption">
-                                            @if($questionbytype->category_id < 6)
-                                                <textarea class="form-control"
-                                                          rows="3"
-                                                          readonly="">{{$questionbytype->pivot->answers}}</textarea>
-                                            @else
-                                                <textarea class="form-control"
-                                                          name="answersid[{{ $questionbytype->id }}]"
-                                                          rows="5"></textarea>
-                                            @endif
-                                            <hr>
-                                        </div>
-
-                                        @else
-                                            <div class="form-group" style="padding:10px;">
-                                                <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
-                                                @if($questionbytype->type === "tall")
-                                                    <textarea name="answersid[{{ $questionbytype->id }}]"
-                                                              class="form-control" rows="3"
-                                                              placeholder="{{ $questionbytype->placeholder }}"></textarea>
-                                                @elseif($questionbytype->type === "regular")
-                                                    <input type="text" name="answersid[{{ $questionbytype->id }}]"
-                                                           class="form-control"
-                                                           placeholder="{{ $questionbytype->placeholder }}">
-                                                @endif
-                                            </div>
-                                            <!-- /.form-group -->
-                                        @endif
-                                        @endforeach
-                                    </div>
-                                    <!-- /.thumbnail -->
-                                </div>
-                                @endforeach
-
-                                @endunless
-                </div>
-                <!-- /.row -->
-                <hr>
-                <div class="form-group" style="padding:3%;">
-                    {!! Form:: submit('Create Selection' , ['class' => 'btn btn-success form-control']) !!}
-                    {!! Form::close() !!}
-                </div>
+                @include('create_report')
+               
             </div>
             <!-- /.form-group -->
         </div>
@@ -133,11 +75,8 @@
     <!-- /#page-wrapper -->
     <br>
 
-    <script type="text/javascript">
-        $(".selectthumbnail").height(Math.max.apply(null, $(".selectthumbnail").map(function () {
-            return $(this).height();
-        })));
-    </script>
+   
+
 @endsection
 
 @stop

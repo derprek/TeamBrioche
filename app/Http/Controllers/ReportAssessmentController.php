@@ -49,15 +49,18 @@ class ReportAssessmentController extends Controller
         $questions_category = Question::Assessment()->distinct()->lists('category_id');
 
         $questionslist = array();
-        foreach ($questions_category as $category)
+        $categories = array();
+        foreach ($questions_category as $category_id)
         {
+            $categories[] = Category::find($category_id);
             $questionslist[] = Question::Assessment()
-                ->Getquestionsbycat($category)
+                ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
-
-        return view('reports.createAssessment', compact('questions', 'clients', 'questionslist'));
+        $submitButtonText = "Upload Assessment Report";
+        $thumbnail_dist = 100 /count($questions_category);
+        return view('test', compact('questions', 'categories','clients', 'questionslist','thumbnail_dist','submitButtonText'));
     }
 
     /**
@@ -103,16 +106,18 @@ class ReportAssessmentController extends Controller
 
         $arraycount = $report->questions()->distinct()->Assessment()->orderBy('category_id', 'ASC')->lists('category_id');
 
+        $categories = array();
         $answerlist = array();
         foreach ($arraycount as $ans) 
-        {
+        {   
+            $categories[] = Category::find($ans);
             $answerlist[] = $report->questions()
                 ->Getquestionsbycat($ans)
                 ->orderBy('type', 'DESC')
                 ->get();
         }
-
-        return view('reports.showAssessment', compact('answerlist', 'report', 'clientinfo', 'pracinfo'));
+        $thumbnail_dist = 100 /count($arraycount);
+        return view('reports.showAssessment', compact('answerlist', 'report', 'clientinfo', 'pracinfo','thumbnail_dist','categories'));
     }
 
     /**
@@ -177,8 +182,8 @@ class ReportAssessmentController extends Controller
                 ->orderBy('type', 'DESC')
                 ->get();
         }
-        //dd($questionslist[0][0]);
-        return view('test', compact('questions', 'categories','clients', 'questionslist'));
+        $thumbnail_dist = 100 /count($questions_category);
+        return view('test', compact('questions', 'categories','clients', 'questionslist','thumbnail_dist'));
 
     }
 }

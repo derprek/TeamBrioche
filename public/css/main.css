@@ -72,9 +72,7 @@ span.round-tabs.five{
 .nav-tabs > li.active > a span.round-tabs{
     background: #fafafa;
 }
-.nav-tabs > li {
-    width: 14%;
-}
+
 /*li.active:before {
     content: " ";
     position: absolute;

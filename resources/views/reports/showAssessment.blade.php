@@ -75,77 +75,14 @@
                     </div>
                 </div>
 
-                <!-- Display question in step one by  category -->
-
-                    <br>
                     <hr>
 
-                    @foreach($answerlist as $answerbycat)
-
-                        @foreach($answerbycat as $answerbytype)
-
-                            @if($answerbytype->type === "thumbnail")
-                                <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
-
-                                <div class="col-sm-6 col-md-6" style="padding-top:40px;border-spacing: 10px 50px;">
-                                    <div class="selectthumbnail" style="border: 1px outset black;padding:10px;">
-                                        <br>
-                                        <img style="width:10%" src={{ $answerbytype->imgpath }} >
-                                        <br>
-                                        <h4>{{ $answerbytype->question }}</h4>
-                                        <hr>
-                                        <div class="caption">
-                                                <textarea class="form-control"
-                                                          name="answersid[{{ $answerbytype->id }}]"
-                                                          rows="5">{{$answerbytype->pivot->answers}}</textarea>
-                                            <hr>
-                                        </div>
-
-                                        @else
-
-                                            <div class="form-group" style="padding:10px;">
-                                                <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                                                @if($answerbytype->type === "tall")
-                                                    <input type="hidden" name="rqid[]"
-                                                           value={{ $answerbytype->pivot->rqid }}>
-                                                    <textarea name="answersid[{{ $answerbytype->id }}]"
-                                                              class="form-control"
-                                                              rows="3">{{$answerbytype->pivot->answers}}</textarea>
-
-                                                @elseif($answerbytype->type === "regular")
-                                                    <input type="hidden" name="rqid[]"
-                                                           value={{ $answerbytype->pivot->rqid }}>
-                                                    <input type="text" name="answersid[{{ $answerbytype->id }}]"
-                                                           class="form-control"
-                                                           value="{{ $answerbytype->pivot->answers }}">
-                                                @endif
-                                            </div>
-                                            <!-- /.form-group -->
-                                        @endif
-                                        @endforeach
-                                    </div>
-                                    <!-- /.thumbnail -->
-                                </div>
-                                @endforeach
-
-
-                <hr>
-                <div class="form-group" style="padding:3%;">
-                    {!! Form:: submit('Update Report' , ['class' => 'btn btn-success form-control']) !!}
-                    {!! Form::close() !!}
-                </div>
+                  @include('show_report')
 
             <!-- /.form-group -->
         </div>
         <!-- /.container-fluid -->
     </div>
-
-
-    <script type="text/javascript">
-        $(".selectthumbnail").height(Math.max.apply(null, $(".selectthumbnail").map(function () {
-                    return $(this).height();
-                })) + 30);
-    </script>
 
 @endsection
 @stop

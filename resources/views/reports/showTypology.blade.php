@@ -70,62 +70,8 @@
                 {!! Form::open(['url' => 'reports/Typology/update']) !!}
                 <input type="hidden" name="reportid" value={{$report->id}}>
 
-                <div class="form-group" style="padding:10px;">
-                    <label for="goals_typology">Goals:</label>
-                     <textarea readonly name="goals_typology"
-                               class="form-control" rows="5"
-                               placeholder="Goals + Typology"> {{ $goals}}</textarea>
-                </div>
-
-                @foreach($answerlist as $answerbycat)
-
-                    @foreach($answerbycat as $answerbytype)
-
-                        @if($answerbytype->type === "thumbnail")
-
-                            <div class="col-sm-6 col-md-6" style="padding-top:40px;border-spacing: 10px 50px;">
-                                <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
-
-                                <div class="selectthumbnail" style="border: 1px outset black;padding:10px;">
-                                    <br>
-                                    <img style="width:20%" src={{ $answerbytype->imgpath }} >
-                                    <br>
-                                    <h4>{{ $answerbytype->question }}</h4>
-                                    <hr>
-                                    <div class="caption">
-                                                <textarea class="form-control"
-                                                          name="answersid[{{ $answerbytype->id }}]"
-                                                          rows="3"
-                                                          readonly>{{ $answerbytype->pivot->answers }}</textarea>
-                                        <hr>
-                                    </div>
-
-                                    @else
-                                        <div class="form-group" style="padding-top:10px;">
-                                            <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                                            @if($answerbytype->type === "tall")
-                                                <input type="hidden" name="rqid[]"
-                                                       value={{ $answerbytype->pivot->rqid }}>
-                                                <textarea name="answersid[{{ $answerbytype->id }}]"
-                                                          class="form-control"
-                                                          rows="3">{{ $answerbytype->pivot->answers }}</textarea>
-                                            @elseif($answerbytype->type === "regular")
-                                                <input type="hidden" name="rqid[]"
-                                                       value={{ $answerbytype->pivot->rqid }}>
-                                                <input type="text" name="answersid[{{ $answerbytype->id }}]"
-                                                       class="form-control" value="{{ $answerbytype->pivot->answers }}">
-                                            @endif
-                                        </div>
-                                    @endif
-                                    @endforeach
-                                </div>
-                            </div>
-                            @endforeach
-
-                            <div class="form-group" style="padding-right:30px;">
-                                {!! Form:: submit('Update Report' , ['class' => 'btn btn-success form-control']) !!}
-                                {!! Form::close() !!}
-                            </div>
+               @include('show_report')
+               
             </div>
         </div>
 

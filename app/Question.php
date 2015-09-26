@@ -36,7 +36,7 @@ class Question extends Model
 
     public function selections()
     {
-        return $this->belongsToMany('App\Selection')->withPivot('answers', 'qsid');
+        return $this->belongsToMany('App\Selection')->withPivot('answers', 'rqid');
     }
 
      /**
