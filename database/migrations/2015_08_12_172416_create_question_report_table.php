@@ -19,7 +19,7 @@ class CreateQuestionReportTable extends Migration
                 $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
 
                 $table->integer('question_id')->unsigned()->index();
-                $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+                $table->foreign('question_id')->references('id')->on('questions');
 
                 $table->text('answers');
                 $table->timestamps();
