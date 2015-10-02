@@ -22,11 +22,6 @@
 @section('content')
     @include('reports_angularjs')
 
-    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css'
-          type='text/css' media='all'/>
-    <script type='text/javascript'
-            src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script>
-
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- Page Heading -->
@@ -52,23 +47,12 @@
                 </ul>
 
 
-                <div ng-app="reportApp" class="tab-content">
+                <div id="reportApp" class="tab-content">
                     <div ng-controller="MyReportsController" id="home" class="tab-pane fade in active">
 
                         <div id="allReportsLoad" style="width:100%; ">
-                            <br><br><br>
-
-                            <div style="margin:auto;" class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                            <br>
+                            
+                            @include('partials.loadinganimation')
 
                             <div id="allReportsLoad_text" style="margin-left:45%;">
                                 <small style="margin:auto;">
@@ -77,7 +61,7 @@
                             </div>
                         </div>
 
-                        <div id="emptymsg" style="visibility:hidden;">
+                        <div id="emptymsg" class="emptymsg_container" style="visibility:hidden;">
                             <h2>No Reports found.</h2>
                         </div>
 
@@ -93,7 +77,7 @@
                                         <input type="checkbox" value="" checked ng-model='search.type'
                                                ng-true-value="'In Progress'" ng-false-value=''>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        In Progress
+                                        <small> In Progress </small> 
                                     </label>
                                 </div>
 
@@ -102,7 +86,7 @@
                                         <input type="checkbox" value="" ng-model='search.type'
                                                ng-true-value="'Finished'" ng-false-value=''>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        Finished
+                                         <small> Finished </small> 
                                     </label>
                                 </div>
                             </div>
@@ -118,7 +102,7 @@
                             </tr>
 
                             <!-- List out reports -->
-                            <tr dir-paginate="report in AllReports| filter:search.text | filter:search.type | itemsPerPage: 8"
+                            <tr ng-if="AllReports" dir-paginate="report in AllReports| filter:search.text | filter:search.type | itemsPerPage: 8"
                                 pagination-id="allReportsPagination">
                                 <td> @{{ report.id }} </td>
                                 <td> @{{ report.name }} </td>
@@ -132,7 +116,7 @@
 
                         </table>
 
-                        <dir-pagination-controls template-url="/dirPagination.tpl.html"
+                        <dir-pagination-controls ng-if="AllReports" template-url="/dirPagination.tpl.html"
                                                  pagination-id="allReportsPagination"></dir-pagination-controls>
 
 
@@ -144,19 +128,8 @@
                     <div ng-controller="SharedReportsController" id="menu1" class="tab-pane fade">
 
                         <div id="sharedReportsLoad" style="width:100%; ">
-                            <br><br><br>
-
-                            <div style="margin:auto;" class="la-ball-spin-clockwise-fade-rotating la-dark la-2x">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                            <br>
+                            
+                            @include('partials.loadinganimation')
 
                             <div id="sharedReportsLoad_text" style="margin-left:45%;">
                                 <small style="margin:auto;">
@@ -165,7 +138,7 @@
                             </div>
                         </div>
 
-                        <div id="shared_emptymsg" style="visibility:hidden;">
+                        <div id="shared_emptymsg" class="emptymsg_container" style="visibility:hidden;">
                             <h2>No Reports found.</h2>
                         </div>
 
@@ -216,7 +189,7 @@
                                 
                         </table>
 
-                        <dir-pagination-controls template-url="/dirPagination.tpl.html"
+                        <dir-pagination-controls ng-if="SharedReports" template-url="/dirPagination.tpl.html"
                                                  pagination-id="sharedReportsPagination"></dir-pagination-controls>
 
                     </div>

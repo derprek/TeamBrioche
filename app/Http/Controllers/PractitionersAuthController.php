@@ -42,7 +42,8 @@ class PractitionersAuthController extends Controller
 
             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
             Session::put('prac_id', $practitionerinfo->id);
-            Session::put('prac_name', $practitionerinfo->name);
+            $prac_name = $practitionerinfo->fname . " " . $practitionerinfo->sname;
+            Session::put('prac_name', $prac_name);
 
             return redirect('practitioner/dashboard');
 

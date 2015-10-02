@@ -96,3 +96,15 @@ Route::post('todos', 'PractitionersController@newtodos');
 
 Route::get('createTest', 'ReportAssessmentController@test');
 Route::get('showtest', 'ReportAssessmentController@showtest');
+
+Route::get('practitioner/inbox', 'MessengerController@index');
+Route::get('practitioner/inbox/showthread/{conv_id}', 'MessengerController@show');
+Route::get('getMyInbox', 'MessengerController@getInbox');
+Route::get('getMySentbox', 'MessengerController@getSentbox');
+
+Route::get('getMyMessages', 'MessengerController@getAllMessages');
+Route::get('getUnreadMessages', 'MessengerController@getUnread');
+Route::get('getAllRecipients', 'MessengerController@getAllRecipients');
+
+Route::post('newMessage', 'MessengerController@store');
+Route::post('practitioner/readmessages', 'MessengerController@markasread');

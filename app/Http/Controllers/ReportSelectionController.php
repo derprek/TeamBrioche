@@ -48,7 +48,7 @@ class ReportSelectionController extends Controller
     {
         $questions = Question::Selection()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
         $report = Report::find($report_id);
-        $pracname = Practitioner::find($report->prac_id)->name;
+        $pracname = Practitioner::find($report->prac_id)->fsname . " " . Practitioner::find($report->prac_id)->sname;
         
         $client_id = User::find($report->userid)->id;
         $clientname = User::find($report->userid)->fname ." ". User::find($report->userid)->sname;
@@ -167,7 +167,7 @@ class ReportSelectionController extends Controller
         $selectionlist = array();
         foreach($selection as $selectionreport)
         {       
-            $pracname = Practitioner::find($selectionreport->prac_id)->name;
+            $pracname = Practitioner::find($selectionreport->prac_id)->fname . " " . Practitioner::find($selectionreport->prac_id)->sname;;
             $select_id = $selectionreport->id;
             $select_date = $selectionreport->updated_at;
             $selection_prod = $selectionreport->questions()->where('question_id','=', 27)->first()->pivot->answers;
@@ -188,11 +188,10 @@ class ReportSelectionController extends Controller
     {
 
         $selection = Selection::find($select_id);
-        $pracname = Practitioner::find($selection->prac_id)->first()->name;
+        $practitioner = Practitioner::find($selection->prac_id)->first();
+        $pracname = $practitioner->fname . " " . $practitioner->sname;
         $report = Report::find($selection->report_id);
-       //dd($report);
-        //$report = Report::find($report_id);
-        
+       
         $client_id = User::find($report->userid)->id;
         $clientname = User::find($report->userid)->fname ." ". User::find($report->userid)->sname;
 

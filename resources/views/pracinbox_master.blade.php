@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body ng-app="messengerApp">
 @if(Session::has('flash_message'))
     <script>
         BootstrapDialog.show({
@@ -30,7 +30,7 @@
     </script>
 @endif
 
-<div id="wrapper">
+<div id="wrapper" ng-controller="InboxController">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -46,8 +46,8 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
 
-        <li class="dropdown" ng-cloak ng-app="messengerApp" ng-controller="masterMessageController">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()">  @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
+        <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()"> @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>

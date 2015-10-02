@@ -65,7 +65,7 @@ class ReportManagerController extends Controller
         $reportstepcount = $report->questions()->distinct()->lists('step');
         $reportselection = Selection::GetReports($report_id)->get();
         $reportselectioncount = count($reportselection);
-        $pracslist = Practitioner::lists('name', 'id');
+        $pracslist = Practitioner::lists('fname', 'id');
         $sharerslist = $report->practitioners()->get();
 
         return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner','reportselection','reportselectioncount', 'reportviewer', 'pracslist', 'sharerslist'));
@@ -94,64 +94,6 @@ class ReportManagerController extends Controller
         }
         else
         {   
-            return $reportlist;
-        }
-    }
-
-     public function getProgressReports()
-    {
-
-        $progress = Report::latest('updated_at')->practitioner()->progress()->get();
-
-        $reportlist = array();
-        foreach($progress as $report)
-        {       
-            $username = User::find($report->userid);
-           
-            $reportlist[] = ['id'=>$report->id,
-                                'name'=>$username->fname . " " . $username->sname,
-                                'updated_at'=>$report->updated_at->diffForHumans(),
-                                'status'=>$report->status,
-                                'created_at'=>$report->created_at->diffForHumans()];
-                      
-        }
-
-        if(count($reportlist) < 1)
-        {
-            return null;
-        }
-        else
-        {
-            return $reportlist;
-        }
-        
-        //return Todo::all();
-    }
-
-    public function getFinishedReports()
-    {
-
-        $finished = Report::latest('updated_at')->practitioner()->finished()->get();
-
-        $reportlist = array();
-        foreach($finished as $report)
-        {       
-            $username = User::find($report->userid);
-           
-            $reportlist[] = ['id'=>$report->id,
-                                'name'=>$username->fname . " " . $username->sname,
-                                'updated_at'=>$report->updated_at->diffForHumans(),
-                                'status'=>$report->status,
-                                'created_at'=>$report->created_at->diffForHumans()];
-                      
-        }
-       
-        if(count($reportlist) < 1)
-        {
-            return null;
-        }
-        else
-        {
             return $reportlist;
         }
     }

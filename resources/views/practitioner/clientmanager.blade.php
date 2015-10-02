@@ -22,7 +22,7 @@
 @section('content')
     @include('clients_angularjs')
 
-    <div ng-app="clientApp" id="page-wrapper">
+    <div id="clientApp" id="page-wrapper">
         <div ng-controller="AllClientsController" class="container-fluid">
             <!-- Page Heading -->
             <div class="row">

@@ -37,7 +37,7 @@
                     @if ($questionbycat === reset($questionslist))  
 
                          <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade in active">
-                          <h3> {{$categories[$i]->name}}</h3>
+                          <h3 class = "panel_header"> {{$categories[$i]->name}}</h3>
                           <hr>
 
                         @if(isset($clients))
@@ -63,7 +63,7 @@
                             <label for="goals_typology">Goals:</label>
                          <textarea readonly name="goals_typology"
                                    class="form-control" rows="5"
-                                   placeholder="Goals + Typology"> {{ $goals}}</textarea>
+                                   placeholder="Goals + Typology"> {{$goals}}</textarea>
                         </div>
                         @endif                 
 
@@ -181,8 +181,8 @@
 
          TweenMax.staggerFrom(".reportTabs", 2, {scale:0.5, opacity:0, delay:0.3, ease:Elastic.easeOut, force3D:true}, 0.2);
 
-        });
-      
+        });             
+
     $('#firstTab').delay(2500).queue(function(){
     $(this).addClass("active");
     });             

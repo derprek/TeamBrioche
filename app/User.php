@@ -41,6 +41,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $query->where('prac_id', '=', Session::get('prac_id'));
     }
 
+    public function scopeValidateEmail($query, $email)
+    {
+        $query->where('email', '=', $email);
+    }
+
     /**
      *
      * The attributes that are mass assignable.

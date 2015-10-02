@@ -53,4 +53,8 @@ class Practitioner extends Model
         $query->where('id', '=', Session::get('prac_id'));
     }
 
+    public function scopeNotCurrent($query)
+    {
+        $query->where('id', '!=', Session::get('prac_id'));
+    }
 }
