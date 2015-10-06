@@ -43,25 +43,9 @@
 
 @section('content')
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.min.css" rel="stylesheet" />
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        &nbsp;
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report
-                                Manager</a>
-                        </li>
-
-                    </ol>
-                </div>
-            </div>
-            <!-- /.row -->
 
     <div class="row">
     <hr>

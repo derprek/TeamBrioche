@@ -10,3 +10,4 @@
 <link rel="stylesheet" href="/css/cog.css">
 <link rel="stylesheet" href="/css/ball-spin.css">
 <link rel="stylesheet" href="/css/angular-toastr.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.min.css" rel="stylesheet" />

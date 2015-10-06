@@ -44,21 +44,6 @@
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        &nbsp;
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report
-                                Manager</a>
-                        </li>
-
-                    </ol>
-                </div>
-            </div>
-            <!-- /.row -->
 
     <div class="row">
     <hr>
@@ -68,7 +53,6 @@
             
                 <a href="/../practitioner/inbox" class="btn btn-primary btn-sm btn-block" ><i style="margin-right:5%;" class="fa fa-angle-left"></i>   <small style="font-size:1.1em;">Inbox </small></a>
                 
-            
         </div>
         <div class="col-sm-10 col-md-11">
             <!-- Nav tabs -->

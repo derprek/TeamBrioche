@@ -14,7 +14,8 @@ class CreatePractitionersTable extends Migration
     {     
         Schema::create('practitioners', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('fname');
+            $table->string('sname');
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->string('usertype');
