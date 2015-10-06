@@ -1,4 +1,7 @@
-clientApp.controller('AllClientsController', ['$scope', '$http', function($scope, $http){
+clientApp.controller('clientController', ['$scope', '$http', function($scope, $http){
+
+	$scope.showForm = true;
+    $scope.loadingSpinner = false;
 
  $http.get('/getAllClients').success(function(fetchAllClients){
 
@@ -24,4 +27,12 @@ clientApp.controller('AllClientsController', ['$scope', '$http', function($scope
 				}
 
 			});
+
+ 	$scope.showLoadingAnimation = function() {
+
+      	$scope.showForm = false;
+      	$scope.loadingSpinner = true;
+      };
+
+
 }]);

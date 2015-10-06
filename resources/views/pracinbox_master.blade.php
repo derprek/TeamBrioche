@@ -13,22 +13,6 @@
 </head>
 
 <body ng-app="messengerApp">
-@if(Session::has('flash_message'))
-    <script>
-        BootstrapDialog.show({
-            title: 'Success',
-            message: '{{ Session::get('flash_message')}}',
-            buttons: [{
-                label: 'Close',
-                cssClass: 'btn-info',
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
-
-            }]
-        });
-    </script>
-@endif
 
 <div id="wrapper" ng-controller="InboxController">
     <!-- Navigation -->

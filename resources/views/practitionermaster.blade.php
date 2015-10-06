@@ -18,6 +18,25 @@
         BootstrapDialog.show({
             title: 'Success',
             message: '{{ Session::get('flash_message')}}',
+            type: BootstrapDialog.TYPE_SUCCESS,
+            buttons: [{
+                label: 'Close',
+                cssClass: 'btn-info',
+                action: function (dialogItself) {
+                    dialogItself.close();
+                }
+
+            }]
+        });
+    </script>
+@endif
+
+@if(Session::has('error_message'))
+    <script>
+        BootstrapDialog.alert({
+            title: '{{ Session::get('error_title')}}',
+            message: '{{ Session::get('error_message')}}',
+            type: BootstrapDialog.TYPE_WARNING,
             buttons: [{
                 label: 'Close',
                 cssClass: 'btn-info',

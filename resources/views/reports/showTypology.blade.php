@@ -12,9 +12,6 @@
             <li class="active">
                 <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
             </li>
-            <li>
-                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
         </ul>
     </div>
 @endsection
@@ -29,7 +26,26 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
+                        
+
+                    @if(Session::has('is_admin'))
+
+                       <li>
+                            <i class="fa fa-bar-chart"></i> <a href="{{ url('admin/reportmanager') }}">Report
+                                Manager</a>
+                        </li>
                         <li>
+                            <i class="fa fa-search"></i>
+                            <a href="{{ url('/practitioner/overview', $report->id) }} ">Report
+                                Overview</a>
+                        </li>
+                        <li class="active">
+                            Edit Typology
+                        </li>
+
+                    @else
+
+                       <li>
                             <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report
                                 Manager</a>
                         </li>
@@ -41,6 +57,9 @@
                         <li class="active">
                             Edit Typology
                         </li>
+
+                    @endif
+
                     </ol>
                 </div>
             </div>

@@ -45,10 +45,24 @@ class PractitionersAuthController extends Controller
             $prac_name = $practitionerinfo->fname . " " . $practitionerinfo->sname;
             Session::put('prac_name', $prac_name);
 
-            return redirect('practitioner/dashboard');
-
+            if($practitionerinfo->usertype === 'admin')
+            {
+                Session::put('is_admin', 'true');
+                return redirect('practitioner/chooseaccount');
+            }
+            else
+            {   
+                Session::forget('is_admin');
+                return redirect('practitioner/dashboard');
+            }
         }
     }
+
+    public function chooseaccount()
+    {
+        return view('practitioner.chooseaccount');
+    }
+
     /**
      * Logs the user out
      *

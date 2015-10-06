@@ -17,10 +17,9 @@ Route::controllers([
 
 ]);
 
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::get('/', 'GeneralController@homepage');
 
+Route::get('/unauthorizedaccess', 'GeneralController@authorizedaccess');
 
 /**
  * Client Account routes
@@ -63,7 +62,7 @@ Route::post('reports/Selection', 'ReportSelectionController@store');
 Route::get('practitioner/dashboard', 'PractitionersController@index');
 Route::get('practitioner/clientmanager', 'ClientManagerController@index');
 Route::get('practitioner/reportmanager', 'ReportManagerController@index');
-Route::get('practitioner/questionmanager', 'QuestionManagerController@index');
+
 Route::get('practitioner/overview/{report_id}', 'ReportManagerController@overview');
 Route::get('practitioner/client/{report_id}', 'PractitionersController@viewclient');
 
@@ -85,14 +84,15 @@ Route::post('practitioner/login', 'PractitionersAuthController@login');
 
 Route::get('angular', 'PractitionersController@angular');
 
-Route::get('getAllReports', 'ReportManagerController@getAllReports');
+Route::get('getMyReports', 'ReportManagerController@getMyReports');
 Route::get('getProgressReports', 'ReportManagerController@getProgressReports');
 Route::get('getFinishedReports', 'ReportManagerController@getFinishedReports');
 Route::get('getSharedReports', 'ReportManagerController@getSharedReports');
 
 Route::get('getAllClients', 'ClientManagerController@getAllClients');
 
-Route::post('todos', 'PractitionersController@newtodos');
+Route::post('admin/registerpractitioner', 'PersonnelController@storePractitioner');
+Route::post('admin/registerclient', 'PersonnelController@storeClient');
 
 Route::get('createTest', 'ReportAssessmentController@test');
 Route::get('showtest', 'ReportAssessmentController@showtest');
@@ -108,3 +108,29 @@ Route::get('getAllRecipients', 'MessengerController@getAllRecipients');
 
 Route::post('newMessage', 'MessengerController@store');
 Route::post('practitioner/readmessages', 'MessengerController@markasread');
+
+Route::get('practitioner/chooseaccount', 'PractitionersAuthController@chooseaccount');
+Route::get('admin/dashboard', 'AdminsController@index');
+
+Route::get('admin/personnelmanager', 'PersonnelController@index');
+Route::get('admin/getAllPractitioners', 'PersonnelController@getAllPractitioners');
+Route::get('admin/getAllClients', 'PersonnelController@getAllClients');
+Route::get('admin/viewpractitioner/{prac_id}', 'PersonnelController@showPractitioner');
+Route::get('admin/viewclient/{client_id}', 'PersonnelController@showClient');
+Route::get('practitioner/viewclient/{client_id}', 'ClientManagerController@show');
+
+Route::get('admin/getThisPractitioner', 'PersonnelController@getThisPractitioner');
+Route::get('admin/getPractitionerReports', 'PersonnelController@getPractitionerReports');
+Route::get('admin/getPractitionerClients', 'PersonnelController@getPractitionerClients');
+
+Route::get('admin/getThisClient', 'PersonnelController@getThisClient');
+Route::get('admin/getClientReports', 'PersonnelController@getClientReports');
+
+Route::post('admin/updatePractitioner', 'PersonnelController@updatePractitioner');
+Route::post('practitioner/updateClient', 'ClientManagerController@update');
+Route::post('admin/deleteClient', 'PersonnelController@deleteClient');
+Route::post('admin/deletePractitioner', 'PersonnelController@deletePractitioner');
+
+Route::get('admin/questionmanager', 'QuestionManagerController@index');
+Route::get('admin/reportmanager', 'AdminReportManagerController@index');
+Route::get('getAllReports', 'AdminReportManagerController@getAllReports');

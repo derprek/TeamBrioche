@@ -15,3 +15,19 @@
 <script src="/js/angular-toastr.tpls.js"></script>
 <script src="/js/angular-animate.min.js"></script>
 
+<script src="/js/Angular_JS/personnelmanager/personnelmanagerApp.js"></script>
+<script src="/js/Angular_JS/personnelmanager/personnelmanagerController.js"></script>
+<script src="/js/Angular_JS/personnelmanager/practitioner/practitioner_informationController.js"></script>
+<script src="/js/Angular_JS/personnelmanager/practitioner/practitioner_reportsController.js"></script>
+<script src="/js/Angular_JS/personnelmanager/practitioner/practitioner_clientController.js"></script>
+<script src="/js/Angular_JS/personnelmanager/client/client_informationController.js"></script>
+<script src="/js/Angular_JS/personnelmanager/client/client_reportsController.js"></script>
+
+<script src="/js/Angular_JS/clients/clientApp.js"></script>
+<script src="/js/Angular_JS/clients/clientController.js"></script>
+
+<script src="/js/Angular_JS/reports/reportApp.js"></script>
+<script src="/js/Angular_JS/reports/MyReportsController.js"></script>
+<script src="/js/Angular_JS/reports/sharedReports.js"></script>
+<script src="/js/Angular_JS/admin/adminReportManagerController.js"></script>
+

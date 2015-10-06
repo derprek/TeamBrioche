@@ -49,6 +49,6 @@ class QuestionManagerController extends Controller
         $assessment_qns = Question::Assessment()->get();
         $typology_qns = Question::Typology()->get();
 
-        return view('practitioner.questionmanager', compact('assessment_qns', 'typology_qns'));
+        return view('admin.questionManager.questionmanager', compact('assessment_qns', 'typology_qns'));
     }
 }

@@ -33,7 +33,7 @@ messengerApp.controller('masterMessageController', [ '$http', '$scope','toastr',
    $http.get('/getAllRecipients').success(function(fetchAllRecipients){
 
         $scope.RecipientList = fetchAllRecipients;
-        $scope.newMessage.email = $scope.RecipientList[0];
+        $scope.newMessage.recipient = $scope.RecipientList[0];
 
     });
    };
@@ -78,8 +78,6 @@ messengerApp.controller('masterMessageController', [ '$http', '$scope','toastr',
       toastr.error('There was an error trying to send your message :(','Failed!');
 
       });
-
-    
   };
 
   }]);

@@ -10,7 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  */
 class Practitioner extends Model
-{
+{   
+    protected $casts = [
+        'verified' => 'boolean'
+    ];
+
     /**
      *Form the relationship between the practitioner and the reports model.
      *
@@ -57,4 +61,5 @@ class Practitioner extends Model
     {
         $query->where('id', '!=', Session::get('prac_id'));
     }
+
 }

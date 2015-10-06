@@ -26,9 +26,8 @@ class CreateClientRequest extends Request
         return [
             'fname' => 'required',
             'sname' => 'required',
-            'email' => 'unique:users,email',
+            'email' => 'unique:practitioner,email',
             'password' => 'required|min:7',
-            'password_confirmation' => 'required|same:password',      
-        ];
+            'password_confirmation' => 'required|same:password', 
     }
 }

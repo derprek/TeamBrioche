@@ -30,7 +30,7 @@
 
                     <div class="form-group" style="padding-top:20%;">
                       <br><br><hr>
-                      <input type="submit" value="Send" class="btn btn-primary btn-sm ">
+                      <input type="submit" ng-show="RecipientList" value="Send" class="btn btn-primary btn-sm ">
                       <button type="button" ng-click="cancelAdd()" class="btn btn-danger btn-sm">Cancel</button>
                     </div>
                 </form>

@@ -18,6 +18,7 @@ class CreatePractitionersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->string('usertype');
+            $table->boolean('verified');
             $table->rememberToken();
             $table->timestamps();
         });

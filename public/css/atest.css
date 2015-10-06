@@ -824,3 +824,12 @@ a.selectthumbnail.active{border-color:#18bc9c}
    float:right;
    display: inline-block;
 }
+
+.center_text {
+
+   display: block;
+   width: 100%;
+   margin: 0 auto;
+   text-align:center;
+   margin-top:15%;
+}

@@ -12,9 +12,6 @@
             <li class="active">
                 <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
             </li>
-            <li>
-                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
         </ul>
     </div>
 @endsection
@@ -29,7 +26,25 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
+                        
+                    @if(Session::has('is_admin'))
+
                         <li>
+                            <i class="fa fa-bar-chart"></i> <a href="{{ url('admin/reportmanager') }}">Report
+                                Manager</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-search"></i>
+                            <a href="{{ url('/practitioner/overview', $report->id) }} ">Report
+                                Overview</a>
+                        </li>
+                        <li>
+                            Edit Assessment
+                        </li>
+
+                    @else
+
+                       <li>
                             <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report
                                 Manager</a>
                         </li>
@@ -41,6 +56,8 @@
                         <li>
                             Edit Assessment
                         </li>
+
+                    @endif
                     </ol>
                 </div>
             </div>
@@ -67,7 +84,7 @@
                             <div class="well">
                                 <h4>Report: {{$report->id}}</h4>
                                 <h4>Client's name: {{ $clientinfo->fname}} {{ $clientinfo->sname}}</h4>
-                                <h4>Practitioner's name: {{ $pracinfo->name }}</h4>
+                                <h4>Practitioner's name: {{ $pracname }}</h4>
                             </div>
                         </div>
 

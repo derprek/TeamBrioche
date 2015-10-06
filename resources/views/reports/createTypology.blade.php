@@ -12,9 +12,6 @@
             <li class="active">
                 <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
             </li>
-            <li>
-                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
         </ul>
     </div>
 @endsection
@@ -30,12 +27,27 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
+
+                    @if(Session::has('is_admin'))
+
+                        <li>
+                            <i class="fa fa-dashboard"></i> <a href="{{ url('admin/dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-desktop"></i> Create a new Typology report
+                        </li>
+
+                    @else
+
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> Create Step two
+                            <i class="fa fa-desktop"></i> Create a new Typology report
                         </li>
+
+                    @endif
+                        
                     </ol>
                 </div>
             </div>

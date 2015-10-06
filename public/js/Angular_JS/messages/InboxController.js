@@ -55,6 +55,7 @@ messengerApp.controller('InboxController', [ '$http', '$scope','toastr', functio
    $http.get('/getAllRecipients').success(function(fetchAllRecipients){
 
         $scope.RecipientList = fetchAllRecipients;
+        $scope.newMessage.recipient = $scope.RecipientList[0];
 
     });
    };

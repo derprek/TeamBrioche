@@ -47,8 +47,7 @@ class ReportManagerController extends Controller
      */
     public function index()
     {
-
-        return view('practitioner.reportmanager');
+        return view('practitioner.ReportManager.reportmanager');
     }
 
      /**
@@ -68,10 +67,10 @@ class ReportManagerController extends Controller
         $pracslist = Practitioner::lists('fname', 'id');
         $sharerslist = $report->practitioners()->get();
 
-        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner','reportselection','reportselectioncount', 'reportviewer', 'pracslist', 'sharerslist'));
+        return view('practitioner.ReportManager.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner','reportselection','reportselectioncount', 'reportviewer', 'pracslist', 'sharerslist'));
     }
 
-    public function getAllReports()
+    public function getMyReports()
     {
         $prac_reports = Report::latest('updated_at')->practitioner()->get();
 

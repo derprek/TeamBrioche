@@ -271,31 +271,6 @@ class MessengerController extends Controller
         $newMessage->status =  Input::get('status');
         $newMessage->created_at = Carbon::now();
         $newMessage->save();
-
-        $recipient = Practitioner::ValidateEmail($newMessage->receiver_email)->first();
-        if($recipient !== null)
-        {
-            $recipient_name = $recipient->fname . " " . $recipient->sname; 
-        }
-        else
-        {
-           $recipient_name = "unknown user";
-        }
-        
-        $messagelist[] = ['id'=>$newMessage->id,
-                                'conv_id'=>$newMessage->conv_id,
-                                'sender_email'=>$newMessage->sender_email,
-                                'receiver_email'=>$newMessage->receiver_email,
-                                'recipient_email'=>$newMessage->receiver_email,
-                                'receiver_name'=>$recipient_name,
-                                'title'=>$newMessage->title,
-                                'status'=>$newMessage->status,
-                                'content'=>$newMessage->content,
-                                'is_unread'=>false,
-                                'created_at'=>$newMessage->created_at->diffForHumans()];
-
-        return $messagelist;
-
     }
 
     /**
@@ -376,8 +351,8 @@ class MessengerController extends Controller
         }
         else
         {
-            $receiver_email = "User is not in our database anymore";
-            $receiver_name = "User is not in our database anymore"; 
+            $receiver_email = "Unrecognized User.";
+            $receiver_name = "Unrecognized User."; 
         }
         
            $messagelist[] = ['id'=>$message->id,

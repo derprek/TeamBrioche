@@ -1,26 +1,45 @@
 @extends('practitionermaster')
 
 @section('sidemenubar')
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-            <li>
-                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
-            </li>
-            <li>
-                <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-            </li>
-            <li class="active">
-                <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-            </li>
-            <li>
-                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
-        </ul>
-    </div>
+    @if(Session::has('is_admin'))
+    
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li >
+                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
+                </li>
+                <li class="active">
+                    <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
+                </li>
+            </ul>
+        </div>
+    
+    @else
+    
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li>
+                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+                </li>
+                <li class="active">
+                    <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+                </li>
+            </ul>
+        </div>
+
+    @endif
 @endsection
 
 @section('content')
-    @include('reports_angularjs')
 
     <div id="page-wrapper">
         <div class="container-fluid">

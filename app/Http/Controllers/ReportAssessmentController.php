@@ -46,7 +46,16 @@ class ReportAssessmentController extends Controller
     {
         $questions = Question::Assessment()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
         $clients = User::latest('created_at')->MyClient()->get();
-        $questions_category = Question::Assessment()->distinct()->lists('category_id');
+
+        if($clients->isEmpty())
+        {   
+            Session::flash('error_title', 'No Registered clients found.');
+            Session::flash('error_message', 'Please create one first.');
+            return redirect('practitioner/clientmanager');
+        }
+        else
+        { 
+            $questions_category = Question::Assessment()->distinct()->lists('category_id');
 
         $questionslist = array();
         $categories = array();
@@ -60,7 +69,9 @@ class ReportAssessmentController extends Controller
         }
         $submitButtonText = "Upload Assessment Report";
         $thumbnail_dist = 100 /count($questions_category);
-        return view('test', compact('questions', 'categories','clients', 'questionslist','thumbnail_dist','submitButtonText'));
+        return view('reports.createAssessment', compact('questions', 'categories','clients', 'questionslist','thumbnail_dist','submitButtonText'));
+        }
+        
     }
 
     /**
@@ -103,6 +114,7 @@ class ReportAssessmentController extends Controller
         $report = Report::find($report_id);
         $clientinfo = User::find($report->userid);
         $pracinfo = Practitioner::find($report->prac_id);
+        $pracname = $pracinfo->fname . " " . $pracinfo->sname;
 
         $arraycount = $report->questions()->distinct()->Assessment()->orderBy('category_id', 'ASC')->lists('category_id');
 
@@ -117,7 +129,7 @@ class ReportAssessmentController extends Controller
                 ->get();
         }
         $thumbnail_dist = 100 /count($arraycount);
-        return view('reports.showAssessment', compact('answerlist', 'report', 'clientinfo', 'pracinfo','thumbnail_dist','categories'));
+        return view('reports.showAssessment', compact('answerlist', 'report', 'clientinfo', 'pracname','thumbnail_dist','categories'));
     }
 
     /**
@@ -144,26 +156,6 @@ class ReportAssessmentController extends Controller
         Session::flash('flash_message', 'Report successfully updated!');
 
         return redirect("reports/Assessment/" . $reportid);
-    }
-
-    public function test()
-    {
-        $questions = Question::Assessment()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
-        $clients = User::latest('created_at')->MyClient()->get();
-        $questions_category = Question::Assessment()->distinct()->lists('category_id');
-
-        $questionslist = array();
-        $categories = array();
-        foreach ($questions_category as $category_id)
-        {
-            $categories[] = Category::find($category_id);
-            $questionslist[] = Question::Assessment()
-                ->Getquestionsbycat($category_id)
-                ->orderBy('type', 'DESC')
-                ->get();
-        }
-        //dd($questionslist[0][0]);
-        return view('reports.createTest', compact('questions', 'categories','clients', 'questionslist'));
     }
 
     public function showtest()
