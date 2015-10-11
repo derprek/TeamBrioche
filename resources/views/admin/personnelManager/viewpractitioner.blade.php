@@ -94,8 +94,7 @@
             <div class="col-sm-10 col-md-10 col-lg-12" ng-cloak ng-show="Practitioner">
             <form role="form" method="POST" action="{{ url('/admin/updatePractitioner') }}">
                 
-            <div class="form-group" ng-cloak>
-            <br> 
+            <div class="form-group" ng-cloak> 
 
                 @if (Session::has('practitioner_updateerror'))
                     <div class="alert alert-danger">

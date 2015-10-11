@@ -65,7 +65,21 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
 
-        <li class="dropdown" ng-cloak ng-app="messengerApp" ng-controller="masterMessageController">
+        @if(Session::has('is_admin'))
+           <li class="dropdown">
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                    <small>Admin Options</small>
+                    <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                   <li>
+                        <a href="/admin/dashboard"><i class="fa fa-fw fa-power-off"></i> Admin Home</a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+            <li class="dropdown" ng-cloak ng-app="messengerApp" ng-controller="masterMessageController">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()">  @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">

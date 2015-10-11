@@ -93,7 +93,6 @@
             <div class="col-sm-10 col-md-10 col-lg-12" ng-cloak ng-show="Client">
             <form role="form" method="POST" action="{{ url('/practitioner/updateClient') }}">
 
-            <br>
             <div class="form-group" ng-cloak>
 
                 @if (Session::has('client_updateerror'))
@@ -126,7 +125,7 @@
                 <label>Email Address:<input type="text" name="prac_email" class="form-control" value="@{{ Client.prac_email }}" readonly> </label>
                 <br>
 
-                 <button data-toggle="modal" data-target="#deletepersonnel" class="btn btn-danger btn-sm ">Delete Client</button>
+                  <button data-toggle="modal" data-target="#deletepersonnel" class="btn btn-danger btn-sm ">Delete Client</button>
 
                  <form role="form" method="POST" action="{{ url('/admin/deleteClient') }}">
                  <input type="hidden" name="id" class="form-control" value="@{{ Client.id }}" required>

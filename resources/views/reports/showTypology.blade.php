@@ -27,38 +27,31 @@
                     </h1>
                     <ol class="breadcrumb">
                         
-
                     @if(Session::has('is_admin'))
 
-                       <li>
+                        <li>
                             <i class="fa fa-bar-chart"></i> <a href="{{ url('admin/reportmanager') }}">Report
                                 Manager</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-search"></i>
-                            <a href="{{ url('/practitioner/overview', $report->id) }} ">Report
-                                Overview</a>
-                        </li>
-                        <li class="active">
-                            Edit Typology
                         </li>
 
                     @else
 
-                       <li>
+                        <li>
                             <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report
                                 Manager</a>
                         </li>
+
+                    @endif
+
                         <li>
                             <i class="fa fa-search"></i>
                             <a href="{{ url('/practitioner/overview', $report->id) }} ">Report
                                 Overview</a>
                         </li>
+
                         <li class="active">
                             Edit Typology
                         </li>
-
-                    @endif
 
                     </ol>
                 </div>
