@@ -63,6 +63,7 @@ Route::get('practitioner/dashboard', 'PractitionersController@index');
 Route::get('practitioner/clientmanager', 'ClientManagerController@index');
 Route::get('practitioner/reportmanager', 'ReportManagerController@index');
 
+
 Route::get('practitioner/overview/{report_id}', 'ReportManagerController@overview');
 Route::get('practitioner/client/{report_id}', 'PractitionersController@viewclient');
 
@@ -72,7 +73,7 @@ Route::post('practitioner/createUser', 'ClientManagerController@store');
 Route::post('reports/removeSharer', 'SharingController@removeSharer');
 Route::post('reports/shareReport', 'SharingController@addNewSharer');
 
-
+Route::get('practitioner/reportpdf/{report_id}', 'ReportManagerController@generatereport');
 /**
  * Authentication routes
  *
