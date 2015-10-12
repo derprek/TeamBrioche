@@ -140,9 +140,11 @@ class ReportManagerController extends Controller
 
     public function generatereport($report_id)
     {
+        $pracid = Session::get('prac_id');
+        $pracinfo = Practitioner::find($pracid);
+        
         $report = Report::find($report_id);
         $clientinfo = User::find($report->userid);
-        $pracinfo = Practitioner::find($report->prac_id);
 
         $arraycount = $report->questions()->distinct()->where('step','=',1)->orderBy('category_id','ASC')->lists('category_id');
 
@@ -156,7 +158,7 @@ class ReportManagerController extends Controller
           }
       //dd($answerlist);  
       //$data['name'] = "name123";
-
+       
       $pdf = \PDF::loadView('practitioner.reportManager.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
 
       return $pdf->stream('file.pdf',array("Attachment" => 0));

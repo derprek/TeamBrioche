@@ -15,7 +15,7 @@
         <input type="hidden" name="reportid" value={{$report->id}}>
             <div>
                 <p style="text-align:right"> Client's name: {{ $clientinfo->fname}} {{ $clientinfo->sname}} </p>
-                <p style="text-align:right"> Practitioner's name: {{ $pracinfo->name }} </p>
+                <p style="text-align:right"> Practitioner's name: {{ $pracinfo->fname }} {{ $pracinfo->sname}}</p>
             </div>
         <hr>
 
