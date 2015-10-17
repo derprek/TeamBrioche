@@ -63,7 +63,16 @@ class MessengerController extends Controller
             {
                 $sender_email = Conversation::find($conversation_id)->firstuser_email;
                 $getprac = Practitioner::ValidateEmail($sender_email)->first();
-                $sender_name = $getprac->fname . " " . $getprac->sname;
+
+                if($getprac === null)
+                {
+                    $sender_name = "";
+                }
+                else
+                {
+                    $sender_name = $getprac->fname . " " . $getprac->sname;
+                }
+
 
                 if($sender_name === null)
                 {

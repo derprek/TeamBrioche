@@ -28,7 +28,7 @@
           href="{{ url('admin/dashboard') }}"
           role="button">Administrator Account</a></p>
 
-         <p style="display:inline-block"><a class="btn btn-success btn-lg"
+         <p style="display:inline-block"><a class="btn btn-primary btn-lg"
           href="{{ url('practitioner/dashboard') }}"
           role="button">Practitioner Account</a></p>
           </div>

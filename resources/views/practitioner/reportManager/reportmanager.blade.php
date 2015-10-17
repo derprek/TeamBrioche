@@ -109,7 +109,6 @@
                                     </label>
                                 </div>
                             </div>
-                            <hr>
 
                             <tr ng-show="AllReports">
                                 <th>Report Number @{{remaining()}}</th>
@@ -184,7 +183,6 @@
                                 </label>
                             </div>
                             </div>
-                            <hr>
 
                                 <tr ng-cloak ng-show="SharedReports">
                                     <th>Report Number</th>

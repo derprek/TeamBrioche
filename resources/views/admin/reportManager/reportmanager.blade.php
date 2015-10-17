@@ -73,8 +73,6 @@
                 <h2>No Reports found.</h2>
             </div>
 
-            <hr>
-
             <div class="col-sm-10 col-md-10 col-lg-12">
             <br>
 

@@ -52,7 +52,7 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
-                        <li class="active"><i class="fa fa-inbox"></i> Inbox</li>
+                        <li class="active"><i class="fa fa-inbox"></i>Mailbox</li>
                     </ol>
                 </div>
             </div>
@@ -60,7 +60,7 @@
 
     <div class="row">
     <hr>
-        <div ng-cloak class="col-sm-2 col-md-2 col-lg-1">
+        <div ng-cloak class="col-sm-2 col-md-2 col-lg-2">
             <a href="#" class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></a>
             <hr />
             <ul class="nav nav-pills nav-stacked">
@@ -91,7 +91,7 @@
         </div>
 
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css"> 
-        <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10 col-lg-11">
+        <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10 col-lg-10">
             <!-- Nav tabs -->
                 <h3> Inbox </h3>
                
@@ -148,7 +148,7 @@
                                 <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
                             </div>
 
-                     <div ng-show="Sentbox" ng-cloak class="col-sm-10 col-md-10 col-lg-11">
+                     <div ng-show="Sentbox" ng-cloak class="col-sm-10 col-md-10 col-lg-10">
                             <h3> Sent Box </h3>
                
                     <br>

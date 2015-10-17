@@ -79,15 +79,15 @@
             </li>
         @endif
 
-            <li class="dropdown" ng-cloak ng-app="messengerApp" ng-controller="masterMessageController">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()">  @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
+            <li class="dropdown" ng-cloak ng-app="messengerApp" ng-controller="masterMessageController" ng-cloak>
+                <a ng-cloak href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()">  @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#" ng-click="startAdd()"><i class="fa fa-pencil"></i> <small>Compose</small></a>
                     </li>
                     <li>
-                        <a href="/../practitioner/inbox"><i class="fa fa-fw fa-envelope"></i> <small>Inbox</small></a>
+                        <a href="/../practitioner/inbox"><i class="fa fa-fw fa-envelope"></i> <small>Mailbox</small></a>
                     </li>
                 </ul>
                 @include('partials.messagewindow')
