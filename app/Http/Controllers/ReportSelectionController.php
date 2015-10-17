@@ -367,7 +367,7 @@ class ReportSelectionController extends Controller
         }
 
       $pdf = \PDF::loadView('practitioner.reportManager.reportSelectionPDF', compact('selection', 'clientname', 'answerlist','report','pracname','categories'));
-      return $pdf->stream('file.pdf',array("Attachment" => 0));
+      return $pdf->stream('slectionReport.pdf',array("Attachment" => 0));
     }
 
 }

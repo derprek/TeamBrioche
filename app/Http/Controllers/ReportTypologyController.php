@@ -159,6 +159,6 @@ class ReportTypologyController extends Controller
        //'answerlist','report','goals', 'clientinfo', 'pracinfo','thumbnail_dist','categories'
       $pdf = \PDF::loadView('practitioner.reportManager.reportTypologyPDF', compact('answerlist','report','clientinfo','pracinfo','goals'));
 
-      return $pdf->stream('file.pdf',array("Attachment" => 0));
+      return $pdf->stream('trypologyReport.pdf',array("Attachment" => 0));
     }
 }

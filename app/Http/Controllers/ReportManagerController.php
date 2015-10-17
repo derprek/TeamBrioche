@@ -161,6 +161,6 @@ class ReportManagerController extends Controller
        
       $pdf = \PDF::loadView('practitioner.reportManager.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
 
-      return $pdf->stream('file.pdf',array("Attachment" => 0));
+      return $pdf->stream('assessementReport.pdf',array("Attachment" => 0));
     }
 }
