@@ -14,21 +14,20 @@
         <h4>Report ID: {{$report->id}}</h4>
         <input type="hidden" name="reportid" value={{$report->id}}>
             <div>
-                <p style="text-align:right"> Client's name: {{ $clientinfo->fname}} {{ $clientinfo->sname}} </p>
-                <p style="text-align:right"> Practitioner-in-charge: {{ $pracinfo->fname }} {{ $pracinfo->sname}}</p>
+                <p style="text-align:right">Selection Report ID: {{ $selection->id }}</p>
+                <p style="text-align:right"> Client: {{ $clientname }} </p>
+                <p style="text-align:right"> Practitioner-in-charge: {{ $pracname }}</p>
             </div>
         <hr>
 
         @foreach($answerlist as $reportinfo)
         <div white-space="pre-line">
             @foreach($reportinfo as $reportlist)
-                <h4>QUESTION:</h4>
-                <p>{{ $reportlist->question }}</p>
-                <h4>ANSWER:</h4>
-                <p>{{ $reportlist->pivot->answers}}</p>             
+                <h4>{{ $reportlist->question }}</h4>
+                <p>{{ $reportlist->pivot->answers}}<p>                
+                <p></p>             
                 <hr>
-            @endforeach
-            
+            @endforeach          
         </div>
         @endforeach
     

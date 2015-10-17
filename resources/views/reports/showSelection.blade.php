@@ -79,7 +79,8 @@
 
                     <a class="btn btn-default" href="{{ url('/reports/selection/overview', $report->id) }}"> Back to
                         Overview </a>
-
+                    <a class="btn btn-default" href="{{ url('/practitioner/selection/reportpdf', $selection->id) }}"> 
+                        Print Overview Report </a>
                     <a class="btn btn-primary" role="button" data-toggle="collapse" href="#stakeholders"
                        aria-expanded="false" aria-controls="collapseExample">
                         Stakeholders

@@ -75,6 +75,8 @@ Route::post('reports/shareReport', 'SharingController@addNewSharer');
 
 Route::get('practitioner/reportpdf/{report_id}', 'ReportManagerController@generatereport');
 Route::get('practitioner/Typology/reportpdf/{report_id}', 'ReportTypologyController@generatereport');
+Route::get('practitioner/selection/reportpdf/{select_id}', 'ReportSelectionController@generatereport');
+
 /**
  * Authentication routes
  *
