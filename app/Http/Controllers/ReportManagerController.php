@@ -23,6 +23,9 @@ use App\Category;
 use App\Subcategory;
 use App\Selection;
 
+use DOMPDF;
+use Barryvdh\DomPDF\Facade as PDF;
+
 class ReportManagerController extends Controller
 {   
     /**
@@ -97,6 +100,13 @@ class ReportManagerController extends Controller
         }
     }
 
+/**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+
     public function getSharedReports()
     {
 
@@ -126,5 +136,31 @@ class ReportManagerController extends Controller
         {
             return $reportlist;
         }
+    }
+
+    public function generatereport($report_id)
+    {
+        $pracid = Session::get('prac_id');
+        $pracinfo = Practitioner::find($pracid);
+        
+        $report = Report::find($report_id);
+        $clientinfo = User::find($report->userid);
+
+        $arraycount = $report->questions()->distinct()->where('step','=',1)->orderBy('category_id','ASC')->lists('category_id');
+
+         $answerlist = array();
+          foreach($arraycount as $ans)
+          {
+            $answerlist[] = $report->questions()
+                                   ->where('category_id','=', $ans)
+                                   ->orderBy('type','DESC')
+                                   ->get();
+          }
+      //dd($answerlist);  
+      //$data['name'] = "name123";
+       
+      $pdf = \PDF::loadView('practitioner.reportManager.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
+
+      return $pdf->stream('file.pdf',array("Attachment" => 0));
     }
 }

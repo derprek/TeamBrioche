@@ -90,7 +90,7 @@ class ReportTypologyController extends Controller
                 ->orderBy('type', 'DESC')
                 ->get();
         }
-
+        //dd($answerlist);
         $thumbnail_dist = 100 /count($arraycount);
         return view('reports.showTypology', compact('answerlist','report','goals', 'clientinfo', 'pracinfo','thumbnail_dist','categories'));
     }
@@ -130,5 +130,35 @@ class ReportTypologyController extends Controller
         Session::flash('flash_message', 'Report successfully updated!');
 
         return redirect("reports/Typology/" . $reportid);
+    }
+
+    public function generatereport($report_id)
+    {
+
+        $report = Report::find($report_id);
+        $clientinfo = User::find($report->userid);
+        $pracinfo = Practitioner::find($report->prac_id);
+
+        $fetchgoals = $report->questions()->Assessment()->GetGoals()->first();
+        $goals = $fetchgoals->pivot->answers;
+        //dd($goals);
+        $arraycount = $report->questions()->distinct()->Typology()->orderBy('category_id', 'ASC')->lists('category_id');
+
+        $categories = array();
+        $answerlist = array();
+        foreach ($arraycount as $ans) 
+        {
+            $categories[] = Category::find($ans);
+            $answerlist[] = $report->questions()
+                ->Getquestionsbycat($ans)
+                ->orderBy('type', 'DESC')
+                ->get();
+        }
+        //dd($categories);
+       
+       //'answerlist','report','goals', 'clientinfo', 'pracinfo','thumbnail_dist','categories'
+      $pdf = \PDF::loadView('practitioner.reportManager.reportTypologyPDF', compact('answerlist','report','clientinfo','pracinfo','goals'));
+
+      return $pdf->stream('file.pdf',array("Attachment" => 0));
     }
 }

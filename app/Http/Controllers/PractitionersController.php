@@ -58,4 +58,6 @@ class PractitionersController extends Controller
     {   
         return view('angulartest');
     }
+
+    
 }

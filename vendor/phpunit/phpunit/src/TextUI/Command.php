@@ -101,8 +101,9 @@ class PHPUnit_TextUI_Command
     }
 
     /**
-     * @param  array $argv
-     * @param  bool  $exit
+     * @param array $argv
+     * @param bool  $exit
+     *
      * @return int
      */
     public function run(array $argv, $exit = true)
@@ -169,6 +170,7 @@ class PHPUnit_TextUI_Command
      * Create a TestRunner, override in subclasses.
      *
      * @return PHPUnit_TextUI_TestRunner
+     *
      * @since  Method available since Release 3.6.0
      */
     protected function createRunner()
@@ -592,6 +594,10 @@ class PHPUnit_TextUI_Command
                 $this->arguments['stderr'] = $phpunit['stderr'];
             }
 
+            if (isset($phpunit['columns']) && ! isset($this->arguments['columns'])) {
+                $this->arguments['columns'] = $phpunit['columns'];
+            }
+
             if (isset($phpunit['printerClass'])) {
                 if (isset($phpunit['printerFile'])) {
                     $file = $phpunit['printerFile'];
@@ -661,8 +667,9 @@ class PHPUnit_TextUI_Command
     /**
      * Handles the loading of the PHPUnit_Runner_TestSuiteLoader implementation.
      *
-     * @param  string                         $loaderClass
-     * @param  string                         $loaderFile
+     * @param string $loaderClass
+     * @param string $loaderFile
+     *
      * @return PHPUnit_Runner_TestSuiteLoader
      */
     protected function handleLoader($loaderClass, $loaderFile = '')
@@ -705,8 +712,9 @@ class PHPUnit_TextUI_Command
     /**
      * Handles the loading of the PHPUnit_Util_Printer implementation.
      *
-     * @param  string               $printerClass
-     * @param  string               $printerFile
+     * @param string $printerClass
+     * @param string $printerFile
+     *
      * @return PHPUnit_Util_Printer
      */
     protected function handlePrinter($printerClass, $printerFile = '')
@@ -782,16 +790,17 @@ class PHPUnit_TextUI_Command
             exit(PHPUnit_TextUI_TestRunner::EXCEPTION_EXIT);
         }
 
-        $remoteFilename = sprintf(
-            'https://phar.phpunit.de/phpunit%s.phar',
-            PHPUnit_Runner_Version::getReleaseChannel()
-        );
+        if (PHP_VERSION_ID < 50600) {
+            $remoteFilename = sprintf('https://phar.phpunit.de/phpunit-old.phar');
+        } else {
+            $remoteFilename = sprintf('https://phar.phpunit.de/phpunit.phar');
+        }
 
         $tempFilename = tempnam(sys_get_temp_dir(), 'phpunit') . '.phar';
 
         // Workaround for https://bugs.php.net/bug.php?id=65538
         $caFile = dirname($tempFilename) . '/ca.pem';
-        copy(__PHPUNIT_PHAR_ROOT__ . '/phar/ca.pem', $caFile);
+        copy(__PHPUNIT_PHAR_ROOT__ . '/ca.pem', $caFile);
 
         print 'Updating the PHPUnit PHAR ... ';
 
