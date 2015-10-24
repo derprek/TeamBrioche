@@ -17,7 +17,7 @@ class CreateTypologyAnswersTable extends Migration
                 $table->increments('id');
 
                 $table->integer('typology_id')->unsigned()->index();
-                $table->foreign('typology_id')->references('id')->on('typologys')->onDelete('cascade');
+                $table->foreign('typology_id')->references('id')->on('typologies')->onDelete('cascade');
 
                 $table->integer('question_id')->unsigned()->index();
                 $table->foreign('question_id')->references('id')->on('questions');
