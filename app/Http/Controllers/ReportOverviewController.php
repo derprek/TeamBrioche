@@ -76,7 +76,7 @@ class ReportOverviewController extends Controller
         })
         ->get();
 
-        return view('practitioner.reportManager.reportoverview', compact('client', 'report_step' ,'report', 'reportowner','evaluation_count', 'shareable_practitioners', 'shared_practitioners'));
+        return view('reports.reportoverview', compact('client', 'report_step' ,'report', 'reportowner','evaluation_count', 'shareable_practitioners', 'shared_practitioners'));
     }
 
 

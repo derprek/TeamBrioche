@@ -115,7 +115,7 @@
                                 <th>Created on</th>
                                 <th>Updated on</th>
                                 <th>Status</th>
-                                <th>Edit</th>
+                                <th>View</th>
                             </tr>
 
                             <!-- List out reports -->
@@ -128,7 +128,7 @@
                                 <td> @{{ report.status }} </td>
                                 <td style="width:10%"><a
                                             href="/reports/overview/@{{ report.id }}"
-                                            class="btn btn-success btn-sm"> Edit</a></td>
+                                            class="btn btn-success btn-sm"> View</a></td>
                             </tr>
 
                         </table>

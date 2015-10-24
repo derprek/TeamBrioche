@@ -9,9 +9,10 @@
 <script src="/js/bootstrap-dialog.js"></script> 
 <script src="/js/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js"></script>
+<script src="/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
 
 <script src="/js/Angular_JS/messages/messengerApp.js"></script>
-<script src="/js/Angular_JS/messages/InboxController.js"></script>
+<script src="/js/Angular_JS/messages/MailboxController.js"></script>
 <script src="/js/Angular_JS/messages/masterMessageController.js"></script>
 <script src="/js/Angular_JS/reports/dirPagination.js"></script>
 <script src="/js/angular-toastr.tpls.js"></script>

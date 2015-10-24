@@ -51,7 +51,7 @@ class ReportManagerController extends Controller
      */
     public function index()
     {
-        return view('practitioner.reportManager.reportmanager');
+        return view('reports.reportmanager');
     }
 
      /**
@@ -129,26 +129,25 @@ class ReportManagerController extends Controller
 
     public function generatereport($report_id)
     {
-        $pracid = Session::get('prac_id');
-        $pracinfo = Practitioner::find($pracid);
+        $pracinfo = Practitioner::find(Session::get('prac_id'));
         
-        $report = Report::find($report_id);
+        $assessment = Assessment::GetAssessment($report_id)->first();
+        $current_version = Version::find($assessment->current_version);
+        $creator_practitioner = Practitioner::GetThisPractitioner($current_version->prac_id)->first();
         $clientinfo = User::find($report->userid);
 
-        $arraycount = $report->questions()->distinct()->where('step','=',1)->orderBy('category_id','ASC')->lists('category_id');
+        $arraycount = $assessment->questions()->distinct()->GetCurrentVersion($assessment->current_version)->orderBy('category_id','ASC')->lists('category_id');
 
          $answerlist = array();
           foreach($arraycount as $ans)
           {
-            $answerlist[] = $report->questions()
+            $answerlist[] = $assessment->questions()
                                    ->where('category_id','=', $ans)
                                    ->orderBy('type','DESC')
                                    ->get();
           }
-      //dd($answerlist);  
-      //$data['name'] = "name123";
        
-      $pdf = \PDF::loadView('practitioner.reportManager.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
+      $pdf = \PDF::loadView('report.reportPDF', compact('answerlist','assessment','clientinfo','pracinfo','creator_practitioner'));
 
       return $pdf->stream('assessementReport.pdf',array("Attachment" => 0));
     }
@@ -172,8 +171,8 @@ class ReportManagerController extends Controller
    
       
        
-      $pdf = \PDF::loadView('practitioner.reportManager.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
+      //$pdf = \PDF::loadView('report.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
 
-      return $pdf->stream('file.pdf',array("Attachment" => 0));
+      //return $pdf->stream('file.pdf',array("Attachment" => 0));
     }
 }

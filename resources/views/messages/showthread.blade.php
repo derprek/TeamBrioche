@@ -1,7 +1,7 @@
 @extends('mailboxMaster')
 
 @section('sidemenubar')
-    @if(Session::has('is_admin'))
+    @if((Session::has('is_admin')) && (Session::has('prac_id')))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -20,7 +20,7 @@
             </ul>
         </div>
     
-    @else
+    @elseif(Session::has('prac_id'))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -35,6 +35,19 @@
                 </li>
             </ul>
         </div>
+
+    @elseif(Auth::check())
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li class="active">
+                <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
+            </li>
+            <li>
+                <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
+            </li>
+        </ul>
+    </div>
 
     @endif
 @endsection
@@ -68,18 +81,27 @@
                
             
         </div>
-        <div class="col-sm-10 col-md-11">
+
+
+        <div id="loadthreadpage" style="width:100%; ">
+                               
+            @include('partials.loadinganimation')
+
+            <div id="loadthreadpage_text" style="margin-left:45%;">
+                <small>
+                    Fetching your Messages....
+                </small>
+            </div>
+        </div>
+
+        <div class="col-sm-10 col-md-11" ng-cloak>
             <!-- Nav tabs -->
              <toaster-container ></toaster-container>
                     
                     <div class="row" style="overflow: auto;margin-bottom:1%;margin-right:1%;"> <p ng-if="totalunreadmessages()" ><small style="font-size:0.7em;float:right;">You have (@{{totalunreadmessages()}}) unread messages.</small></p></div>
-                    <a role="button" ng-show="AllMessages" data-toggle="collapse" href="#moreinfo" aria-expanded="false" aria-controls="moreinfo"><div class="row" style="overflow: auto;margin-bottom:1%;margin-right:1%;">  <small style="font-size:0.7em;float:right;">More Info <i class="fa fa-chevron-down"></i> </small></div></a>
-                    <div class="collapse" id="moreinfo">
-                            <div class="well">
-                              <small> Recipient Email address: @{{recipient_email()}} </small><br>
-                              <small> Total number of messages: @{{totalmessages()}} </small>
-                            </div>
-                        </div>
+                    <small class="mailboxfontmedium pull-right"ng-show="AllMessages"> Messages with: @{{recipient_email()}} </small>
+                    <br><br>
+                    
 
                      <input ng-show="AllMessages" type="text" placeholder="Search...." class="form-control"
                                    ng-model="search.text"><br>
@@ -87,33 +109,47 @@
                     <div ng-show="(AllMessages | filter:search.text).length == 0" class="emptymsg_container">
                         <p id="emptymsg">No Results found.</p>
                     </div>
+                   
                     
-                    <div class="list-group" dir-paginate="message in AllMessages | filter:search.text |  itemsPerPage: 5" pagination-id="threadPagination">
-                        
-                        <div class="panel " ng-if="message.sender_email !== 'You' && message.status === 'unread'"> 
-                        <div style="background-image: none;background-color: #59ABE3;color: white;" class="panel-heading"><small>From: @{{ message.recipient_name }}</small> <strong style="padding-left:3%;">@{{ message.title }}</strong></div>
-                        <div class="panel-body">
-                           <small>@{{ message.content }}</small>
-                        </div>
-
-                        <div class="panel-footer"><small style="font-size:0.7em;">@{{ message.created_at }}</small></div>
-                        <hr>
-                        </div>
+                        <uib-accordion close-others="false" >
+                       
+                       <span dir-paginate="message in AllMessages | filter:search.text |  itemsPerPage: 5" pagination-id="threadPagination" style="padding:3px;" >
 
 
-                        <div class="panel" ng-if="message.sender_email === 'You' || message.status !== 'unread'"> 
-                        <div style="background-image: none;background-color: #6C7A89;color: white;" class="panel-heading"><small>From: @{{ message.recipient_name }}</small> <strong style="padding-left:3%;">@{{ message.title }}</strong></div>
-                        <div class="panel-body">
-                           <small>@{{ message.content }}</small>
-                        </div>
+                        <uib-accordion-group  panel-class="panel-info" is-open="true" ng-if="message.sender_email !== 'You' && message.status === 'unread'">
+                          <uib-accordion-heading>
+                           <span class="pull-left" style="width:20%;">From: @{{ message.sender_name }} </span>  
+                            <span>@{{ message.title }} </span>  
+                            <p class="mailboxfontmedium pull-right"> @{{ message.created_at  }} </p>
+                          </uib-accordion-heading>
+                          @{{ message.content }}
+                        </uib-accordion-group>
 
-                        <div class="panel-footer" style="float-right;"><small style="font-size:0.7em;">@{{ message.created_at }}</small></div>
-                        <hr>
-                        </div>                              
-                    </div>
+                        <uib-accordion-group  is-open="true" ng-if="totalunreadmessages() !== '0' && message.id === getfirstID()">
+                          <uib-accordion-heading id="firstmessage">
+                           <span class="pull-left" style="width:20%;">From: @{{ message.sender_name }} </span>  
+                            <span> @{{ message.title }} </span>  
+                            <p class="mailboxfontmedium pull-right"> @{{ message.created_at  }} </p> 
+                          </uib-accordion-heading>
+                          @{{ message.content }}
+                        </uib-accordion-group>
+
+                        <uib-accordion-group  is-open="false" ng-if=" message.id !== getfirstID() && (message.sender_email === 'You' || message.status !== 'unread')">
+                          <uib-accordion-heading>
+                            <span class="pull-left" style="width:20%;"> From: @{{ message.sender_name }} </span>  
+                            <span> @{{ message.title }} </span>  
+                            <p class="mailboxfontmedium pull-right"> @{{ message.created_at  }} </p>
+                          </uib-accordion-heading>
+                          @{{ message.content }}
+                        </uib-accordion-group>
+
+                        </span>
+
+                      </uib-accordion>
                     
                     <dir-pagination-controls template-url="/dirPagination.tpl.html"
                         pagination-id="threadPagination"></dir-pagination-controls>
+
             </div>
             <!-- Ad -->         
 

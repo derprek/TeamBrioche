@@ -19,6 +19,7 @@ use App\Product;
 use App\Category;
 use App\Selection;
 use Validator;
+use Hash;
 
 class PasswordController extends Controller
 {
@@ -90,10 +91,27 @@ class PasswordController extends Controller
 
             if(Session::has('prac_id'))
             {
-                $practitioner_password = Practitioner::GetCurrent()->first()->password;
-                if($practitioner_password === MD5($current_password))
+                $practitioner = Practitioner::GetCurrent()->first();
+                if($practitioner->password === MD5($current_password))
                 {
-                    
+                    $validator = Validator::make($request->all(), [
+                       'new_password' => 'required|min:7',
+                       'confirm_password' => 'required|same:new_password', 
+                    ]);
+
+                     if ($validator->fails()) 
+                     {
+                           Session::flash('password_error','Your passwords do not match');
+                           return redirect()->back();
+                     }
+
+                     $newpassword = $request->new_password;
+
+                     $practitioner->password = MD5($newpassword);
+                     $practitioner->save();
+
+                     Session::flash('flash_message','Your password has been successfully updated');
+                     return redirect()->back();
                 }
                 else
                 {   
@@ -102,28 +120,86 @@ class PasswordController extends Controller
                 }
                 
             }
+            elseif(Auth::check())
+            {
+                $client = Auth::user();
+
+                if (Hash::check($current_password, $client->password)) 
+                {
+                   $validator = Validator::make($request->all(), [
+                       'new_password' => 'required|min:7',
+                       'confirm_password' => 'required|same:new_password', 
+                    ]);
+
+                    if ($validator->fails()) 
+                    {
+                        Session::flash('password_error','Your passwords do not match');
+                        return redirect()->back();
+                    }
+
+                    $newpassword = $request->new_password;
+   
+                    $client->password = $newpassword;
+                    $client->save();
+
+                    Session::flash('flash_message','Your password has been successfully updated');
+                    return redirect()->back();
+                }
+                else
+                {
+                    Session::flash('password_error','Your current password is incorrect');
+                    return redirect()->back();
+                }
+                
+            }
         }
 
-        if(Session::has('prac_id'))
+        else
         {
-             $validator = Validator::make($request->all(), [
-               'new_password' => 'required|min:7',
-               'confirm_password' => 'required|same:new_password', 
-            ]);
+            if(Session::has('prac_id'))
+            {
+                $validator = Validator::make($request->all(), [
+                   'new_password' => 'required|min:7',
+                   'confirm_password' => 'required|same:new_password', 
+                ]);
 
-             if ($validator->fails()) 
-             {
-                   Session::flash('password_error','Your passwords do not match');
-                   return redirect()->back();
-             }
+                 if ($validator->fails()) 
+                 {
+                       Session::flash('password_error','Your passwords do not match');
+                       return redirect()->back();
+                 }
 
-           $newpassword = $request->new_password;
-           $practitioner = Practitioner::GetCurrent()->first();
-           $practitioner->password = MD5($newpassword);
-           $pass = $practitioner->save();
+               $newpassword = $request->new_password;
+               $practitioner = Practitioner::GetCurrent()->first();
+               $practitioner->password = MD5($newpassword);
+               $practitioner->verified = 1;
+               $practitioner->save();
 
-           Session::flash('flash_message','Your password has been successfully updated');
-           return redirect()->back();
+               Session::flash('flash_message','Your password has been successfully updated');
+               return redirect()->back();
+           }
+           elseif(Auth::check())
+           {
+                $validator = Validator::make($request->all(), [
+                   'new_password' => 'required|min:7',
+                   'confirm_password' => 'required|same:new_password', 
+                ]);
+
+                if ($validator->fails()) 
+                {
+                    Session::flash('password_error','Your passwords do not match');
+                    return redirect()->back();
+                }
+
+                $newpassword = $request->new_password;
+                $client = Auth::user();
+                $client->password = $newpassword;
+                $client->verified = 1;
+                $client->save();
+
+                Session::flash('flash_message','Your password has been successfully updated');
+                return redirect()->back();
+           }
         }
     }
 

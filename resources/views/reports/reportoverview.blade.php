@@ -162,6 +162,7 @@
                                                 <!-- end of assessment panel -->
 
 
+
                                                 <!-- typology panel -->
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="panel panel-atest">
@@ -179,6 +180,7 @@
 
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                         @if ($report_step > 1)
 

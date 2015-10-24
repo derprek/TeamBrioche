@@ -2,25 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fc0280-7884-4728-9776-f1d355b4ee1b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.env" afterPath="$PROJECT_DIR$/.env" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/TeamBrioche.iml" afterPath="$PROJECT_DIR$/.idea/TeamBrioche.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/atest.css" afterPath="$PROJECT_DIR$/public/css/atest.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/public/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/practitioner/clientManager/clientmanager.blade.php" afterPath="$PROJECT_DIR$/resources/views/practitioner/clientManager/clientmanager.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/createEvaluation.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/createEvaluation.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/cssreferences.blade.php" afterPath="$PROJECT_DIR$/resources/views/cssreferences.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/homepage.blade.php" afterPath="$PROJECT_DIR$/resources/views/homepage.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/master.blade.php" afterPath="$PROJECT_DIR$/resources/views/master.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/personnelManager/personnelmanager.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/personnelManager/personnelmanager.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/reportManager/reportmanager.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/reportManager/reportmanager.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportmanager.blade.php" afterPath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportmanager.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportoverview.blade.php" afterPath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportoverview.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/ui-bootstrap-tpls-0.14.3.min.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportoverview.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/profile/userProfile.blade.php" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/Angular_JS/messages/InboxController.js" afterPath="$PROJECT_DIR$/public/js/Angular_JS/messages/MailboxController.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportPDF.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/reportPDF.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportSelectionPDF.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/reportSelectionPDF.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportTypologyPDF.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/reportTypologyPDF.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportmanager.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/reportmanager.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Assessment.php" afterPath="$PROJECT_DIR$/app/Assessment.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Conversation.php" afterPath="$PROJECT_DIR$/app/Conversation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/MessengerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessengerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportAssessmentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportAssessmentController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportManagerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportManagerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportOverviewController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportOverviewController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/adminmaster.blade.php" afterPath="$PROJECT_DIR$/resources/views/adminmaster.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/jsreferences.blade.php" afterPath="$PROJECT_DIR$/resources/views/jsreferences.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/messages/mailbox.blade.php" afterPath="$PROJECT_DIR$/resources/views/messages/mailbox.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/mailboxMaster.blade.php" afterPath="$PROJECT_DIR$/resources/views/mailboxMaster.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Angular_JS/messages/masterMessageController.js" afterPath="$PROJECT_DIR$/public/js/Angular_JS/messages/masterMessageController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Angular_JS/messages/messengerApp.js" afterPath="$PROJECT_DIR$/public/js/Angular_JS/messages/messengerApp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/newVersionActionModal.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/newVersionActionModal.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/patientmaster.blade.php" afterPath="$PROJECT_DIR$/resources/views/patientmaster.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/selectionoverview.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/selectionoverview.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/showAssessment.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/showAssessment.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/showEvaluation.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/showEvaluation.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/showTypology.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/showTypology.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php" afterPath="$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/messages/showthread.blade.php" afterPath="$PROJECT_DIR$/resources/views/messages/showthread.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TeamBrioche.iws" />
@@ -46,8 +56,18 @@
       <file leaf-file-name="atest.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/atest.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.555555">
-              <caret line="488" column="18" selection-start-line="488" selection-start-column="18" selection-end-line="488" selection-end-column="18" />
+            <state vertical-scroll-proportion="-16.925926">
+              <caret line="788" column="1" selection-start-line="788" selection-start-column="1" selection-end-line="788" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reportoverview.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.332696">
+              <caret line="49" column="42" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -70,46 +90,6 @@
               <caret line="7" column="69" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="69" />
               <folding>
                 <element signature="e#6018#6042#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reportoverview.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/practitioner/reportManager/reportoverview.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.66730404">
-              <caret line="268" column="28" selection-start-line="268" selection-start-column="28" selection-end-line="268" selection-end-column="28" />
-              <folding>
-                <element signature="e#2768#2789#0#HTML" expanded="true" />
-                <element signature="e#3396#3431#0#HTML" expanded="true" />
-                <element signature="e#8439#8460#0#HTML" expanded="true" />
-                <element signature="e#14243#14264#0#HTML" expanded="true" />
-                <element signature="e#14332#14353#0#HTML" expanded="true" />
-                <element signature="e#16418#16442#0#HTML" expanded="true" />
-                <element signature="e#17091#17115#0#HTML" expanded="true" />
-                <element signature="e#18937#18958#0#HTML" expanded="true" />
-                <element signature="e#20712#20746#0#HTML" expanded="true" />
-                <element signature="e#23552#23586#0#HTML" expanded="true" />
-                <marker date="1445712139000" expanded="true" signature="24369:24504" placeholder="..." />
-                <marker date="1445712139000" expanded="true" signature="24384:24503" placeholder="..." />
-                <marker date="1445712139000" expanded="true" signature="24410:24502" placeholder="..." />
-                <marker date="1445712139000" expanded="true" signature="24423:24501" placeholder="..." />
-                <marker date="1445712139000" expanded="true" signature="24533:24639" placeholder="..." />
-                <marker date="1445712139000" expanded="true" signature="24546:24638" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/practitioner/reportManager/test.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.375">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="54" selection-end-column="6" />
-              <folding>
-                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h6#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,7 +139,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/reports/selectionoverview.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-18.75">
-              <caret line="77" column="60" selection-start-line="77" selection-start-column="60" selection-end-line="77" selection-end-column="60" />
+              <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -173,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ReportStepOneController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReportStepTwoController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SharingController.php" />
         <option value="$PROJECT_DIR$/app/Category.php" />
@@ -221,9 +200,10 @@
         <option value="$PROJECT_DIR$/resources/views/practitioner/clientManager/clientmanager.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/personnelManager/personnelmanager.blade.php" />
         <option value="$PROJECT_DIR$/public/css/bootstrap.min.css" />
-        <option value="$PROJECT_DIR$/public/css/atest.css" />
         <option value="$PROJECT_DIR$/resources/views/practitioner/reportManager/test.php" />
         <option value="$PROJECT_DIR$/resources/views/practitioner/reportManager/reportoverview.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/atest.css" />
+        <option value="$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php" />
       </list>
     </option>
   </component>
@@ -549,7 +529,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15384616" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36458334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -844,14 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/practitioner/reportManager/reportmanager.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46042004">
@@ -903,7 +875,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/reports/selectionoverview.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.75">
-          <caret line="77" column="60" selection-start-line="77" selection-start-column="60" selection-end-line="77" selection-end-column="60" />
+          <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -932,16 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/personnelManager/personnelmanager.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.4117646">
-          <caret line="7" column="69" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="69" />
-          <folding>
-            <element signature="e#6018#6042#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="320.3889">
@@ -958,17 +920,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/atest.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.555555">
-          <caret line="488" column="18" selection-start-line="488" selection-start-column="18" selection-end-line="488" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/practitioner/reportManager/test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375">
+        <state vertical-scroll-proportion="0.6272727">
           <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="54" selection-end-column="6" />
           <folding>
             <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
@@ -977,28 +931,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/practitioner/reportManager/reportoverview.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/personnelManager/personnelmanager.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66730404">
-          <caret line="268" column="28" selection-start-line="268" selection-start-column="28" selection-end-line="268" selection-end-column="28" />
+        <state vertical-scroll-proportion="4.4117646">
+          <caret line="7" column="69" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="69" />
           <folding>
-            <element signature="e#2768#2789#0#HTML" expanded="true" />
-            <element signature="e#3396#3431#0#HTML" expanded="true" />
-            <element signature="e#8439#8460#0#HTML" expanded="true" />
-            <element signature="e#14243#14264#0#HTML" expanded="true" />
-            <element signature="e#14332#14353#0#HTML" expanded="true" />
-            <element signature="e#16418#16442#0#HTML" expanded="true" />
-            <element signature="e#17091#17115#0#HTML" expanded="true" />
-            <element signature="e#18937#18958#0#HTML" expanded="true" />
-            <element signature="e#20712#20746#0#HTML" expanded="true" />
-            <element signature="e#23552#23586#0#HTML" expanded="true" />
-            <marker date="1445712139000" expanded="true" signature="24369:24504" placeholder="..." />
-            <marker date="1445712139000" expanded="true" signature="24384:24503" placeholder="..." />
-            <marker date="1445712139000" expanded="true" signature="24410:24502" placeholder="..." />
-            <marker date="1445712139000" expanded="true" signature="24423:24501" placeholder="..." />
-            <marker date="1445712139000" expanded="true" signature="24533:24639" placeholder="..." />
-            <marker date="1445712139000" expanded="true" signature="24546:24638" placeholder="..." />
+            <element signature="e#6018#6042#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/atest.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.925926">
+          <caret line="788" column="1" selection-start-line="788" selection-start-column="1" selection-end-line="788" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.332696">
+          <caret line="49" column="42" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

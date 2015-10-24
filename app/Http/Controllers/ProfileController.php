@@ -56,11 +56,12 @@ class ProfileController extends Controller
         }
         elseif(Auth::check())
         {
-            //dd(Auth::user()->email);
             $client = Auth::user();
             $is_verified = $client->verified;
             $my_practitioner = Practitioner::GetThisPractitioner($client->prac_id)->first();
             $report_count = Report::GetUserReports()->get();
+
+            return view('profile.clientProfile', compact('client','my_practitioner','report_count','is_verified'));
 
         }
         else

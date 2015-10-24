@@ -1,4 +1,4 @@
-messengerApp.controller('InboxController', [ '$http', '$scope','toastr', function($http, $scope,toastr){
+messengerApp.controller('MailboxController', [ '$http', '$scope','toastr', function($http, $scope,toastr){
 
   $scope.currentPage = 1;
   $scope.pageSize = 10;
@@ -11,27 +11,29 @@ messengerApp.controller('InboxController', [ '$http', '$scope','toastr', functio
         $scope.getRecipients();   
     });
 
-  $scope.totalunread = function() {
+$scope.getfirstID = function() {
 
-      var unreadcount = 0;
+  return $scope.FirstMessageID;
+}
 
-        angular.forEach($scope.Inbox, function(inbox) {
-          unreadcount += inbox.has_unread ? 1 : 0;
+$scope.totalunread = function() {
 
-        });
-        
-        return unreadcount;
-      };
-
+  return $scope.unreadcounter;
+}
   $scope.getInbox = function() {
 
-    $http.get('/getMyInbox').success(function(fetchInbox){
+    $http.get('/getMyMail').success(function(fetchInbox){
 
         $scope.Inbox = fetchInbox;
 
-        document.getElementById("loadInbox").style.display = "none";
-        document.getElementById("loadInbox_text").style.display = "none";
-
+        var url = window.location.pathname;
+              
+              if(url == "/mailbox")
+              {
+                document.getElementById("loadInbox").style.display = "none";
+                document.getElementById("loadInbox_text").style.display = "none";
+              }
+        
         var count =0;
 
         angular.forEach($scope.Inbox, function(inbox) {
@@ -41,7 +43,26 @@ messengerApp.controller('InboxController', [ '$http', '$scope','toastr', functio
 
         if (count >= 1) 
         {
-           document.getElementById("emptymsg").style.display = "none";            
+           document.getElementById("emptymsg").style.display = "none";        
+
+            var unreadcount = 0;
+
+            angular.forEach($scope.Inbox, function(inbox) {
+              unreadcount += inbox.has_unread ? 1 : 0;
+
+            });
+            
+            $scope.unreadcounter = unreadcount;
+
+            if($scope.unreadcounter != 0)
+            { 
+              if(url != "/mailbox")
+              {
+
+                $scope.getMyMessages();
+              }
+            }
+
         }
         else
         {
@@ -114,6 +135,17 @@ messengerApp.controller('InboxController', [ '$http', '$scope','toastr', functio
 
      .success(function(){ 
 
+       var url = window.location.pathname;
+              
+            if(url != "/mailbox")
+            {
+              $scope.getMyMessages();
+            }
+            else
+            {
+              TweenMax.staggerFrom("#sendbox", 2, {scale:0.5, opacity:0, delay:0.3, ease:Elastic.easeOut, force3D:true}, 0.2);
+            }
+
        $scope.getSentBox();
        $scope.errorText = "Your Message has been sent.";
        toastr.clear();
@@ -121,8 +153,6 @@ messengerApp.controller('InboxController', [ '$http', '$scope','toastr', functio
         {
           closeButton: true
         });
-
-          TweenMax.staggerFrom("#sendbox", 2, {scale:0.5, opacity:0, delay:0.3, ease:Elastic.easeOut, force3D:true}, 0.2);
 
       })
 
@@ -142,11 +172,20 @@ messengerApp.controller('InboxController', [ '$http', '$scope','toastr', functio
 
         $scope.AllMessages = fetchAllMessages;
 
-       var conv_id = { conv_id: $scope.AllMessages[0].conv_id };
+        var url = window.location.pathname;
+              
+            if(url != "/mailbox")
+            {
+              document.getElementById("loadthreadpage").style.display = "none";
+              document.getElementById("loadthreadpage_text").style.display = "none"; 
 
-       $http.post('/../practitioner/readmessages',conv_id);
-        
-        document.getElementById("emptymsg").style.visibility = "visible";
+              $scope.FirstMessageID =  $scope.AllMessages[0].id ;
+              var conv_id = { conv_id: $scope.AllMessages[0].conv_id };
+              $http.post('/../practitioner/readmessages',conv_id);
+              document.getElementById("emptymsg").style.visibility = "visible";
+
+            }
+      
     })
       };
 
@@ -169,4 +208,5 @@ messengerApp.controller('InboxController', [ '$http', '$scope','toastr', functio
         return unreadcount;
       };
       
+       setInterval($scope.getInbox, 3000);
   }]);

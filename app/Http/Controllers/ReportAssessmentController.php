@@ -203,9 +203,9 @@ class ReportAssessmentController extends Controller
      */
     public function checkhistory()
     {
-        $id = $_POST['id'];
         $assessment_id = $_POST['assessment_id'];
         $reportid = $_POST['report_id'];
+        $assessment_id = $_POST['assessment_id'];
         $answers = $_POST['answersid'];
         $current_version_number = $_POST['current_version'];
         ksort($answers);
@@ -280,8 +280,9 @@ class ReportAssessmentController extends Controller
                 Session::flash('flash_message', 'Create_New_Version!');
                 Session::put('modified_answers', $answers);
                 Session::put('current_assessment', $assessment);
+                Session::flash('current_version_number', $current_version_number);
 
-                return redirect("reports/Assessment/" . $reportid)->with('version_number', $current_version_number);;
+                return redirect("reports/assessment/view/" . $reportid);
 
             }
             elseif(isset($matching_version))
@@ -296,7 +297,7 @@ class ReportAssessmentController extends Controller
              Session::flash('flash_message', 'No changes!');
         }
 
-        return redirect("reports/Assessment/" . $reportid);
+        return redirect("reports/assessment/view/" . $reportid);
             
     }
 
@@ -342,9 +343,10 @@ class ReportAssessmentController extends Controller
         }
         else
         {
-
             $assessment = Session::pull('current_assessment');
             $answers = Session::pull('modified_answers');
+            $current_version = $_POST['version_number'];
+            $current_date = Carbon::now();
 
             $totalAnswers = count($answers);
 
@@ -354,10 +356,10 @@ class ReportAssessmentController extends Controller
                     ->where('assessment_id', $assessment->id)
                     ->where('version_id', $assessment->current_version)
                     ->where('question_id', $a)
-                    ->update(['answers' => $answers[$a], 'updated_at' => Carbon::now()]);
+                    ->update(['answers' => $answers[$a], 'updated_at' => $current_date]);
             }
 
-            Session::flash('flash_message', "Updated version {{ $assessment->current_version }}");
+            Session::flash('flash_message', "Updated version $current_version ");
 
             return Redirect::back();
 

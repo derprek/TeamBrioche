@@ -1,8 +1,10 @@
 @extends('mailboxMaster')
 
+
+
 @section('sidemenubar')
 
-    @if(Session::has('is_admin'))
+    @if((Session::has('is_admin')) && (Session::has('prac_id')))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -21,7 +23,7 @@
             </ul>
         </div>
     
-    @else
+    @elseif(Session::has('prac_id'))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -36,6 +38,19 @@
                 </li>
             </ul>
         </div>
+
+    @elseif(Auth::check())
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li class="active">
+                <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
+            </li>
+            <li>
+                <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
+            </li>
+        </ul>
+    </div>
 
     @endif
     
@@ -97,18 +112,18 @@
                
                     <br>
                      <input type="text" placeholder="Search...." class="form-control"
-                                   ng-model="search.text"><br>
+                                   ng-model="inboxsearch.text"><br>
 
-                    <div class="list-group" dir-paginate="inbox in Inbox | filter:search.text | itemsPerPage: 10" pagination-id="inboxPagination">
-                        <a href="/practitioner/inbox/showthread/@{{ inbox.conv_id }}" class="list-group-item" data-toggle="tooltip" title="@{{ inbox.sender_email }}" >
+                    <div class="list-group" dir-paginate="inbox in Inbox | filter:inboxsearch.text | itemsPerPage: 10" pagination-id="inboxPagination">
+                        <a href="/practitioner/inbox/showthread/@{{ inbox.conv_id }}" class="list-group-item" data-toggle="tooltip" title="@{{ inbox.recipient_email }}" >
 
                            <i ng-if="inbox.unreadcount !== 0" class="fa fa-envelope-o"></i>
 
                                 <span class="message_sendername" ng-if="inbox.unreadcount !== 0"> <p class="badge pull-left" >@{{ inbox.unreadcount }}</p> 
-                                <p class="mailboxfontlarge"><strong>From: @{{ inbox.sender_name }} </strong></p>  </span> 
+                                <p class="mailboxfontlarge"><strong>From: @{{ inbox.recipient_name }} </strong></p>  </span> 
 
                                 <span class="message_sendername" ng-if="inbox.unreadcount === 0">
-                                <p class="mailboxfontlarge">From: @{{ inbox.sender_name }} </p>  </span> 
+                                <p class="mailboxfontlarge">From: @{{ inbox.recipient_name }} </p>  </span> 
                                 
                                 <span class="" ng-if="inbox.unreadcount === 0"><small class="mailboxfontlarge">@{{ inbox.last_msg_title }}</small></span>
                                 <span class="" ng-if="inbox.unreadcount !== 0"><strong class="mailboxfontlarge">@{{ inbox.last_msg_title }}</strong></span>
@@ -134,7 +149,7 @@
                             
                             <div id="loadSentbox" style="width:100%; ">
                                
-                            @include('partials.loadinganimation')
+                                @include('partials.loadinganimation')
 
                                 <div id="loadSentbox_text" style="margin-left:45%;">
                                     <small>
@@ -153,9 +168,9 @@
                
                     <br>
                      <input type="text" placeholder="Search...." class="form-control"
-                                   ng-model="search.text"><br>
+                                   ng-model="sentsearch.text"><br>
 
-                    <div class="list-group" dir-paginate="sentbox in Sentbox | filter:search.text | itemsPerPage: 10" pagination-id="sentboxPagination">
+                    <div class="list-group" dir-paginate="sentbox in Sentbox | filter:sentsearch.text | itemsPerPage: 10" pagination-id="sentboxPagination">
                         <a class="list-group-item" role="button" data-toggle="collapse" href="#@{{ sentbox.id }}"
                            aria-expanded="false" aria-controls="content">
 

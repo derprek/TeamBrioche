@@ -14,7 +14,7 @@
 
 <body ng-app="messengerApp">
 
-<div id="wrapper" ng-controller="InboxController">
+<div id="wrapper" ng-controller="MailboxController">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,18 +48,37 @@
             <li class="dropdown">
 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                   @if(Session::has('prac_id'))
+
                     <small>{{ Session::get('prac_name')  }}</small>
+
+                   @elseif(Auth::check())
+                   
+                     <small>{{ Auth::User()->fname}} {{ Auth::User()->sname}}</small>
+
+                   @endif 
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+
+                        @if(Session::has('prac_id'))
+
+                         <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+
+                        @elseif(Auth::check())
+                       
+                          <a href="/../auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+
+                        @endif 
+
+                        
                     </li>
                 </ul>
             </li>
