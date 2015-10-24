@@ -1,22 +1,44 @@
 @extends('practitionermaster')
 
 @section('sidemenubar')
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-            <li>
-                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
-            </li>
-            <li>
-                <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-            </li>
-            <li class="active">
-                <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-            </li>
-            <li>
-                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
-        </ul>
-    </div>
+
+    @if(Session::has('is_admin'))
+    
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li >
+                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
+                </li>
+                <li class="active">
+                    <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
+                </li>
+            </ul>
+        </div>
+    
+    @else
+    
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li>
+                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+                </li>
+                <li class="active">
+                    <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
+                </li>
+            </ul>
+        </div>
+
+    @endif
+    
 @endsection
 
 @section('content')
@@ -30,18 +52,39 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
+                        
+                    @if(Session::has('is_admin'))
+
+                        <li>
+                            <i class="fa fa-bar-chart"></i> <a href="{{ url('admin/reportmanager') }}">Report
+                                Manager</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-search"></i>
+                            <a href="{{ url('/reports/overview', $report->id) }} ">Report
+                                Overview</a>
+                        </li>
+                        <li>
+                             Viewing all <strong>Evaluation</strong> for Report: {{$report->id}}.
+                        </li>
+
+                    @else
+
                         <li>
                             <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report
                                 Manager</a>
                         </li>
                         <li>
                             <i class="fa fa-search"></i>
-                            <a href="{{ url('/practitioner/overview', $report->id) }} ">Report
+                            <a href="{{ url('/reports/overview', $report->id) }} ">Report
                                 Overview</a>
                         </li>
-                        <li class="active">
-                            Selection Manager
+                        <li>
+                            Viewing all <strong>Evaluation(s)</strong> for Report: {{$report->id}}.
                         </li>
+
+                    @endif
+
                     </ol>
                 </div>
             </div>
@@ -49,13 +92,16 @@
 
             <div class="col-lg-12">
 
+                @unless(Session::has('is_admin'))
                 <a class="btn btn-success"
-                   href="{{ url('/reports/createSelection',$report->id) }}"
-                   role="button">Create a new selection</a>
+                   href="{{ url('/reports/evaluation/new',$report->id) }}"
+                   role="button">Create a new evaluation
+                </a>
                 <hr>
-
+                @endunless
+                
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home"><strong>View all Selection reports</strong></a>
+                    <li class="active"><a data-toggle="tab" href="#home"><strong>View all Evaluation reports</strong></a>
                     </li>
                 </ul>
 
@@ -63,28 +109,30 @@
                     <div id="home" class="tab-pane fade in active">
                         <!-- 1st tab -->
                         <table class="table table-bordered table-hover table-striped">
-
-                            @if(empty($selectionlist))
+                        <br>
+                            @if(empty($evaluationlist))
                                 <tr> No Records
                                 </tr>
 
                             @else
 
                                 <tr>
-                                    <th>Selection Number</th>
+                                    <th>Evaluation Number</th>
                                     <th>Product</th>
+                                    <th>Client</th>
                                     <th>Practitioner</th>
                                     <th>Updated on</th>
                                     <th>View</th>
                                 </tr>
 
                                 <!-- List out reports -->
-                                @foreach($selectionlist as $reportlist)
+                                @foreach($evaluationlist as $evaluation)
                                     <tr>
-                                        <td> {{ $reportlist['id'] }}</td>
-                                        <td> {{ $reportlist['product'] }}</td>
-                                        <td> {{ $reportlist['name'] }}</td>
-                                        <td> {{ $reportlist['date'] }}</td>
+                                        <td style="width:10%;"> {{ $evaluation['id'] }}</td>
+                                        <td style="width:40%;"> {{ $evaluation['product'] }}</td>
+                                        <td style="width:20%;"> {{ $evaluation['client_name'] }}</td>
+                                        <td style="width:20%;"> {{ $evaluation['prac_name'] }}</td>
+                                        <td style="width:10%;"> {{ $evaluation['date'] }}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menu1"
@@ -92,26 +140,21 @@
                                                     <span class="caret"></span></button>
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                     <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                               href="{{ url('/reports/Selection',$reportlist['id']) }}">View</a>
+                                                                               href="{{ url('/reports/evaluation/view',$evaluation['id']) }}">View</a>
                                                     </li>
                                                     <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                data-toggle="modal"
-                                                                               data-target="#{{$reportlist['id']}}">Delete</a>
+                                                                               data-target="#{{$evaluation['id']}}">Delete</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </td>
-                                        <!--  <td style="width:10%">
-                                        @$select_id = $reportlist['id'] 
-                                        <a href="{{ url('/reports/Selection',$reportlist['id']) }}"
-                                         class="btn btn-success btn-sm form-control"> Edit
-                                        </a></td>-->
                                     </tr>
 
 
                                     <div class="container">
                                         <!-- Create new client Modal -->
-                                        <div class="modal fade" id="{{$reportlist['id']}}" role="dialog">
+                                        <div class="modal fade" id="{{$evaluation['id']}}" role="dialog">
                                             <div class="modal-dialog ">
                                                 <!-- Modal content-->
                                                 <div class="modal-content">
@@ -128,12 +171,12 @@
                                                         <form role="form" method="POST"
                                                               action="{{ url('/reports/selection/delete') }}">
                                                             <input type="hidden" name="selectid"
-                                                                   value="{{ $reportlist['id'] }}">
+                                                                   value="{{ $evaluation['id'] }}">
                                                             <input type="hidden" name="reportid"
                                                                    value="{{ $report->id }}">
 
                                                             <h4> Are you sure you want to delete
-                                                                Selection {{$reportlist['id']}} </h4>
+                                                                Evaluation {{$evaluation['id']}} </h4>
 
                                                             <div class="modal-footer">
                                                                 <button type="submit"

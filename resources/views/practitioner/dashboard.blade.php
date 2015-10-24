@@ -13,9 +13,6 @@
             <li>
                 <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
             </li>
-            <li>
-                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
         </ul>
     </div>
 @endsection
@@ -46,7 +43,6 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
                     <li><a data-toggle="tab" href="#notification">Notification</a></li>
-
                 </ul>
 
 
@@ -66,9 +62,8 @@
                                         <p> Who shall we help today?</p>
                                         <hr>
                                         <p><a class="btn btn-success btn-lg"
-                                              href="{{ url('reports/createAssessment') }}"
+                                              href="{{ url('reports/assessment/new') }}"
                                               role="button">Create a new Report</a></p>
-
                                     </div>
                                 </div>
                             </div>

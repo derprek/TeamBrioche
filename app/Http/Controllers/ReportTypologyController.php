@@ -16,6 +16,8 @@ use Carbon\Carbon;
 use Session;
 use App\Practitioner;
 use App\Category;
+use App\Assessment;
+use App\Typology;
 
 /**
  * Class ReportTypologyController
@@ -47,10 +49,13 @@ class ReportTypologyController extends Controller
     public function index($report_id)
     {   
         $report = Report::find($report_id);
-        $fetchgoals = $report->questions()->Assessment()->GetGoals()->first();
+        $practitioner = Practitioner::find($report->prac_id);
+        $client = User::find($report->userid);
+
+        $assessment = Assessment::GetAssessment($report->id)->first();
+        $fetchgoals = $assessment->questions()->Assessment()->GetGoals()->first();
         $goals = $fetchgoals->pivot->answers;
 
-        $questions = Question::Typology()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
         $questions_category = Question::Typology()->distinct()->lists('category_id');
 
         $categories = array();
@@ -66,10 +71,90 @@ class ReportTypologyController extends Controller
         
         $submitButtonText = "Upload Typology Report";
         $thumbnail_dist = 100 /count($questions_category);
-        return view('reports.createTypology', compact('questions', 'goals','questionslist', 'report_id','thumbnail_dist','categories','submitButtonText'));
+        return view('reports.createTypology', compact('questions', 'goals','questionslist', 'report_id','client','practitioner','thumbnail_dist','categories','submitButtonText'));
     }
 
      public function show($report_id)
+    {
+        $report = Report::find($report_id);
+        $client = User::find($report->userid);
+        $practitioner = Practitioner::find($report->prac_id);
+
+        $assessment = Assessment::GetAssessment($report->id)->first(); 
+        $fetchgoals = $assessment->questions()->GetGoals()->first();
+        $goals = $fetchgoals->pivot->answers;
+
+        $typology = Typology::GetTypology($report->id)->first();
+        $arraycount = $typology->questions()->distinct()->Typology()->orderBy('category_id', 'ASC')->lists('category_id');
+
+        $categories = array();
+        $answerlist = array();
+        foreach ($arraycount as $ans) 
+        {
+            $categories[] = Category::find($ans);
+            $answerlist[] = $typology->questions()
+                ->Getquestionsbycat($ans)
+                ->orderBy('type', 'DESC')
+                ->get();
+        }
+        
+        $submitButtonText = "Update Typology Report";
+        $thumbnail_dist = 100 /count($arraycount);
+        return view('reports.showTypology', compact('answerlist','report','typology','goals', 'client', 'practitioner','thumbnail_dist','categories','submitButtonText'));
+    }
+
+    /**
+     * Store a report in step two.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $report_id = $_POST['reportid'];
+        $report = Report::find($report_id);
+        
+        $typology = new Typology;
+        $typology->report_id = $report->id;
+        $success_save = $typology->save();
+
+        if($success_save === true)
+        {
+            $report->step = 2;
+            $report->save();
+
+            $questionlist = Question::Typology()->lists('id');
+
+            foreach ($questionlist as $questionid) 
+            {
+                $typology->questions()->attach($questionid, array('answers' => $_POST['answersid'][$questionid]));
+            }
+        }
+
+        
+
+        return redirect()->action('ReportOverviewController@index', [$report_id]);
+    }
+
+    public function update()
+    {
+        $typology = Typology::find($_POST['typology_id']);
+        $answers = $_POST['answersid'];
+        $questions = Question::Typology()->lists('id');
+
+            foreach($questions as $id)
+            {
+               DB::table('typology_answers')
+                    ->where('typology_id', $typology->id)
+                    ->where('question_id', $id)
+                    ->update(['answers' => $answers[$id], 'updated_at' => Carbon::now()]);
+            }
+        
+        Session::flash('flash_message', 'Report successfully updated!');
+
+        return redirect("reports/Typology/" . $typology->report_id);
+    }
+
+    public function generatereport($report_id)
     {
         $report = Report::find($report_id);
         $clientinfo = User::find($report->userid);
@@ -77,7 +162,7 @@ class ReportTypologyController extends Controller
 
         $fetchgoals = $report->questions()->Assessment()->GetGoals()->first();
         $goals = $fetchgoals->pivot->answers;
-
+        //dd($goals);
         $arraycount = $report->questions()->distinct()->Typology()->orderBy('category_id', 'ASC')->lists('category_id');
 
         $categories = array();
@@ -90,45 +175,11 @@ class ReportTypologyController extends Controller
                 ->orderBy('type', 'DESC')
                 ->get();
         }
+        //dd($categories);
+       
+       //'answerlist','report','goals', 'clientinfo', 'pracinfo','thumbnail_dist','categories'
+      $pdf = \PDF::loadView('practitioner.reportManager.reportTypologyPDF', compact('answerlist','report','clientinfo','pracinfo','goals'));
 
-        $thumbnail_dist = 100 /count($arraycount);
-        return view('reports.showTypology', compact('answerlist','report','goals', 'clientinfo', 'pracinfo','thumbnail_dist','categories'));
-    }
-
-    /**
-     * Store a report in step two.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        $report_id = $_POST['reportid'];
-        $report = Report::find($report_id);
-        $questioncount = Question::Typology()->lists('id');
-
-        foreach ($questioncount as $questionid) {
-            $report->questions()->attach($questionid, array('answers' => $_POST['answersid'][$questionid]));
-        }
-
-        return redirect()->action('ReportManagerController@overview', [$report_id]);
-    }
-
-    public function update()
-    {
-        $rqid = $_POST['rqid'];
-        $reportid = $_POST['reportid'];
-        $answers = $_POST['answersid'];
-       // dd($rqid);
-
-        $i = 0;
-        foreach($answers as $updatedanswer)
-        {
-            DB::update("update question_report set answers ='" . $updatedanswer . "' where rqid = ?", array($rqid[$i]));
-            $i++;
-        }
-
-        Session::flash('flash_message', 'Report successfully updated!');
-
-        return redirect("reports/Typology/" . $reportid);
+      return $pdf->stream('trypologyReport.pdf',array("Attachment" => 0));
     }
 }

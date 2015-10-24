@@ -22,6 +22,10 @@ use App\Tag;
 use App\Category;
 use App\Subcategory;
 use App\Selection;
+use App\Assessment;
+
+use DOMPDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ReportManagerController extends Controller
 {   
@@ -47,8 +51,7 @@ class ReportManagerController extends Controller
      */
     public function index()
     {
-
-        return view('practitioner.reportmanager');
+        return view('practitioner.reportManager.reportmanager');
     }
 
      /**
@@ -57,21 +60,9 @@ class ReportManagerController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function overview($report_id)
-    {
-        $report = Report::find($report_id);
-        $reportviewer = Session::get('prac_id');
-        $reportowner = $report->prac_id;
-        $reportstepcount = $report->questions()->distinct()->lists('step');
-        $reportselection = Selection::GetReports($report_id)->get();
-        $reportselectioncount = count($reportselection);
-        $pracslist = Practitioner::lists('name', 'id');
-        $sharerslist = $report->practitioners()->get();
+    
 
-        return view('practitioner.reportoverview', compact('reportstepcount', 'report_id', 'report', 'reportowner','reportselection','reportselectioncount', 'reportviewer', 'pracslist', 'sharerslist'));
-    }
-
-    public function getAllReports()
+    public function getMyReports()
     {
         $prac_reports = Report::latest('updated_at')->practitioner()->get();
 
@@ -98,63 +89,12 @@ class ReportManagerController extends Controller
         }
     }
 
-     public function getProgressReports()
-    {
-
-        $progress = Report::latest('updated_at')->practitioner()->progress()->get();
-
-        $reportlist = array();
-        foreach($progress as $report)
-        {       
-            $username = User::find($report->userid);
-           
-            $reportlist[] = ['id'=>$report->id,
-                                'name'=>$username->fname . " " . $username->sname,
-                                'updated_at'=>$report->updated_at->diffForHumans(),
-                                'status'=>$report->status,
-                                'created_at'=>$report->created_at->diffForHumans()];
-                      
-        }
-
-        if(count($reportlist) < 1)
-        {
-            return null;
-        }
-        else
-        {
-            return $reportlist;
-        }
-        
-        //return Todo::all();
-    }
-
-    public function getFinishedReports()
-    {
-
-        $finished = Report::latest('updated_at')->practitioner()->finished()->get();
-
-        $reportlist = array();
-        foreach($finished as $report)
-        {       
-            $username = User::find($report->userid);
-           
-            $reportlist[] = ['id'=>$report->id,
-                                'name'=>$username->fname . " " . $username->sname,
-                                'updated_at'=>$report->updated_at->diffForHumans(),
-                                'status'=>$report->status,
-                                'created_at'=>$report->created_at->diffForHumans()];
-                      
-        }
-       
-        if(count($reportlist) < 1)
-        {
-            return null;
-        }
-        else
-        {
-            return $reportlist;
-        }
-    }
+/**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
 
     public function getSharedReports()
     {
@@ -185,5 +125,55 @@ class ReportManagerController extends Controller
         {
             return $reportlist;
         }
+    }
+
+    public function generatereport($report_id)
+    {
+        $pracid = Session::get('prac_id');
+        $pracinfo = Practitioner::find($pracid);
+        
+        $report = Report::find($report_id);
+        $clientinfo = User::find($report->userid);
+
+        $arraycount = $report->questions()->distinct()->where('step','=',1)->orderBy('category_id','ASC')->lists('category_id');
+
+         $answerlist = array();
+          foreach($arraycount as $ans)
+          {
+            $answerlist[] = $report->questions()
+                                   ->where('category_id','=', $ans)
+                                   ->orderBy('type','DESC')
+                                   ->get();
+          }
+      //dd($answerlist);  
+      //$data['name'] = "name123";
+       
+      $pdf = \PDF::loadView('practitioner.reportManager.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
+
+      return $pdf->stream('assessementReport.pdf',array("Attachment" => 0));
+    }
+
+    public function printSummary($report_id)
+    { 
+      $report = Report::find($report_id);
+      $practitioner = Practitioner::find($report->prac_id);
+      $client = User::find($report->userid);
+
+      $assessment = Assessment::GetAssessment($report_id)->first();  
+      $assessment_answers = $assessment->questions()->where('version_id','=', $assessment->version_id)->get();
+      dd($assessment_answers);
+          foreach($arraycount as $ans)
+          {
+            $answerlist[] = $report->questions()
+                                   ->where('category_id','=', $ans)
+                                   ->orderBy('type','DESC')
+                                   ->get();
+          }
+   
+      
+       
+      $pdf = \PDF::loadView('practitioner.reportManager.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
+
+      return $pdf->stream('file.pdf',array("Attachment" => 0));
     }
 }

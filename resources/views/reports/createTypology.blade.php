@@ -12,9 +12,6 @@
             <li class="active">
                 <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
             </li>
-            <li>
-                <a href="{{ url('practitioner/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
         </ul>
     </div>
 @endsection
@@ -30,30 +27,71 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
+
+                    @if(Session::has('is_admin'))
+
+                        <li>
+                            <i class="fa fa-dashboard"></i> <a href="{{ url('admin/dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-desktop"></i> Create a new Typology report
+                        </li>
+
+                    @else
+
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> Create Step two
+                            <i class="fa fa-desktop"></i> Create a new Typology report
                         </li>
+
+                    @endif
+                        
                     </ol>
                 </div>
             </div>
             <!-- /.row -->
-            <a class="btn btn-default" href="{{ url('/practitioner/overview', $report_id) }}"> Back to Overview </a>       
 
-                {!! Form::open(['url' => 'reports/Typology']) !!}
-                <input type="hidden" name="reportid" value= {{ $report_id }}>
+             <div class="form-group">
+                <div>
+                    <br>
 
-                <div class="form-group">
-                <hr>
+                    <a class="pull-left" href="{{ url('/reports/overview', $report_id) }}"><i class="fa fa-chevron-left"></i> Back to Overview </a>       
 
-                @include('create_report')
+                    <a class="pull-right" data-toggle="popover" data-html="true" data-trigger="click" data-animation="true" data-placement="left" title="Report Information" 
+                      data-content="Report ID: {{ $report_id }} <br> <hr>
+                      Practitioner: {{ $practitioner->fname }} {{ $practitioner->sname }} <br>
+                      Practitioner email: {{ $practitioner->email }}<br><hr>
+                      Client: {{ $client->fname }} {{ $client->sname }}<br>
+                      Client email: {{ $client->email }}"> 
+
+                        <small style="color:#111;font-size:0.9em;"><i  class="fa fa-info-circle"></i> Information </small>
+
+                    </a>
+
+                </div>
+             </div>
+
+            <hr>
+            {!! Form::open(['url' => 'reports/Typology']) !!}
+            <input type="hidden" name="reportid" value= {{ $report_id }}>
+
+            <div class="form-group">
+
+            @include('create_report')
+            
             </div>
             <!-- /.form-group -->
         </div>
         <!-- /.container-fluid -->
     </div>
     <!-- #page-wrapper -->
+
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="popover"]').popover()
+        })
+    </script>
 
 @stop

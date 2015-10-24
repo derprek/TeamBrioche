@@ -24,6 +24,21 @@ class Question extends Model
 
     ];
 
+    public function assessments()
+    {
+        return $this->belongsToMany('App\Assessment', 'assessment_answers')->withPivot('answers', 'id', 'assessment_id','version_id')->withTimestamps();
+    }
+
+    public function typologys()
+    {
+        return $this->belongsToMany('App\Typology', 'typology_answers')->withPivot('answers', 'id', 'typology_id')->withTimestamps();
+    }
+
+    public function evaluations()
+    {
+        return $this->belongsToMany('App\Evaluation', 'evaluation_answers')->withPivot('answers', 'id', 'evaluation_id')->withTimestamps();
+    }
+
     /**
      * Get the id of the answers.
      *
@@ -32,11 +47,6 @@ class Question extends Model
     public function reports()
     {
         return $this->belongsTo('App\Report')->withPivot('answers', 'rqid');
-    }
-
-    public function selections()
-    {
-        return $this->belongsToMany('App\Selection')->withPivot('answers', 'rqid');
     }
 
      /**
@@ -64,12 +74,10 @@ class Question extends Model
      *
      * @param $query
      */
-    public function scopeSelection($query)
+    public function scopeEvaluation($query)
     {
         $query->where('step', '=', '3');
     }
-
-   
 
     /**
      * Define goals scope
@@ -119,6 +127,11 @@ class Question extends Model
     public function scopeGetPersonalFactors($query)
     {
         $query->where('question', 'LIKE', "Personal factors");
+    }
+
+    public function scopeGetProduct($query)
+    {
+        $query->where('question', 'LIKE', "Product(s) evaluated for selection:");
     }
 
     /**

@@ -20,7 +20,6 @@ class CreateReportsTable extends Migration
             $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('step');
-            $table->timestamp('date');
             $table->string('status');
             $table->boolean('published');
 

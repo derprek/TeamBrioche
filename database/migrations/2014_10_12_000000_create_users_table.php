@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->string('usertype');
+            $table->boolean('verified');
             $table->string('notes');
 
             $table->integer('prac_id')->unsigned()->index();

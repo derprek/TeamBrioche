@@ -27,6 +27,10 @@ class Report extends Model
         'status'
     ];
 
+     protected $casts = [
+        'published' => 'boolean'
+    ];
+
     /**
      * Define report scope where status is in progress.
      *
@@ -57,6 +61,11 @@ class Report extends Model
         $query->where('prac_id', '=', Session::get('prac_id'));
     }
 
+    public function scopeGetThisPractitionerReports($query,$prac_id)
+    {
+        $query->where('prac_id', '=', $prac_id);
+    }
+
     /**
      * Get the user reports.
      *
@@ -67,21 +76,20 @@ class Report extends Model
         $query->where('userid', '=', Auth::User()->id);
     }
 
+    public function scopeGetClientReports($query, $client_id)
+    {
+        $query->where('userid', '=', $client_id);
+    }
+
     public function scopePublished($query)
     {
         $query->where('published', '=', 1);
-    }
-
-    public function getPublishedAttribute($value)
-    {
-        return(boolean) $value;
     }
 
     public function getHumanUpdatedAtAttribute()
     {
          return $this->getHumanTimestampAttribute("updated_at");
     }
-
 
     /**
      * Form the relationship between the report and the Question model.
@@ -118,8 +126,4 @@ class Report extends Model
      *
      * @return $this
      */
-    public function products()
-    {
-        return $this->belongsToMany('App\Product')->withPivot('request_by');
-    }
 }

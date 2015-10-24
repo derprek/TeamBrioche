@@ -79,12 +79,12 @@
 
                      @if($answerbytype->type === "thumbnail")
 
-                      @if(isset($evaluation))
+                      @if(isset($is_evaluation))
+             
                         @if($answerbytype->step !== 3)
 
                            <div class="form-group" style="padding:10px;">
                            <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                            <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
                              <textarea class="form-control"
                               name="answersid[{{ $answerbytype->id }}]"
                               rows="3" readonly="" 
@@ -95,7 +95,6 @@
 
                           <div class="form-group" style="padding:10px;">
                           <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                           <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
                           <textarea class="form-control"
                             name="answersid[{{ $answerbytype->id }}]"
                             rows="3"
@@ -108,7 +107,6 @@
 
                           <div class="form-group" style="padding:10px;">
                           <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                           <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
                           <textarea class="form-control"
                             name="answersid[{{ $answerbytype->id }}]"
                             rows="3"
@@ -122,12 +120,10 @@
                           <div class="form-group" style="padding:10px;">
                               <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
                               @if($answerbytype->type === "tall")
-                               <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
                                   <textarea name="answersid[{{ $answerbytype->id }}]"
                                             class="form-control" rows="3"
                                             placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}</textarea>
                               @elseif($answerbytype->type === "regular")
-                               <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
                                   <input type="text" name="answersid[{{ $answerbytype->id }}]"
                                          class="form-control"
                                          placeholder="{{ $answerbytype->placeholder }}"
@@ -138,29 +134,28 @@
                     @endif
 
                 @endforeach
-               
+                    
+                    <div class="form-group" style="padding:10px;">
+
                     @if ($answerbycat === end($answerlist)) 
 
-                    <div class="form-group" style="padding:10px;">
-                    <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
-                        {!! Form:: submit('Update' , ['class' => 'btn btn-success ']) !!}
-                        {!! Form::close() !!}
-                    </div> 
-
+                        <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
+                   
                     @elseif($answerbycat === reset($answerlist))
 
-                    <div class="form-group" style="padding:10px;">
-                         <a class="btn btn-primary btnNext" href="#">Next Section</a>
-                    </div> 
+                         <a class="btn btn-primary btnNext" data-toggle="modal" data-target="#versionConfirmation" href="#">Next Section</a>
 
                     @else
 
-                    <div class="form-group" style="padding:10px;">
                         <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
                         <a class="btn btn-primary btnNext" href="#">Next Section</a>
-                    </div> 
 
                     @endif
+
+                    <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-cloud-upload"></i> {{$submitButtonText}}</button>
+                    </div> 
+
+                    </form>
 
                     </div>
                      <?php $i++; ?>
@@ -179,9 +174,7 @@
       $('.nav-tabs > .active').prev('li').find('a').trigger('click');
     });
  
-    $(function(){
-    $('a[title]').tooltip();
-    });
+   
 
      $(document).ready(function() {
 

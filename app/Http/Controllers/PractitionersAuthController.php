@@ -42,12 +42,39 @@ class PractitionersAuthController extends Controller
 
             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
             Session::put('prac_id', $practitionerinfo->id);
-            Session::put('prac_name', $practitionerinfo->name);
+            $prac_name = $practitionerinfo->fname . " " . $practitionerinfo->sname;
+            Session::put('prac_name', $prac_name);
+            Session::forget('is_admin');
 
-            return redirect('practitioner/dashboard');
-
+            if($practitionerinfo->usertype === 'admin')
+            {
+                return redirect('admin/chooseaccount');
+            }
+            else
+            {   
+                return redirect('practitioner/dashboard');
+            }
         }
     }
+
+    public function chooseaccount()
+    {
+        return view('practitioner.chooseaccount');
+    }
+
+    public function loginAsPractitioner()
+    {
+        Session::forget('is_admin');
+        return redirect('practitioner/dashboard');
+    }
+
+    public function loginAsAdmin()
+    {   
+        Session::put('is_admin', 'true');
+        return redirect('admin/dashboard');
+    }
+
+
     /**
      * Logs the user out
      *

@@ -37,7 +37,7 @@
                     @if ($questionbycat === reset($questionslist))  
 
                          <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade in active">
-                          <h3> {{$categories[$i]->name}}</h3>
+                          <h3 class = "panel_header"> {{$categories[$i]->name}}</h3>
                           <hr>
 
                         @if(isset($clients))
@@ -48,7 +48,7 @@
                             @unless($clients->isEmpty())
                                 @foreach($clients as $client)
 
-                                    <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} </br>
+                                    <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} &#10;
                                         Email: {{ $client-> email }} </option>
 
                                 @endforeach
@@ -63,7 +63,7 @@
                             <label for="goals_typology">Goals:</label>
                          <textarea readonly name="goals_typology"
                                    class="form-control" rows="5"
-                                   placeholder="Goals + Typology"> {{ $goals}}</textarea>
+                                   placeholder="Goals + Typology"> {{$goals}}</textarea>
                         </div>
                         @endif                 
 
@@ -121,7 +121,7 @@
                                 @if($questionbytype->type === "tall")
                                     <textarea name="answersid[{{ $questionbytype->id }}]"
                                               class="form-control" rows="3"
-                                              placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                                              placeholder="{{$questionbytype->placeholder }}"></textarea>
                                 @elseif($questionbytype->type === "regular")
                                     <input type="text" name="answersid[{{ $questionbytype->id }}]"
                                            class="form-control"
@@ -137,8 +137,8 @@
 
                     <div class="form-group" style="padding:10px;">
                     <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
-                        {!! Form:: submit($submitButtonText, ['class' => 'btn btn-success ']) !!}
-                        {!! Form::close() !!}
+                    <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-cloud-upload"></i> {{$submitButtonText}}</button>
+                       </form>
                     </div> 
 
                     @elseif($questionbycat === reset($questionslist))
@@ -163,28 +163,28 @@
                 <!-- old -->
           </div>      
 
-          <script>
+    <script>
 
-    $('.btnNext').click(function(){
-      $('.nav-tabs > .active').next('li').find('a').trigger('click');
-    });
+      $('.btnNext').click(function(){
+        $('.nav-tabs > .active').next('li').find('a').trigger('click');
+      });
 
-    $('.btnPrevious').click(function(){
-      $('.nav-tabs > .active').prev('li').find('a').trigger('click');
-    });
- 
-    $(function(){
-    $('a[title]').tooltip();
-    });
+      $('.btnPrevious').click(function(){
+        $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+      });
+   
+      $(function(){
+      $('a[title]').tooltip();
+      });
 
-    $(document).ready(function() {
+      $(document).ready(function() {
 
-         TweenMax.staggerFrom(".reportTabs", 2, {scale:0.5, opacity:0, delay:0.3, ease:Elastic.easeOut, force3D:true}, 0.2);
+           TweenMax.staggerFrom(".reportTabs", 2, {scale:0.5, opacity:0, delay:0.3, ease:Elastic.easeOut, force3D:true}, 0.2);
 
-        });
-      
-    $('#firstTab').delay(2500).queue(function(){
-    $(this).addClass("active");
-    });             
+          });             
+
+      $('#firstTab').delay(2500).queue(function(){
+      $(this).addClass("active");
+      });             
 
     </script>

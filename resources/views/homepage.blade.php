@@ -6,18 +6,18 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive" src="img/logo.png" alt="">
+                <img class="img-responsive" src="img/final_logo.png" style="width:30%;" alt="">
 
                 <div class="intro-text">
-                    <span class="name">A T E S T </span>
+                   
                     <hr class="star-light">
-                    <span class="skills">Assitive Technology Evaluation and Selection Tool</span>
+                    <span class="skills">Assistive Technology Evaluation and Selection Tool</span>
                 </div>
                 <br>
-                <button type="button" id="regbtn" class="btn btn-success"
+                <button type="button" id="regbtn" class="btn btn-info"
                         data-toggle="modal" data-target="#praclogin">Practitioner Login
                 </button>
-                <button type="button" id="regbtn" class="btn btn-success"
+                <button type="button" id="regbtn" class="btn btn-info"
                         data-toggle="modal" data-target="#clientlogin">Client Login
                 </button>
             </div>

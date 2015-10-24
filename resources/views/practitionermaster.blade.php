@@ -13,11 +13,52 @@
 </head>
 
 <body>
+
+
 @if(Session::has('flash_message'))
+
+    @if(Session::get('flash_message') === 'Create_New_Version!')
+
+        @include('partials.newVersionActionModal')   
+        {{Session::forget('flash_message')}}
+
+        <script>
+
+             $('#versionConfirmation').modal({
+                show: true,
+                keyboard: false,
+                backdrop: 'static'
+            });
+               
+        </script>
+
+    @else
+
+        @include('partials.flashMessageModal');
+
+        <script>
+                
+            $('#flashMessageModal').modal('show');
+           
+           setTimeout(function(){
+              $('#flashMessageModal').modal('hide')
+            }, 3000);
+
+        </script>
+
+    @endif
+@endif
+
+
+
+@if(Session::has('error_message'))
+
     <script>
-        BootstrapDialog.show({
-            title: 'Success',
-            message: '{{ Session::get('flash_message')}}',
+
+        BootstrapDialog.alert({
+            title: '{{ Session::get('error_title')}}',
+            message: '{{ Session::get('error_message')}}',
+            type: BootstrapDialog.TYPE_WARNING,
             buttons: [{
                 label: 'Close',
                 cssClass: 'btn-info',
@@ -27,8 +68,12 @@
 
             }]
         });
+
     </script>
+    
 @endif
+
+
 
 <div id="wrapper">
     <!-- Navigation -->
@@ -46,16 +91,29 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                    Welcome, {{ Session::get('prac_name')  }}
+            <li class="dropdown" ng-cloak ng-app="messengerApp" ng-controller="masterMessageController" ng-cloak>
+                <a ng-cloak href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()">  @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="#" ng-click="startAdd()"><i class="fa fa-pencil"></i> <small>Compose</small></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        <a href="/../mailbox"><i class="fa fa-fw fa-envelope"></i> <small>Mailbox</small></a>
+                    </li>
+                </ul>
+                @include('partials.messagewindow')
+            </li>
+
+
+            <li class="dropdown">
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                    <small>{{ Session::get('prac_name')  }}</small>
+                    <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
