@@ -51,10 +51,10 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-users"></i> Personnel Manager
+                            <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-users"></i> View Practitioner
+                            <i class="fa fa-user"></i> View Practitioner
                         </li>
                     </ol>
                 </div>

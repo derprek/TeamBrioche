@@ -56,12 +56,11 @@
                     @if(Session::has('is_admin'))
 
                         <li>
-                            <i class="fa fa-bar-chart"></i> <a href="{{ url('admin/reportmanager') }}">Report
+                            <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i> Report
                                 Manager</a>
                         </li>
                         <li>
-                            <i class="fa fa-search"></i>
-                            <a href="{{ url('/reports/overview', $report->id) }} ">Report
+                            <a href="{{ url('/reports/overview', $report->id) }} "><i class="fa fa-search"></i>Report
                                 Overview</a>
                         </li>
                         <li>
@@ -71,12 +70,12 @@
                     @else
 
                         <li>
-                            <i class="fa fa-bar-chart"></i> <a href="{{ url('practitioner/reportmanager') }}">Report
+                           <a href="{{ url('practitioner/reportmanager') }}"> <i class="fa fa-bar-chart"></i> Report
                                 Manager</a>
                         </li>
                         <li>
-                            <i class="fa fa-search"></i>
-                            <a href="{{ url('/reports/overview', $report->id) }} ">Report
+                            <a href="{{ url('/reports/overview', $report->id) }} ">
+                                <i class="fa fa-search"></i>Report
                                 Overview</a>
                         </li>
                         <li>

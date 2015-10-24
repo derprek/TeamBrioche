@@ -28,32 +28,33 @@
                     </h1>
                     <ol class="breadcrumb">
 
-                    @if(Session::has('is_admin'))
+                        @if(Session::has('is_admin'))
 
-                        <li>
-                            <i class="fa fa-dashboard"></i> <a href="{{ url('admin/dashboard') }}">Dashboard</a>
-                        </li>
-                        <li>
-                            <i></i> <a href="{{ url('admin/reportmanager') }}">Report Manager</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-pencil"></i> Create a new Selection report
-                        </li>
+                            <li>
+                                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report Manager</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-pencil"></i> Create a new Selection report
+                            </li>
 
-                    @else
+                        @else
 
-                        <li>
-                            <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
-                        </li>
-                        <li>
-                            <i></i> <a href="{{ url('practitioner/reportmanager') }}">Report Manager</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-pencil"></i> Create a new Selection report
-                        </li>
+                            <li>
+                                <a href="{{ url('practitioner/dashboard') }}"><i
+                                            class="fa fa-dashboard"></i>Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report Manager</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-pencil"></i> Create a new Selection report
+                            </li>
 
-                    @endif
-                        
+                        @endif
+
                     </ol>
                 </div>
             </div>
@@ -61,20 +62,22 @@
             <div class="form-group">
                 <div>
                     <br>
-                        <a class="pull-left" href="{{ URL::previous() }}"><i class="fa fa-chevron-left"></i> Back to Overview </a>       
+                    <a class="pull-left" href="{{ URL::previous() }}"><i class="fa fa-chevron-left"></i> Back to
+                        Overview </a>
 
-                        <a class="pull-right" data-toggle="popover" data-html="true" data-animation="true" data-placement="left" title="Report Information" 
-                          data-content="Report ID: {{ $report->id }} <br><hr>
+                    <a class="pull-right" data-toggle="popover" data-html="true" data-animation="true"
+                       data-placement="left" title="Report Information"
+                       data-content="Report ID: {{ $report->id }} <br><hr>
                           Practitioner: {{ $practitioner->fname }} {{ $practitioner->sname }} <br>
                           Practitioner email: {{ $practitioner->email }}<br><hr>
                           Client: {{ $client->fname }} {{ $client->sname }}<br>
-                          Client email: {{ $client->email }}"> 
+                          Client email: {{ $client->email }}">
 
-                            <small style="color:#000;font-size:0.9em;">Information
-                                <i  class="fa fa-info-circle"></i>
-                            </small>
+                        <small style="color:#000;font-size:0.9em;">Information
+                            <i class="fa fa-info-circle"></i>
+                        </small>
 
-                        </a>
+                    </a>
                 </div>
             </div>
 
@@ -83,22 +86,22 @@
             <input type="hidden" name="report_id" value= {{ $report->id }}>
 
             @include('create_report')
-               
-            </div>
-            <!-- /.form-group -->
+
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.form-group -->
+    </div>
+    <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
     <br>
 
-   <script>
+    <script>
 
         $(function () {
-          $('[data-toggle="popover"]').popover()
+            $('[data-toggle="popover"]').popover()
         })
-        
-   </script>
+
+    </script>
 
 @endsection
 

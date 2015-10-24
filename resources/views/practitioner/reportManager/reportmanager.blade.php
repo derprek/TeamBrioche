@@ -51,7 +51,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li class="active">
-                            <i class="fa fa-bar-chart"></i> Report Manager
+                            <i class="fa fa-bar-chart-o"></i>  Report Manager
                         </li>
                     </ol>
                 </div>
@@ -161,7 +161,7 @@
 
                         <table ng-cloak ng-show="SharedReports" class="table table-bordered table-hover table-striped">
                             <br>
-                            <input ng-show="SharedReports" type="text" placeholder="Search...." class="form-control"
+                            <input ng-show="SharedReports" type="text" placeholder="Search...." class="freportorm-control"
                                    ng-model="search.text">
 
                             <div class="row">

@@ -35,10 +35,10 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">About Us</a>
+                    <a href="#home">Home</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#mission">Our Mission</a>
+                    <a href="#mission">About</a>
                 </li>
 
             </ul>

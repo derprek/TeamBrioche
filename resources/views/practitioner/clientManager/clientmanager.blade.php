@@ -68,7 +68,7 @@
 
             <button ng-show="AllClients" type="button" id="regbtn" class="btn btn-success"
                     data-toggle="modal" data-target="#newclient">
-                <i class="fa fa-user"></i> Register a new Client
+                <i class="fa fa-user-plus"></i> Register a new Client
             </button>
             <hr>
 

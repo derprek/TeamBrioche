@@ -96,7 +96,7 @@
 
             <div class="dropdown" ng-cloak ng-show="AllPractitioners">
                 <button class="btn btn-success dropdown-toggle" type="button" id="menu1"
-                        data-toggle="dropdown"><i class="fa fa-plus"></i> Register a new Personnel
+                        data-toggle="dropdown"><i class="fa fa-user-plus"></i></i> Register a new Personnel
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                     <li role="presentation"  data-toggle="modal" data-target="#newpractitioner">

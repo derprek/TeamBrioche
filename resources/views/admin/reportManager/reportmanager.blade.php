@@ -51,7 +51,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li class="active">
-                            <i class="fa fa-users"></i> Report Manager
+                            <i class="fa fa-bar-chart-o"></i>  Report Manager
                         </li>
                     </ol>
                 </div>

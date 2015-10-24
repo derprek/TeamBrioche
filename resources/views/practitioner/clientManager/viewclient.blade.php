@@ -3,7 +3,7 @@
 @section('sidemenubar')
 
  @if(Session::has('is_admin'))
-    
+
        <div class="collapse navbar-collapse navbar-ex1-collapse">
 
             <ul class="nav navbar-nav side-nav">
@@ -73,14 +73,25 @@
                     <h1 class="page-header">
                         &nbsp;
                     </h1>
+                    @if(Session::has('is_admin'))
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-users"></i> Personnel Manager
                         </li>
                         <li class="active">
-                            <i class="fa fa-users"></i> View Client
+                            <i class="fa fa-user"></i> View Client
                         </li>
                     </ol>
+                    @else
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-user"></i> View Client
+                            </li>
+                        </ol>
+                    @endif
                 </div>
             </div>
             <!-- /.row -->
