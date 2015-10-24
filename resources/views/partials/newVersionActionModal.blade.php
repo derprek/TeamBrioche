@@ -7,7 +7,7 @@
 
                         <div class="modal-body">
 
-                                    <h4 style="text-align:center;"> <i class="fa fa-exclamation-triangle"></i>You are trying to modify version: {{Session::pull('version_number')}}
+                                    <h4 style="text-align:center;"> <i class="fa fa-exclamation-triangle"></i>You are trying to modify version: {{Session::get('current_version_number')}}
 
                                     </h4>
                                     <br>
@@ -19,10 +19,16 @@
                                          <a href="{{ url('assessment/newversion') }}" class="btn btn-success pull-right" style="margin-right:8px;">
                                          <i class="fa fa-file"></i> New Version</a>
 
-                                         <a href="{{ url('assessment/update') }}" class="btn btn-info pull-right" style="margin-right:8px;">
-                                         <i class="fa fa-pencil-square-o"></i> Overwrite</a>
+                                          {!! Form::open(['url' => 'assessment/update']) !!}
+                                          <input type="hidden" name="version_number" value= {{ Session::pull('current_version_number') }}>
 
-                                        <button type="submit"  class="btn btn-danger pull-left"
+                                          <button type="submit" class="btn btn-info pull-right" style="margin-right:8px;">
+                                          <i class="fa fa-pencil-square-o"></i> Overwrite</button>
+
+                                         {!! Form::close() !!}
+                                         
+
+                                        <button type="button"  class="btn btn-danger pull-left"
                                                 data-dismiss="modal">
                                             <i class="fa fa-times"></i> Discard changes
                                         </button>

@@ -15,6 +15,23 @@
 </head>
 
 <body>
+
+@if(Session::has('flash_message'))
+
+    @include('partials.flashMessageModal');
+
+    <script>
+            
+        $('#flashMessageModal').modal('show');
+       
+       setTimeout(function(){
+          $('#flashMessageModal').modal('hide')
+        }, 3000);
+
+    </script>
+
+@endif
+
 <div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -33,13 +50,10 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fa fa-user"></i> {{ Auth::User()->fname}} <b class="caret"></b></a>
+                            class="fa fa-user"></i> {{ Auth::User()->fname}} {{ Auth::User()->sname}}  <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>

@@ -26,7 +26,7 @@ Route::get('/unauthorizedaccess', 'GeneralController@authorizedaccess');
 
 Route::get('mailbox', 'MessengerController@index');
 Route::get('practitioner/inbox/showthread/{conv_id}', 'MessengerController@show');
-Route::get('getMyInbox', 'MessengerController@getInbox');
+Route::get('getMyMail', 'MessengerController@getMail');
 Route::get('getMySentbox', 'MessengerController@getSentbox');
 
 Route::get('getMyMessages', 'MessengerController@getAllMessages');
@@ -151,7 +151,7 @@ Route::get('getUnsharedPractitioners', 'SharingController@getUnsharedPractitione
 Route::get('admin/loginAsAdmin', 'PractitionersAuthController@loginAsAdmin');
 Route::get('admin/loginAsPractitioner', 'PractitionersAuthController@loginAsPractitioner');
 
-Route::get('assessment/update', 'ReportAssessmentController@update');
+Route::post('assessment/update', 'ReportAssessmentController@update');
 Route::get('assessment/newversion', 'ReportAssessmentController@storeNewVersion');
 
 Route::get('assessment/setcurrentversion/{ids}', 'ReportAssessmentController@setCurrentVersion');

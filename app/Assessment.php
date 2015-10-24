@@ -15,4 +15,9 @@ class Assessment extends Model
     {
         $query->where('report_id', '=', $report_id);
     }
+
+    public function scopeGetCurrentVersion($query, $version_id)
+    {
+        $query->where('current_version', '=', $version_id);
+    }
 }

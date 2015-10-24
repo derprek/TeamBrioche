@@ -17,15 +17,16 @@
             <div>
                 <p style="text-align:right"> Client's name: {{ $clientinfo->fname}} {{ $clientinfo->sname}} </p>
                 <p style="text-align:right"> Practitioner-in-charge: {{ $pracinfo->fname }} {{ $pracinfo->sname}}</p>
+                <p style="text-align:right"> Report Conducted by: {{ $creator_practitioner->fname }} {{ $creator_practitioner->sname}}</p>
             </div>
         <hr>
 
         @foreach($answerlist as $reportinfo)
         <div white-space="pre-line">
             @foreach($reportinfo as $reportlist)
-                <h4>QUESTION:</h4>
+                <h4>Question:</h4>
                 <p>{{ $reportlist->question }}</p>
-                <h4>ANSWER:</h4>
+                <h4>Answer:</h4>
                 <p>{{ $reportlist->pivot->answers}}</p>             
                 <hr>
             @endforeach

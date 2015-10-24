@@ -130,10 +130,15 @@
                                     <tr>
                                         <td style="width:10%;"> {{ $evaluation['id'] }}</td>
                                         <td style="width:40%;"> {{ $evaluation['product'] }}</td>
-                                        <td style="width:20%;"> {{ $evaluation['client_name'] }}</td>
-                                        <td style="width:20%;"> {{ $evaluation['prac_name'] }}</td>
+                                        <td style="width:17%;"> {{ $evaluation['client_name'] }}</td>
+                                        <td style="width:17%;"> {{ $evaluation['prac_name'] }}</td>
                                         <td style="width:10%;"> {{ $evaluation['date'] }}</td>
-                                        <td>
+
+                                         <td style="width:10%"><a
+                                             href="{{ url('/reports/evaluation/view',$evaluation['id']) }}"
+                                            class="btn btn-info btn-sm"> View</a></td>
+
+                                      <!--   <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menu1"
                                                         data-toggle="dropdown">Options
@@ -148,7 +153,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                        </td>
+                                        </td> -->
                                     </tr>
 
 

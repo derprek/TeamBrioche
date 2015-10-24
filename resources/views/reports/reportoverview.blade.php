@@ -172,7 +172,7 @@
                                                                                 class="cr-icon fa fa-check"></i></span>
                                                                     <p>Completed</p>
                                                             </label>
-                                                            <a href="{{ url('/reports/typology',$report->id) }}">
+                                                            <a href="{{ url('/reports/typology/view',$report->id) }}">
                                                                 <button type="button" id="updatebtn"
                                                                         class="btn btn-primary form-control">
                                                                     View

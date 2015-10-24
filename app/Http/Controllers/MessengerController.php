@@ -49,101 +49,122 @@ class MessengerController extends Controller
      *
      * @return Response
      */
-    public function getInbox()
+    public function getMail()
     {
-        $prac_email = Practitioner::find(Session::get('prac_id'))->email;
-        $conversations = Message::latest('created_at')->GetConversationReceiver($prac_email)
-                            ->distinct()->lists('conv_id');
+        if(Session::has('prac_id'))
+        {
+            $viewer = Practitioner::find(Session::get('prac_id'));
+        }
+        elseif(Auth::check())
+        {
+            $viewer = User::find(Auth::user()->id);
+        }
 
-        $conversationlist = array();
-        foreach($conversations as $conversation_id)
-        {       
-            $unreadcounter =0;
-            if(Conversation::find($conversation_id)->firstuser_email !== $prac_email)
-            {
-                $sender_email = Conversation::find($conversation_id)->firstuser_email;
-                $getprac = Practitioner::ValidateEmail($sender_email)->first();
+        if($viewer !== null)
+        {
+            $conversations = Message::latest('created_at')->GetConversationReceiver($viewer->email)
+                                ->distinct()->lists('conv_id'); 
 
-                if($getprac === null)
+            $conversationlist = array();
+
+            foreach($conversations as $conversation_id)
+            {       
+                $unreadcounter =0;
+                $conversation = Conversation::find($conversation_id);
+
+                if(($conversation->firstuser_email !== $viewer->email) && ($conversation->seconduser_email === $viewer->email))
                 {
-                    $sender_name = "";
+                    $recipient_email = $conversation->firstuser_email;
+                    $practitioner = Practitioner::ValidateEmail($recipient_email)->first();
+
+                    if($practitioner === null)
+                    {
+                        $user = User::ValidateEmail($recipient_email)->first();
+
+                            if($user !== null)
+                            {
+                                $recipient = $user;
+                            }
+                            else
+                            {
+                                $recipient = null;
+                            }
+                    }
+                    else
+                    {
+                        $recipient = $practitioner;
+                    }
+
+                }
+                elseif(($conversation->seconduser_email !== $viewer->email) && ($conversation->firstuser_email === $viewer->email))
+                {   
+                    $recipient_email = $conversation->seconduser_email;
+                    $practitioner = Practitioner::ValidateEmail($recipient_email)->first();
+
+                    if($practitioner === null)
+                    {
+                        $user = User::ValidateEmail($recipient_email)->first();
+
+                            if($user !== null)
+                            {
+                                $recipient = $user;
+                            }
+                            else
+                            {
+                                $recipient = null;
+                            }
+                    }
+                    else
+                    {
+                        $recipient = $practitioner;
+                    }
+
                 }
                 else
                 {
-                    $sender_name = $getprac->fname . " " . $getprac->sname;
+                    $recipient_email = "Error retrieving recipient email :(";
                 }
+                
+                $last_message = Message::latest('created_at')->GetMessageById($conversation_id)
+                                    ->first();
 
+                $last_msg_title = $last_message->title;
+                $last_msg_content = $last_message->content;
+                $last_msg_status = $last_message->status;
+                $last_msg_time = $last_message->created_at->diffForHumans();
+                $unreadcounter = count(Message::GetConversationReceiver($viewer->email)->GetMessageById($conversation_id)
+                                    ->GetUnreadMessages()->lists('id'));
 
-                if($sender_name === null)
+                
+                $is_last_sender = true;
+                if($last_message->receiver_email === $viewer->email)
                 {
-                    $getuser = User::ValidateEmail($sender_email)->first();
-                    $sender_name = $getuser->fname . " " . $getuser->sname;
-                    
-                    if($sender_name === null)
-                    {
-                        $sender_name = "";
-                    }
+                    $is_last_sender = false;
                 }
-            }
-            elseif(Conversation::find($conversation_id)->seconduser_email !== $prac_email)
-            {
-                $sender_email = Conversation::find($conversation_id)->seconduser_email;
-                $getprac = Practitioner::ValidateEmail($sender_email)->first();
-                $sender_name = $getprac->fname . " " . $getprac->sname;
 
-                if($sender_name === null)
+                $has_unread = false;
+                if(($unreadcounter > 0) AND ($is_last_sender === false))
                 {
-                    $getuser = User::ValidateEmail($sender_email)->first();
-                    $sender_name = $getuser->fname . " " . $getuser->sname;
-                    
-                    if($sender_name === null)
-                    {
-                        $sender_name = "";
-                    }
+                    $has_unread = true;
                 }
+
+                $conversationlist[] = ['conv_id'=>$conversation_id,
+                                    'recipient_name'=>$recipient->fname . " " . $recipient->sname,
+                                    'recipient_email'=>$recipient->email,
+                                    'last_msg_title'=>$last_msg_title,
+                                    'last_msg_content'=>$last_msg_content,
+                                    'last_msg_time'=>$last_msg_time,
+                                    'last_msg_status'=>$last_msg_status,
+                                    'unreadcount'=>$unreadcounter,
+                                    'has_unread' =>$has_unread,
+                                    'is_last_sender' =>$is_last_sender];
+                          
             }
-            else
-            {
-                $sender_email = "Error retrieving recipient email :(";
-            }
-            
-            $last_message = Message::latest('created_at')->GetMessageById($conversation_id)
-                                ->GetConversationReceiver($prac_email)->first();
-
-            $last_msg_title = $last_message->title;
-            $last_msg_content = $last_message->content;
-            $last_msg_status = $last_message->status;
-            $last_msg_time = $last_message->created_at->diffForHumans();
-            $unreadcounter = count(Message::GetConversationReceiver($prac_email)->GetMessageById($conversation_id)
-                                ->GetUnreadMessages()->lists('id'));
-
-            
-            $is_last_sender = true;
-            if($last_message->receiver_email === $prac_email)
-            {
-                $is_last_sender = false;
-            }
-
-            $has_unread = false;
-            if(($unreadcounter > 0) AND ($is_last_sender === false))
-            {
-                $has_unread = true;
-            }
-
-
-
-            $conversationlist[] = ['conv_id'=>$conversation_id,
-                                'sender_name'=>$sender_name,
-                                'sender_email'=>$sender_email,
-                                'last_msg_title'=>$last_msg_title,
-                                'last_msg_content'=>$last_msg_content,
-                                'last_msg_time'=>$last_msg_time,
-                                'last_msg_status'=>$last_msg_status,
-                                'unreadcount'=>$unreadcounter,
-                                'has_unread' =>$has_unread,
-                                'is_last_sender' =>$is_last_sender];
-                      
         }
+        else
+        {
+            return null;
+        }   
    
         if(count($conversationlist) < 1)
         {
@@ -158,8 +179,16 @@ class MessengerController extends Controller
 
      public function getUnread()
     {
-        $prac_email = Practitioner::find(Session::get('prac_id'))->email;
-        $unreadcount = Message::latest('created_at')->GetConversationReceiver($prac_email)
+        if(Session::has('prac_id'))
+        {
+            $viewer = Practitioner::find(Session::get('prac_id'));
+        }
+        elseif(Auth::check())
+        {
+            $viewer = User::find(Auth::user()->id);
+        }
+
+        $unreadcount = Message::latest('created_at')->GetConversationReceiver($viewer->email)
                             ->GetUnreadMessages()->distinct()->lists('conv_id');
 
         if(count($unreadcount) < 1)
@@ -175,53 +204,102 @@ class MessengerController extends Controller
 
     public function getAllMessages()
     {     
-        $prac_email = Practitioner::find(Session::get('prac_id'))->email;
+        if(Session::has('prac_id'))
+        {
+             $viewer = Practitioner::find(Session::get('prac_id'));
+        }
+        elseif(Auth::check())
+        {
+            $viewer = User::find(Auth::user()->id);
+        }
+
         $messages = Message::latest('created_at')->GetMessageById(Session::get('conv_id'))
                             ->get();
         
         $messagelist = array();
         foreach($messages as $message)
         {       
-           if($message->sender_email === $prac_email)
+           if($message->sender_email === $viewer->email)
                 {
                    $sender_email='You';
-                }
-                else
-                {
-                    $sender_email=$message->sender_email;
-                    $recipient = Practitioner::ValidateEmail($sender_email)->first();
-                    $recipient_email = $recipient->email;
-                    $recipient_name = $recipient->fname . " " . $recipient->sname;
-                }
-                
-           if($message->receiver_email === $prac_email)
-                {
-                    $receiver_email='You';
-                }
-                else
-                {
-                    $receiver_email=$message->receiver_email; 
-                    $recipient = Practitioner::ValidateEmail($receiver_email)->first();
+                   $sender_name = 'You';
+
+                   $receiver_email=$message->receiver_email; 
+                    $practitioner = Practitioner::ValidateEmail($receiver_email)->first();
+
+                    if($practitioner === null)
+                    {
+                        $user = User::ValidateEmail($receiver_email)->first();
+
+                        if($user !== null)
+                        {
+                            $recipient = $user;                          
+                        }
+                        else
+                        {
+                            $recipient = null;
+                        }
+                    }
+                    else
+                    {
+                        $recipient = $practitioner;                  
+                    }
+
                     $recipient_email = $recipient->email;
                     $recipient_name = $recipient->fname . " " . $recipient->sname;    
+
+                
+                    
+                }
+                
+           if($message->receiver_email === $viewer->email)
+                {
+                    $receiver_email='You';
+                    
+                    $sender_email= $message->sender_email;
+                    $practitioner = Practitioner::ValidateEmail($sender_email)->first();
+
+                    if($practitioner === null)
+                    {
+                        $user = User::ValidateEmail($sender_email)->first();
+
+                        if($user !== null)
+                        {
+                            $recipient = $user;
+                            $sender_name = $user->fname . " " . $user->sname;
+                        }
+                        else
+                        {
+                            $recipient = null;
+                        }
+                    }
+                    else
+                    {
+                        $recipient = $practitioner;
+                        $sender_name = $practitioner->fname . " " . $practitioner->sname;
+                    }
+
+                    $recipient_email = $recipient->email;
+                    $recipient_name = $recipient->fname . " " . $recipient->sname;
+                    
                 }
 
-            $is_sender = false;
-            if($message->receiver_email === $prac_email)
+            $is_receiver = false;
+            if($message->receiver_email === $viewer->email)
             {
-                $is_sender = true;
+                $is_receiver = true;
             }
 
             $is_unread = false;
-            if(($message->status === 'unread') AND ($is_sender === true))
+            if(($message->status === 'unread') AND ($is_receiver === true))
             {
                 $is_unread = true;
             }
 
-
            $messagelist[] = ['id'=>$message->id,
                                 'conv_id'=>$message->conv_id,
                                 'sender_email'=>$sender_email,
+                                'sender_name'=>$sender_name,
                                 'receiver_email'=>$receiver_email,
                                 'recipient_email'=>$recipient_email,
                                 'recipient_name'=>$recipient_name,
@@ -245,41 +323,51 @@ class MessengerController extends Controller
 
     public function store()
     {   
-        $prac_email = Practitioner::find(Session::get('prac_id'))->email;
-        $first = Conversation::where('firstuser_email','=', $prac_email )->where('seconduser_email','=', Input::get('receiver_email'))->first();
-        $second = Conversation::where('firstuser_email','=', Input::get('receiver_email') )->where('seconduser_email','=', $prac_email)->first();
+        if(Session::has('prac_id'))
+        {
+             $viewer = Practitioner::find(Session::get('prac_id'));
+        }
+        elseif(Auth::check())
+        {
+            $viewer = User::find(Auth::user()->id);
+        }
+
+        $first = Conversation::GetFirstParty($viewer->email)->GetSecondParty(Input::get('receiver_email'))->first();
+        $second = Conversation::GetFirstParty(Input::get('receiver_email'))->GetSecondParty($viewer->email)->first();
 
         if(($first !== null) OR ($second !== null))
         {   
             if($first !== null)
             {
-                $conv_id = $first->id;
+                $conversation_id = $first->id;
             }
             elseif($second !== null)
             {
-                $conv_id = $second->id;
+                $conversation_id = $second->id;
             }
         }
         elseif(($first === null) AND ($second === null))
         {
             $newConversation = new Conversation;
-            $newConversation->firstuser_email = $prac_email;
+            $newConversation->firstuser_email = $viewer->email;
             $newConversation->seconduser_email = Input::get('receiver_email');
-            $newConversation->created_at = Carbon::now();
             $newConversation->save();
-            $conv_id = $newConversation->id;
+            $conversation_id = $newConversation->id;
 
         }
 
-        $newMessage = new Message;
-        $newMessage->conv_id = $conv_id;
-        $newMessage->receiver_email = Input::get('receiver_email');
-        $newMessage->sender_email = $prac_email;
-        $newMessage->title = Input::get('title');
-        $newMessage->content = Input::get('content');
-        $newMessage->status =  Input::get('status');
-        $newMessage->created_at = Carbon::now();
-        $newMessage->save();
+        if($conversation_id !== null)
+        {
+            $newMessage = new Message;
+            $newMessage->conv_id = $conversation_id;
+            $newMessage->receiver_email = Input::get('receiver_email');
+            $newMessage->sender_email = $viewer->email;
+            $newMessage->title = Input::get('title');
+            $newMessage->content = Input::get('content');
+            $newMessage->status =  Input::get('status');
+            $newMessage->save();
+        }
+        
     }
 
     /**
@@ -289,13 +377,21 @@ class MessengerController extends Controller
      * @return Response
      */
     public function markasread()
-    {
-        $prac_email = Practitioner::find(Session::get('prac_id'))->email;
+    {   
+        if(Session::has('prac_id'))
+        {
+             $viewer = Practitioner::find(Session::get('prac_id'));
+        }
+        elseif(Auth::check())
+        {
+            $viewer = User::find(Auth::user()->id);
+        }
+
         $messages = Message::GetMessageById(Input::get('conv_id'))->get();
 
         foreach($messages as $message)
         {
-            if($message->receiver_email === $prac_email)
+            if($message->receiver_email === $viewer->email)
             {
                 if($message->status === 'unread')
                 {
@@ -311,19 +407,50 @@ class MessengerController extends Controller
 
 
     public function getAllRecipients()
-    {
+    {   
         $recipientlist = array();
-        $practitionerlist = Practitioner::NotCurrent()->get();
-        $clientlist = User::MyClient()->get();
 
-        $allRecipients = $practitionerlist->merge($clientlist);
-
-        foreach($allRecipients as $recipient)
+        if(Session::has('prac_id'))
         {
-            $recipientlist[] = ['id'=>$recipient->id,
-                                'name'=>$recipient->fname . " " . $recipient->sname,
-                                'email'=>$recipient->email
-                                ];
+             $practitionerlist = Practitioner::NotCurrent()->get();
+             $clientlist = User::MyClient()->get();
+
+             $allRecipients = $practitionerlist->merge($clientlist);
+
+                foreach($allRecipients as $recipient)
+                {
+                    $recipientlist[] = ['id'=>$recipient->id,
+                                        'name'=>$recipient->fname . " " . $recipient->sname,
+                                        'email'=>$recipient->email
+                                        ];
+                }
+
+        }
+        elseif(Auth::check())
+        {
+            $viewer = User::find(Auth::user()->id);
+            $viewer_reports = Report::GetUserReports()->get();
+            $owner_practitioner = Practitioner::GetThisPractitioner($viewer->prac_id)->get();
+
+            foreach($viewer_reports as $report)
+            {   
+                $shared_reports[] = $report->practitioners()->get();
+            }
+
+            $shared_reports[] = $owner_practitioner;
+
+            foreach($shared_reports as $shared_report)
+            {
+                foreach($shared_report as $report_participants)
+                {
+                    $recipientlist[] = ['id'=>$report_participants->id,
+                                        'name'=>$report_participants->fname . " " . $report_participants->sname,
+                                        'email'=>$report_participants->email
+                                        ];
+                }
+
+            }
+            
         }
 
         if(count($recipientlist) < 1)
@@ -344,35 +471,60 @@ class MessengerController extends Controller
      * @return Response
      */
     public function getSentbox()
-    {
-        $prac_email = Practitioner::find(Session::get('prac_id'))->email;
-        $messages = Message::latest('created_at')->GetConversationSender($prac_email)
+    {   
+        if(Session::has('prac_id'))
+        {
+             $viewer = Practitioner::find(Session::get('prac_id'));
+        }
+        elseif(Auth::check())
+        {
+            $viewer = User::find(Auth::user()->id);
+        }
+
+        $messages = Message::latest('created_at')->GetConversationSender($viewer->email)
                             ->get();
         
         $messagelist = array();
         foreach($messages as $message)
         {       
+            $practitioner = Practitioner::ValidateEmail($message->receiver_email)->first();
 
-        $recipient = Practitioner::ValidateEmail($message->receiver_email)->first();
+            if($practitioner === null)
+            {
+                $user = User::ValidateEmail($message->receiver_email)->first();
 
-        if($recipient !== null)
-        {
-            $receiver_email = $recipient->email;
-            $receiver_name = $recipient->fname . " " . $recipient->sname; 
-        }
-        else
-        {
-            $receiver_email = "Unrecognized User.";
-            $receiver_name = "Unrecognized User."; 
-        }
-        
-           $messagelist[] = ['id'=>$message->id,
-                                'conv_id'=>$message->conv_id,
-                                'receiver_email'=>$receiver_email,
-                                'receiver_name'=>$receiver_name,
-                                'title'=>$message->title,
-                                'content'=>$message->content,
-                                'created_at'=>$message->created_at->diffForHumans()];
+                if($user !== null)
+                {
+                    $recipient = $user;
+                }
+                else
+                {
+                    $recipient === null;
+                }
+            }
+            else
+            {
+                $recipient = $practitioner;
+            }
+
+            if($recipient !== null)
+            {
+                $receiver_email = $recipient->email;
+                $receiver_name = $recipient->fname . " " . $recipient->sname; 
+            }
+            else
+            {
+                $receiver_email = "Unrecognized User.";
+                $receiver_name = "Unrecognized User."; 
+            }
+            
+               $messagelist[] = ['id'=>$message->id,
+                                    'conv_id'=>$message->conv_id,
+                                    'receiver_email'=>$receiver_email,
+                                    'receiver_name'=>$receiver_name,
+                                    'title'=>$message->title,
+                                    'content'=>$message->content,
+                                    'created_at'=>$message->created_at->diffForHumans()];
         }
 
         if(count($messagelist) < 1)

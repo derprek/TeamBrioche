@@ -80,4 +80,6 @@ messengerApp.controller('masterMessageController', [ '$http', '$scope','toastr',
       });
   };
 
+  setInterval($scope.getUnread, 3000);
+
   }]);
