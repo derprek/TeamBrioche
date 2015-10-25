@@ -112,6 +112,7 @@
                                     <th>Status</th>
                                     <th>Created on</th>
                                     <th>Updated on</th>
+                                    <th>Edit</th>
                                 </tr>
 
                                 @if(empty($reporthistory[0]))
@@ -129,6 +130,9 @@
                                             <td> {{ $report->status }}  </td>
                                             <td> {{ $report->created_at }}  </td>
                                             <td> {{ $report->updated_at }}  </td>
+                                            <td style="width:10%"><a
+                                                href="/client/overview/{{ $report->id }}"
+                                                class="btn btn-success btn-sm form-control"> View</a></td>
                                         </tr>
 
                                     @endforeach

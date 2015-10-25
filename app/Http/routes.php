@@ -44,6 +44,7 @@ Route::post('practitioner/readmessages', 'MessengerController@markasread');
  */
 Route::get('home', 'ClientsController@index');
 Route::get('client/reportarchives', 'ClientsReportController@index');
+Route::get('client/overview/{report_id}', 'ClientsReportController@overview');
 Route::post('client/login', 'ClientAuthController@login');
 
 
