@@ -217,7 +217,7 @@
                                                         </div>
                                                     <div class="col-xs-9 text-right">
                                                         @if (isset($evaluation_count))
-                                                                h5>{{$evaluation_count}} evaluation report (s).</h5>
+                                                                <h4> <strong>{{$evaluation_count}}</strong> evaluation report (s).</h4>
                                                                 </div>
                                                             </div>
                                                             <!-- .row -->
