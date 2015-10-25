@@ -45,6 +45,10 @@
 
     <script>
 
+         $(function () {
+          $('[data-toggle="popover"]').popover()
+        });
+
         $('#client_list').select2();    
   
     </script>

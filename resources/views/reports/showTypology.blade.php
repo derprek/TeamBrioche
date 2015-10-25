@@ -38,7 +38,6 @@
         </div>
 
     @endif
-
     
 @endsection
 @section('content')
@@ -110,7 +109,7 @@
             
                 </div>
                 </div>
-                <hr>
+                <br>
                 {!! Form::open(['url' => 'reports/Typology/update']) !!}
                 <input type="hidden" name="typology_id" value={{$typology->id}}>
 

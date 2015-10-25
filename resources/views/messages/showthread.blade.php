@@ -71,15 +71,14 @@
             <!-- /.row -->
 
     <div class="row">
-    <br>
-        <div class="col-sm-2 col-md-1">
+
+        <div class="col-sm-2 col-md-2" style="padding:3%;">
              <a href="#" class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></a>
             <hr />
             
             <a class="directionLinks pull-left" href="/../mailbox"> <i class="fa fa-chevron-left"></i>  Mailbox </a>
             
         </div>
-
 
         <div id="loadthreadpage" style="width:100%; ">
                                
@@ -92,7 +91,7 @@
             </div>
         </div>
 
-        <div class="col-sm-10 col-md-11" ng-cloak>
+        <div class="col-sm-10 col-md-10" ng-cloak>
             <!-- Nav tabs -->
              <toaster-container ></toaster-container>
                     
@@ -107,16 +106,12 @@
 
                      <input ng-show="AllMessages" type="text" placeholder="Search...." class="form-control"
                                    ng-model="search.text"><br>
-
-                    <div ng-show="(AllMessages | filter:search.text).length == 0" class="emptymsg_container">
-                        <h3> No Results found.</h3>
-                    </div>
                     
                         <uib-accordion close-others="false" >
                        
                        <span dir-paginate="message in AllMessages | filter:search.text |  itemsPerPage: 5" pagination-id="threadPagination" style="padding:3px;" >
 
-                        <uib-accordion-group  panel-class="panel-info" is-open="true" ng-if="message.sender_email !== 'You' && message.status === 'unread'">
+                        <uib-accordion-group  panel-class="panel-info" is-open="true" ng-if="message.sender_email !== 'You' && message.status === 'unread'" >
                           <uib-accordion-heading>
                            <span class="pull-left" style="width:20%;">From: @{{ message.sender_name }} </span>  
                             <span>@{{ message.title }} </span>  
@@ -134,8 +129,8 @@
                           @{{ message.content }}
                         </uib-accordion-group>
 
-                        <span ng-if="(message.sender_email === 'You' || message.status !== 'unread')">
-                        <uib-accordion-group  is-open="false" ng-if=" message.id !== getfirstID()">
+                        <span ng-if="message.id !== getfirstID()" >
+                        <uib-accordion-group is-open="false" ng-if="message.sender_email === 'You' || message.status !== 'unread' ">
                           <uib-accordion-heading>
                             <span class="pull-left" style="width:20%;"> From: @{{ message.sender_name }} </span>  
                             <span> @{{ message.title }} </span>  
@@ -148,6 +143,14 @@
                         </span>
 
                       </uib-accordion>
+
+                      <div ng-if="AllMessages">
+
+                            <div ng-show="(AllMessages | filter:search.text).length == 0" class="emptyresults_container">
+                                 <h3> No results found <i class="fa fa-meh-o"></i> </h3>
+                            </div>
+
+                        </div>
                     
                     <dir-pagination-controls template-url="/dirPagination.tpl.html"
                         pagination-id="threadPagination"></dir-pagination-controls>

@@ -127,7 +127,7 @@
                 </div>
                 <!-- /.form-group -->
 
-                        <hr>
+                        <br>
                         {!! Form::open(['url' => 'reports/evaluation/update']) !!}
                         <input type="hidden" name="evaluation_id" value= {{ $evaluation->id }}>
                         @include('show_report')

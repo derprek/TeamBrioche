@@ -64,14 +64,6 @@
             </div>
             <!-- /.row -->
 
-           
-
-            <button ng-show="AllClients" ng-cloak type="button" id="regbtn" class="btn btn-success"
-                    data-toggle="modal" data-target="#newclient">
-                <i class="fa fa-user-plus"></i> Register a new Client
-            </button>
-            <hr>
-
             <div id = "allClientsLoad" style = "width:100%; ">
                      
                 @include('partials.loadinganimation')
@@ -89,17 +81,23 @@
                     </div>
 
 
-            <!-- Client list table -->
-            <table ng-show="AllClients" ng-cloak class="table table-bordered table-hover table-striped">
+            <button ng-show="AllClients" ng-cloak type="button" id="regbtn" class="btn btn-success"
+                    data-toggle="modal" data-target="#newclient">
+                <i class="fa fa-user-plus"></i> Register a new Client
+            </button>
+            <hr>
 
-                <input ng-show="AllClients" type="text" placeholder="Search...." class="form-control" ng-model="search">
+            <!-- Client list table -->
+            <table ng-cloak ng-show="AllClients"  class="table table-bordered table-hover table-striped">
+
+                <input ng-cloak ng-show="AllClients" type="text" placeholder="Search...." class="form-control" ng-model="search">
                 <br>
 
-                <tr ng-show="AllClients">
-                    <th>Client Name</th>
-                    <th>Client Email</th>
-                    <th>Joined on</th>
-                    <th>Edit</th>
+                <tr ng-show="(AllClients| filter:search).length > 0">
+                    <th class="largeRow">Client Name</th>
+                    <th class="normalRow">Client Email</th>
+                    <th class="mediumRow">Joined on</th>
+                    <th class="smallRow">Options</th>
                 </tr>
 
                 <tr ng-repeat="client in AllClients | filter:search">
@@ -108,11 +106,20 @@
                     <td> @{{ client.created_at }}</td>
                     <td>
                         <a href="/practitioner/viewclient/@{{ client.id }}"
-                           class="btn btn-success btn-sm"> Edit </a>
+                           class="btn btn-info btn-sm"> View </a>
                     </td>
                 </tr>
 
             </table>
+
+            <div ng-if="AllClients">
+
+                <div ng-show="(AllClients | filter:search).length == 0" class="emptyresults_container">
+                     <h3> No results found <i class="fa fa-meh-o"></i> </h3>
+                </div>
+
+            </div>
+
             <!-- /.table -->
 
             @include('partials.RegisterClientForm')

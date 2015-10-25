@@ -9,9 +9,11 @@
 
                             <h3>Success</h3>
                             
-                            <br><br>
+                            <br>
+                                <h1> <i style="color:#26A65B;"class="fa fa-check"></i> </h1>
+                            <br>
 
-                            <h5> {{ Session::get('flash_message') }} </h5>
+                            <h5> {{ Session::pull('flash_message') }} </h5>
                            
                         </div>
                         <!-- /.modal-body -->

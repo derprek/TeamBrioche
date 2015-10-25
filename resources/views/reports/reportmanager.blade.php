@@ -83,55 +83,57 @@
                             <h2>No Reports found.</h2>
                         </div>
 
-                        <table ng-show="AllReports" class="table table-bordered table-hover table-striped">
-                            <br>
+                        <div ng-cloak>
+                            <table ng-show="AllReports" class="table table-bordered table-hover table-striped">
+                                <br>
 
-                            <input ng-show="AllReports" type="text" placeholder="Search...." class="form-control"
-                                   ng-model="searchInbox.text">
+                                <input ng-show="AllReports" type="text" placeholder="Search...." class="form-control"
+                                       ng-model="searchInbox.text">
 
-                            <div class="row">
-                                <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
-                                    <label style="font-size: 1em">
-                                        <input type="checkbox" value="" checked ng-model='searchInbox.type'
-                                               ng-true-value="'In Progress'" ng-false-value=''>
-                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        <small> In Progress</small> 
-                                    </label>
+                                <div class="row">
+                                    <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
+                                        <label style="font-size: 1em">
+                                            <input type="checkbox" value="" checked ng-model='searchInbox.type'
+                                                   ng-true-value="'In Progress'" ng-false-value=''>
+                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                            <small> In Progress</small> 
+                                        </label>
+                                    </div>
+
+                                    <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
+                                        <label style="font-size: 1em">
+                                            <input type="checkbox" value="" ng-model='searchInbox.type'
+                                                   ng-true-value="'Finished'" ng-false-value=''>
+                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                             <small> Finished </small> 
+                                        </label>
+                                    </div>
                                 </div>
 
-                                <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
-                                    <label style="font-size: 1em">
-                                        <input type="checkbox" value="" ng-model='searchInbox.type'
-                                               ng-true-value="'Finished'" ng-false-value=''>
-                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                         <small> Finished </small> 
-                                    </label>
-                                </div>
-                            </div>
+                                <tr ng-show="(AllReports| filter:searchInbox.text | filter:searchInbox.type).length > 0">
+                                    <th class="smallRow">Report Number @{{remaining()}}</th>
+                                    <th class="normalRow">Client Name</th>
+                                    <th class="mediumRow">Created on</th>
+                                    <th class="mediumRow">Updated on</th>
+                                    <th class="smallRow">Status</th>
+                                    <th class="smallRow">Options</th>
+                                </tr>
 
-                            <tr ng-show="(AllReports| filter:searchInbox.text | filter:searchInbox.type).length > 0">
-                                <th class="smallRow">Report Number @{{remaining()}}</th>
-                                <th class="normalRow">Client Name</th>
-                                <th class="mediumRow">Created on</th>
-                                <th class="mediumRow">Updated on</th>
-                                <th class="smallRow">Status</th>
-                                <th class="smallRow">Options<th>
-                            </tr>
+                                <!-- List out reports -->
+                                <tr ng-if="AllReports" dir-paginate="report in AllReports| filter:searchInbox.text | filter:searchInbox.type | itemsPerPage: 8"
+                                    pagination-id="allReportsPagination">
+                                    <td> @{{ report.id }} </td>
+                                    <td> @{{ report.name }} </td>
+                                    <td> @{{ report.created_at }} </td>
+                                    <td> @{{ report.updated_at }} </td>
+                                    <td> @{{ report.status }} </td>
+                                    <td>
+                                      <a href="/reports/overview/@{{ report.id }}" class="btn btn-info btn-sm"> View</a>
+                                    </td>
+                                </tr>
 
-                            <!-- List out reports -->
-                            <tr ng-if="AllReports" dir-paginate="report in AllReports| filter:searchInbox.text | filter:searchInbox.type | itemsPerPage: 8"
-                                pagination-id="allReportsPagination">
-                                <td> @{{ report.id }} </td>
-                                <td> @{{ report.name }} </td>
-                                <td> @{{ report.created_at }} </td>
-                                <td> @{{ report.updated_at }} </td>
-                                <td> @{{ report.status }} </td>
-                                <td>
-                                  <a href="/reports/overview/@{{ report.id }}" class="btn btn-info btn-sm"> View</a>
-                                </td>
-                            </tr>
-
-                        </table>
+                            </table>
+                        </div>
 
                         <div ng-if="AllReports">
 
@@ -167,51 +169,53 @@
                             <h2>No Reports found.</h2>
                         </div>
 
-                        <table ng-cloak ng-show="SharedReports" class="table table-bordered table-hover table-striped">
-                            <br>
-                            <input ng-show="SharedReports" type="text" placeholder="Search...." class="form-control"
-                                   ng-model="searchSent.text">
+                        <div ng-cloak>
+                            <table ng-show="SharedReports" class="table table-bordered table-hover table-striped">
+                                <br>
+                                <input ng-show="SharedReports" type="text" placeholder="Search...." class="form-control"
+                                       ng-model="searchSent.text">
 
-                            <div class="row">
-                                <div ng-show="SharedReports" class="checkbox" style="display: inline-block;">
+                                <div class="row">
+                                    <div ng-show="SharedReports" class="checkbox" style="display: inline-block;">
+                                        <label style="font-size: 1em">
+                                            <input type="checkbox" value="" checked ng-model='searchSent.type'
+                                                   ng-true-value="'In Progress'" ng-false-value=''>
+                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                            In Progress
+                                        </label>
+                                    </div>
+
+                                <div ng-show="SharedReports" class="checkbox" style = "display: inline-block;">
                                     <label style="font-size: 1em">
-                                        <input type="checkbox" value="" checked ng-model='searchSent.type'
-                                               ng-true-value="'In Progress'" ng-false-value=''>
+                                        <input type="checkbox" value="" ng-model='searchSent.type' ng-true-value="'Finished'" ng-false-value=''>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                        In Progress
+                                        Finished
                                     </label>
                                 </div>
+                                </div>
 
-                            <div ng-cloak ng-show="SharedReports" class="checkbox" style = "display: inline-block;">
-                                <label style="font-size: 1em">
-                                    <input type="checkbox" value="" ng-model='searchSent.type' ng-true-value="'Finished'" ng-false-value=''>
-                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                    Finished
-                                </label>
-                            </div>
-                            </div>
+                                    <tr ng-show="(SharedReports| filter:searchSent.text | filter:searchSent.type).length > 0">
+                                        <th class="smallRow">Report Number</th>
+                                        <th class="normalRow">Client Name</th>
+                                        <th class="mediumRow">Created on</th>
+                                        <th class="mediumRow">Updated on</th>
+                                        <th class="smallRow">Status</th>
+                                        <th class="smallRow">Options</th>
+                                    </tr>
 
-                                <tr ng-cloak ng-show="(SharedReports| filter:searchSent.text | filter:searchSent.type).length > 0">
-                                    <th class="smallRow">Report Number</th>
-                                    <th class="normalRow">Client Name</th>
-                                    <th class="mediumRow">Created on</th>
-                                    <th class="mediumRow">Updated on</th>
-                                    <th class="smallRow">Status</th>
-                                    <th class="smallRow">Options</th>
-                                </tr>
-
-                                <tr ng-cloak dir-paginate="report in SharedReports| filter:searchSent.text | filter:searchSent.type | itemsPerPage: 5" pagination-id="sharedReportsPagination">
-                                    <td> @{{ report.id }} </td>
-                                    <td> @{{ report.name }} </td>
-                                    <td> @{{ report.created_at }} </td>
-                                    <td> @{{ report.updated_at }} </td>
-                                    <td> @{{ report.status }} </td>
-                                    <td>
-                                        <a href="/reports/overview/@{{ report.id }}" class="btn btn-info btn-sm">View</a>
-                                    </td>
-                                </tr>
-                                
-                        </table>
+                                    <tr dir-paginate="report in SharedReports| filter:searchSent.text | filter:searchSent.type | itemsPerPage: 5" pagination-id="sharedReportsPagination">
+                                        <td> @{{ report.id }} </td>
+                                        <td> @{{ report.name }} </td>
+                                        <td> @{{ report.created_at }} </td>
+                                        <td> @{{ report.updated_at }} </td>
+                                        <td> @{{ report.status }} </td>
+                                        <td>
+                                            <a href="/reports/overview/@{{ report.id }}" class="btn btn-info btn-sm">View</a>
+                                        </td>
+                                    </tr>
+                                    
+                            </table>
+                        </div>
 
                          <div ng-if="SharedReports">
 

@@ -130,8 +130,7 @@ class ReportTypologyController extends Controller
             }
         }
 
-        
-
+        Session::put('flash_message', 'Typology successfully created!');
         return redirect()->action('ReportOverviewController@index', [$report_id]);
     }
 
@@ -149,8 +148,7 @@ class ReportTypologyController extends Controller
                     ->update(['answers' => $answers[$id], 'updated_at' => Carbon::now()]);
             }
         
-        Session::flash('flash_message', 'Report successfully updated!');
-
+        Session::flash('flash_message', 'Typology successfully updated!');
         return redirect("reports/Typology/" . $typology->report_id);
     }
 

@@ -29,8 +29,17 @@
                 @endunless
                  </div>
 
+                 <span data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="left" title="Report Confidentiality" 
+                          data-content="Reports uploaded online is private so feel free to
+                          upload incomplete and draft reports. <br><br>
+                          You may come back and update this report in future. <hr>
+                          <strong> You may also decide to share the report with other practitioners 
+                          or your client after you have uploaded it.</strong> " class="pull-right"> Information
+                 <i class="fa fa-info-circle"></i>
+                  </span>
+                  <br>
                 <div class="tab-content" >
-
+                
                 <?php $i = 0; ?>
                 @foreach($questionslist as $questionbycat)
 
@@ -48,8 +57,7 @@
                             @unless($clients->isEmpty())
                                 @foreach($clients as $client)
 
-                                    <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} &#10;
-                                        Email: {{ $client-> email }} </option>
+                                    <option value= {{ $client-> id }}> {{ $client-> email }} </option>
 
                                 @endforeach
                             @endunless

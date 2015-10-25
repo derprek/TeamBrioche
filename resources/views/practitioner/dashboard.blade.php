@@ -40,50 +40,33 @@
 
             <div class="col-lg-12">
 
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
-                </ul>
+            <br>
+                <div class="jumbotron">
 
+                    <div class="container">
+                        <div class="pull-left">
+                            <h3>Greetings, Practitioner!</h3>
 
-                <div class="tab-content">
-                    @if ((count($errors) > 0) OR (Session::has('flash_message')))
-                        <div id="home" class="tab-pane fade">
-                            @else
-                                    <!-- Home tab -->
-                            <div id="home" class="tab-pane fade in active">
-                                @endif
-                                <br>
-
-                                <div class="jumbotron">
-                                    <div class="container">
-                                        <h3>Greetings, Practitioner!</h3>
-
-                                        <p> Who shall we help today?</p>
-                                        <hr>
-                                        <p><a class="btn btn-success btn-lg"
-                                              href="{{ url('reports/assessment/new') }}"
-                                              role="button">Create a new Report</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- notification tab -->
-                            <div id="notification" class="tab-pane fade ">
-                                <br>
-
-                                <div class="jumbotron">
-                                    <div class="container">
-                                        <h3>Notification will be implemented here</h3>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
+                            <p> Who shall we help today?</p>
                             <hr>
+                            <span class="pull-left">
+                                <a class="btn btn-success btn-lg"
+                                  href="{{ url('reports/assessment/new') }}"
+                                  role="button">Create a new Report</a>
+
+                                  @if(isset($latest_report))
+                                      <a class="btn btn-info btn-lg" style="padding-left:20px;"
+                                      href="/reports/overview/{{ $latest_report->id }}"
+                                      role="button">View your latest Report</a>
+                                  @endif
+                            </span>
                         </div>
+                    </div>
                 </div>
-                <!-- /.tab-content -->
+
+            <br>
+
             </div>
-            <!-- /.col-lg-12 -->
         </div>
         <!-- /.container-fluid -->
     </div>

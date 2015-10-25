@@ -18,9 +18,8 @@
 @if(Session::has('flash_message'))
 
     @if(Session::get('flash_message') === 'Create_New_Version!')
-
-        @include('partials.newVersionActionModal')   
         {{Session::forget('flash_message')}}
+        @include('partials.newVersionActionModal')   
 
         <script>
 

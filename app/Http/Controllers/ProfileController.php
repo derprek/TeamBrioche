@@ -40,19 +40,12 @@ class ProfileController extends Controller
     {
         if(Session::has('prac_id'))
         {
-            if(Session::has('is_admin'))
-            {
+            $practitioner = Practitioner::GetCurrent()->first(); 
+            $is_verified = $practitioner->verified;
+            $report_count = count(Report::Practitioner()->lists('id'));
+            $client_count = count(User::MyClient()->lists('id'));
 
-            }
-            else
-            {
-                 $practitioner = Practitioner::GetCurrent()->first(); 
-                 $is_verified = $practitioner->verified;
-                 $report_count = count(Report::Practitioner()->lists('id'));
-                 $client_count = count(User::MyClient()->lists('id'));
-
-                  return view('profile.practitionerProfile', compact('practitioner','report_count','client_count','is_verified'));
-            }
+            return view('profile.practitionerProfile', compact('practitioner','report_count','client_count','is_verified'));
         }
         elseif(Auth::check())
         {

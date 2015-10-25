@@ -154,6 +154,6 @@ Route::get('admin/loginAsPractitioner', 'PractitionersAuthController@loginAsPrac
 Route::post('assessment/update', 'ReportAssessmentController@update');
 Route::get('assessment/newversion', 'ReportAssessmentController@storeNewVersion');
 
-Route::get('assessment/setcurrentversion/{ids}', 'ReportAssessmentController@setCurrentVersion');
+Route::post('assessment/setcurrentversion', 'ReportAssessmentController@setCurrentVersion');
 
 Route::get('reports/printsummary/{report_id}', 'ReportManagerController@printSummary');

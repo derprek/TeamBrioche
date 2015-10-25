@@ -74,8 +74,7 @@
             <!-- /.row -->
 
     <div class="row">
-    <hr>
-        <div ng-cloak class="col-sm-2 col-md-2 col-lg-1">
+        <div ng-cloak class="col-sm-2 col-md-2 col-lg-2" style="padding:3%;">
             <a href="#" class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></a>
             <hr />
             <ul class="nav nav-tabs nav-stacked">
@@ -100,12 +99,12 @@
             </div>
         </div>
 
-        <div class="emptymsg_container" id="emptymsg" style="visibility:hidden;">
+        <div ng-hide="Inbox" class="emptymsg_container" id="emptymsg" style="visibility:hidden;">
             <h3>You have no mail.</h3>
             <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
         </div>
 
-          <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10 col-lg-11">
+          <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10 col-lg-10">
             <!-- Nav tabs -->
                 <h3> Inbox </h3>
                
@@ -113,17 +112,13 @@
                      <input type="text" placeholder="Search...." class="form-control"
                                    ng-model="inboxsearch.text"><br>
 
-                    <div ng-show="(Inbox | filter:inboxsearch.text).length == 0" class="emptyresults_container">
-                        <h3> No Results found.</h3>
-                    </div>
-
                     <div class="list-group" dir-paginate="inbox in Inbox | filter:inboxsearch.text | itemsPerPage: 10" pagination-id="inboxPagination">
                         <a href="/practitioner/inbox/showthread/@{{ inbox.conv_id }}" class="list-group-item" data-toggle="tooltip" title="@{{ inbox.recipient_email }}" >
 
                            <i ng-if="inbox.unreadcount !== 0" class="fa fa-envelope-o"></i>
 
-                                <span class="message_sendername" ng-if="inbox.unreadcount !== 0"> <p class="badge pull-left" >@{{ inbox.unreadcount }}</p> 
-                                <p class="mailboxfontlarge"><strong>From: @{{ inbox.recipient_name }} </strong></p>  </span> 
+                                <span class="message_sendername" ng-if="inbox.unreadcount !== 0"> <p style="margin-right:2%;" class="badge pull-left" >@{{ inbox.unreadcount }}</p> 
+                                <p class="mailboxfontlarge" ><strong>From: @{{ inbox.recipient_name }} </strong></p>  </span> 
 
                                 <span class="message_sendername" ng-if="inbox.unreadcount === 0">
                                 <p class="mailboxfontlarge">From: @{{ inbox.recipient_name }} </p>  </span> 
@@ -141,9 +136,16 @@
                             </div>
                     
 
+                        <div ng-if="Inbox">
+
+                            <div ng-show="(Inbox | filter:inboxsearch.text).length == 0" class="emptyresults_container">
+                                 <h3> No results found <i class="fa fa-meh-o"></i> </h3>
+                            </div>
+
+                        </div>
+
                     <dir-pagination-controls template-url="/dirPagination.tpl.html"
                                                  pagination-id="inboxPagination"></dir-pagination-controls>
-                <hr>
 
                     </div>
                     </div>
@@ -161,7 +163,7 @@
                                 </div>
                             </div>
 
-                            <div ng-hide="Sentbox" class="emptymsg_container" id="emptymsg_send">
+                            <div class="emptymsg_container" id="emptymsg_send" style="visibility:hidden;">
                                 <h3 style="margin:0;">No Mail found.</h3>
                                 <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
                             </div>
@@ -172,10 +174,6 @@
                     <br>
                      <input type="text" placeholder="Search...." class="form-control"
                                    ng-model="sentsearch.text"><br>
-
-                     <div ng-show="(Sentbox | filter:sentsearch.text).length == 0" class="emptyresults_container">
-                        <h3> No Results found.</h3>
-                     </div>
 
                     <div class="list-group" dir-paginate="sentbox in Sentbox | filter:sentsearch.text | itemsPerPage: 10" pagination-id="sentboxPagination">
                         <a class="list-group-item" role="button" data-toggle="collapse" href="#@{{ sentbox.id }}"
@@ -196,6 +194,14 @@
                                 </div>
                                 
                             </div>
+
+                        <div ng-if="Sentbox">
+
+                            <div ng-show="(Sentbox | filter:sentsearch.text).length == 0" class="emptyresults_container">
+                                 <h3> No results found <i class="fa fa-meh-o"></i> </h3>
+                            </div>
+
+                        </div>
                     
 
                     <dir-pagination-controls template-url="/dirPagination.tpl.html"

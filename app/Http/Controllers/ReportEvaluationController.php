@@ -149,9 +149,7 @@ class ReportEvaluationController extends Controller
             }
         }
 
-        
-
-        Session::flash('flash_message', "Your new Evaluation report has been successfully created.");
+        Session::put('flash_message', "Evaluation successfully created!");
 
         return redirect()->action('ReportEvaluationController@overview', [$report_id]);
     }
@@ -283,21 +281,24 @@ class ReportEvaluationController extends Controller
         return view('reports.showEvaluation', compact('evaluation', 'answerlist','report','client','practitioner','thumbnail_dist','categories','is_evaluation','submitButtonText'));
     }
 
-     public function update()
-    {
+    public function update(Request $request)
+    {   
+        $evaluation = Evaluation::find($request->evaluation_id);
+
         $answers = $_POST['answersid'];
-        $selectid = $_POST['selectid'];
+        $questions = Question::Evaluation()->lists('id');
 
-        $i = 0;
-        foreach($answers as $updatedanswer)
-        {
-            DB::update("update question_selection set answers ='" . $updatedanswer . "' where rqid = ?", array($rqid[$i]));
-            $i++;
-        }
+            foreach($questions as $id)
+            {
+               DB::table('evaluation_answers')
+                    ->where('evaluation_id', $evaluation->id)
+                    ->where('question_id', $id)
+                    ->update(['answers' => $answers[$id], 'updated_at' => Carbon::now()]);
+            }
 
-        Session::flash('flash_message', 'Report successfully updated!');
+        Session::flash('flash_message', 'Evaluation successfully updated!');
 
-        return redirect()->action('ReportSelectionController@show', [$selectid]);
+        return redirect()->action('ReportEvaluationController@show', [$evaluation->id]);
     }
 
     public function delete()

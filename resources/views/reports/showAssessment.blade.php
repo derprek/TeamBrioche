@@ -91,7 +91,6 @@
                     
                     <!-- Display client and practitioner name -->
 
-
                     <div>
                         <br>
 
@@ -167,7 +166,7 @@
                     </div>
                 </div>
 
-               <hr>
+               <br>
 
                   {!! Form::open(['url' => 'reports/stepAssessment/checkhistory']) !!}
                   <input type="hidden" name="report_id" value={{$report->id}}>
@@ -191,11 +190,11 @@
 
         $(function () {
           $('[data-toggle="popover"]').popover()
-        })
+        });
 
-         $(function(){
-          $('a[title]').tooltip();
-          });
+         $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
         
    </script>
 

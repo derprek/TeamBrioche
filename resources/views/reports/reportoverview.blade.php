@@ -208,16 +208,16 @@
 
                                                 <!-- selection panel -->
                                                 <div class="col-lg-4 col-md-4">
-                                                    <div class="panel panel-atest">
-                                                        <div class="panel-heading">Evaluation</div>
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-xs-3">
-                                                                    <i class="fa fa-balance-scale fa-3x"></i>
-                                                                </div>
-                                                                <div class="col-xs-9 text-right">
-                                                                    @if (isset($evaluation_count))
-                                                                        <h5>{{$evaluation_count}} evaluation report(s).</h5>
+                                                <div class="panel panel-atest">
+                                                    <div class="panel-heading">Evaluation</div>
+                                                    <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-3">
+                                                            <i class="fa fa-balance-scale fa-3x"></i>
+                                                        </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        @if (isset($evaluation_count))
+                                                                h5>{{$evaluation_count}} evaluation report (s).</h5>
                                                                 </div>
                                                             </div>
                                                             <!-- .row -->

@@ -77,27 +77,33 @@ class ReportAssessmentController extends Controller
         
     }
 
-    public function setCurrentVersion($ids)
+    public function setCurrentVersion(Request $request)
     {   
-        if($ids !== null)
-        {
-            $get_ids = explode(",",$ids);
-           
-            if(count($get_ids) === 3)
-            {
-                 $assessment_id = $get_ids[0];
-                 $version_id = $get_ids[1];
-                 $version_number = $get_ids[2];
+        if($request !== null)
+        {  
+            $assessment_id = $request->assessment_id;
+            $version_id =  $request->version_id;
+            $version_number = $request->version_number;
 
-                 $assessment = Assessment::find($assessment_id);
-                 $assessment->current_version = $version_id;
-                 $assessment->save();
-
-                Session::flash('flash_message', "Version has been modified to version $version_number!"); 
-                return Redirect::back();
-            }
+            $assessment = Assessment::find($assessment_id);
+            $assessment->current_version = $version_id;
+            $saved = $assessment->save();    
         }
-    
+        else
+        {
+            $has_error = true;
+        }
+
+        if((isset($has_error)) || ($saved === false))
+        {
+            Session::flash('error_message', "An issue was encountered while attempting to modify the version. Process aborted :("); 
+        }
+        else
+        {
+            Session::put('flash_message', "Assessment has been modified to version $version_number!"); 
+        }
+
+        return Redirect::back();
     }
 
     /**
@@ -107,11 +113,11 @@ class ReportAssessmentController extends Controller
      */
     public function store()
     {
-        $client = $_POST['client'];
+        $client_id = $_POST['client'];
         $practitioner_id = Session::get('prac_id');
 
         $report = new Report;
-        $report->userid = $client;
+        $report->userid = $client_id;
         $report->step = '1';
         $report->status = 'In Progress';
         $report->prac_id = $practitioner_id;
@@ -135,6 +141,7 @@ class ReportAssessmentController extends Controller
             $assessment->questions()->attach($questionid, array('answers' => $_POST['answersid'][$questionid], 'version_id' => $version->id));
         }
 
+        Session::put('flash_message', 'New report successfully created!');
         return redirect('practitioner/reportmanager');
     }
 
@@ -191,7 +198,7 @@ class ReportAssessmentController extends Controller
                 ->get();
         }
 
-        $submitButtonText = "Update Assessment Report";
+        $submitButtonText = "Click here to update or create a new version";
         $thumbnail_dist = 100 /count($categories_id);
 
         return view('reports.showAssessment', compact('answerlist','versionlist','currentversion','report','assessment', 'client', 'practitioner','thumbnail_dist','categories','submitButtonText'));
@@ -277,10 +284,10 @@ class ReportAssessmentController extends Controller
 
             if(($new_version === true) || (!isset($matching_version)))
             {  
-                Session::flash('flash_message', 'Create_New_Version!');
+                Session::put('flash_message', 'Create_New_Version!');
                 Session::put('modified_answers', $answers);
                 Session::put('current_assessment', $assessment);
-                Session::flash('current_version_number', $current_version_number);
+                Session::put('current_version_number', $current_version_number);
 
                 return redirect("reports/assessment/view/" . $reportid);
 
@@ -289,12 +296,12 @@ class ReportAssessmentController extends Controller
             {   
                 $assessment->current_version = $matching_version;
                 $assessment->save();
-                Session::flash('flash_message', 'Modified version');
+                Session::put('flash_message', 'Your results matches an existing version. Successfully loaded existing version.');
             }
         }
         else
         {
-             Session::flash('flash_message', 'No changes!');
+             Session::put('flash_message', 'No changes detected');
         }
 
         return redirect("reports/assessment/view/" . $reportid);

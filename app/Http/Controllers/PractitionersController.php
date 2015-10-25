@@ -51,7 +51,17 @@ class PractitionersController extends Controller
      */
     public function index()
     {   
-        return view('practitioner.dashboard');
+        $latest_report = Report::latest('updated_at')->Practitioner()->first();
+
+        if($latest_report !== null)
+        {
+            return view('practitioner.dashboard',compact('latest_report'));           
+        }
+        else
+        {
+            return view('practitioner.dashboard');
+        }
+
     }
 
     public function angular()

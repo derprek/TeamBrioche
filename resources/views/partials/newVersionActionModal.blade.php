@@ -10,9 +10,9 @@
                                     <h4 style="text-align:center;"> <i class="fa fa-exclamation-triangle"></i>You are trying to modify version: {{Session::get('current_version_number')}}
 
                                     </h4>
-                                    <br>
-                                    <small>Do you wish to overwrite this version or create a new version?</small>
                                     <br><br>
+                                    <h6 style="text-align:center;">Do you wish to <strong>overwrite</strong> this version or <strong>create</strong> a new version?</h6>
+                                    <br><br><br>
 
                                     <div class="modal-footer">
 

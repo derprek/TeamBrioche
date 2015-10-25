@@ -126,29 +126,39 @@
                 <input ng-show="AllPractitioners" type="text" placeholder="Search...." class="form-control" ng-model="searchprac">
                 <br>
 
-                <tr ng-show="AllPractitioners">
-                    <th>Practitioner's Name</th>
-                    <th>Practitioner's Email</th>
-                    <th>Joined on</th>
-                    <th>Edit</th>
+                <tr ng-show="(AllPractitioners| filter:searchprac).length > 0">
+                    <th class="mediumRow">Practitioner's Name</th>
+                    <th class="mediumRow">Practitioner's Email</th>
+                    <th class="mediumRow">Joined on</th>
+                    <th class="smallRow">View</th>
                 </tr>
 
-                <tr ng-repeat="practitioner in AllPractitioners | filter:searchprac">
+                <tr dir-paginate="practitioner in AllPractitioners | filter:searchprac | itemsPerPage: 10" pagination-id="practitionersPagination">
                     <td> @{{ practitioner.name }}</td>
                     <td> @{{ practitioner.email }}</td>
                     <td> @{{ practitioner.created_at }}</td>
                     <td>
                         <a href="/admin/viewpractitioner/@{{ practitioner.id }}"
-                           class="btn btn-success btn-sm"> View </a>
+                           class="btn btn-info btn-sm"> View </a>
                     </td>
                 </tr>
 
             </table>
             <!-- /.table -->
+
+            <div ng-if="AllPractitioners">
+
+                <div ng-show="(AllPractitioners | filter:searchprac).length == 0" class="emptyresults_container">
+                     <h3> No results found <i class="fa fa-meh-o"></i> </h3>
+                </div>
+
+            </div>
+
+            <dir-pagination-controls ng-if="AllPractitioners" template-url="/dirPagination.tpl.html"
+                                                 pagination-id="practitionersPagination"></dir-pagination-controls>
+
             </div>
             <!-- /.prac div -->
-
-
 
             <div id="clients" class="tab-pane fade">
             <br>
@@ -176,25 +186,37 @@
                 <input ng-show="AllClients" type="text" placeholder="Search...." class="form-control" ng-model="searchclient">
                 <br>
 
-                <tr ng-show="AllClients">
-                    <th>Client's Name</th>
-                    <th>Client's Email</th>
-                    <th>Joined on</th>
-                    <th>Edit</th>
+                <tr ng-show="(AllClients| filter:searchclient).length > 0">
+                    <th class="mediumRow">Client's Name</th>
+                    <th class="mediumRow">Client's Email</th>
+                    <th class="mediumRow">Joined on</th>
+                    <th class="smallRow">Edit</th>
                 </tr>
 
-                <tr ng-repeat="client in AllClients | filter:searchclient">
+                <tr dir-paginate="client in AllClients | filter:searchclient | itemsPerPage: 10" pagination-id="clientsPagination">
                     <td> @{{ client.name }}</td>
                     <td> @{{ client.email }}</td>
                     <td> @{{ client.created_at }}</td>
                     <td>
                         <a href="/admin/viewclient/@{{ client.id }}"
-                           class="btn btn-success btn-sm"> View </a>
+                           class="btn btn-info btn-sm"> View </a>
                     </td>
                 </tr>
 
             </table>
             <!-- /.table -->
+
+            <div ng-if="AllClients">
+
+                <div ng-show="(AllClients | filter:searchclient).length == 0" class="emptyresults_container">
+                     <h3> No results found <i class="fa fa-meh-o"></i> </h3>
+                </div>
+
+            </div>
+
+            <dir-pagination-controls ng-if="AllPractitioners" template-url="/dirPagination.tpl.html"
+                                                 pagination-id="clientsPagination"></dir-pagination-controls>
+
             </div>
             <!-- /.client div -->
 

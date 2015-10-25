@@ -8,6 +8,7 @@ messengerApp.controller('MailboxController', [ '$http', '$scope','toastr', funct
   angular.element(document).ready(function () {
         $scope.newMessage = {};
         $scope.getInbox();
+        $scope.getSentBox();
         $scope.getRecipients();   
     });
 
@@ -34,14 +35,14 @@ $scope.totalunread = function() {
                 document.getElementById("loadInbox_text").style.display = "none";
               }
         
-        var count =0;
+        var mailcount =0;
 
         angular.forEach($scope.Inbox, function(inbox) {
-          count += 1;
+          mailcount += 1;
 
         });
 
-        if (count >= 1) 
+        if (mailcount >= 1) 
         {
           var unreadcount = 0;
 
@@ -51,7 +52,7 @@ $scope.totalunread = function() {
           });
           
           $scope.unreadcounter = unreadcount;
-          
+
           if($scope.unreadcounter != 0)
           { 
             if(url != "/mailbox")
@@ -105,7 +106,7 @@ $scope.totalunread = function() {
         }
         else
         {
-          document.getElementById("emptymsg").style.visibility = "visible";
+          document.getElementById("emptymsg_send").style.visibility = "visible";
         }
     });
     
