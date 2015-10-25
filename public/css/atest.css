@@ -693,7 +693,14 @@ a.selectthumbnail.active {
     display: block;
     width: 80%;
     margin: 0 auto;
-    visibility: hidden;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.emptyresults_container {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
     text-align: center;
     margin-top: 15%;
 }
@@ -786,4 +793,40 @@ a.selectthumbnail.active {
 
     font-size: 0.9em;
     color: #000;
+}
+
+.largeRow {
+
+    width:40%;
+    overflow: hidden;
+}
+
+.normalRow {
+
+    width:30%;
+    overflow: hidden;
+}
+
+.mediumRow {
+
+    width:20%;
+    overflow: hidden;
+}
+
+.smallRow {
+
+    width:10%;
+    overflow: hidden;
+}
+
+.tinyRow {
+
+    width:8%;
+    overflow: hidden;
+}
+
+.directionLinks {
+
+  color:#34495E;
+  font-weight: bold;
 }

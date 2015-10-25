@@ -71,14 +71,12 @@
             <!-- /.row -->
 
     <div class="row">
-    <hr>
+    <br>
         <div class="col-sm-2 col-md-1">
              <a href="#" class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></a>
             <hr />
             
-            <a class="pull-left" href="/../mailbox"> <i class="fa fa-chevron-left"></i>  Mailbox </a>
-
-               
+            <a class="directionLinks pull-left" href="/../mailbox"> <i class="fa fa-chevron-left"></i>  Mailbox </a>
             
         </div>
 
@@ -98,23 +96,25 @@
             <!-- Nav tabs -->
              <toaster-container ></toaster-container>
                     
-                    <div class="row" style="overflow: auto;margin-bottom:1%;margin-right:1%;"> <p ng-if="totalunreadmessages()" ><small style="font-size:0.7em;float:right;">You have (@{{totalunreadmessages()}}) unread messages.</small></p></div>
-                    <small class="mailboxfontmedium pull-right"ng-show="AllMessages"> Messages with: @{{recipient_email()}} </small>
+                    <div class="row" style="overflow: auto;margin-bottom:1%;margin-right:1%;"> 
+                        <p ng-if="totalunreadmessages()" ><small style="font-size:0.7em;float:right;">You have (@{{totalunreadmessages()}}) unread messages.</small></p>
+                    </div>
+
+                    <small class="mailboxfontmedium pull-right"ng-show="AllMessages"> 
+                         Messages with: @{{recipient_email()}} 
+                    </small>
                     <br><br>
-                    
 
                      <input ng-show="AllMessages" type="text" placeholder="Search...." class="form-control"
                                    ng-model="search.text"><br>
 
                     <div ng-show="(AllMessages | filter:search.text).length == 0" class="emptymsg_container">
-                        <p id="emptymsg">No Results found.</p>
+                        <h3> No Results found.</h3>
                     </div>
-                   
                     
                         <uib-accordion close-others="false" >
                        
                        <span dir-paginate="message in AllMessages | filter:search.text |  itemsPerPage: 5" pagination-id="threadPagination" style="padding:3px;" >
-
 
                         <uib-accordion-group  panel-class="panel-info" is-open="true" ng-if="message.sender_email !== 'You' && message.status === 'unread'">
                           <uib-accordion-heading>
@@ -134,7 +134,8 @@
                           @{{ message.content }}
                         </uib-accordion-group>
 
-                        <uib-accordion-group  is-open="false" ng-if=" message.id !== getfirstID() && (message.sender_email === 'You' || message.status !== 'unread')">
+                        <span ng-if="(message.sender_email === 'You' || message.status !== 'unread')">
+                        <uib-accordion-group  is-open="false" ng-if=" message.id !== getfirstID()">
                           <uib-accordion-heading>
                             <span class="pull-left" style="width:20%;"> From: @{{ message.sender_name }} </span>  
                             <span> @{{ message.title }} </span>  
@@ -142,6 +143,7 @@
                           </uib-accordion-heading>
                           @{{ message.content }}
                         </uib-accordion-group>
+                        </span>
 
                         </span>
 

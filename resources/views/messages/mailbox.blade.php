@@ -100,19 +100,22 @@
             </div>
         </div>
 
-        <div ng-hide="Inbox" class="emptymsg_container" id="emptymsg">
+        <div class="emptymsg_container" id="emptymsg" style="visibility:hidden;">
             <h3>You have no mail.</h3>
             <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
         </div>
 
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css"> 
-        <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10 col-lg-11">
+          <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10 col-lg-11">
             <!-- Nav tabs -->
                 <h3> Inbox </h3>
                
                     <br>
                      <input type="text" placeholder="Search...." class="form-control"
                                    ng-model="inboxsearch.text"><br>
+
+                    <div ng-show="(Inbox | filter:inboxsearch.text).length == 0" class="emptyresults_container">
+                        <h3> No Results found.</h3>
+                    </div>
 
                     <div class="list-group" dir-paginate="inbox in Inbox | filter:inboxsearch.text | itemsPerPage: 10" pagination-id="inboxPagination">
                         <a href="/practitioner/inbox/showthread/@{{ inbox.conv_id }}" class="list-group-item" data-toggle="tooltip" title="@{{ inbox.recipient_email }}" >
@@ -169,6 +172,10 @@
                     <br>
                      <input type="text" placeholder="Search...." class="form-control"
                                    ng-model="sentsearch.text"><br>
+
+                     <div ng-show="(Sentbox | filter:sentsearch.text).length == 0" class="emptyresults_container">
+                        <h3> No Results found.</h3>
+                     </div>
 
                     <div class="list-group" dir-paginate="sentbox in Sentbox | filter:sentsearch.text | itemsPerPage: 10" pagination-id="sentboxPagination">
                         <a class="list-group-item" role="button" data-toggle="collapse" href="#@{{ sentbox.id }}"

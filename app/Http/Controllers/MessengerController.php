@@ -26,7 +26,18 @@ use App\Conversation;
 use Input; 
 
 class MessengerController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+           
+                if ((!Session::has('prac_id'))  || (Auth::check()))
+                {
+                    return redirect('/unauthorizedaccess');
+                }
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +71,7 @@ class MessengerController extends Controller
             $viewer = User::find(Auth::user()->id);
         }
 
-        if($viewer !== null)
+        if(isset($viewer))
         {
             $conversations = Message::latest('created_at')->GetConversationReceiver($viewer->email)
                                 ->distinct()->lists('conv_id'); 
@@ -148,9 +159,20 @@ class MessengerController extends Controller
                     $has_unread = true;
                 }
 
+                if($recipient !== null)
+                {
+                   $recipient_name = $recipient->fname . " " . $recipient->sname;
+                   $recipient_email = $recipient->email;
+                }
+                else
+                {
+                    $recipient_name ='Recipient no longer exists';
+                    $recipient_email = 'Recipient no longer exists';
+                }
+
                 $conversationlist[] = ['conv_id'=>$conversation_id,
-                                    'recipient_name'=>$recipient->fname . " " . $recipient->sname,
-                                    'recipient_email'=>$recipient->email,
+                                    'recipient_name'=>$recipient_name,   
+                                    'recipient_email'=>$recipient_email,
                                     'last_msg_title'=>$last_msg_title,
                                     'last_msg_content'=>$last_msg_content,
                                     'last_msg_time'=>$last_msg_time,
@@ -481,6 +503,9 @@ class MessengerController extends Controller
             $viewer = User::find(Auth::user()->id);
         }
 
+        if(isset($viewer))
+        {
+
         $messages = Message::latest('created_at')->GetConversationSender($viewer->email)
                             ->get();
         
@@ -525,6 +550,7 @@ class MessengerController extends Controller
                                     'title'=>$message->title,
                                     'content'=>$message->content,
                                     'created_at'=>$message->created_at->diffForHumans()];
+        }
         }
 
         if(count($messagelist) < 1)

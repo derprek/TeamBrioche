@@ -194,7 +194,7 @@
                                                         @else
                                                             @unless(Session::has('is_admin'))
                                                                 <div class="panel-footer"><span
-                                                                            class="pull-right"><a
+                                                                            class="pull-left"><a
                                                                                 href="{{ url('/reports/typology/new',$report->id) }}"><strong>Create</strong>
                                                                             <i class="fa fa-arrow-right"></i> </a></span>
                                                                     <div class="clearfix"></div>
@@ -247,6 +247,7 @@
                                             @unless(Session::has('is_admin'))
                                             <div class="panel-footer"><span class="pull-left"><a href="{{ url('/reports/evaluation/new',$report->id) }}"><i
                                                                 class="fa fa-plus"></i> Create New</a></span>
+                                                                <div class="clearfix"></div>
                                             </div>
                                             @endunless
                                             <!-- .footer -->

@@ -64,18 +64,36 @@ class ReportManagerController extends Controller
 
     public function getMyReports()
     {
-        $prac_reports = Report::latest('updated_at')->practitioner()->get();
+        $reports = Report::latest('updated_at')->practitioner()->get();
 
         $reportlist = array();
-        foreach($prac_reports as $report)
+        foreach($reports as $report)
         {       
-            $username = User::find($report->userid);
+            $client = User::find($report->userid);
+
+            if($report->updated_at->isToday())
+            {
+                $updated_date = date('h:ia', strtotime($report->updated_at));
+            }
+            else
+            {
+                $updated_date = date('F d, Y', strtotime($report->updated_at));
+            }
+
+            if($report->created_at->isToday())
+            {
+                $created_date = date('h:ia', strtotime($report->created_at));
+            }
+            else
+            {
+                $created_date = date('F d, Y', strtotime($report->created_at));
+            }
            
             $reportlist[] = ['id'=>$report->id,
-                                'name'=>$username->fname . " " . $username->sname,
-                                'updated_at'=>$report->updated_at->diffForHumans(),
+                                'name'=>$client->fname . " " . $client->sname,
+                                'updated_at'=>$updated_date,
                                 'status'=>$report->status,
-                                'created_at'=>$report->created_at->diffForHumans()];
+                                'created_at'=>$created_date];
                       
         }
 
@@ -98,23 +116,39 @@ class ReportManagerController extends Controller
 
     public function getSharedReports()
     {
-
-        $pracid = Session::get('prac_id');
-        $pracinfo = Practitioner::find($pracid);
+        $practitioner = Practitioner::find(Session::get('prac_id'));
        
-        $shared = $pracinfo->reports()->get();
-
+        $shared_reports = $practitioner->reports()->get();
 
         $reportlist = array();
-        foreach($shared as $report)
+
+        foreach($shared_reports as $report)
         {       
-            $username = User::find($report->userid);
+            $client = User::find($report->userid);
+
+            if($report->updated_at->isToday())
+            {
+                $updated_date = date('h:ia', strtotime($report->updated_at));
+            }
+            else
+            {
+                $updated_date = date('F d, Y', strtotime($report->updated_at));
+            }
+
+            if($report->created_at->isToday())
+            {
+                $created_date = date('h:ia', strtotime($report->created_at));
+            }
+            else
+            {
+                $created_date = date('F d, Y', strtotime($report->created_at));
+            }
            
             $reportlist[] = ['id'=>$report->id,
-                                'name'=>$username->fname . " " . $username->sname,
-                                'updated_at'=>$report->updated_at->diffForHumans(),
+                                'name'=>$client->fname . " " . $client->sname,
+                                'updated_at'=>$updated_date,
                                 'status'=>$report->status,
-                                'created_at'=>$report->created_at->diffForHumans()];
+                                'created_at'=>$created_date];
                       
         }
         if(count($reportlist) < 1)

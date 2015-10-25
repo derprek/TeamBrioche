@@ -3,7 +3,7 @@ reportApp.controller('SharedReportsController', ['$scope', '$http', function($sc
   $scope.currentPage = 1;
   $scope.pageSize = 10;
 
- $http.get('/getSharedReports').success(function(fetchSharedReports){
+  $http.get('/getSharedReports').success(function(fetchSharedReports){
 
 		$scope.SharedReports = fetchSharedReports;
 
@@ -13,20 +13,19 @@ reportApp.controller('SharedReportsController', ['$scope', '$http', function($sc
 		var count =0;
 
 		angular.forEach($scope.SharedReports, function(report) {
-			count += 1;
+		  count += 1;
 
 		});
 
-		if (count >= 1) {
-		   
-		   document.getElementById("shared_emptymsg").style.display = "none";
-		   	
+		if (count >= 1) 
+		{
+		   document.getElementById("emptymsg_shared").style.display = "none";	   	
 		}
 		else
 		{
-			document.getElementById("shared_emptymsg").style.visibility = "visible";
+			document.getElementById("emptymsg_shared").style.visibility = "visible";
 		}
 
 	});
 
-}]);
+ }]);

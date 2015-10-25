@@ -66,7 +66,7 @@
 
            
 
-            <button ng-show="AllClients" type="button" id="regbtn" class="btn btn-success"
+            <button ng-show="AllClients" ng-cloak type="button" id="regbtn" class="btn btn-success"
                     data-toggle="modal" data-target="#newclient">
                 <i class="fa fa-user-plus"></i> Register a new Client
             </button>
@@ -90,7 +90,7 @@
 
 
             <!-- Client list table -->
-            <table ng-show="AllClients" class="table table-bordered table-hover table-striped">
+            <table ng-show="AllClients" ng-cloak class="table table-bordered table-hover table-striped">
 
                 <input ng-show="AllClients" type="text" placeholder="Search...." class="form-control" ng-model="search">
                 <br>

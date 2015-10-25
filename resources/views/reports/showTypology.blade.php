@@ -88,9 +88,10 @@
                 <!-- Display client and practitioner name -->
                 <div>
                     <br>
-                <a class="pull-left" href="{{ url('/reports/overview', $report->id) }}"> <i class="fa fa-chevron-left"></i> Back to
-                        Overview </a>
-
+                <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}"> 
+                    <i class="fa fa-chevron-left"></i> Back to Overview 
+                </a>
+                
                     <a class="pull-right" data-toggle="popover" data-html="true" data-trigger="click" data-animation="true" data-placement="left" title="Report Information" 
                       data-content="Report ID: {{ $report->id }} <br> <hr>
                       Practitioner: {{ $practitioner->fname }} {{ $practitioner->sname }} <br>

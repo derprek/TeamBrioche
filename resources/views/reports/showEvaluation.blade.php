@@ -74,7 +74,7 @@
 
                     @else
 
-                       <li>
+                        <li>
                             <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i> Report
                                 Manager</a>
                         </li>
@@ -102,8 +102,9 @@
                     <div>
 
                         <br>
-                        <a class="pull-left" href="{{ url('/reports/evaluation/overview', $report->id) }}"> <i class="fa fa-chevron-left"></i> Back to
-                            Overview </a>
+                        <a class="directionLinks pull-left" href="{{ url('/reports/evaluation/overview', $report->id) }}"> 
+                            <i class="fa fa-chevron-left"></i> Back to Overview 
+                        </a>
 
                         <a class="pull-right" data-toggle="popover" data-html="true" data-animation="true" data-placement="left" title="Report Information" 
                           data-content="Report ID: {{ $report->id }} <br>

@@ -59,12 +59,12 @@
                         @endif    
 
                         @if(isset($goals))
-                        <div class="form-group" style="padding:10px;">
-                            <label for="goals_typology">Goals:</label>
-                         <textarea readonly name="goals_typology"
-                                   class="form-control" rows="5"
-                                   placeholder="Goals + Typology"> {{$goals}}</textarea>
-                        </div>
+                          <div class="form-group" style="padding:10px;">
+                              <label for="goals_typology">Goals:</label>
+                           <textarea readonly name="goals_typology"
+                                     class="form-control" rows="5"
+                                     placeholder="Goals + Typology"> {{$goals}}</textarea>
+                          </div>
                         @endif                 
 
                     @else

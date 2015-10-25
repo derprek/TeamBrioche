@@ -44,7 +44,6 @@ class ReportEvaluationController extends Controller
      */
     public function index($report_id)
     {
-        //$questions = Question::Evaluation()->orderBy('category_id', 'ASC')->orderBy('type', 'DESC')->get();
         $report = Report::find($report_id);
         $assessment = Assessment::GetAssessment($report->id)->first(); 
         $practitioner = Practitioner::find($report->prac_id);
@@ -169,34 +168,39 @@ class ReportEvaluationController extends Controller
         $client = User::find($report->id);
         $practitioners = Practitioner::all();
 
-        //  $practitioners = Practitioner::all();
-      //  $practitioner = $practitioners->where('id', $report->prac_id)->first();
-
-        $evaluationlist = array();
-        foreach($evaluations as $evaluation)
-        {       
-            $practitioner = $practitioners->where('id' , $evaluation->prac_id)->first();
-
-            $select_date = $evaluation->updated_at;
-            if($evaluation->updated_at = Carbon::today())
-            {
-                $date = "Today, " . date('h:ia', strtotime($evaluation->updated_at));
-            }
-            else
-            {
-                $date = date('F d, Y', strtotime($version['updated_at']));
-            }
-
-            $evaluation_product = $evaluation->questions()->GetProduct()->first()->pivot->answers;
-
-            $evaluationlist[] = ['prac_name'=>$practitioner->fname . " " . $practitioner->sname,
-                                'client_name' => $client->fname . " " . $client->sname,
-                                'id'=>$evaluation->id,
-                                'date'=>$date,
-                                'product'=>$evaluation_product];
-                      
+        if(($report === null ) || ($client === null))
+        {
+            Session::flash('error_message', 'There was an error creating your Evaluation Report :( ');
+            return redirect()->back();
         }
-      
+        else
+        {
+            $evaluationlist = array();
+            foreach($evaluations as $evaluation)
+            {       
+                $practitioner = $practitioners->where('id' , $evaluation->prac_id)->first();
+
+                $select_date = $evaluation->updated_at;
+                if($evaluation->updated_at = Carbon::today())
+                {
+                    $date = "Today, " . date('h:ia', strtotime($evaluation->updated_at));
+                }
+                else
+                {
+                    $date = date('F d, Y', strtotime($version['updated_at']));
+                }
+
+                $evaluation_product = $evaluation->questions()->GetProduct()->first()->pivot->answers;
+
+                $evaluationlist[] = ['prac_name'=>$practitioner->fname . " " . $practitioner->sname,
+                                    'client_name' => $client->fname . " " . $client->sname,
+                                    'id'=>$evaluation->id,
+                                    'date'=>$date,
+                                    'product'=>$evaluation_product];
+                          
+            }
+        }
+        
         return view('reports.selectionoverview', compact('evaluationlist', 'report', 'clientname'));
         
     }

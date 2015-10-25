@@ -17,10 +17,9 @@ reportApp.controller('MyReportsController', [ '$http', '$scope', function($http,
 
         });
 
-        if (count >= 1) {
-           
+        if (count >= 1)
+        {
            document.getElementById("emptymsg").style.display = "none";
-            
         }
         else
         {

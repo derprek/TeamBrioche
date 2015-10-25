@@ -43,25 +43,27 @@ $scope.totalunread = function() {
 
         if (count >= 1) 
         {
-           document.getElementById("emptymsg").style.display = "none";        
+          var unreadcount = 0;
 
-            var unreadcount = 0;
+          angular.forEach($scope.Inbox, function(inbox) {
+            unreadcount += inbox.has_unread ? 1 : 0;
 
-            angular.forEach($scope.Inbox, function(inbox) {
-              unreadcount += inbox.has_unread ? 1 : 0;
-
-            });
-            
-            $scope.unreadcounter = unreadcount;
-
-            if($scope.unreadcounter != 0)
-            { 
-              if(url != "/mailbox")
-              {
-
-                $scope.getMyMessages();
-              }
+          });
+          
+          $scope.unreadcounter = unreadcount;
+          
+          if($scope.unreadcounter != 0)
+          { 
+            if(url != "/mailbox")
+            {
+              $scope.getMyMessages();
             }
+          }
+
+        if(url == "/mailbox")
+              {
+                 document.getElementById("emptymsg").style.display = "none";
+              }
 
         }
         else
@@ -182,8 +184,6 @@ $scope.totalunread = function() {
               $scope.FirstMessageID =  $scope.AllMessages[0].id ;
               var conv_id = { conv_id: $scope.AllMessages[0].conv_id };
               $http.post('/../practitioner/readmessages',conv_id);
-              document.getElementById("emptymsg").style.visibility = "visible";
-
             }
       
     })

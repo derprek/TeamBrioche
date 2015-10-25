@@ -26,9 +26,14 @@
                     </h1>
                     <ol class="breadcrumb">
 
-                        <li class="active">
-                            <i class="fa fa-dashboard"></i> Dashboard
+                        <li>
+                            <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
                         </li>
+
+                        <li class="active">
+                            <i class="fa fa-pencil"></i> Create a new Report
+                        </li>
+
                     </ol>
                 </div>
             </div>

@@ -103,12 +103,12 @@
                 <br>
 
                 <tr ng-show="AllReports">
-                    <th>Report ID</th>
-                    <th>Client</th>
-                    <th>Supervised by</th>
-                    <th>Created on</th>
-                    <th>Last Update</th>
-                    <th>View</th>
+                    <th style="width:10%;">Report ID</th>
+                    <th class="mediumRow">Client</th>
+                    <th class="mediumRow">Supervised by</th>
+                    <th class="smallRow">Created on</th>
+                    <th class="smallRow">Last Update</th>
+                    <th class="smallRow">View</th>
                 </tr>
 
                 <tr dir-paginate="report in AllReports| filter:search.text | filter:search.type | itemsPerPage: 8" pagination-id="ReportManagerPagination">

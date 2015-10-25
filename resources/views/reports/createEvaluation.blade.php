@@ -28,32 +28,18 @@
                     </h1>
                     <ol class="breadcrumb">
 
-                        @if(Session::has('is_admin'))
+                        <li>
+                            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report Manager</a>
+                        </li>
 
-                            <li>
-                                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report Manager</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-pencil"></i> Create a new Selection report
-                            </li>
+                         <li>
+                             <a href="{{ URL::previous() }} "> <i class="fa fa-search"> </i> 
+                             Report Overview</a>
+                        </li>
 
-                        @else
-
-                            <li>
-                                <a href="{{ url('practitioner/dashboard') }}"><i
-                                            class="fa fa-dashboard"></i>Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report Manager</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-pencil"></i> Create a new Selection report
-                            </li>
-
-                        @endif
+                        <li class="active">
+                            <i class="fa fa-pencil"></i> Create a new Evaluation report
+                        </li>
 
                     </ol>
                 </div>
@@ -62,8 +48,9 @@
             <div class="form-group">
                 <div>
                     <br>
-                    <a class="pull-left" href="{{ URL::previous() }}"><i class="fa fa-chevron-left"></i> Back to
-                        Overview </a>
+                    <a class="directionLinks pull-left" href="{{ URL::previous() }}">
+                      <i class="fa fa-chevron-left"></i> Back to Overview 
+                    </a>
 
                     <a class="pull-right" data-toggle="popover" data-html="true" data-animation="true"
                        data-placement="left" title="Report Information"

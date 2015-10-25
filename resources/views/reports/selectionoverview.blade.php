@@ -91,21 +91,20 @@
 
             <div class="col-lg-12">
 
+                <br>
+                <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}" >
+                         <i class="fa fa-chevron-left"></i>Back to Overview
+                </a> 
+                <br><hr>
                 @unless(Session::has('is_admin'))
-                <a class="btn btn-success"
-                   href="{{ url('/reports/evaluation/new',$report->id) }}"
-                   role="button">Create a new evaluation
-                </a>
-                <hr>
+                    
+                    <a class="btn btn-success pull-left"
+                       href="{{ url('/reports/evaluation/new',$report->id) }}"
+                       role="button"><i class="fa fa-plus"></i> Create a new Evaluation
+                    </a>
+                    <br><br>
                 @endunless
-                
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home"><strong>View all Evaluation reports</strong></a>
-                    </li>
-                </ul>
 
-                <div class="tab-content">
-                    <div id="home" class="tab-pane fade in active">
                         <!-- 1st tab -->
                         <table class="table table-bordered table-hover table-striped">
                         <br>
@@ -116,24 +115,24 @@
                             @else
 
                                 <tr>
-                                    <th>Evaluation Number</th>
-                                    <th>Product</th>
-                                    <th>Client</th>
-                                    <th>Practitioner</th>
-                                    <th>Updated on</th>
-                                    <th>View</th>
+                                    <th class="smallRow">Evaluation Number</th>
+                                    <th class="normalRow">Product</th>
+                                    <th class="mediumRow">Client</th>
+                                    <th class="mediumRow">Practitioner</th>
+                                    <th class="smallRow">Updated on</th>
+                                    <th class="smallRow">View</th>
                                 </tr>
 
                                 <!-- List out reports -->
                                 @foreach($evaluationlist as $evaluation)
                                     <tr>
-                                        <td style="width:10%;"> {{ $evaluation['id'] }}</td>
-                                        <td style="width:40%;"> {{ $evaluation['product'] }}</td>
-                                        <td style="width:17%;"> {{ $evaluation['client_name'] }}</td>
-                                        <td style="width:17%;"> {{ $evaluation['prac_name'] }}</td>
-                                        <td style="width:10%;"> {{ $evaluation['date'] }}</td>
+                                        <td> {{ $evaluation['id'] }}</td>
+                                        <td> {{ $evaluation['product'] }}</td>
+                                        <td> {{ $evaluation['client_name'] }}</td>
+                                        <td> {{ $evaluation['prac_name'] }}</td>
+                                        <td> {{ $evaluation['date'] }}</td>
 
-                                         <td style="width:10%"><a
+                                         <td><a
                                              href="{{ url('/reports/evaluation/view',$evaluation['id']) }}"
                                             class="btn btn-info btn-sm"> View</a></td>
 
@@ -156,12 +155,12 @@
                                     </tr>
 
 
-                                    <div class="container">
+                                  <!--  <div class="container">
                                         <!-- Create new client Modal -->
-                                        <div class="modal fade" id="{{$evaluation['id']}}" role="dialog">
+                                      <!--  <div class="modal fade" id="{{$evaluation['id']}}" role="dialog">
                                             <div class="modal-dialog ">
                                                 <!-- Modal content-->
-                                                <div class="modal-content">
+                                            <!--    <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close"
                                                                 data-dismiss="modal">&times;</button>
@@ -172,7 +171,7 @@
                                                     <div class="modal-body">
 
                                                         <!-- Registration form -->
-                                                        <form role="form" method="POST"
+                                                    <!--    <form role="form" method="POST"
                                                               action="{{ url('/reports/selection/delete') }}">
                                                             <input type="hidden" name="selectid"
                                                                    value="{{ $evaluation['id'] }}">
@@ -182,7 +181,7 @@
                                                             <h4> Are you sure you want to delete
                                                                 Evaluation {{$evaluation['id']}} </h4>
 
-                                                            <div class="modal-footer">
+                                                          <!--  <div class="modal-footer">
                                                                 <button type="submit"
                                                                         class="btn btn-primary form-control">Confirm
                                                                 </button>
@@ -192,25 +191,21 @@
                                                                         data-dismiss="modal">Close
                                                                 </button>
                                                             </div>
-                                                            <!-- /.modal-footer -->
+                                                            <!-- /.modal-footer 
                                                         </form>
                                                     </div>
-                                                    <!-- /.modal-body -->
+                                                    <!-- /.modal-body 
                                                 </div>
-                                                <!-- /.modal-content -->
+                                                <!-- /.modal-content 
                                             </div>
-                                            <!-- /.modal-dialog -->
+                                            <!-- /.modal-dialog
                                         </div>
-                                        <!-- /.modal -->
+                                        <!-- /.modal 
                                     </div>
                                     <!-- /.container -->
                                 @endforeach
                             @endif
                         </table>
-                    </div>
-
-                </div>
-                <!-- /.tab-content -->
             </div>
             <!-- /.col-lg-12 -->
         </div>

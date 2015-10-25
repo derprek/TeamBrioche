@@ -28,25 +28,23 @@
                     </h1>
                     <ol class="breadcrumb">
 
-                    @if(Session::has('is_admin'))
+                        <li>
+                             <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                        </li>
+
+                         <li>
+                            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i> 
+                            Report Manager</a>
+                        </li>
 
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="{{ url('admin/dashboard') }}">Dashboard</a>
+                             <a href="{{ url('/reports/overview', $report_id) }} "> <i class="fa fa-search"> </i> 
+                             Report Overview</a>
                         </li>
+
                         <li class="active">
-                            <i class="fa fa-desktop"></i> Create a new Typology report
+                            <i class="fa fa-pencil"></i> Create a new Typology
                         </li>
-
-                    @else
-
-                        <li>
-                            <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-desktop"></i> Create a new Typology report
-                        </li>
-
-                    @endif
                         
                     </ol>
                 </div>
@@ -57,7 +55,9 @@
                 <div>
                     <br>
 
-                    <a class="pull-left" href="{{ url('/reports/overview', $report_id) }}"><i class="fa fa-chevron-left"></i> Back to Overview </a>       
+                    <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report_id) }}">
+                        <i class="fa fa-chevron-left"></i> Back to Overview 
+                    </a>       
 
                     <a class="pull-right" data-toggle="popover" data-html="true" data-trigger="click" data-animation="true" data-placement="left" title="Report Information" 
                       data-content="Report ID: {{ $report_id }} <br> <hr>
