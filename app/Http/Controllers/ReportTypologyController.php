@@ -155,13 +155,14 @@ class ReportTypologyController extends Controller
     public function generatereport($report_id)
     {
         $report = Report::find($report_id);
+        $typology = Typology::GetTypology($report->id)->get();
+        $assessment = Assessment::GetAssessment($report->id)->get();
         $clientinfo = User::find($report->userid);
         $pracinfo = Practitioner::find($report->prac_id);
 
-        $fetchgoals = $report->questions()->Assessment()->GetGoals()->first();
+        $fetchgoals = $assessment->questions()->GetGoals()->first();
         $goals = $fetchgoals->pivot->answers;
-        //dd($goals);
-        $arraycount = $report->questions()->distinct()->Typology()->orderBy('category_id', 'ASC')->lists('category_id');
+        $arraycount = $typology->questions()->distinct()->orderBy('category_id', 'ASC')->lists('category_id');
 
         $categories = array();
         $answerlist = array();

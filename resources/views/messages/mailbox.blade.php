@@ -74,15 +74,18 @@
             <!-- /.row -->
 
     <div class="row">
-        <div ng-cloak class="col-sm-2 col-md-2 col-lg-2" style="padding:3%;">
-            <a href="#" class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></a>
-            <hr />
-            <ul class="nav nav-tabs nav-stacked">
-                <li class="active" ><a data-toggle="tab" href="#inbox" ng-click="getInbox()"><span class="badge pull-right" ng-if="totalunread()">@{{ totalunread() }}</span> Inbox </a>
-                </li>
-                 <li><a data-toggle="tab" href="#sentbox" ng-click="getSentBox()"  id="sendbox"> Sent </a>
-                </li>  
-            </ul>
+        <br><br>
+        <div ng-cloak class="col-sm-2 col-md-2 col-lg-2">
+            <div ng-cloak class="col-lg-9">
+                <button class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></button>
+                <hr />
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="active" ><a data-toggle="tab" href="#inbox" ng-click="getInbox()"><span class="badge pull-right" style="margin-left:2%;" ng-if="totalunread()">@{{ totalunread() }}</span> Inbox </a>
+                    </li>
+                     <li><a data-toggle="tab" href="#sentbox" ng-click="getSentBox()"  id="sendbox"> Sent </a>
+                    </li>  
+                </ul>
+            </div>
         </div>
 
         <div class="tab-content">
@@ -104,7 +107,7 @@
             <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
         </div>
 
-          <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10 col-lg-10">
+          <div ng-show="Inbox" ng-cloak class="col-sm-10 col-md-10">
             <!-- Nav tabs -->
                 <h3> Inbox </h3>
                
@@ -150,6 +153,7 @@
                     </div>
                     </div>
 
+                    <!-- Sent box tab -->
                     <div id="sentbox" class="tab-pane fade">
                             
                             <div id="loadSentbox" style="width:100%; ">

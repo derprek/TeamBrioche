@@ -71,13 +71,13 @@
             <!-- /.row -->
 
     <div class="row">
-
-        <div class="col-sm-2 col-md-2" style="padding:3%;">
-             <a href="#" class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></a>
-            <hr />
-            
-            <a class="directionLinks pull-left" href="/../mailbox"> <i class="fa fa-chevron-left"></i>  Mailbox </a>
-            
+        <br><br>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+             <div ng-cloak class="col-lg-9">
+                <a href="#" class="btn btn-success btn-sm btn-block" role="button" ng-click="startAdd()"> <i class="fa fa-pencil"></i> <p style="font-size:1em;">Compose</p></a>
+                <hr>
+                <a class="directionLinks pull-left" href="/../mailbox"> <i class="fa fa-chevron-left"></i>  Mailbox </a>
+            </div>
         </div>
 
         <div id="loadthreadpage" style="width:100%; ">
@@ -120,7 +120,7 @@
                           @{{ message.content }}
                         </uib-accordion-group>
 
-                        <uib-accordion-group  is-open="true" ng-if="totalunreadmessages() !== '0' && message.id === getfirstID()">
+                        <uib-accordion-group  is-open="true" ng-if="totalunreadmessages() === 0  && message.id === getfirstID()">
                           <uib-accordion-heading id="firstmessage">
                            <span class="pull-left" style="width:20%;">From: @{{ message.sender_name }} </span>  
                             <span> @{{ message.title }} </span>  
