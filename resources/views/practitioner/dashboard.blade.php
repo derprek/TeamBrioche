@@ -40,7 +40,8 @@
 
             <div class="col-lg-12">
 
-            <br>
+                <br>
+
                 <div class="jumbotron">
 
                     <div class="container">
@@ -48,23 +49,33 @@
                             <h3>Greetings, Practitioner!</h3>
 
                             <p> Who shall we help today?</p>
+
+
+                            <br><p>Currently, you have :<p/>
+
+                            <p>  of clients, <br>
+                                {{ $my_reports }}  report(s),and<br>
+                                {{ $shared_reports }} shared reports. <br></p>
+
+
+
                             <hr>
                             <span class="pull-left">
                                 <a class="btn btn-success btn-lg"
-                                  href="{{ url('reports/assessment/new') }}"
-                                  role="button">Create a new Report</a>
+                                   href="{{ url('reports/assessment/new') }}"
+                                   role="button">Create a new Report</a>
 
-                                  @if(isset($latest_report))
-                                      <a class="btn btn-primary btn-lg" style="padding-left:20px;"
-                                      href="/reports/overview/{{ $latest_report->id }}"
-                                      role="button">View your latest Report</a>
-                                  @endif
+                                @if(isset($latest_report))
+                                    <a class="btn btn-primary btn-lg" style="padding-left:20px;"
+                                       href="/reports/overview/{{ $latest_report->id }}"
+                                       role="button">View your latest Report</a>
+                                @endif
                             </span>
                         </div>
                     </div>
                 </div>
 
-            <br>
+                <br>
 
             </div>
         </div>
