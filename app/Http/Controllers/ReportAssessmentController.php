@@ -186,7 +186,9 @@ class ReportAssessmentController extends Controller
             $versionlist = array();
             foreach ($versions as $version) 
             {   
-                $practitioner = $practitioners->where('id', $version->prac_id)->first();
+                $practitioners = Practitioner::all();
+                $practitioner = $practitioners->where('id', $report->prac_id)->first();
+
                 if($practitioner->id === Session::get('prac_id'))
                 {
                     $practitioner_name = 'You';
@@ -220,9 +222,6 @@ class ReportAssessmentController extends Controller
                  $i++;
             }  
         }
-
-        $practitioners = Practitioner::all();
-        $practitioner = $practitioners->where('id', $report->prac_id)->first();
 
         $categories_id = $assessment->questions()->where('version_id','=',$assessment->current_version)->distinct()->orderBy('category_id', 'ASC')->lists('category_id');
 

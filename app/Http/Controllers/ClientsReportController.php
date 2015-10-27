@@ -58,7 +58,7 @@ class ClientsReportController extends Controller
 
         $latestreport = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
 
-        return view('Client.reportarchives', compact('report','report_step', 'reporthistory','latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
+        return view('Client.reportarchives', compact('report','report_step', 'reporthistory','latestreport', 'answerlist', 'questionlist', 'evaluation_count'));
 
     }
 

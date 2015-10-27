@@ -47,7 +47,7 @@ class ClientAuthController extends Controller
         else
         {
             $errors[] = 'Invalid Credentials! Please try again';
-            return Redirect()->back()->withErrors($errors);
+            return redirect()->back()->withErrors($errors);
         }
 
     }
