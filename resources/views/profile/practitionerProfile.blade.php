@@ -118,6 +118,7 @@
                         <input type="submit" value="Update" class="btn btn-primary ">
                     </div>
                 </div>
+                @include('partials.changePasswordModal')
             </form>
 
         </div>

@@ -53,9 +53,15 @@ class PractitionersController extends Controller
     {   
         $latest_report = Report::latest('updated_at')->Practitioner()->first();
 
+        $my_reports = count(Report::Practitioner()->lists('id'));
+
+        $practitioner = Practitioner::GetCurrent()->first();
+        $shared_reports = count($practitioner->reports()->lists('id'));
+
+
         if($latest_report !== null)
         {
-            return view('practitioner.dashboard',compact('latest_report'));           
+            return view('practitioner.dashboard',compact('latest_report','my_reports','shared_reports'));
         }
         else
         {
@@ -64,10 +70,6 @@ class PractitionersController extends Controller
 
     }
 
-    public function angular()
-    {   
-        return view('angulartest');
-    }
 
     
 }

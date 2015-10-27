@@ -43,41 +43,33 @@
 
             <div class="col-lg-12">
 
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Dashboard</a></li>
 
+                @if ((count($errors) > 0) OR (Session::has('flash_message')))
+                    <div id="home" class="tab-pane fade">
+                        @else
+                                <!-- Home tab -->
+                        <div id="home" class="tab-pane fade in active">
+                            @endif
+                            <br>
 
-                </ul>
+                            <div class="jumbotron">
+                                <div class="container">
+                                    <h3>Greetings, Administrator!</h3>
 
-
-                <div class="tab-content">
-                    @if ((count($errors) > 0) OR (Session::has('flash_message')))
-                        <div id="home" class="tab-pane fade">
-                            @else
-                                    <!-- Home tab -->
-                            <div id="home" class="tab-pane fade in active">
-                                @endif
-                                <br>
-
-                                <div class="jumbotron">
-                                    <div class="container">
-                                        <h3>Greetings, Administrator!</h3>
-
-                                        <p> Who shall we help today?</p>
-                                        <hr>
-                                        <p><a class="btn btn-success btn-lg"
-                                              href="{{ url('admin/reportmanager') }}"
-                                              role="button">View All Reports</a></p>
-                                    </div>
+                                    <p> Who shall we help today?</p>
+                                    <hr>
+                                    <p><a class="btn btn-success btn-lg"
+                                          href="{{ url('admin/reportmanager') }}"
+                                          role="button">View All Reports</a></p>
                                 </div>
                             </div>
-                            <!-- notification tab -->
-
                         </div>
-                        <hr>
+                        <!-- notification tab -->
 
-                </div>
-                <!-- /.tab-content -->
+                    </div>
+                    <hr>
+
+
             </div>
             <!-- /.col-lg-12 -->
         </div>

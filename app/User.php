@@ -51,6 +51,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $query->where('email', '=', $email);
     }
 
+
     /**
      *
      * The attributes that are mass assignable.

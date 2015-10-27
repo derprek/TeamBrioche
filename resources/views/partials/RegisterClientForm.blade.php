@@ -58,8 +58,8 @@
                                                value="{{ old('email') }}">
                                         <br>
 
-                                        <select id="genderselect" name="gender" class="selectpicker"
-                                                data-style="btn-inverse">
+                                        <label for="gender">Gender: </label>
+                                        <select id="genderselect" name="gender" class="form-control" theme ="bootstrap">
                                             <option value='Male'>Male</option>
                                             <option value="Female">Female</option>
                                         </select>
