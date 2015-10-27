@@ -26,7 +26,7 @@
         <script>
             BootstrapDialog.show({
                 title: 'Success',
-                message: '{{ Session::pull('successful_registration')}} <strong>{{ Session::pull('email')}}.</strong> <br><br> <strong>The default password is: {{ Session::pull('defaultpassword')}}</strong>',
+                message: '{{ Session::pull('successful_registration')}} <strong>{{ Session::pull('email')}}.</strong> <br><br> <strong>The default password is: {{ Session::pull('defaultpassword')}}</strong>' ,
                 type: BootstrapDialog.TYPE_SUCCESS,
                 buttons: [{
                     label: 'Close',
@@ -40,7 +40,7 @@
         </script>
     @endif
 
-    <div>
+    <div >
         <div id="personnelmanagerApp" class="container-fluid">
 
             <!-- Page Heading -->
@@ -75,118 +75,78 @@
 
                         <div ng-controller="practitioner_informationController">
 
-                            <div id="thisPractitionerInfoLoad" style="width:100%; ">
+                            <div id = "thisPractitionerInfoLoad" style = "width:100%; ">
 
                                 @include('partials.loadinganimation')
 
-                                <div id="thisPractitionerLoad_text" style="margin-left:45%;">
-                                    <small style="margin:auto;">
+                                <div id = "thisPractitionerLoad_text" style="margin-left:45%;">
+                                    <small style="margin:auto;"  >
                                         Fetching Practitioner Information....
                                     </small>
                                 </div>
                             </div>
 
-                            <div ng-hide="Practitioner" id="emptymsg_information" class="emptymsg_container"
-                                 style="visibility:hidden;">
+                            <div ng-hide="Practitioner" id="emptymsg_information" class="emptymsg_container" style="visibility:hidden;">
                                 <h2>No Practitioners found.</h2>
-                                <a href="#" data-toggle="modal" data-target="#newclient"><h3> Click here to register
-                                        your first Practitioners. </h3></a>
+                                <a href="#" data-toggle="modal" data-target="#newclient"> <h3> Click here to register your first Practitioners. </h3> </a>
                             </div>
 
-
-                            <div class="form-horizontal col-sm-12 col-md-10 col-lg-10" ng-cloak ng-show="Practitioner">
+                            <div class="col-sm-10 col-md-10 col-lg-12" ng-cloak ng-show="Practitioner">
                                 <form role="form" method="POST" action="{{ url('/admin/updatePractitioner') }}">
-                                    <br>
 
                                     <div class="form-group" ng-cloak>
 
                                         @if (Session::has('practitioner_updateerror'))
                                             <div class="alert alert-danger">
-                                                <strong>Whoops!</strong> There were some problems with your
-                                                input.<br><br>
+                                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
                                                 <ul>
                                                     <li>The email has already been taken.</li>
                                                 </ul>
                                             </div>
                                         @endif
 
+                                        <input type="hidden" name="id" class="form-control" value="@{{ Practitioner.id }}" required>
+                                        <label>First Name:<input type="text" name="fname" class="form-control" value="@{{ Practitioner.fname }}" required>   </label>
+                                        <br>
 
-                                        <input type="hidden" name="id" class="form-control"
-                                               value="@{{ Practitioner.id }}" required>
+                                        <label>Family Name:<input type="text" name="sname" class="form-control" value="@{{ Practitioner.sname }}" required> </label>
+                                        <br>
 
-                                        <div class="form-group">
+                                        <label> Registered Email Address: <input type="email" name="email" value="@{{ Practitioner.email }}" class="form-control" required> </label>
+                                        <br><br>
 
-                                            <label for="FirstName" class="col-sm-2 control-label">First Name</label>
-
-                                            <div class="col-sm-4">
-                                                <input type="text" name="fname" class="form-control"
-                                                       value="@{{ Practitioner.fname }}" required>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-
-                                            <label for="FamilyName" class="col-sm-2 control-label">Family Name</label>
-
-                                            <div class="col-sm-4">
-                                                <input type="text" name="fname" class="form-control"
-                                                       value="@{{ Practitioner.sname }}" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label for="Email" class="col-sm-2 control-label"> Email</label>
-
-                                            <div class="col-sm-4">
-                                                <input type="text" name="fname" class="form-control"
-                                                       value="@{{ Practitioner.email }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="submit" value="Update" class="btn btn-primary ">
-                                        </div>
-
-                                    </div>
+                                        <input type="submit" value="Update" class="btn btn-primary btn-sm ">
                                 </form>
 
                                 <hr>
                             </div>
 
-
-                            <button data-toggle="modal" data-target="#deletepersonnel" class="btn btn-danger btn-sm ">
-                                Delete Practitioner
-                            </button>
+                            <button data-toggle="modal" data-target="#deletepersonnel" class="btn btn-danger btn-sm ">Delete Practitioner</button>
 
                             <form role="form" method="POST" action="{{ url('/admin/deletePractitioner') }}">
-                                <input type="hidden" name="id" class="form-control" value="@{{ Practitioner.id }}"
-                                       required>
+                                <input type="hidden" name="id" class="form-control" value="@{{ Practitioner.id }}" required>
                             @include('partials.deletePersonnel_modal')
-                            </form>
 
                         </div>
                     </div>
-                </div>
-                <!-- /.home -->
+                </div><!-- /.home -->
 
                 <div id="clients" class="tab-pane fade">
 
                     <div ng-controller="practitioner_clientsController">
 
-                        <div id="thisPractitionerClientsLoad" style="width:100%; ">
+                        <div id = "thisPractitionerClientsLoad" style = "width:100%; ">
 
                             @include('partials.loadinganimation')
 
-                            <div id="thisPractitionerClientsLoad_text" style="margin-left:45%;">
-                                <small style="margin:auto;">
+                            <div id = "thisPractitionerClientsLoad_text" style="margin-left:45%;">
+                                <small style="margin:auto;"  >
                                     Fetching Practitioner Clients....
                                 </small>
                             </div>
                         </div>
 
-                        <div ng-hide="Clients" id="emptymsg_clients" class="emptymsg_container"
-                             style="visibility:hidden;">
+                        <div ng-hide="Clients" id="emptymsg_clients" class="emptymsg_container" style="visibility:hidden;">
                             <h2>No Clients found.</h2>
                         </div>
 
@@ -207,8 +167,7 @@
                                 </tr>
 
                                 <!-- List out reports -->
-                                <tr ng-if="Clients"
-                                    dir-paginate="client in Clients| filter:searchclient.text | filter:search.type | itemsPerPage: 8"
+                                <tr ng-if="Clients" dir-paginate="client in Clients| filter:searchclient.text | filter:search.type | itemsPerPage: 8"
                                     pagination-id="allClientsPagination">
                                     <td> @{{ client.id }} </td>
                                     <td> @{{ client.name }} </td>
@@ -225,27 +184,25 @@
 
                         </div>
                     </div>
-                </div>
-                <!-- /.reports -->
+                </div><!-- /.reports -->
 
 
                 <div id="reports" class="tab-pane fade">
 
                     <div ng-controller="practitioner_reportsController">
 
-                        <div id="thisPractitionerReportsLoad" style="width:100%; ">
+                        <div id = "thisPractitionerReportsLoad" style = "width:100%; ">
 
                             @include('partials.loadinganimation')
 
-                            <div id="thisPractitionerReportsLoad_text" style="margin-left:45%;">
-                                <small style="margin:auto;">
+                            <div id = "thisPractitionerReportsLoad_text" style="margin-left:45%;">
+                                <small style="margin:auto;"  >
                                     Fetching Practitioner Reports....
                                 </small>
                             </div>
                         </div>
 
-                        <div ng-hide="Reports" id="emptymsg_reports" class="emptymsg_container"
-                             style="visibility:hidden;">
+                        <div ng-hide="Reports" id="emptymsg_reports" class="emptymsg_container" style="visibility:hidden;">
                             <h2>No Reports found.</h2>
                         </div>
 
@@ -263,7 +220,7 @@
                                             <input type="checkbox" value="" checked ng-model='search.type'
                                                    ng-true-value="'In Progress'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            <small> In Progress</small>
+                                            <small> In Progress </small>
                                         </label>
                                     </div>
 
@@ -272,7 +229,7 @@
                                             <input type="checkbox" value="" ng-model='search.type'
                                                    ng-true-value="'Finished'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            <small> Finished</small>
+                                            <small> Finished </small>
                                         </label>
                                     </div>
                                 </div>
@@ -288,8 +245,7 @@
                                 </tr>
 
                                 <!-- List out reports -->
-                                <tr ng-if="Reports"
-                                    dir-paginate="report in Reports| filter:search.text | filter:search.type | itemsPerPage: 8"
+                                <tr ng-if="Reports" dir-paginate="report in Reports| filter:search.text | filter:search.type | itemsPerPage: 8"
                                     pagination-id="allReportsPagination">
                                     <td> @{{ report.id }} </td>
                                     <td> @{{ report.name }} </td>
@@ -308,8 +264,7 @@
 
                         </div>
                     </div>
-                </div>
-                <!-- /.reports -->
+                </div><!-- /.reports -->
 
             </div>
         </div>

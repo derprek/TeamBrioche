@@ -54,8 +54,8 @@
                             <br><p>Currently, you have :<p/>
 
                             <p>  of clients, <br>
-                                {{ $my_reports }}  report(s),and<br>
-                                {{ $shared_reports }} shared reports. <br></p>
+                             my_reports  report(s),and<br>
+                                 $shared_reports  shared reports. <br></p>
 
 
 
