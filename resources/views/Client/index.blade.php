@@ -4,7 +4,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li class="active">
-                <a href="{{ url('home') }}"><i class="fa fa-home"></i> Dashboard</a>
+                <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
             </li>
             <li>
                 <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
@@ -25,8 +25,8 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i> <a href="#">Dashboard</a>
+                        <li class="active">
+                            <i class="fa fa-home"></i>Home
                         </li>
                     </ol>
                 </div>

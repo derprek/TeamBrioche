@@ -5,7 +5,7 @@
 
         <ul class="nav navbar-nav side-nav">
             <li class="active">
-                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
             </li>
             <li>
                 <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
@@ -33,7 +33,7 @@
                     <ol class="breadcrumb">
 
                         <li class="active">
-                            <i class="fa fa-home"></i> Home
+                            <i class="fa fa-home"></i> Dashboard
                         </li>
                     </ol>
                 </div>
@@ -44,7 +44,7 @@
             <div class="col-lg-12">
 
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                    <li class="active"><a data-toggle="tab" href="#home">Dashboard</a></li>
                     <li><a data-toggle="tab" href="#notification">Notification</a></li>
 
                 </ul>

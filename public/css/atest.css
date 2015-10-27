@@ -824,9 +824,16 @@ a.selectthumbnail.active {
     width:8%;
     overflow: hidden;
 }
+.btn{
+    white-space:normal;
+}
 
 .directionLinks {
 
   color:#34495E;
   font-weight: bold;
+}
+\.form-inline .form-group{
+    margin-left: 0;
+    margin-right: 0;
 }

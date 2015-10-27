@@ -5,7 +5,7 @@
 
         <ul class="nav navbar-nav side-nav">
             <li class="active">
-                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
             </li>
             <li>
                 <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
@@ -30,7 +30,7 @@
                     <ol class="breadcrumb">
 
                         <li class="active">
-                            <i class="fa fa-home"></i> Home
+                            <i class="fa fa-home"></i> Dashboard
                         </li>
                     </ol>
                 </div>
@@ -55,7 +55,7 @@
                                   role="button">Create a new Report</a>
 
                                   @if(isset($latest_report))
-                                      <a class="btn btn-info btn-lg" style="padding-left:20px;"
+                                      <a class="btn btn-primary btn-lg" style="padding-left:20px;"
                                       href="/reports/overview/{{ $latest_report->id }}"
                                       role="button">View your latest Report</a>
                                   @endif

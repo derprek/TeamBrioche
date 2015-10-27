@@ -71,7 +71,7 @@
                               <label for="goals_typology">Goals:</label>
                            <textarea readonly name="goals_typology"
                                      class="form-control" rows="5"
-                                     placeholder="Goals + Typology"> {{$goals}}</textarea>
+                                     placeholder="Goals + Typology"> {{$goals}} </textarea>
                           </div>
                         @endif                 
 
@@ -105,7 +105,7 @@
                           <textarea class="form-control"
                             name="answersid[{{ $questionbytype->id }}]"
                             rows="3"
-                            placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                            placeholder="{{ $questionbytype->placeholder }}" ></textarea>
                           </div>
                           <!-- /.form-group -->
                         @endif
@@ -117,7 +117,7 @@
                           <textarea class="form-control"
                             name="answersid[{{ $questionbytype->id }}]"
                             rows="3"
-                            placeholder="{{ $questionbytype->placeholder }}"></textarea>
+                            placeholder="{{ $questionbytype->placeholder }}" autofocus></textarea>
                           </div>
                           <!-- /.form-group -->
 

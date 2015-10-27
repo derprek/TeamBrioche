@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>

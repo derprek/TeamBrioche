@@ -3,7 +3,7 @@
 @section('sidemenubar')
     <ul class="nav navbar-nav side-nav">
         <li>
-            <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Home</a>
+            <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
         </li>
         <li>
             <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
@@ -27,7 +27,7 @@
                     <ol class="breadcrumb">
 
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="{{ url('practitioner/dashboard') }}">Dashboard</a>
+                             <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a>
                         </li>
 
                         <li class="active">

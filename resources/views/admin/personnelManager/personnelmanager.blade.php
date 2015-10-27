@@ -5,7 +5,7 @@
 
         <ul class="nav navbar-nav side-nav">
             <li>
-                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
             </li>
             <li class="active">
                 <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
@@ -139,7 +139,7 @@
                     <td> @{{ practitioner.created_at }}</td>
                     <td>
                         <a href="/admin/viewpractitioner/@{{ practitioner.id }}"
-                           class="btn btn-info btn-sm"> View </a>
+                           class="btn btn-primary btn-sm"> View </a>
                     </td>
                 </tr>
 
@@ -199,7 +199,7 @@
                     <td> @{{ client.created_at }}</td>
                     <td>
                         <a href="/admin/viewclient/@{{ client.id }}"
-                           class="btn btn-info btn-sm"> View </a>
+                           class="btn btn-primary btn-sm"> View </a>
                     </td>
                 </tr>
 

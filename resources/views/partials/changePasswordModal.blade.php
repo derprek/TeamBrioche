@@ -36,7 +36,7 @@
                 
                             <div class="input-group">
                               <span class="input-group-addon" style="padding-right:17px;">Current Password</span>
-                              <input required type="password" class="form-control" id="current_password"
+                              <input required type="password" class="form-control" id="current_password" maxlength="50"
                                 onkeyup="checkEmpty()" name="current_password" placeholder="Enter your current password" >
                             </div> 
 
@@ -48,7 +48,7 @@
 
                             <div class="input-group">
                               <span class="input-group-addon" style="padding-right:39px;">New Password</span>
-                              <input required type="password" class="form-control" id="new_password" 
+                              <input required type="password" class="form-control" id="new_password" maxlength="50"
                                 onkeyup="checkEmpty()" name="new_password" placeholder="Enter a new password" >
                             </div> 
 
@@ -56,7 +56,7 @@
 
                             <div class="input-group">
                               <span class="input-group-addon" >Confirm Password</span>
-                              <input required type="password" class="form-control" id="confirm_password" 
+                              <input required type="password" class="form-control" id="confirm_password" maxlength="50"
                                 onkeyup="checkEmpty()" name="confirm_password" placeholder="Confirm your new password">
                             </div> 
                             <br>

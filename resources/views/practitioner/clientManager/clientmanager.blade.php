@@ -4,7 +4,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li>
-                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
             </li>
             <li class="active">
                 <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
@@ -106,7 +106,7 @@
                     <td> @{{ client.created_at }}</td>
                     <td>
                         <a href="/practitioner/viewclient/@{{ client.id }}"
-                           class="btn btn-info btn-sm"> View </a>
+                           class="btn btn-primary btn-sm"> View </a>
                     </td>
                 </tr>
 

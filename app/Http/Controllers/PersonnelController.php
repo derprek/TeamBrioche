@@ -92,8 +92,8 @@ class PersonnelController extends Controller
 
         if($successful_registration)
         {   
-            $message = "Hello, " . $newPractitioner->fname .". Your account is ready for you! Please use this default password: " 
-             . $randomgeneratedpw;
+            $message = "Hello, " . $newPractitioner->fname .". Your account is ready for you! Please log in to use this default password: "
+             . $randomgeneratedpw."\r\n\r\n Click here: uqatest.com to log in ";
 
             $email = $newPractitioner->email;
 
@@ -144,7 +144,7 @@ class PersonnelController extends Controller
         if($successful_registration)
         {   
             $message = "Hello, " . $newClient->fname .". Your account is ready for you! Please use this default password: " 
-             . $randomgeneratedpw;
+             . $randomgeneratedpw."\r\n\r\n Click here: uqatest.com to log in ";
 
             $email = $newClient->email;
 

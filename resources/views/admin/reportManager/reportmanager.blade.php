@@ -6,7 +6,7 @@
 
         <ul class="nav navbar-nav side-nav">
             <li>
-                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Home</a>
+                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
             </li>
             <li>
                 <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
@@ -119,7 +119,7 @@
                     <td> @{{ report.updated_at }}</td>
                     <td>
                         <a href="/reports/overview/@{{ report.id }}"
-                           class="btn btn-success btn-sm"> View </a>
+                           class="btn btn-primary btn-sm"> View </a>
                     </td>
                 </tr>
 

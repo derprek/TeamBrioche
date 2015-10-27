@@ -86,7 +86,7 @@
                         <div class="form-group">
 
                             <div class="col-md-12">
-                                <input type="email" class="form-control" required name="email"
+                                <input type="email" class="form-control" required name="email" maxlength="30"
                                        value="{{ old('email') }}" placeholder="&#xF007; E-mail Address"
                                        style="font-family:Arial, FontAwesome" autofocus>
                             </div>
@@ -94,7 +94,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input type="password" required class="form-control" placeholder="&#xF023; Password"
+                                <input type="password" required class="form-control" maxlength="50" placeholder="&#xF023; Password"
                                        style="font-family:Arial, FontAwesome" name="password">
                             </div>
                         </div>
@@ -148,7 +148,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input type="email" class="form-control" required name="email"
+                                <input type="email" class="form-control" required name="email" maxlength="30"
                                        value="{{ old('email') }}" placeholder="&#xF007; E-mail Address"
                                        style="font-family:Arial, FontAwesome" autofocus>
 
@@ -158,7 +158,7 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <input type="password" required class="form-control" placeholder="&#xF023; Password"
-                                       style="font-family:Arial, FontAwesome" name="password">
+                                       maxlength="50" style="font-family:Arial, FontAwesome" name="password">
                             </div>
                         </div>
 
