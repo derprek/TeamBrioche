@@ -296,6 +296,11 @@ class ClientManagerController extends Controller
     {     
        $client = User::find($request->id);
 
+       if($client === null)
+       {
+         return redirect('/unauthorizedaccess');
+       }
+
         if((Session::has('is_admin')) || ($client->prac_id === Session::get('prac_id')))
         {
             if($client === null)

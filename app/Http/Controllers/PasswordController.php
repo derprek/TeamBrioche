@@ -204,9 +204,137 @@ class PasswordController extends Controller
     }
 
     
-    public function newuser($password)
+    public function newuser(Request $request)
     {
+        if(isset($request->registered_email))
+        {
+            if($request->registered_email !== $request->email)
+            {
+                Session::put('invalid_user','Invalid Email provided');
+                return redirect()->back();
+            }
+        }
         
-        dd($password);
+        Session::put('registered_email' , $request->email);
+        
+        return redirect('setpassword');     
+
     }
+
+    public function setpasswordpage()
+    {   
+        $registered_email = Session::pull('registered_email');
+        $is_verified = false;
+
+        return view('profile.setnewpassword',compact('is_verified','registered_email'));     
+    }
+
+    public function setfirstpassword(Request $request)
+    {
+         $validator = Validator::make($request->all(), [
+           'new_password' => 'required|min:7',
+           'confirm_password' => 'required|same:new_password', 
+        ]);
+
+         if ($validator->fails()) 
+         { 
+               Session::put('password_error','Your passwords do not match');
+               return redirect()->back();
+         }
+
+            if(!Session::has('new_user_email'))
+            {
+                return redirect('/unauthorizedaccess');
+            }
+
+
+            $get_user = User::ValidateEmail(Session::get('new_user_email'))->first();
+
+            if($get_user !== null)
+            {
+                $client = $get_user;
+                $client->password = $request->new_password;
+                $client->verified = 1;
+                $saved = $client->save();  
+
+                if($saved)
+                {
+                    Auth::login($client);
+                }
+
+                Session::flash('flash_message','Congratulations on your new account!');
+                return redirect('home');
+            }
+            else
+            {
+                 $get_user = Practitioner::ValidateEmail(Session::get('new_user_email'))->first();
+            }
+
+            if($get_user !== null)
+            {
+                if(!isset($client))
+                {
+                    $practitioner = $get_user;
+
+                    $practitioner->password = $request->new_password;
+                    $practitioner->verified = 1;
+                    $saved = $practitioner->save();
+
+                    Session::flash('flash_message','Your password has been successfully updated');
+                    
+                    if($practitioner->usertype === 'admin')
+                    {
+                         return redirect('admin/dashboard');
+                    }
+                    else
+                    {
+                         return redirect('practitioner/dashboard');
+                    }
+                }
+            }
+
+            if(!isset($saved))
+            {
+                return redirect('/unauthorizedaccess');
+            }
+        
+
+        return view('profile.setnewpassword',compact('is_verified'));     
+
+    }
+
+    public function validateuser($password)
+    {   
+        Session::forget('new_user_email');
+
+        if((Auth::check()) || (Session::has('prac_id')))
+        {
+            $invalid = true;
+        }
+        $clients = User::GetUnverified()->get();
+
+        foreach($clients as $client)
+        {
+            if (Hash::check($password, $client->password))
+            {
+                $get_new_user = $client;
+            }
+        }
+
+        if($get_new_user === null)
+        {
+            $get_new_user = Practitioner::GetUnverified()->ValidatePassword(MD5($password))->first();
+        }
+
+        if($get_new_user === null)
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
+        Session::put('new_user_email', $get_new_user->email);
+
+        return view('profile.validatenewuser');     
+     }
+
+    
 }

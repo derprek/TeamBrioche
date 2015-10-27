@@ -14,7 +14,7 @@
                             <ul>
                                  @if(Session::has('password_error'))
 
-                                    <li> {{ Session::get('password_error') }}</li>
+                                    <li> {{ Session::pull('password_error') }}</li>
 
                                  @endif
                                
@@ -66,10 +66,22 @@
                                     <i class="fa fa-trash"></i></i>Update Password
                                 </button>
 
+                                @if((Auth::guest()) && (!Session::has('prac_id')))
+
+                                <a href="/../"class="btn btn-primary pull-left">
+                                   <i class="fa fa-home"></i> Back to home page
+                                </a>
+
+                                @endif
+
+                                @unless(Auth::guest())
+
                                 <button type="submit" class="btn btn-danger pull-left"
                                         data-dismiss="modal">
                                     <i class="fa fa-times"></i> Cancel
                                 </button>
+
+                                @endunless
 
                             </div>
                             <!-- /.modal-footer -->
