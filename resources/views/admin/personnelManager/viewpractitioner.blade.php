@@ -95,7 +95,7 @@
                                       action="{{ url('/admin/updatePractitioner') }}">
 
                                     <div class="form-group" ng-cloak>
-                                        <BR>
+                                        <br>
 
                                         @if (Session::has('practitioner_updateerror'))
                                             <div class="alert alert-danger">
@@ -159,7 +159,7 @@
                                            required>
                                     @include('partials.deletePersonnel_modal')
                                 </form>
-                            
+                            </div>
                         </div>
                     </div>
                     <!-- /.home -->
