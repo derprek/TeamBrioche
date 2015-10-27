@@ -23,17 +23,6 @@ use Hash;
 
 class PasswordController extends Controller
 {
-    public function __construct()
-    {
-        $this->beforeFilter(function(){
-           
-               if ((Auth::guest()) && (!Session::has('prac_id')))
-               {
-                    return redirect('/unauthorizedaccess');
-               }
-        });
-    }
-    
     /**
      * Display a listing of the resource.
      *
