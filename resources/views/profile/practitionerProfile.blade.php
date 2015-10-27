@@ -85,8 +85,9 @@
             @endif
 
             <br>
-                <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
-                      action="{{ url('updateprofile') }}">
+
+            <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+                  action="{{ url('updateprofile') }}">
 
                 <div class="form-group">
                     <label for="FirstName" class="col-sm-2 control-label">First Name</label>
@@ -115,7 +116,7 @@
                                required>
                     </div>
                     <div class="col-sm-4">
-                       <button type="submit" class="btn btn-primary "> Update</button>
+                        <button type="submit" class="btn btn-primary "> Update</button>
                     </div>
                 </div>
             </form>
@@ -125,9 +126,9 @@
         <hr class="col-lg-12" style="border-top: solid 3px;">
 
         <div class="row col-lg-12">
-            <form class="form-horizontal col-sm-12 col-md-10 col-lg-10">
-
-               <div class="form-group">
+            <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+                  action="{{ url('updatepassword') }}">
+                <div class="form-group">
                     <label for="Password" class="col-sm-2 control-label">Password</label>
 
                     <div class="col-sm-4">
@@ -135,8 +136,7 @@
                                 class="btn btn-default ">Change Password
                         </button>
                     </div>
-                    <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
-                          action="{{ url('updatepassword') }}">
+
                     @include('partials.changePasswordModal')
                 </div>
             </form>

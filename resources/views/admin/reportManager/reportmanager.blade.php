@@ -14,9 +14,6 @@
             <li class="active">
                 <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
             </li>
-            <li>
-                <a href="{{ url('admin/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-            </li>
         </ul>
     </div>
 @endsection

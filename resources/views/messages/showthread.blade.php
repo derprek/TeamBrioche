@@ -14,9 +14,7 @@
                 <li>
                     <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
                 </li>
-                <li>
-                    <a href="{{ url('admin/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-                </li>
+
             </ul>
         </div>
     
@@ -113,7 +111,7 @@
 
                         <uib-accordion-group  panel-class="panel-info" is-open="true" ng-if="message.sender_email !== 'You' && message.status === 'unread'" >
                           <uib-accordion-heading>
-                           <span class="pull-left" style="width:20%;">From: @{{ message.sender_name }} </span>  
+                           <span class="pull-left" style="width:20%;font-size: 0.9em;">From: @{{ message.sender_name }} </span>
                             <span>@{{ message.title }} </span>  
                             <p class="mailboxfontmedium pull-right"> @{{ message.created_at  }} </p>
                           </uib-accordion-heading>
@@ -122,7 +120,7 @@
 
                         <uib-accordion-group  is-open="true" ng-if="totalunreadmessages() === 0  && message.id === getfirstID()">
                           <uib-accordion-heading id="firstmessage">
-                           <span class="pull-left" style="width:20%;">From: @{{ message.sender_name }} </span>  
+                           <span class="pull-left" style="width:20%; font-size: 0.9em;">From: @{{ message.sender_name }} </span>
                             <span> @{{ message.title }} </span>  
                             <p class="mailboxfontmedium pull-right"> @{{ message.created_at  }} </p> 
                           </uib-accordion-heading>
@@ -132,7 +130,7 @@
                         <span ng-if="message.id !== getfirstID()" >
                         <uib-accordion-group is-open="false" ng-if="message.sender_email === 'You' || message.status !== 'unread' ">
                           <uib-accordion-heading>
-                            <span class="pull-left" style="width:20%;"> From: @{{ message.sender_name }} </span>  
+                            <span class="pull-left" style="width:20%;font-size: 0.9em;"> From: @{{ message.sender_name }} </span>
                             <span> @{{ message.title }} </span>  
                             <p class="mailboxfontmedium pull-right"> @{{ message.created_at  }} </p>
                           </uib-accordion-heading>
