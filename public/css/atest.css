@@ -833,7 +833,10 @@ a.selectthumbnail.active {
   color:#34495E;
   font-weight: bold;
 }
-\.form-inline .form-group{
+.form-inline .form-group{
     margin-left: 0;
     margin-right: 0;
+}
+.nav .nav-pills{
+    text-align: center;
 }

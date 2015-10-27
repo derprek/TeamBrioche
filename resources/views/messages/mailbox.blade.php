@@ -72,27 +72,26 @@
             </div>
             <!-- /.row -->
 
-            <div class="row">
-                <br>
-
-                <div ng-cloak class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
-                    <button class="btn btn-success btn-block" role="button" ng-click="startAdd()">
+            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div ng-cloak class="col-md-2">
+                    <button class="btn btn-success btn-block col-md2 col-lg-2" role="button" ng-click="startAdd()">
                         </i>Compose <i class="fa fa-pencil"></i>
                     </button>
-                    <hr/>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a data-toggle="tab" href="#inbox" ng-click="getInbox()"><span
-                                        class="badge pull-right" style="margin-left:2%;"
-                                        ng-if="totalunread()">@{{ totalunread() }}</span>Inbox <i
-                                        class="fa fa-inbox"></i></a>
-                        </li>
-                        <li><a data-toggle="tab" href="#sentbox" ng-click="getSentBox()" id="sendbox">Sent <i
-                                        class="fa fa-paper-plane"></i></a>
-                        </li>
+                </div>
+                <div ng-cloak class="col-md-6">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#inbox" ng-click="getInbox()">
+                    <span
+                            class="badge pull-right" style="margin-left:2%;"
+                            ng-if="totalunread()">@{{ totalunread() }}</span>Inbox </a></li>
+                        <li><a data-toggle="tab" href="#sentbox" ng-click="getSentBox()" id="sendbox">Sent</a></li>
                     </ul>
                 </div>
+            </div>
 
+            <div class="row">
                 <div class="tab-content">
+
                     <div id="inbox" class="tab-pane fade in active">
 
                         <div id="loadInbox" style="width:100%; ">
@@ -106,7 +105,7 @@
                             </div>
                         </div>
 
-                        <div ng-hide="Inbox" class="emptymsg_container" id="emptymsg" style="visibility:hidden;">
+                        <div ng-hide="Inbox" style="text-align:left" class="emptymsg_container" id="emptymsg" style="visibility:hidden;">
                             <h3>You have no mail.</h3>
                             <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
                         </div>
@@ -122,7 +121,8 @@
                             <div class="list-group"
                                  dir-paginate="inbox in Inbox | filter:inboxsearch.text | itemsPerPage: 10"
                                  pagination-id="inboxPagination">
-                                <a href="/practitioner/inbox/showthread/@{{ inbox.conv_id }}" class="list-group-item"
+                                <a href="/practitioner/inbox/showthread/@{{ inbox.conv_id }}"
+                                   class="list-group-item"
                                    data-toggle="tooltip" title="@{{ inbox.recipient_email }}">
 
                                     <i ng-if="inbox.unreadcount !== 0" class="fa fa-envelope-o"></i>
@@ -145,7 +145,8 @@
                                     <div class="message_previewtext" ng-if="inbox.unreadcount === 0"><p
                                                 class="mailboxfontmedium"> @{{ inbox.last_msg_content }}</p></div>
                                     <div class="message_previewtext_unread" ng-if="inbox.unreadcount !== 0"><strong
-                                                class="mailboxfontmedium"> @{{ inbox.last_msg_content }}</strong></div>
+                                                class="mailboxfontmedium"> @{{ inbox.last_msg_content }}</strong>
+                                    </div>
                                     <div class="message_timestamp">
                                         <small>@{{ inbox.last_msg_time }}</small>
                                     </div>
@@ -239,13 +240,13 @@
                     <!-- End of Sentbox div -->
                 </div>
                 <!-- End of tabbed content div -->
-
             </div>
-            <!-- Ad -->
-            @include('partials.messagewindow')
-
         </div>
-        <!-- /.container-fluid -->
+        <!-- Ad -->
+        @include('partials.messagewindow')
+
+    </div>
+    <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
     <br>

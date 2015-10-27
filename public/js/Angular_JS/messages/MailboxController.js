@@ -114,12 +114,10 @@ $scope.totalunread = function() {
   };
 
   $scope.fuckhenry = function() {
-    alert('sup');
     $scope.newWindow = true;
   };
 
   $scope.startAdd = function() {
-    alert('sup');
     $scope.newWindow = true;
   };
 
