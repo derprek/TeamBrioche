@@ -318,6 +318,11 @@ class ClientManagerController extends Controller
                 Session::put('flash_message', "$client_name has been successfully deleted!");
             }
 
+            if(!Session::has('is_admin'))
+            {
+              return redirect("/practitioner/clientmanager"); 
+            }
+
             return redirect("admin/personnelmanager/");
         }
         else

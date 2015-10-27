@@ -107,7 +107,7 @@
 
             @include('partials.RegisterClientForm')
 
-            <div ng-show="loadingSpinner" style="visibility:hidden;" class="overlay"></div>
+            <div ng-show="loadingSpinner" ng-cloak class="overlay"></div>
 
         </div>
         <!-- /.container-fluid -->

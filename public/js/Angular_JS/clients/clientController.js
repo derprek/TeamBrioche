@@ -32,6 +32,7 @@ clientApp.controller('clientController', ['$scope', '$http', function($scope, $h
 
       	$scope.showForm = false;
       	$scope.loadingSpinner = true;
+
       };
 
 

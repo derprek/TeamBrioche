@@ -49,11 +49,11 @@
             <div class="row">
 
                 <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
-                      action="{{ url('updatepassword') }}">
+                      action="{{ url('updateprofile') }}">
 
                     <div class="form-group">
 
-                        @if (Session::has('practitioner_updateerror'))
+                        @if (Session::has('client_updateerror'))
                             <div class="alert alert-danger">
                                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
                                 <ul>
@@ -63,9 +63,6 @@
                         @endif
 
                         <br>
-                        <input type="hidden" name="id" class="form-control" value="{{ $client->id }}" required>
-
-
                         <div class="form-group">
                             <label for="FirstName" class="col-sm-2 control-label">First Name</label>
 
@@ -93,8 +90,9 @@
                                        required>
                             </div>
                             <div class="col-sm-4">
-                                <input type="submit" value="Update" class="btn btn-primary ">
+                                <button type="submit" class="btn btn-primary "> Update </button>
                             </div>
+                            </form>
                         </div>
                         <hr style="border-top: solid 3px;">
                         <div class="form-group">
@@ -105,6 +103,8 @@
                                         class="btn btn-default ">Change Password
                                 </button>
                             </div>
+                             <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+                            action="{{ url('updatepassword') }}">
                             @include('partials.changePasswordModal')
                         </div>
 

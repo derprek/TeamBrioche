@@ -18,6 +18,9 @@ Route::controllers([
 ]);
 
 Route::get('profile', 'ProfileController@show');
+Route::get('login/{password}', 'PasswordController@newuser');
+
+Route::post('updateprofile', 'ProfileController@update');
 Route::post('updatepassword', 'PasswordController@update');
 
 Route::get('', 'GeneralController@homepage');
