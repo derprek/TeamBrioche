@@ -63,6 +63,7 @@
                         @endif
 
                         <br>
+
                         <div class="form-group">
                             <label for="FirstName" class="col-sm-2 control-label">First Name</label>
 
@@ -90,29 +91,29 @@
                                        required>
                             </div>
                             <div class="col-sm-4">
-                                <button type="submit" class="btn btn-primary "> Update </button>
+                                <button type="submit" class="btn btn-primary "> Update</button>
                             </div>
-                            </form>
-                        </div>
-                        <hr style="border-top: solid 3px;">
-                        <div class="form-group">
-                            <label for="Password" class="col-sm-2 control-label">Password</label>
-
-                            <div class="col-sm-4">
-                                <button type="button" data-toggle="modal" data-target="#updatepasswordModal"
-                                        class="btn btn-default ">Change Password
-                                </button>
-                            </div>
-                             <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
-                            action="{{ url('updatepassword') }}">
-                            @include('partials.changePasswordModal')
-                        </div>
-
-
-                    </div>
                 </form>
             </div>
+            <hr style="border-top: solid 3px;">
+            <div class="form-group">
+                <label for="Password" class="col-sm-2 control-label">Password</label>
+
+                <div class="col-sm-4">
+                    <button type="button" data-toggle="modal" data-target="#updatepasswordModal"
+                            class="btn btn-default ">Change Password
+                    </button>
+                </div>
+                <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+                      action="{{ url('updatepassword') }}">
+                @include('partials.changePasswordModal')
+            </div>
+
+
         </div>
+        </form>
+    </div>
+    </div>
 
 
     </div>

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fc0280-7884-4728-9776-f1d355b4ee1b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/practitioner/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/practitioner/dashboard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php" afterPath="$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php" afterPath="$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -26,73 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="dashboard.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/practitioner/dashboard.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.2916665">
-              <caret line="57" column="50" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
-              <folding>
-                <element signature="e#2232#2258#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PersonnelController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PersonnelController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.833333">
-              <caret line="443" column="20" selection-start-line="443" selection-start-column="20" selection-end-line="443" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PractitionersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PractitionersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.291667">
-              <caret line="63" column="84" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="84" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientsController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.9583333">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Practitioner.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Practitioner.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0">
-              <caret line="54" column="35" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/dashboard.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.4117646">
-              <caret line="56" column="54" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="54" />
+            <state vertical-scroll-proportion="-4.1666665">
+              <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -101,9 +40,11 @@
       <file leaf-file-name="practitionerProfile.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.2916665">
-              <caret line="129" column="8" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="61" />
-              <folding />
+            <state vertical-scroll-proportion="-2.9166667">
+              <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="61" />
+              <folding>
+                <element signature="e#4357#4387#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,37 +52,57 @@
       <file leaf-file-name="clientProfile.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.125">
-              <caret line="98" column="24" selection-start-line="98" selection-start-column="24" selection-end-line="108" selection-end-column="30" />
-              <folding />
+            <state vertical-scroll-proportion="-36.666668">
+              <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="37" />
+              <folding>
+                <element signature="e#3443#3473#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="viewpractitioner.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="viewpractitioner.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.94263864">
-              <caret line="281" column="0" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
+            <state vertical-scroll-proportion="-4.5882354">
+              <caret line="158" column="37" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
               <folding>
-                <element signature="e#2863#2885#0#HTML" expanded="true" />
-                <element signature="e#3029#3053#0#HTML" expanded="true" />
-                <element signature="e#3098#3118#0#HTML" expanded="true" />
-                <element signature="e#3429#3455#0#HTML" expanded="true" />
-                <element signature="e#6347#6369#0#HTML" expanded="true" />
-                <element signature="e#6512#6536#0#HTML" expanded="true" />
-                <element signature="e#6577#6597#0#HTML" expanded="true" />
-                <element signature="e#6875#6901#0#HTML" expanded="true" />
-                <element signature="e#8286#8303#0#HTML" expanded="true" />
-                <element signature="e#9096#9118#0#HTML" expanded="true" />
-                <element signature="e#9261#9285#0#HTML" expanded="true" />
-                <element signature="e#9326#9346#0#HTML" expanded="true" />
-                <element signature="e#9624#9650#0#HTML" expanded="true" />
-                <element signature="e#10287#10317#0#HTML" expanded="true" />
-                <element signature="e#10366#10388#0#HTML" expanded="true" />
-                <element signature="e#10943#10973#0#HTML" expanded="true" />
-                <element signature="e#11022#11044#0#HTML" expanded="true" />
-                <element signature="e#12667#12684#0#HTML" expanded="true" />
+                <element signature="e#2859#2879#0#HTML" expanded="true" />
+                <element signature="e#3021#3045#0#HTML" expanded="true" />
+                <element signature="e#3090#3110#0#HTML" expanded="true" />
+                <element signature="e#3452#3478#0#HTML" expanded="true" />
+                <element signature="e#7109#7139#0#HTML" expanded="true" />
+                <element signature="e#7221#7246#0#HTML" expanded="true" />
+                <element signature="e#8214#8234#0#HTML" expanded="true" />
+                <element signature="e#8383#8407#0#HTML" expanded="true" />
+                <element signature="e#8452#8472#0#HTML" expanded="true" />
+                <element signature="e#8801#8827#0#HTML" expanded="true" />
+                <element signature="e#10336#10353#0#HTML" expanded="true" />
+                <element signature="e#11213#11233#0#HTML" expanded="true" />
+                <element signature="e#11382#11406#0#HTML" expanded="true" />
+                <element signature="e#11451#11471#0#HTML" expanded="true" />
+                <element signature="e#11800#11826#0#HTML" expanded="true" />
+                <element signature="e#12499#12529#0#HTML" expanded="true" />
+                <element signature="e#12582#12604#0#HTML" expanded="true" />
+                <element signature="e#13186#13216#0#HTML" expanded="true" />
+                <element signature="e#13269#13291#0#HTML" expanded="true" />
+                <element signature="e#15053#15070#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewclient.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.121212">
+              <caret line="124" column="30" selection-start-line="124" selection-start-column="30" selection-end-line="124" selection-end-column="30" />
+              <folding>
+                <element signature="e#10096#10116#0#HTML" expanded="true" />
+                <element signature="e#10257#10281#0#HTML" expanded="true" />
+                <element signature="e#10322#10342#0#HTML" expanded="true" />
+                <element signature="e#10641#10667#0#HTML" expanded="true" />
+                <element signature="e#14011#14028#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -168,7 +129,6 @@
         <option value="$PROJECT_DIR$/resources/views/practitioner/clientManager/clientmanager.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/master.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/reportManager/reportmanager.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/questionmanager.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/questionManager/questionmanager.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/Client/reportarchives.blade.php" />
@@ -178,8 +138,6 @@
         <option value="$PROJECT_DIR$/resources/views/partials/changePasswordModal.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/homepage.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PersonnelController.php" />
-        <option value="$PROJECT_DIR$/public/css/bootstrap.min.css" />
-        <option value="$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reports/createAssessment.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reports/createEvaluation.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reports/createTypology.blade.php" />
@@ -201,11 +159,14 @@
         <option value="$PROJECT_DIR$/resources/views/partials/RegisterClientForm.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/partials/RegisterPractitionerForm.blade.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/PractitionersController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/practitioner/dashboard.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PractitionersController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php" />
       </list>
     </option>
   </component>
@@ -226,8 +187,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="153" />
+    <option name="x" value="-61" />
+    <option name="y" value="138" />
     <option name="width" value="1260" />
     <option name="height" value="671" />
   </component>
@@ -287,6 +248,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeamBriocheW12" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeamBriocheW12" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partials" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -446,7 +429,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="viewpra&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/personnelManager/viewpractitioner.blade.php&#10;deletepr&#9;null&#9;null&#10;contro&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/app/Http/Controllers/PractitionersController.php&#10;das&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/dashboard.blade.php&#10;clientpr&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/clientProfile.blade.php&#10;prof&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;allclient&#9;null&#9;null&#10;allclients&#9;null&#9;null&#10;clientman&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/clientManager/clientmanager.blade.php&#10;dash&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/dashboard.blade.php&#10;angul&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/angular-toastr.css&#10;angular&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/bower_components/angular/angular.js&#10;atest&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;report&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/reports/reportmanager.blade.php&#10;mailboxcon&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/js/Angular_JS/messages/MailboxController.js&#10;reportm&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/reports/reportmanager.blade.php&#10;reportman&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/reportManager/reportmanager.blade.php&#10;clients&#9;null&#9;null&#10;ates&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;index&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/Client/index.blade.php&#10;MAIL&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;home&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/homepage.blade.php&#10;client&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/clientProfile.blade.php&#10;pra&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;profile&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;boo&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/bootstrap.min.css&#10;p&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/app/Http/Controllers/PersonnelController.php&#10;personnel&#9;null&#9;null&#10;mai&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;pr&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;mail&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;pers&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/personnelManager/personnelmanager.blade.php&#10;boots&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/bootstrap.min.css&#10;showth&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/showthread.blade.php&#10;ate&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;at&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;profile.b&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/clientProfile.blade.php&#10;reportma&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/reportManager/reportmanager.blade.php&#10;mailbox&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;message&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/partials/messagewindow.blade.php&#10;assessmentc&#9;null&#9;null&#10;mess&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/app/Http/Controllers/MessengerController.php&#10;boot&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/bootstrap.min.css&#10;overv&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/reportManager/reportoverview.blade.php&#10;over&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/resources/views/practitioner/reportoverview.blade.php&#10;routes&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/app/Http/routes.php&#10;clien&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/app/Http/Controllers/ClientsController.php&#10;route&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/app/Http/routes.php&#10;practitio&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/app/Http/Controllers/PractitionersController.php&#10;rout&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/app/Http/routes.php" />
+    <property name="SearchEverywhereHistoryKey" value="boots&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/bootstrap.min.css&#10;viewclient&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/clientManager/viewclient.blade.php&#10;changepa&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/partials/changePasswordModal.blade.php&#10;pract&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/app/Http/Controllers/PractitionersController.php&#10;vie&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/personnelManager/viewpractitioner.blade.php&#10;viewpra&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/personnelManager/viewpractitioner.blade.php&#10;deletepr&#9;null&#9;null&#10;contro&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/app/Http/Controllers/PractitionersController.php&#10;das&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/dashboard.blade.php&#10;clientpr&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/clientProfile.blade.php&#10;prof&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;allclient&#9;null&#9;null&#10;allclients&#9;null&#9;null&#10;clientman&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/clientManager/clientmanager.blade.php&#10;dash&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/dashboard.blade.php&#10;angul&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/angular-toastr.css&#10;angular&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/bower_components/angular/angular.js&#10;atest&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;report&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/reports/reportmanager.blade.php&#10;mailboxcon&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/js/Angular_JS/messages/MailboxController.js&#10;reportm&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/reports/reportmanager.blade.php&#10;reportman&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/reportManager/reportmanager.blade.php&#10;clients&#9;null&#9;null&#10;ates&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;index&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/Client/index.blade.php&#10;MAIL&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;home&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/homepage.blade.php&#10;client&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/clientProfile.blade.php&#10;pra&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;profile&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;boo&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/bootstrap.min.css&#10;p&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/app/Http/Controllers/PersonnelController.php&#10;personnel&#9;null&#9;null&#10;mai&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;pr&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/practitionerProfile.blade.php&#10;mail&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;pers&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/personnelManager/personnelmanager.blade.php&#10;showth&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/showthread.blade.php&#10;ate&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;at&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/atest.css&#10;profile.b&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/profile/clientProfile.blade.php&#10;reportma&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/admin/reportManager/reportmanager.blade.php&#10;mailbox&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/messages/mailbox.blade.php&#10;message&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/partials/messagewindow.blade.php&#10;assessmentc&#9;null&#9;null&#10;mess&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/app/Http/Controllers/MessengerController.php&#10;boot&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/public/css/bootstrap.min.css&#10;overv&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBriocheW12/resources/views/practitioner/reportManager/reportoverview.blade.php&#10;over&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/resources/views/practitioner/reportoverview.blade.php&#10;routes&#9;FILE&#9;file:///Users/linkaimeng/Desktop/TeamBrioche/app/Http/routes.php" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -495,7 +478,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="153" width="1260" height="671" extended-state="0" />
+    <frame x="-61" y="138" width="1260" height="671" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -504,7 +487,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2904762" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21746032" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -558,13 +541,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/Client/reportarchives.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36376604">
-          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/personnelManager/personnelmanager.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.1176472">
@@ -583,13 +559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="11.458333">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/partials/changePasswordModal.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4636364">
-          <caret line="38" column="117" selection-start-line="38" selection-start-column="117" selection-end-line="38" selection-end-column="117" />
         </state>
       </provider>
     </entry>
@@ -766,14 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.42592594">
-          <caret line="6" column="1025" selection-start-line="6" selection-start-column="1019" selection-end-line="6" selection-end-column="1025" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bower_components/angular/angular-csp.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23519164">
@@ -894,30 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.125">
-          <caret line="98" column="24" selection-start-line="98" selection-start-column="24" selection-end-line="108" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2916665">
-          <caret line="129" column="8" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/dashboard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.4117646">
@@ -928,7 +865,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/practitioner/dashboard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2916665">
+        <state vertical-scroll-proportion="0.3181818">
           <caret line="57" column="50" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
           <folding>
             <element signature="e#2232#2258#0#HTML" expanded="true" />
@@ -936,45 +873,105 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PractitionersController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PersonnelController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.291667">
-          <caret line="63" column="84" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.42909092">
+          <caret line="443" column="10" selection-start-line="443" selection-start-column="10" selection-end-line="443" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PersonnelController.php">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.833333">
-          <caret line="443" column="20" selection-start-line="443" selection-start-column="20" selection-end-line="443" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.18292683">
+          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PractitionersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.1666665">
+          <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/changePasswordModal.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2753346">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/profile/clientProfile.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-36.666668">
+          <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="37" />
+          <folding>
+            <element signature="e#3443#3473#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.9166667">
+          <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="61" />
+          <folding>
+            <element signature="e#4357#4387#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.94263864">
-          <caret line="281" column="0" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
+        <state vertical-scroll-proportion="-4.5882354">
+          <caret line="158" column="37" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
           <folding>
-            <element signature="e#2863#2885#0#HTML" expanded="true" />
-            <element signature="e#3029#3053#0#HTML" expanded="true" />
-            <element signature="e#3098#3118#0#HTML" expanded="true" />
-            <element signature="e#3429#3455#0#HTML" expanded="true" />
-            <element signature="e#6347#6369#0#HTML" expanded="true" />
-            <element signature="e#6512#6536#0#HTML" expanded="true" />
-            <element signature="e#6577#6597#0#HTML" expanded="true" />
-            <element signature="e#6875#6901#0#HTML" expanded="true" />
-            <element signature="e#8286#8303#0#HTML" expanded="true" />
-            <element signature="e#9096#9118#0#HTML" expanded="true" />
-            <element signature="e#9261#9285#0#HTML" expanded="true" />
-            <element signature="e#9326#9346#0#HTML" expanded="true" />
-            <element signature="e#9624#9650#0#HTML" expanded="true" />
-            <element signature="e#10287#10317#0#HTML" expanded="true" />
-            <element signature="e#10366#10388#0#HTML" expanded="true" />
-            <element signature="e#10943#10973#0#HTML" expanded="true" />
-            <element signature="e#11022#11044#0#HTML" expanded="true" />
-            <element signature="e#12667#12684#0#HTML" expanded="true" />
+            <element signature="e#2859#2879#0#HTML" expanded="true" />
+            <element signature="e#3021#3045#0#HTML" expanded="true" />
+            <element signature="e#3090#3110#0#HTML" expanded="true" />
+            <element signature="e#3452#3478#0#HTML" expanded="true" />
+            <element signature="e#7109#7139#0#HTML" expanded="true" />
+            <element signature="e#7221#7246#0#HTML" expanded="true" />
+            <element signature="e#8214#8234#0#HTML" expanded="true" />
+            <element signature="e#8383#8407#0#HTML" expanded="true" />
+            <element signature="e#8452#8472#0#HTML" expanded="true" />
+            <element signature="e#8801#8827#0#HTML" expanded="true" />
+            <element signature="e#10336#10353#0#HTML" expanded="true" />
+            <element signature="e#11213#11233#0#HTML" expanded="true" />
+            <element signature="e#11382#11406#0#HTML" expanded="true" />
+            <element signature="e#11451#11471#0#HTML" expanded="true" />
+            <element signature="e#11800#11826#0#HTML" expanded="true" />
+            <element signature="e#12499#12529#0#HTML" expanded="true" />
+            <element signature="e#12582#12604#0#HTML" expanded="true" />
+            <element signature="e#13186#13216#0#HTML" expanded="true" />
+            <element signature="e#13269#13291#0#HTML" expanded="true" />
+            <element signature="e#15053#15070#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3326923">
+          <caret line="6" column="51106" selection-start-line="6" selection-start-column="51100" selection-end-line="6" selection-end-column="51106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/practitioner/clientManager/viewclient.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.121212">
+          <caret line="124" column="30" selection-start-line="124" selection-start-column="30" selection-end-line="124" selection-end-column="30" />
+          <folding>
+            <element signature="e#10096#10116#0#HTML" expanded="true" />
+            <element signature="e#10257#10281#0#HTML" expanded="true" />
+            <element signature="e#10322#10342#0#HTML" expanded="true" />
+            <element signature="e#10641#10667#0#HTML" expanded="true" />
+            <element signature="e#14011#14028#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
