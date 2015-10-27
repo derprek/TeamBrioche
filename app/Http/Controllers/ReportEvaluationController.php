@@ -30,7 +30,7 @@ class ReportEvaluationController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            
+
                if ((Auth::guest()) && (!Session::has('prac_id')))
                {
                     return redirect('/unauthorizedaccess');
@@ -163,8 +163,42 @@ class ReportEvaluationController extends Controller
      */
     public function overview($report_id)
     {   
-        $evaluations = Evaluation::GetEvaluation($report_id)->latest('updated_at')->get();
         $report = Report::find($report_id);
+
+        if($report !== null)
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
+        if((Session::has('prac_id')) && (!Session::has('is_admin')))
+        {
+            $allowed_list = $report->practitioners()->lists('practitioner_id');
+        
+                foreach($allowed_list as $practitioner)
+                {
+                    if ($practitioner === $str) 
+                    {
+                        $validated = true;
+                    } 
+                }
+
+                if(!isset($validated))
+                {
+                    return redirect('/unauthorizedaccess');
+                }
+        }
+        
+        if(Auth::check())
+        {
+            if(Auth::user()->id !== $report->userid)
+            {
+                return redirect('/unauthorizedaccess');
+            }
+        }
+
+        $evaluations = Evaluation::GetEvaluation($report_id)->latest('updated_at')->get();
+
+       
         $client = User::find($report->id);
         $practitioners = Practitioner::all();
 
@@ -208,6 +242,7 @@ class ReportEvaluationController extends Controller
     public function show($evaluation_id)
     {
         $evaluation = Evaluation::find($evaluation_id);
+
         $practitioner = Practitioner::find($evaluation->prac_id);
         $report = Report::find($evaluation->report_id);
         $client = User::find($report->userid); 

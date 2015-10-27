@@ -145,32 +145,28 @@
 
                                             @elseif($report_step === 2)
 
+                                                <div class="panel-footer">
+
                                                 @unless((Auth::check()) || (Session::has('is_admin')))
                                                     <span class="pull-left"><a
                                                             href="{{ url('/reports/evaluation/new',$report->id) }}">
                                                         <i class="fa fa-plus"></i> Create New
                                                     </a></span>
+                                                    <div class="clearfix"></div>
                                                 @endunless
 
                                                  </div>
 
                                             @endif
-
-                                       
-                               
-
-                                          
                                                 <!-- .body -->
-                                    
-
-                                    </div>
-
-                                 </div>
-
-                
-                </div>
+              
                 <!-- .panel-atest-->
 
-                @unless(Auth::check())
-                    </div>
+                @if(Auth::check())
+                  </div>
+                  </div>
+                  </div>  
+                  </div>
+                </div>
+                
                 @endunless

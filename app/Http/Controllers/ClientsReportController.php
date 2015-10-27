@@ -47,12 +47,16 @@ class ClientsReportController extends Controller
     {
         $report = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
 
-        $report_step = $report->step;
+        if($report !== null)
+        {   
+            $report_step = $report->step;
 
-        if ($report_step === 3)
-        {
-            $evaluation_count = count(Evaluation::GetEvaluation($report->id)->get());
+            if ($report_step === 3)
+            {
+                $evaluation_count = count(Evaluation::GetEvaluation($report->id)->get());
+            }
         }
+        
 
         $reporthistory = Report::GetUserReports()->get();
 
