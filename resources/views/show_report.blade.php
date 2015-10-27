@@ -29,7 +29,7 @@
                 @endunless
                  </div>
 
-                <div class="tab-content" >
+                <div class="tab-content" id="answercontainer">
 
                 <?php $i = 0; ?>
                 @foreach($answerlist as $answerbycat)
@@ -151,8 +151,9 @@
                         <a class="btn btn-primary btnNext" href="#">Next Section</a>
 
                     @endif
-
-                    <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-cloud-upload"></i> {{$submitButtonText}}</button>
+                    @unless(Auth::check())
+                     <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-file-o"></i> {{$submitButtonText}}</button>
+                    @endunless
                     </div> 
 
                     </form>
@@ -163,6 +164,13 @@
                 </div>    
                 <!-- old -->
           </div>      
+
+          @if(Auth::check())
+
+            <script>
+             $("#answercontainer").find(':text,textarea').prop('readonly',true);
+            </script>
+          @endif
 
           <script>
 

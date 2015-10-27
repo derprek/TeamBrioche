@@ -1,4 +1,4 @@
-@extends('adminmaster')
+@extends('practitionermaster')
 
 @section('sidemenubar')
 
@@ -58,7 +58,6 @@
                 action: function (dialogItself) {
                     dialogItself.close();
                 }
-
             }]
         });
     </script>
@@ -126,6 +125,8 @@
                 <div class="form-group" ng-cloak>
 
                     @if (Session::has('client_updateerror'))
+                        {{Session::forget('client_updateerror')}}
+                    <br>
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> There were some problems with your input.<br><br>
                             <ul>                                     
@@ -160,7 +161,7 @@
 
                  <button type="button" data-toggle="modal" data-target="#deletepersonnel" class="btn btn-danger btn-sm ">Delete Client</button>
 
-                 <form role="form" method="POST" action="{{ url('/admin/deleteClient') }}">
+                 <form role="form" method="POST" action="{{ url('/deleteClient') }}">
                  <input type="hidden" name="id" class="form-control" value="@{{ Client.id }}" required>
 
                  @include('partials.deletePersonnel_modal')
@@ -190,6 +191,9 @@
 
             <div ng-hide="Reports" id="emptymsg_reports" class="emptymsg_container" style="visibility:hidden;">
                 <h2>No Reports found.</h2>
+                @unless(Session::has('is_admin'))
+                    <h3><a href="{{ url('reports/assessment/new') }}" role="button">Start one by clicking here.</a></h3>
+                @endunless
             </div>
 
             <div class="col-sm-10 col-md-10 col-lg-12" ng-cloak ng-show="Reports">
@@ -221,12 +225,12 @@
                     </div>
                     <hr>
 
-                    <tr ng-show="Reports">
-                        <th>Report Number</th>
-                        <th>Created on</th>
-                        <th>Updated on</th>
-                        <th>Status</th>
-                        <th>Edit</th>
+                    <tr ng-show="(Reports| filter:search.text | filter:search.type).length > 0">
+                        <th class="smallRow">Report Number</th>
+                        <th class="mediumRow">Created on</th>
+                        <th class="mediumRow">Updated on</th>
+                        <th class="mediumRow">Status</th>
+                        <th class="smallRow">View</th>
                     </tr>
 
                     <!-- List out reports -->
@@ -237,11 +241,19 @@
                         <td> @{{ report.updated_at }} </td>
                         <td> @{{ report.status }} </td>
                         <td style="width:10%"><a
-                                    href="/practitioner/overview/@{{ report.id }}"
-                                    class="btn btn-success btn-sm"> Edit</a></td>
+                                    href="/reports/overview/@{{ report.id }}"
+                                    class="btn btn-success btn-sm"> View</a></td>
                     </tr>
 
                 </table>
+
+                <div ng-if="Reports">
+
+                    <div ng-show="(Reports| filter:search.text | filter:search.type).length == 0" class="emptyresults_container">
+                         <h3> No results found <i class="fa fa-meh-o"></i> </h3>
+                    </div>
+
+                </div>
 
                 <dir-pagination-controls ng-if="Reports" template-url="/dirPagination.tpl.html"
                                          pagination-id="allReportsPagination"></dir-pagination-controls>

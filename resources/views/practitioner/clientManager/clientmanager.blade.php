@@ -18,34 +18,14 @@
 
 @section('content')
 
-  @if(Session::has('client_registererrors'))
-
-                <script>
-                    $(document).ready(function () {
-                        $("#newclient").modal('show');
-                    });
-                </script>
-
-            @endif
-
- @if(Session::has('successful_registration'))
+@if(Session::has('client_registererrors'))
     <script>
-        BootstrapDialog.show({
-            title: 'Success',
-            message: '{{ Session::pull('successful_registration')}} <strong>{{ Session::pull('email')}}.</strong> <br><br> <strong>The default password is: {{ Session::pull('defaultpassword')}}</strong>' ,
-            type: BootstrapDialog.TYPE_SUCCESS,
-            buttons: [{
-                label: 'Close',
-                cssClass: 'btn-default',
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
-
-            }]
+        $(document).ready(function () {
+            $("#newclient").modal('show');
         });
     </script>
-@endif
 
+@endif
 
     <div id="clientApp" >
         <div ng-controller="clientController" class="container-fluid">
@@ -94,16 +74,16 @@
                 <br>
 
                 <tr ng-show="(AllClients| filter:search).length > 0">
-                    <th class="largeRow">Client Name</th>
+                    <th class="normalRow">Client Name</th>
                     <th class="normalRow">Client Email</th>
                     <th class="mediumRow">Joined on</th>
                     <th class="smallRow">Options</th>
                 </tr>
 
-                <tr ng-repeat="client in AllClients | filter:search">
-                    <td> @{{ client.fname }}</td>
+                <tr dir-paginate="client in AllClients | filter:search | itemsPerPage: 8" pagination-id="clientsPagination">
+                    <td> @{{ client.name }}</td>
                     <td> @{{ client.email }}</td>
-                    <td> @{{ client.created_at }}</td>
+                    <td> @{{ client.joined_date }}</td>
                     <td>
                         <a href="/practitioner/viewclient/@{{ client.id }}"
                            class="btn btn-primary btn-sm"> View </a>
@@ -120,9 +100,14 @@
 
             </div>
 
+            <dir-pagination-controls ng-if="AllClients" template-url="/dirPagination.tpl.html"
+                                                 pagination-id="clientsPagination"></dir-pagination-controls>
+
             <!-- /.table -->
 
             @include('partials.RegisterClientForm')
+
+            <div ng-show="loadingSpinner" style="visibility:hidden;" class="overlay"></div>
 
         </div>
         <!-- /.container-fluid -->

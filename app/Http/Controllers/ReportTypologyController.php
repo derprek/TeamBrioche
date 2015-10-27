@@ -33,9 +33,9 @@ class ReportTypologyController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) {
-                    return redirect('/../');
+                if (Auth::guest()) 
+                {
+                    return redirect('/unauthorizedaccess');
                 }
         });
     }

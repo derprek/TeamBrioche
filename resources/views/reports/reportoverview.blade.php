@@ -75,20 +75,28 @@
             </div>
             <!-- /.row -->
 
-
-            <h4>
-                <span style="color:#000000">Report Overview: {{ $report->id}}</span>
-                <a class="pull-right" data-toggle="popover" data-html="true" data-animation="true" data-placement="left"
-                   title="Report Information"
+             <a class="pull-right" data-toggle="popover" data-html="true" data-animation="true" data-placement="left"
+                    data-trigger="hover" title="Report Information"
                    data-content="Report ID: {{ $report->id }} <hr>
                       Practitioner: {{ $reportowner->fname }} {{ $reportowner->sname }} <br>
                       Practitioner email: {{ $reportowner->email }}<br><hr>
                       Client: {{ $client->fname }} {{ $client->sname}}<br>
                       Client email: {{ $client->email }}">
 
-                    <small style="color:#111;font-size:0.9em;"><i class="fa fa-info-circle"></i> Information</small>
+                 <small style="color:#111;font-size:0.9em;"><i class="fa fa-info-circle"></i> Report Information</small>
+                      
+            </a>
 
-                </a>
+            @unless($can_view_client === false)
+                  <a class="pull-right" style="margin-right:2%;"href="/practitioner/viewclient/ {{ $client->id}}">
+                  <i class="fa fa-user"></i> <small> View {{ $client->fname }} {{ $client->sname }}'s profile </small>
+                  </a>
+            @endunless    
+        
+            <br>
+
+            <h4>
+                <span style="color:#000000">Report Overview: {{ $report->id}}</span>
             </h4>
             <br>
 
@@ -114,158 +122,7 @@
                 @endif
             </ul>
 
-            <div class="tab-content">
-                @if(Session::has('banner_message'))
-                    <br>
-                    <div class="alert alert-success fade in">
-                        {{Session::get('banner_message')}}
-                    </div>
-                @endif
-                @if(Session::has('banner_message'))
-                    @if(Session::get('banner_message') === "Report successfully updated!")
-                        <div id="home" class="tab-pane fade ">
-                            @else
-                                <div id="home" class="tab-pane fade ">
-                                    @endif
-                                    @else
-                                        <div id="home" class="tab-pane fade in active">
-                                            @endif
-
-                                                    <!-- testing starts here -->
-
-                                            <div class="row">
-                                                <!-- assessment panel -->
-                                                <div class="col-lg-4 col-md-4">
-                                                    <div class="panel panel-atest">
-                                                        <div class="panel-heading">Assessment</div>
-
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-xs-3"><i class="fa fa-pencil fa-3x"></i>
-                                                                </div>
-                                                                <div class="col-xs-9 text-right">
-                                                                    <p>Completed</p>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-                                                            <div class="panel-footer">
-                                                                <span class="pull-right"><a href="{{ url('reports/assessment/view',$report->id ) }}"><strong>View</strong> <i
-                                                                            class="fa fa-arrow-right"></i></a></span>
-
-                                                                <div class="clearfix"></div>
-                                                            </div>
-
-                                                    </div>
-                                                </div>
-                                                <!-- end of assessment panel -->
-
-
-
-                                                <!-- typology panel -->
-                                                <div class="col-lg-4 col-md-4">
-                                                    <div class="panel panel-atest">
-                                                        <div class="panel-heading">Typology</div>
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-xs-3">
-                                                                    <i class="fa fa-leaf fa-3x"></i>
-                                                                </div>
-                                                                <div class="col-xs-9 text-right">
-
-                                                                    @if ($report_step > 1) <p>Completed</p>
-                                                                    @else <p style="color:#a94442">Incomplete</p>
-                                                                    @endif
-
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        @if ($report_step > 1)
-
-                                                            <div class="panel-footer">
-                                                                    <span class="pull-right"><a
-                                                                                href="{{ url('/reports/typology/view',$report->id) }}"><strong>View</strong>
-                                                                            <i class="fa fa-arrow-right"></i></a></span>
-                                                                <div class="clearfix"></div>
-                                                            </div>
-
-                                                        @else
-                                                            @unless(Session::has('is_admin'))
-                                                                <div class="panel-footer"><span
-                                                                            class="pull-left"><a
-                                                                                href="{{ url('/reports/typology/new',$report->id) }}"><strong>Create</strong>
-                                                                            <i class="fa fa-arrow-right"></i> </a></span>
-                                                                    <div class="clearfix"></div>
-                                                                </div>
-                                                            @endunless
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <!-- end of typology panel -->
-
-
-                                                <!-- selection panel -->
-                                                <div class="col-lg-4 col-md-4">
-                                                <div class="panel panel-atest">
-                                                    <div class="panel-heading">Evaluation</div>
-                                                    <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-xs-3">
-                                                            <i class="fa fa-balance-scale fa-3x"></i>
-                                                        </div>
-                                                    <div class="col-xs-9 text-right">
-                                                        @if (isset($evaluation_count))
-                                                                <h4> <strong>{{$evaluation_count}}</strong> evaluation report (s).</h4>
-                                                                </div>
-                                                            </div>
-                                                            <!-- .row -->
-                                                            </div>
-                                                        <!-- .panel-body -->
-                                                        <div class="panel-footer">
-                                                        <span class="pull-left"><a
-                                                                    href="{{ url('/reports/evaluation/new',$report->id) }}">
-                                                                <i class="fa fa-plus"></i> Create New
-                                                            </a></span>
-                                                        <span class="pull-right"><a
-                                                                    href="{{ url('/reports/evaluation/overview',$report->id) }}">
-                                                                <i class="fa fa-arrow-right"></i> View </a></span>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                        <!-- .panel-footer -->
-
-                                                        @else
-                                                        @if($report_step === 2)
-                                                                <p>Incomplete</p>
-                                                    </div>
-                                                    <!-- .col-xs-9 -->
-                                                </div>
-                                                <!-- .row -->
-                                            </div>
-                                            <!-- .body -->
-                                            @unless(Session::has('is_admin'))
-                                            <div class="panel-footer"><span class="pull-left"><a href="{{ url('/reports/evaluation/new',$report->id) }}"><i
-                                                                class="fa fa-plus"></i> Create New</a></span>
-                                                                <div class="clearfix"></div>
-                                            </div>
-                                            @endunless
-                                            <!-- .footer -->
-                                            @else
-                                                <p style="color:#a94442">Incomplete</p>
-                                                <h6 style="color:#a94442"><br> * You need to
-                                                    complete a typology report
-                                                    first.</h6>
-                                        </div>
-                                        <!-- .col-xs-9 -->
-                                    </div>
-                            <!-- row -->
-                            </div>
-                                <!-- .body -->
-                                @endif
-                                @endif
-                            </div>
-                            <!-- .panel-atest-->
+            @include('partials.show_overview')
                             </div>
                             <!-- end of selection panel -->
                             </div>
@@ -295,29 +152,30 @@
                             </div>
                             <hr/>
 
-                            <div class="checkbox">
-                                <label style="font-size: 1.2em">
-                                    @if($report->status === "Finished")
-                                        <input type="checkbox" name="ReportStatus" value="Finished" checked>
-                                    @else
-                                        <input type="checkbox" name="ReportStatus" value="Finished">
-                                    @endif
-                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>Mark as Finished
-                                </label>
-                            </div>
+                            @if($reportowner->id === Session::get('prac_id'))
+                                <div class="checkbox">
+                                    <label style="font-size: 1.2em">
+                                        @if($report->status === "Finished")
+                                            <input type="checkbox" name="ReportStatus" value="Finished" checked>
+                                        @else
+                                            <input type="checkbox" name="ReportStatus" value="Finished">
+                                        @endif
+                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>Mark as Finished
+                                    </label>
+                                </div>
 
 
-                            <div class="checkbox">
-                                <label style="font-size: 1.2em">
-                                    @if($report->published === 1)
-                                        <input type="checkbox" name="PublishedStatus" value="1" checked>
-                                    @else
-                                        <input type="checkbox" name="PublishedStatus" value="1">
-                                    @endif
-                                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>Share this report with Client.
-                                </label>
-                            </div>
-
+                                <div class="checkbox">
+                                    <label style="font-size: 1.2em">
+                                        @if($report->published === 1)
+                                            <input type="checkbox" name="PublishedStatus" value="1" checked>
+                                        @else
+                                            <input type="checkbox" name="PublishedStatus" value="1">
+                                        @endif
+                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>Share this report with Client.
+                                    </label>
+                                </div>
+                            @endif
                             <hr/>
                             {!! Form:: submit('Update Report' , ['class' => 'btn btn-primary form-control']) !!}
                             {!! Form::close() !!}
@@ -392,10 +250,9 @@
                                                         </div>
                                                     </div>
                                                 @else
-                                                    <div class="col-sm-6 col-md-12"
-                                                         style="border-spacing: 10px 50px;">
+                                                    <div class="col-sm-6 col-md-12 col-lg-12 emptymsg_container" >
                                                         <br>
-                                                        <h4>Only the owner can share this report! </h4>
+                                                        <h3> <i class="fa fa-lock"></i>  Only the owner can share this report! </h3>
                                                     </div>
                                                 @endif
                                             </div>

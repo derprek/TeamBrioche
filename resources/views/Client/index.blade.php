@@ -34,44 +34,22 @@
             <!-- /.row-->
 
             <div class="col-lg-12">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
-                </ul>
-                <div class="tab-content">
-                    <!-- home tab -->
-                    <div id="home" class="tab-pane fade in active">
-                        <br>
+                <div class="jumbotron">
+                    <div class="container">
+                        <h3>Greetings , {{ $username }}!</h3>
 
-                        <div class="jumbotron">
-                            <div class="container">
-                                <h3>Greetings , {{ $username }}!</h3>
-
-                                <p> Welcome to ATEST </p>
-                                <hr>
-                                <p><a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}"
-                                      role="button">View Reports</a></p>
-                            </div>
-                        </div>
+                        <p> Welcome to ATEST </p>
+                        <hr>
+                        <p><a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}"
+                              role="button">View Reports</a></p>
                     </div>
-                    <!-- /.home-->
-
-                    <!-- Notifacation tab-->
-                    <div id="notification" class="tab-pane fade ">
-                        <br>
-
-                        <div class="jumbotron">
-                            <div class="container">
-                                <h3>Notification will be implemented here</h3>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.notification-->
                 </div>
             </div>
+            <!-- /.home-->
         </div>
-        <!-- /.container-fluid -->
+    </div>
+    </div>
+    <!-- /.container-fluid -->
     </div>
     <!-- #page-wrapper -->
 

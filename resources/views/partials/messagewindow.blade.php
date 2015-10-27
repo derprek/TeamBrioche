@@ -5,8 +5,6 @@
         <div class='header' ng-click="cancelAdd()">Compose a new Message</div>
           <br>
 
-         
-
         <div class="form-group" > 
           <ui-select id="email" ng-model="newMessage.recipient" theme="bootstrap" ng-disabled="disabled" > 
             <ui-select-match placeholder="Select a Recipient.">@{{$select.selected.email}}</ui-select-match>

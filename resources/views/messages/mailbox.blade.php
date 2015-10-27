@@ -1,7 +1,5 @@
 @extends('mailboxMaster')
 
-
-
 @section('sidemenubar')
 
     @if((Session::has('is_admin')) && (Session::has('prac_id')))

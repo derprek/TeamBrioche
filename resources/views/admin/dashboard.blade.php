@@ -45,7 +45,7 @@
 
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Dashboard</a></li>
-                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
+
 
                 </ul>
 
@@ -72,18 +72,10 @@
                                 </div>
                             </div>
                             <!-- notification tab -->
-                            <div id="notification" class="tab-pane fade ">
-                                <br>
 
-                                <div class="jumbotron">
-                                    <div class="container">
-                                        <h3>Notification will be implemented here</h3>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
                         </div>
+                        <hr>
+
                 </div>
                 <!-- /.tab-content -->
             </div>

@@ -68,6 +68,8 @@
                 <div id="reportApp" class="tab-content">
                     <div ng-controller="MyReportsController" id="home" class="tab-pane fade in active">
 
+                        <br>
+
                         <div id="allReportsLoad" style="width:100%; ">
                             
                             @include('partials.loadinganimation')
@@ -81,9 +83,16 @@
 
                         <div id="emptymsg" class="emptymsg_container" style="visibility:hidden;">
                             <h2>No Reports found.</h2>
+                            <h3><a href="{{ url('reports/assessment/new') }}" role="button">Start one by clicking here.</a></h3>
                         </div>
 
                         <div ng-cloak>
+
+                            <a ng-show="AllReports" id="addreport_btn" ng-cloak class="btn btn-success" style="visibility:hidden;"
+                                  href="{{ url('reports/assessment/new') }}"
+                                  role="button"><i class="fa fa-file-o"></i>  Create a new Report</a>
+                            <br>
+
                             <table ng-show="AllReports" class="table table-bordered table-hover table-striped">
                                 <br>
 

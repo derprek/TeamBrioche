@@ -39,10 +39,10 @@ class ClientManagerController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) {
-                    return redirect('/../');
-                }
+            if((!Session::has('prac_id')))
+            {
+                return redirect('/unauthorizedaccess');
+            }   
         });
     }
 
@@ -60,19 +60,32 @@ class ClientManagerController extends Controller
 
     public function show($client_id)
     {   
-      $client_owner = User::find($client_id)->prac_id;
+      $client = User::find($client_id);
 
-        if((Session::get('prac_id') !== $client_owner) && (!Session::has('is_admin')))
-            {
-                return redirect('/unauthorizedaccess');
-            }   
-        else
-            {
-               Session::forget('viewing_client');
-               Session::put('viewing_client', $client_id);
+      if($client !== null)
+      {
+         if((Session::has('is_admin')) || (Session::get('prac_id') === $client->prac_id))
+         { 
+            $invalid = false;
+            Session::forget('viewing_client');
+            Session::put('viewing_client', $client_id);
 
-              return view('practitioner.clientManager.viewclient');
-            }
+            return view('practitioner.clientManager.viewclient');
+         }   
+         else
+         {
+            $invalid = true;
+         }
+      }
+      else
+      {
+          $invalid = true;
+      }
+
+      if($invalid === true)
+      {
+          return redirect('/unauthorizedaccess');
+      }
        
     }
 
@@ -91,7 +104,7 @@ class ClientManagerController extends Controller
 
             if ($validator->fails())
                 {
-                   Session::flash('client_updateerror', $validator->messages()) ;
+                   Session::put('client_updateerror', $validator->messages()) ;
                    return Redirect()->back()->withInput();
                 }
         }
@@ -99,7 +112,7 @@ class ClientManagerController extends Controller
         $client->email = $request->email;
         $client->save();
 
-      Session::flash('flash_message', 'Client has been successfully updated!');
+      Session::put('flash_message', 'Client has been successfully updated!');
       return Redirect()->back();
     }
 
@@ -116,7 +129,7 @@ class ClientManagerController extends Controller
 
         if ($validator->fails())
             {
-               Session::flash('client_registererrors', $validator->messages()) ;
+               Session::put('client_registererrors', $validator->messages()) ;
                return Redirect()->back()->withInput();
             }
 
@@ -149,26 +162,55 @@ class ClientManagerController extends Controller
             });
         }
 
-        $newmessage = "Client has been successfully created! The default password has been mailed to ";
+        $newmessage = "The default password has been mailed to ";
 
-         Session::flash('successful_registration', $newmessage);
-         Session::flash('email', $newClient->email);
-         Session::flash('defaultpassword', $randomgeneratedpw);
+        Session::put('info_title', 'Client has been successfully registered!');
+        Session::put('info_message', $newmessage);
+        Session::put('client_email', $newClient->email);
 
-        return redirect("practitioner/clientmanager/");
+         if(Session::has('report_noclients'))
+         {
+            Session::forget('report_noclients');
+
+            return redirect("reports/assessment/new");
+         }
+         else
+         {
+            return redirect("practitioner/clientmanager/");
+         }
+
+        
     }
 
     public function getAllClients()
     {
         $clients = User::latest('created_at')->MyClient()->get();
 
-        if(count($clients) < 1)
+        $clientlist = array();
+        foreach($clients as $client)
+        {       
+            if($client->created_at->isToday())
+            {
+                $joined_date = date('h:ia', strtotime($client->created_at));
+            }
+            else
+            {
+                $joined_date = date('F d, Y', strtotime($client->created_at));
+            }
+           
+            $clientlist[] = ['id'=>$client->id,
+                             'email'=>$client->email,
+                             'name'=>$client->fname . " " . $client->sname,
+                             'joined_date'=>$joined_date];   
+        }
+
+        if(count($clientlist) < 1)
         {
             return null;
         }
         else
         {
-            return $clients;
+            return $clientlist;
         }
     }
 
@@ -200,7 +242,7 @@ class ClientManagerController extends Controller
 
      public function getClientReports()
     {     
-        $client = Practitioner::find(Session::get('viewing_client'));
+        $client = User::find(Session::get('viewing_client'));
 
         if($client === null)
         {
@@ -213,10 +255,28 @@ class ClientManagerController extends Controller
             $reportlist = array();
             foreach($reports as $report)
             {       
+                if($report->created_at->isToday())
+                {
+                    $created_at = date('h:ia', strtotime($report->created_at));
+                }
+                else
+                {
+                    $created_at = date('F d, Y', strtotime($report->created_at));
+                }
+
+                if($report->updated_at->isToday())
+                {
+                    $updated_at = date('h:ia', strtotime($report->updated_at));
+                }
+                else
+                {
+                    $updated_at = date('F d, Y', strtotime($report->updated_at));
+                }
+
                 $reportlist[] = ['id'=>$report->id,
-                                    'updated_at'=>$report->updated_at->diffForHumans(),
+                                    'updated_at'=>$updated_at,
                                     'status'=>$report->status,
-                                    'created_at'=>$report->created_at->diffForHumans()];
+                                    'created_at'=>$created_at];
                           
             }
 
@@ -230,6 +290,44 @@ class ClientManagerController extends Controller
             }
             
         }
+    }
+
+    public function deleteClient(Request $request)
+    {     
+       $client = User::find($request->id);
+
+        if((Session::has('is_admin')) || ($client->prac_id === Session::get('prac_id')))
+        {
+            if($client === null)
+            {
+                $error = true;
+            }
+            else
+            {    
+                $error = false;
+                $client_name = $client->fname . " " . $client->sname;
+                $result = $client->delete();
+            }
+
+            if(($error === true) || ($result === false))
+            {
+                Session::put('error_message', 'There was an error in deleting the client!');
+            }
+            elseif($error === false)
+            {
+                Session::put('flash_message', "$client_name has been successfully deleted!");
+            }
+
+            return redirect("admin/personnelmanager/");
+        }
+        else
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
+       
+
+       
     }
 
 }

@@ -31,10 +31,9 @@ class ReportOverviewController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) 
+                if (!Session::has('prac_id')) 
                 {
-                    return redirect('/../');
+                    return redirect('/unauthorizedaccess');
                 }
         });
     }
@@ -47,13 +46,26 @@ class ReportOverviewController extends Controller
         $practitioners = Practitioner::all();
         $reportowner = $practitioners->where('id', $report->prac_id)->first();
 
+        if($report === null)
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
+        if(($report->prac_id === $reportowner->id) || (Session::has('is_admin')))
+        {
+            $can_view_client = true;
+        }
+        else
+        {
+            $can_view_client = false;
+        }
+
         $report_step = $report->step;
 
         if ($report_step === 3)
         {
             $evaluation_count = count(Evaluation::GetEvaluation($report_id)->get());
         }
-
 
         $shareable_practitioners = Practitioner::
         where('id','!=', $report->prac_id)
@@ -76,7 +88,7 @@ class ReportOverviewController extends Controller
         })
         ->get();
 
-        return view('reports.reportoverview', compact('client', 'report_step' ,'report', 'reportowner','evaluation_count', 'shareable_practitioners', 'shared_practitioners'));
+        return view('reports.reportoverview', compact('client', 'report_step' ,'report', 'reportowner','evaluation_count', 'shareable_practitioners', 'shared_practitioners','can_view_client'));
     }
 
 
