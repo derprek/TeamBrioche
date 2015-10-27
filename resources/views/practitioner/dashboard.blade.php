@@ -49,15 +49,7 @@
                             <h3>Greetings, Practitioner!</h3>
 
                             <p> Who shall we help today?</p>
-
-
-                            <br><p>Currently, you have :<p/>
-
-                            <p>  of clients, <br>
-                                {{ $my_reports }}  report(s),and<br>
-                                {{ $shared_reports }} shared reports. <br></p>
-
-
+                            
 
                             <hr>
                             <span class="pull-left">
