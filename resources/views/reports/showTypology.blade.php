@@ -2,7 +2,7 @@
 
 @section('sidemenubar')
 
-    @if(Session::has('is_admin'))
+    @if((Session::has('prac_id')) && (Session::has('is_admin')))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -21,7 +21,7 @@
             </ul>
         </div>
     
-    @else
+    @elseif(Session::has('prac_id'))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -35,6 +35,19 @@
                     <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
                 </li>
             </ul>
+        </div>
+
+    @elseif(Auth::check())
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+              <li>
+                  <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
+              </li>
+              <li class="active">
+                  <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
+              </li>
+          </ul>
         </div>
 
     @endif
@@ -52,21 +65,22 @@
                     </h1>
                     <ol class="breadcrumb">
                         
-                    @if(Session::has('is_admin'))
+                    @if(Session::has('prac_id'))
+                        @if(Session::has('is_admin'))
 
-                        <li>
-                             <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report
-                                Manager</a>
-                        </li>
+                            <li>
+                                 <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report
+                                    Manager</a>
+                            </li>
 
-                    @else
+                          @else
 
-                        <li>
-                             <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report
-                                Manager</a>
-                        </li>
+                            <li>
+                                 <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report
+                                    Manager</a>
+                            </li>
 
-                    @endif
+                        @endif
 
                         <li>
 
@@ -78,6 +92,19 @@
                            Viewing <strong>Typology</strong> for Report: {{$report->id}}.
                         </li>
 
+                    @elseif(Auth::check())
+
+                        <li>
+                               <a href="{{ url('home') }}"><i class="fa fa-home"></i>Home</a>
+                        </li>
+                        <li>
+                               <a href="{{ url('/client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> View all reports</a>
+                        </li>
+                        <li class="active">
+                              Viewing <strong>Typology</strong> for Report: {{$report->id}}.
+                        </li>
+
+                    @endif
                     </ol>
                 </div>
             </div>
@@ -87,11 +114,22 @@
                 <!-- Display client and practitioner name -->
                 <div>
                     <br>
-                <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}"> 
-                    <i class="fa fa-chevron-left"></i> Back to Overview 
-                </a>
+                @if(Auth::check())
+
+                    <a class="directionLinks pull-left" href="{{ url('/client/reportarchives') }}">
+                     <i class="fa fa-chevron-left"></i> Back 
+                    </a>
+
+                @elseif(Session::has('prac_id'))
+
+                     <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}"> 
+                        <i class="fa fa-chevron-left"></i> Back to Overview 
+                    </a>
+
+                @endif
+               
                 
-                    <a class="pull-right" data-toggle="popover" data-html="true" data-trigger="click" data-animation="true" data-placement="left" title="Report Information" 
+                    <a class="pull-right" data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="left" title="Report Information" 
                       data-content="Report ID: {{ $report->id }} <br> <hr>
                       Practitioner: {{ $practitioner->fname }} {{ $practitioner->sname }} <br>
                       Practitioner email: {{ $practitioner->email }}<br><hr>
@@ -122,10 +160,5 @@
     </div>
 
     <!-- /#page-wrapper -->
-    <script type="text/javascript">
-        $(function () {
-          $('[data-toggle="popover"]').popover()
-        })
-    </script>
 @endsection
 @stop

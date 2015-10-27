@@ -42,7 +42,7 @@
           <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav side-nav">
                   <li>
-                      <a href="{{ url('home') }}"><i class="fa fa-home"></i> Dashboard</a>
+                      <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
                   </li>
                   <li class="active">
                       <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
@@ -66,7 +66,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         
-                    @if(Session::has('is_admin'))
+                    @if((Session::has('prac_id')) && (Session::has('is_admin')))
 
                         <li>
                              <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report
@@ -80,7 +80,7 @@
                             Viewing <strong>Assessment</strong> for Report: {{$report->id}}. 
                         </li>
 
-                    @else
+                    @elseif(Session::has('prac_id'))
 
                        <li>
                             <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i> Report
@@ -93,6 +93,18 @@
                         <li>
                             Viewing <strong>Assessment</strong> for Report: {{$report->id}}.
                         </li>
+
+                       @elseif(Auth::check())
+
+                         <li>
+                               <a href="{{ url('home') }}"><i class="fa fa-home"></i>Home</a>
+                          </li>
+                          <li>
+                               <a href="{{ url('/client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> View all reports</a>
+                          </li>
+                          <li class="active">
+                              Viewing <strong>Assessment</strong> for Report: {{$report->id}}.
+                          </li>
 
                     @endif
                     </ol>
@@ -113,7 +125,7 @@
                           <i class="fa fa-chevron-left"></i> Back 
                           </a>
 
-                        @else
+                        @elseif(Session::has('prac_id'))
 
                           <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}">
                           <i class="fa fa-chevron-left"></i> Back to Overview 
@@ -214,17 +226,7 @@
 
     </div>
 
-    <script>
-
-        $(function () {
-          $('[data-toggle="popover"]').popover()
-        });
-
-         $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        });
-        
-   </script>
+   
 
 @endsection
 @stop
