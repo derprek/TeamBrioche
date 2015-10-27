@@ -45,7 +45,12 @@ class ReportEvaluationController extends Controller
      * @return Response
      */
     public function index($report_id)
-    {
+    {   
+        if((Auth::check()) || (Session::has('is_admin')))
+        {
+            return redirect('/unauthorizedaccess');
+        }
+        
         $report = Report::find($report_id);
         $assessment = Assessment::GetAssessment($report->id)->first(); 
         $practitioner = Practitioner::find($report->prac_id);
@@ -165,24 +170,25 @@ class ReportEvaluationController extends Controller
     {   
         $report = Report::find($report_id);
 
-        if($report !== null)
+        if($report === null)
         {
             return redirect('/unauthorizedaccess');
         }
 
+        //checks if practitioner has rights to view this report
         if((Session::has('prac_id')) && (!Session::has('is_admin')))
         {
             $allowed_list = $report->practitioners()->lists('practitioner_id');
         
                 foreach($allowed_list as $practitioner)
                 {
-                    if ($practitioner === $str) 
+                    if ($practitioner === Session::get('prac_id')) 
                     {
                         $validated = true;
                     } 
                 }
 
-                if(!isset($validated))
+                if((!isset($validated)) && ($report->prac_id !== Session::get('prac_id')))
                 {
                     return redirect('/unauthorizedaccess');
                 }
@@ -242,6 +248,39 @@ class ReportEvaluationController extends Controller
     public function show($evaluation_id)
     {
         $evaluation = Evaluation::find($evaluation_id);
+
+        if($evaluation === null)
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
+        $report = Report::find($evaluation->report_id);
+
+        if((Session::has('prac_id')) && (!Session::has('is_admin')))
+        {
+            $allowed_list = $report->practitioners()->lists('practitioner_id');
+        
+                foreach($allowed_list as $practitioner)
+                {
+                    if ($practitioner === Session::get('prac_id')) 
+                    {
+                        $validated = true;
+                    } 
+                }
+
+                if((!isset($validated)) && ($report->prac_id !== Session::get('prac_id')))
+                {
+                    return redirect('/unauthorizedaccess');
+                }
+        }
+
+        if(Auth::check())
+        {
+            if(Auth::user()->id !== $report->userid)
+            {
+                return redirect('/unauthorizedaccess');
+            }
+        }
 
         $practitioner = Practitioner::find($evaluation->prac_id);
         $report = Report::find($evaluation->report_id);

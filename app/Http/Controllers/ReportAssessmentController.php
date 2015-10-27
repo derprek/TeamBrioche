@@ -46,6 +46,11 @@ class ReportAssessmentController extends Controller
      */
     public function index()
     {
+        if((Auth::check()) || (Session::has('is_admin')))
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
         $clients = User::latest('created_at')->MyClient()->get();
 
         if($clients->isEmpty())
@@ -82,6 +87,11 @@ class ReportAssessmentController extends Controller
 
     public function setCurrentVersion(Request $request)
     {   
+        if(Auth::check())
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
         if($request !== null)
         {  
             $assessment_id = $request->assessment_id;
@@ -115,7 +125,12 @@ class ReportAssessmentController extends Controller
      * @return Response
      */
     public function store()
-    {
+    {   
+        if((Auth::check()) || (Session::has('is_admin')))
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
         $client_id = $_POST['client'];
         $practitioner_id = Session::get('prac_id');
 
@@ -173,6 +188,9 @@ class ReportAssessmentController extends Controller
             }
         }
 
+         $practitioners = Practitioner::all();
+         $practitioner = $practitioners->where('id', $report->prac_id)->first();
+
         $assessment = Assessment::GetAssessment($report_id)->first();
         
         if(Session::has('prac_id'))
@@ -186,22 +204,21 @@ class ReportAssessmentController extends Controller
             $versionlist = array();
             foreach ($versions as $version) 
             {   
-                $practitioners = Practitioner::all();
-                $practitioner = $practitioners->where('id', $report->prac_id)->first();
+                $creator_name = $practitioners->where('id', $version->prac_id)->first();
 
-                if($practitioner->id === Session::get('prac_id'))
+                if($version->prac_id === Session::get('prac_id'))
                 {
-                    $practitioner_name = 'You';
+                    $creator_name = 'You';
                 }
                 else
                 {
-                    $practitioner_name = $practitioner->fname . " " . $practitioner->sname;
+                    $creator_name = $creator->fname . " " . $creator->sname;
                 }
 
                 if($version->id === $assessment->current_version)
                 {
                     $currentversion = ['id'=>$version->id,
-                        'practitioner_name'=> $practitioner_name,
+                        'practitioner_name'=> $creator_name,
                         'version_number'=>$i,
                         'updated_at'=>$version->updated_at];
 
@@ -216,7 +233,7 @@ class ReportAssessmentController extends Controller
                 }
 
                 $versionlist[] = ['id'=>$version->id,
-                        'practitioner_name'=> $practitioner_name,
+                        'practitioner_name'=> $creator_name,
                         'version_number'=>$i,
                         'updated_at'=>$version->updated_at];
                  $i++;

@@ -161,12 +161,13 @@
                                                 <!-- .body -->
               
                 <!-- .panel-atest-->
-
+</div>
                 @if(Auth::check())
-                  </div>
-                  </div>
+                  
+                 
                   </div>  
                   </div>
-                </div>
+                  </div>
+                 </div>
                 
                 @endunless

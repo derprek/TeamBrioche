@@ -31,7 +31,7 @@ class ReportOverviewController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-                if (!Session::has('prac_id')) 
+                if ((Auth::guest()) && (!Session::has('prac_id')))
                 {
                     return redirect('/unauthorizedaccess');
                 }
@@ -41,15 +41,43 @@ class ReportOverviewController extends Controller
     public function index($report_id)
     { 
         $report = Report::find($report_id);
-        $client = User::find($report->userid);
-
-        $practitioners = Practitioner::all();
-        $reportowner = $practitioners->where('id', $report->prac_id)->first();
 
         if($report === null)
         {
             return redirect('/unauthorizedaccess');
         }
+
+        if((Session::has('prac_id')) && (!Session::has('is_admin')))
+        {
+            $allowed_list = $report->practitioners()->lists('practitioner_id');
+        
+                foreach($allowed_list as $practitioner)
+                {
+                    if ($practitioner === Session::get('prac_id')) 
+                    {
+                        $validated = true;
+                    } 
+                }
+
+                if((!isset($validated)) && ($report->prac_id !== Session::get('prac_id')))
+                {
+                    return redirect('/unauthorizedaccess');
+                }
+        }
+
+        if(Auth::check())
+        {
+            if(Auth::user()->id !== $report->userid)
+            {
+                return redirect('/unauthorizedaccess');
+            }
+        }
+        
+
+        $client = User::find($report->userid);
+
+        $practitioners = Practitioner::all();
+        $reportowner = $practitioners->where('id', $report->prac_id)->first();
 
         if(($report->prac_id === $reportowner->id) || (Session::has('is_admin')))
         {

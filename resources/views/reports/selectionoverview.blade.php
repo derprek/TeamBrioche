@@ -2,42 +2,7 @@
 
 @section('sidemenubar')
 
-    @if(Session::has('is_admin'))
-    
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li >
-                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
-                </li>
-                <li class="active">
-                    <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-                </li>
-            </ul>
-        </div>
-    
-    @else
-    
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-                </li>
-                <li class="active">
-                    <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-                </li>
-            </ul>
-        </div>
-
-    @endif
+    @include('partials.sidebar_reports')
     
 @endsection
 
@@ -53,7 +18,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         
-                    @if(Session::has('is_admin'))
+                    @if((Session::has('prac_id')) && (Session::has('is_admin')))
 
                         <li>
                             <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i> Report
@@ -63,11 +28,11 @@
                             <a href="{{ url('/reports/overview', $report->id) }} "><i class="fa fa-search"></i>Report
                                 Overview</a>
                         </li>
-                        <li>
+                        <li class="active">
                              Viewing all <strong>Evaluation</strong> for Report: {{$report->id}}.
                         </li>
 
-                    @else
+                    @elseif(Session::has('prac_id'))
 
                         <li>
                            <a href="{{ url('practitioner/reportmanager') }}"> <i class="fa fa-bar-chart"></i> Report
@@ -78,7 +43,19 @@
                                 <i class="fa fa-search"></i>Report
                                 Overview</a>
                         </li>
+                        <li class="active">
+                            Viewing all <strong>Evaluation(s)</strong> for Report: {{$report->id}}.
+                        </li>
+
+                     @elseif(Auth::check())
+
                         <li>
+                           <a href="{{ url('/client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> View all reports</a>
+                        </li>
+                        <li>
+                               <a href="{{ url('/reports/overview',$report->id ) }}"><i class="fa fa-search"></i>Report Overview</a>
+                        </li>
+                         <li class="active">
                             Viewing all <strong>Evaluation(s)</strong> for Report: {{$report->id}}.
                         </li>
 
@@ -92,11 +69,13 @@
             <div class="col-lg-12">
 
                 <br>
-                <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}" >
+
+                    <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}" >
                          <i class="fa fa-chevron-left"></i>Back to Overview
-                </a> 
+                    </a> 
+                
                 <br><hr>
-                @unless(Session::has('is_admin'))
+                @unless((Session::has('is_admin')) || (Auth::check()))
                     
                     <a class="btn btn-success pull-left"
                        href="{{ url('/reports/evaluation/new',$report->id) }}"

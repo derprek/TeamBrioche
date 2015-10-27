@@ -48,6 +48,11 @@ class ReportTypologyController extends Controller
      */
     public function index($report_id)
     {   
+        if((Auth::check()) || (Session::has('is_admin')))
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
         $report = Report::find($report_id);
         $practitioner = Practitioner::find($report->prac_id);
         $client = User::find($report->userid);
@@ -77,6 +82,39 @@ class ReportTypologyController extends Controller
      public function show($report_id)
     {
         $report = Report::find($report_id);
+        $typology = Typology::GetTypology($report->id)->first();
+
+        if(($report === null) || ($typology === null))
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
+        if((Session::has('prac_id')) && (!Session::has('is_admin')))
+        {
+            $allowed_list = $report->practitioners()->lists('practitioner_id');
+        
+                foreach($allowed_list as $practitioner)
+                {
+                    if ($practitioner === Session::get('prac_id')) 
+                    {
+                        $validated = true;
+                    } 
+                }
+
+                if((!isset($validated)) && ($report->prac_id !== Session::get('prac_id')))
+                {
+                    return redirect('/unauthorizedaccess');
+                }
+        }
+
+        if(Auth::check())
+        {
+            if(Auth::user()->id !== $report->userid)
+            {
+                return redirect('/unauthorizedaccess');
+            }
+        }
+
         $client = User::find($report->userid);
         $practitioner = Practitioner::find($report->prac_id);
 
@@ -84,7 +122,7 @@ class ReportTypologyController extends Controller
         $fetchgoals = $assessment->questions()->GetGoals()->first();
         $goals = $fetchgoals->pivot->answers;
 
-        $typology = Typology::GetTypology($report->id)->first();
+        
         $arraycount = $typology->questions()->distinct()->Typology()->orderBy('category_id', 'ASC')->lists('category_id');
 
         $categories = array();

@@ -1,43 +1,9 @@
 @extends('practitionermaster')
 
 @section('sidemenubar')
-    @if(Session::has('is_admin'))
 
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
-                </li>
-                <li class="active">
-                    <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-                </li>
-            </ul>
-        </div>
+    @include('partials.sidebar_reports')
 
-    @else
-
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-                </li>
-                <li class="active">
-                    <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report
-                        Manager</a>
-                </li>
-            </ul>
-        </div>
-
-    @endif
 @endsection
 @section('content')
 
@@ -51,19 +17,25 @@
                         &nbsp;
                     </h1>
                     <ol class="breadcrumb">
-                        @if(Session::has('is_admin'))
+                        @if((Session::has('is_admin')) && (Session::has('is_admin')))
 
                             <li>
                                 <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report
                                     Manager</a>
                             </li>
 
-                        @else
+                        @elseif(Session::has('is_admin'))
 
                             <li>
                                 <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i> Report
                                     Manager</a>
                             </li>
+
+                        @elseif(Auth::check())
+
+                            <li>
+                               <a href="{{ url('/client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> View all reports</a>
+                          </li>
 
                         @endif
 
@@ -87,7 +59,7 @@
                       
             </a>
 
-            @unless($can_view_client === false)
+            @unless(($can_view_client === false) || (Auth::check()))
                   <a class="pull-right" style="margin-right:2%;"href="/practitioner/viewclient/ {{ $client->id}}">
                   <i class="fa fa-user"></i> <small> View {{ $client->fname }} {{ $client->sname }}'s profile </small>
                   </a>
@@ -100,6 +72,7 @@
             </h4>
             <br>
 
+            @unless(Auth::check())
             <ul class="nav nav-tabs">
                 @if(Session::has('banner_message'))
                     @if(Session::get('banner_message') === "Report successfully updated!")
@@ -122,14 +95,17 @@
                 @endif
             </ul>
 
+        @endunless
             @include('partials.show_overview')
+
+                @unless(Auth::check())
                             </div>
                             <!-- end of selection panel -->
                             </div>
                             <!-- .row -->
                             </div>
                                     <!-- end of tab --><!-- end of testing-->
-
+                @endunless
 
 
     @if(Session::has('banner_message'))
