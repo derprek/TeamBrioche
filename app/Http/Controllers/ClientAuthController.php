@@ -42,6 +42,7 @@ class ClientAuthController extends Controller
         $password = $_POST['password'];
         if (Auth::attempt(['email' => $email, 'password' => $password]))
         {
+            Session::flush();
             return redirect()->action('ClientsController@index');
         }
         else

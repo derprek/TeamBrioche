@@ -77,7 +77,7 @@
                                                 </div>
 
                                             @else
-                                                @unless(Session::has('is_admin'))
+                                                @unless((Session::has('is_admin')) || (Auth::check()))
                                                     <div class="panel-footer"><span
                                                                 class="pull-left"><a
                                                                     href="{{ url('/reports/typology/new',$report->id) }}"><strong>Create</strong>

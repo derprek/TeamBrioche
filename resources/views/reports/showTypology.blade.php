@@ -91,11 +91,11 @@
                         <small style="color:#111;font-size:0.9em;"><i  class="fa fa-info-circle"></i> Information </small>
 
                     </a>
-
+                    <!--
                     <small>
                         <a style="padding-right:15px;" class="pull-right" href="{{ url('/practitioner/Typology/reportpdf', $typology->id) }}"> 
                         <i class="fa fa-file-pdf-o"></i> Download PDF </a>
-                    </small>
+                    </small> -->
             
                 </div>
                 </div>

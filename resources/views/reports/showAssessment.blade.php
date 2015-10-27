@@ -94,9 +94,12 @@
                             <span style="color:#111; padding-right:10px;"><i  class="fa fa-info-circle"></i> Information <b class="caret"></b></span>
 
                          </a>
-                   
-                        <a style="padding-right:30px;"class="pull-right" href="{{ url('/practitioner/reportpdf', $report->id) }}"> 
-                        <i class="fa fa-file-pdf-o"></i>  Download PDF   </a>
+
+
+
+                       <!--  PDF
+                        <a style="padding-right:30px;"class="pull-right" href="{{ url('/practitioner/reportpdf', $report->id) }}">
+                        <i class="fa fa-file-pdf-o"></i>  Download PDF   </a> -->
 
                         @unless(Auth::check())
                          <span class="version-control pull-left" style="padding-left:40px;">   

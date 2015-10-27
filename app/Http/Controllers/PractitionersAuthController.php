@@ -39,7 +39,7 @@ class PractitionersAuthController extends Controller
 
         } else {
             $matchme = ['email' => $email, 'password' => $password];
-
+    
             $practitionerinfo = Practitioner::where($matchme)->firstOrFail();
             Session::put('prac_id', $practitionerinfo->id);
             $prac_name = $practitionerinfo->fname . " " . $practitionerinfo->sname;

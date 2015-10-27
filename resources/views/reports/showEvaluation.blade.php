@@ -93,12 +93,13 @@
 
                             <small style="color:#111;font-size:0.9em;"><i  class="fa fa-info-circle"></i> Information </small>
 
-                        </a>   
+                        </a>
 
-                         <small>  <!-- For Future PDF function -->
+                        <!--  PDF
+                         <small>  <!-- For Future PDF function
                             <a style="padding-right:15px;" class="pull-right" href="#"> 
                             <i class="fa fa-file-pdf-o"></i> Download PDF </a>
-                        </small>
+                        </small>-->
                        
                     </div>
                 </div>
