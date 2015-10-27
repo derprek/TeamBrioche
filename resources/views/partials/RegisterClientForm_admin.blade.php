@@ -60,7 +60,7 @@
                                         <br>
 
                                         <label for="prac_email"> Under the supervision of:*</label>    
-                                        <ui-select id="practitioner" name="prac_email" ng-model="selected.practitioner" theme="selectize" class="form-group" style=" height: 29px;" ng-required="true"> 
+                                        <ui-select id="practitioner" name="prac_email" ng-model="selected.practitioner" theme="bootstrap" class="form-group" style=" height: 29px;" ng-required="true"> 
                                             <ui-select-match placeholder="Select a Practitioner.">@{{$select.selected.name}}</ui-select-match>
                                             <ui-select-choices repeat="practitioner in AllPractitioners | filter: $select.search">
                                                <div ng-bind-html="practitioner.name | highlight: $select.search"></div>
@@ -69,6 +69,8 @@
                                               </small>
                                             </ui-select-choices>
                                           </ui-select> 
+
+                                        <br><br>
 
                                         <select id="genderselect" name="gender" class="selectpicker"
                                                 data-style="btn-inverse">

@@ -52,23 +52,41 @@
 
 @if(Session::has('error_message'))
 
+    @include('partials.errorMessageModal');
+
     <script>
-
-        BootstrapDialog.alert({
-            title: '{{ Session::get('error_title')}}',
-            message: '{{ Session::get('error_message')}}',
-            type: BootstrapDialog.TYPE_WARNING,
-            buttons: [{
-                label: 'Close',
-                cssClass: 'btn-info',
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
-
-            }]
-        });
+                
+            $('#errorMessageModal').modal('show');
+           
+           setTimeout(function(){
+              $('#errorMessageModal').modal('hide')
+            }, 10000);
 
     </script>
+    
+@endif
+
+@if(Session::has('info_message'))
+
+    @include('partials.infoMessageModal');
+
+    <script>
+                
+            $('#infoMessageModal').modal('show');
+           
+    </script>
+
+    @unless(Session::has('client_email'))
+
+        <script>
+
+          setTimeout(function(){
+                  $('#infoMessageModal').modal('hide')
+                }, 10000);
+
+        </script>
+
+    @endunless
     
 @endif
 
@@ -90,7 +108,7 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
 
-            <li class="dropdown" ng-cloak ng-app="messengerApp" ng-controller="masterMessageController" ng-cloak>
+            <li class="dropdown" ng-app="messengerApp" ng-controller="masterMessageController" ng-cloak>
                 <a ng-cloak href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()">  @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -108,7 +126,17 @@
             <li class="dropdown">
 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                    <small>{{ Session::get('prac_name')  }}</small>
+                    @if(Auth::check())
+
+                        <small>{{ Auth::user()->fname }} {{ Auth::user()->sname }}</small>
+
+                    @else
+
+                       <small>{{ Session::get('prac_name')  }}</small>
+
+                    @endif
+
+                    
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
@@ -119,7 +147,17 @@
                     </li>
                     <li class="divider"></li>
                     <li>
+                    @if(Auth::check())
+
+                        <a href="/../auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+
+                    @else
+
                         <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+
+                    @endif
+                    
+                        
                     </li>
                 </ul>
             </li>

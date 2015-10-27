@@ -140,7 +140,7 @@ Route::get('getClientReports', 'ClientManagerController@getClientReports');
 
 Route::post('admin/updatePractitioner', 'PersonnelController@updatePractitioner');
 Route::post('practitioner/updateClient', 'ClientManagerController@update');
-Route::post('admin/deleteClient', 'PersonnelController@deleteClient');
+Route::post('deleteClient', 'ClientManagerController@deleteClient');
 Route::post('admin/deletePractitioner', 'PersonnelController@deletePractitioner');
 
 Route::get('admin/questionmanager', 'QuestionManagerController@index');

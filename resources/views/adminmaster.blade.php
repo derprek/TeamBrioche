@@ -15,39 +15,57 @@
 <body>
 
 @if(Session::has('flash_message'))
-    <script>
-        BootstrapDialog.show({
-            title: 'Success',
-            message: '{{ Session::get('flash_message')}}',
-            type: BootstrapDialog.TYPE_SUCCESS,
-            buttons: [{
-                label: 'Close',
-                cssClass: 'btn-info',
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
 
-            }]
-        });
-    </script>
+        @include('partials.flashMessageModal');
+
+        <script>
+                
+            $('#flashMessageModal').modal('show');
+           
+           setTimeout(function(){
+              $('#flashMessageModal').modal('hide')
+            }, 3000);
+
+        </script>
+
 @endif
 
-@if(Session::has('error_message'))
-    <script>
-        BootstrapDialog.alert({
-            title: '{{ Session::get('error_title')}}',
-            message: '{{ Session::get('error_message')}}',
-            type: BootstrapDialog.TYPE_WARNING,
-            buttons: [{
-                label: 'Close',
-                cssClass: 'btn-info',
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
 
-            }]
-        });
+
+@if(Session::has('error_message'))
+
+    @include('partials.errorMessageModal');
+
+    <script>
+
+        $('#errorMessageModal').modal('show');
+
     </script>
+    
+@endif
+
+@if(Session::has('info_message'))
+
+    @include('partials.infoMessageModal');
+
+    <script>
+                
+            $('#infoMessageModal').modal('show');
+           
+    </script>
+
+    @unless(Session::has('client_email'))
+
+        <script>
+
+          setTimeout(function(){
+                  $('#infoMessageModal').modal('hide')
+                }, 10000);
+          
+        </script>
+
+    @endunless
+    
 @endif
 
 

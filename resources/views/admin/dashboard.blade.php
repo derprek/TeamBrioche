@@ -43,54 +43,26 @@
 
             <div class="col-lg-12">
 
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
+                <div class="jumbotron">
+                    <div class="container">
+                        <h3>Greetings, Administrator!</h3>
 
-                </ul>
-
-
-                <div class="tab-content">
-                    @if ((count($errors) > 0) OR (Session::has('flash_message')))
-                        <div id="home" class="tab-pane fade">
-                            @else
-                                    <!-- Home tab -->
-                            <div id="home" class="tab-pane fade in active">
-                                @endif
-                                <br>
-
-                                <div class="jumbotron">
-                                    <div class="container">
-                                        <h3>Greetings, Administrator!</h3>
-
-                                        <p> Who shall we help today?</p>
-                                        <hr>
-                                        <p><a class="btn btn-success btn-lg"
-                                              href="{{ url('admin/reportmanager') }}"
-                                              role="button">View All Reports</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- notification tab -->
-                            <div id="notification" class="tab-pane fade ">
-                                <br>
-
-                                <div class="jumbotron">
-                                    <div class="container">
-                                        <h3>Notification will be implemented here</h3>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
+                        <p> Who shall we help today?</p>
+                        <hr>
+                        <p><a class="btn btn-success btn-lg"
+                              href="{{ url('admin/reportmanager') }}"
+                              role="button">View All Reports</a></p>
+                    </div>
                 </div>
-                <!-- /.tab-content -->
+                    
+                 </div>
             </div>
-            <!-- /.col-lg-12 -->
+                <!-- /.tab-content -->
         </div>
-        <!-- /.container-fluid -->
+            <!-- /.col-lg-12 -->
     </div>
+        <!-- /.container-fluid -->
+</div>
     <!-- #page-wrapper -->
 @endsection
 @stop

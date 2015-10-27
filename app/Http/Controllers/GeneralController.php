@@ -48,7 +48,15 @@ class GeneralController extends Controller
     {   
         if(Session::has('prac_id'))
         {
-            $usertype='practitioner';
+            if(Session::has('is_admin'))
+            {
+                $usertype='admin';
+            }   
+            else
+            {
+                $usertype='practitioner';
+            }
+            
         }
         elseif(Auth::check()) 
         {

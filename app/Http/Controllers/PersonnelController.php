@@ -68,14 +68,13 @@ class PersonnelController extends Controller
      */
     public function storePractitioner(Request $request)
     {   
-
          $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:practitioners,email|unique:users,email'
         ]);
 
         if ($validator->fails())
             {
-               Session::flash('prac_registererrors', $validator->messages()) ;
+               Session::flash('prac_registererrors', $validator->messages());
                return Redirect()->back()->withInput();
             }
 
@@ -106,11 +105,11 @@ class PersonnelController extends Controller
             });
         }
 
-        $newmessage = "Practitioner has been successfully created! The default password has been mailed to ";
+        $newmessage = "The default password has been mailed to ";
 
-         Session::flash('successful_registration', $newmessage);
-         Session::flash('email', $newPractitioner->email);
-         Session::flash('defaultpassword', $randomgeneratedpw);
+        Session::put('info_title', 'Practitioner has been successfully registered!');
+        Session::put('info_message', $newmessage);
+        Session::put('client_email', $newPractitioner->email);
 
          return redirect("admin/personnelmanager");
     }
@@ -157,11 +156,11 @@ class PersonnelController extends Controller
             });
         }
 
-        $newmessage = "Client has been successfully created! The default password has been mailed to ";
+        $newmessage = "The default password has been mailed to ";
 
-         Session::flash('successful_registration', $newmessage);
-         Session::flash('email', $newClient->email);
-         Session::flash('defaultpassword', $randomgeneratedpw);
+        Session::put('info_title', 'Client has been successfully registered!');
+        Session::put('info_message', $newmessage);
+        Session::put('client_email', $newClient->email);
 
          return redirect("admin/personnelmanager");
     }
@@ -445,22 +444,27 @@ class PersonnelController extends Controller
     public function deletePractitioner(Request $request)
     {     
        $practitioner = Practitioner::find($request->id);
-       $prac_name = $practitioner->fname . " " . $practitioner->sname;
-       $practitioner->delete();
 
-       Session::flash('flash_message', 'Practitioner has been successfully deleted!');
+       if($practitioner === null)
+       {
+            $error = true;
+       }
+       else
+       {    
+            $error = false;
+            $practitioner_name = $practitioner->fname . " " . $practitioner->sname;
+            $practitioner->delete();
+       }
+
+       if(($error === true) || ($result === false))
+        {
+            Session::put('error_message', 'There was an error in deleting the practitioner!');
+        }
+        elseif($error === false)
+        {
+            Session::put('flash_message', '$practitioner_name has been successfully deleted!');
+        }
+
        return redirect("admin/personnelmanager/");
     }
-
-    public function deleteClient(Request $request)
-    {     
-       $client = User::find($request->id);
-       $client_name = $client->fname . " " . $client->sname;
-       $client->delete();
-
-       Session::flash('flash_message', 'Client has been successfully deleted!');
-       return redirect("admin/personnelmanager/");
-    }
-
-
 }

@@ -22,29 +22,41 @@
     </nav>
 
     <div class="center_text">
-    <h2><i class="fa fa-lock"></i></i> You do not have access to this page.</h2>
-    <hr>
-    <h4> You may contact Emily Steele at <a>emilysteele@gmail.com</a> for any enquiries.</h4>
-    <br>
+    <h3><i class="fa fa-lock"></i></i> You do not have access to this page.</h3>
+    <hr style="width:70%;">
+    <p> You may contact Emily Steele at <a>emilysteele@gmail.com</a> for any enquiries.</p>
+    <br><br>
 
-      @if($usertype === 'practitioner')
+      @if($usertype === 'admin')
 
-        <p style="display:inline-block"><a class="btn btn-success btn-lg"
-          href="{{ url('practitioner/dashboard') }}"
-          role="button">Back Home</a></p>
+        <p style="display:inline-block"><a class="btn btn-info btn-lg"
+          href="{{  url('/admin/dashboard') }}"
+          role="button">Take me back to my dashboard</a></p>
+
+      @elseif($usertype === 'practitioner')
+
+          <button class="btn btn-info btn-lg" onclick="redirectBack()"> Take me back to the previous page </button>
 
       @elseif($usertype === 'client')
-        <p style="display:inline-block"><a class="btn btn-success btn-lg"
-          href="{{ url('/../home') }}"
-          role="button">Back Home</a></p>
+
+         <button class="btn btn-info btn-lg" onclick="redirectBack()"> Take me back to the previous page </button>
 
       @elseif($usertype === 'guest')
 
-        <p style="display:inline-block"><a class="btn btn-success btn-lg"
+        <p style="display:inline-block"><a class="btn btn-info btn-lg"
           href="{{ url('/../') }}"
-          role="button">Back Home</a></p>
+          role="button">Take me to the home page</a></p>
 
       @endif
+
+      <script>
+
+        function redirectBack()
+        {
+          history.go(-1);
+        }
+
+      </script>
 
 </body>
 </html>

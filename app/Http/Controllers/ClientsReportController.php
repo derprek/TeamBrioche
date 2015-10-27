@@ -7,16 +7,15 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Report;
 use App\Question;
-use App\Manager;
-use App\Product;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use App\User;
 use Auth;
 use Carbon\Carbon;
 use Session;
-use App\Selection;
 use App\Practitioner;
+use App\Evaluation;
 
 /**
  * Class ClientsReportController
@@ -34,7 +33,7 @@ class ClientsReportController extends Controller
         $this->beforeFilter(function(){
             if (Auth::guest()) 
                 {
-                    return redirect('/../');
+                    return redirect('/unauthorizedaccess');
                 }
         });
     }
@@ -46,29 +45,20 @@ class ClientsReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
+        $report = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
+
+        $report_step = $report->step;
+
+        if ($report_step === 3)
+        {
+            $evaluation_count = count(Evaluation::GetEvaluation($report->id)->get());
+        }
+
         $reporthistory = Report::GetUserReports()->get();
 
         $latestreport = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
 
-        if(!empty($latestreport))
-        {
-            $questionreport = $latestreport->questions()
-            ->where('report_id', '=', $latestreport->id)
-            ->get();
-
-            $questionlist = array();
-            $answerlist = array();
-            foreach ($questionreport as $ans) 
-            {
-                $questionlist[] = Question::find($ans->pivot->question_id);
-                $answerlist[] = $ans->pivot->answers;
-            }
-
-            $qrarraylength = count($answerlist);
-        }
-
-        return view('Client.reportarchives', compact('reports', 'reporthistory','latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
+        return view('Client.reportarchives', compact('report','report_step', 'reporthistory','latestreport', 'answerlist', 'questionlist', 'qrarraylength'));
 
     }
 

@@ -48,6 +48,20 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
 
+            <li class="dropdown" ng-app="messengerApp" ng-controller="masterMessageController" ng-cloak>
+                <a ng-cloak href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()">  @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
+                    <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" ng-click="startAdd()"><i class="fa fa-pencil"></i> <small>Compose</small></a>
+                    </li>
+                    <li>
+                        <a href="/../mailbox"><i class="fa fa-fw fa-envelope"></i> <small>Mailbox</small></a>
+                    </li>
+                </ul>
+                @include('partials.messagewindow')
+            </li>
+
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-user"></i> {{ Auth::User()->fname}} {{ Auth::User()->sname}}  <b class="caret"></b></a>

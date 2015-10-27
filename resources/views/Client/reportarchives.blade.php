@@ -34,75 +34,26 @@
             </div>
             <!-- /.row -->
 
-            @unless(empty($reports->id))
+            @unless(empty($report->id))
                     <!-- Dynamic Table -->
             <div class="col-lg-12">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Latest Report</a></li>
-                    <li><a data-toggle="tab" href="#report">View all Reports</a></li>
+                    <li class="active"><a data-toggle="tab" href="#home">View all Reports</a></li>
+                    <li><a data-toggle="tab" href="#report">Latest Report</a></li>
                 </ul>
                 @endunless
 
                 <div class="tab-content">
                     <!-- home tab  -->
+
                     <div id="home" class="tab-pane fade in active">
+                            
                         @if(empty($latestreport))
-                            <h3> No Reports found in our system. </h3>
-                            @else
-                                    <!-- Main jumbotron for a  message -->
-                            <h3> Report Number: {{ $latestreport->id }} </h3>
-                            <!-- Display reports status -->
-                            <div class="body" style="float:right"><h4>Status: {{ $latestreport-> status }} </h4></div>
-                            <br>
-                            <hr/>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Question</th>
-                                        <th>Answer</th>
-                                    </tr>
-                                    </thead>
-                                    <!-- Display report questions and answers. -->
-                                    @if(empty($qrarraylength))
-                                        <tr>
-                                            <td> Create a new Report</td>
-                                        </tr>
-                                    @else
-                                        <tbody>
 
-                                        @for ($i = 0; $i < $qrarraylength; $i++)
-                                            <tr>
-                                                <td>{{ $questionlist[$i]->question }} </td>
-                                                <td>{{ $answerlist[$i]}} </td>
-                                            </tr>
-                                        @endfor
-
-                                        </tbody>
-                                    @endif
-                                </table>
+                             <div id="emptymsg" class="emptymsg_container">
+                                <h2>No Reports found.</h2>
                             </div>
-                            <!-- /.table-responsive -->
 
-                            <!-- display practitioner's notes -->
-                            <label for="pracnotes">Practitioner's Notes</label>
-                            @if (!empty($latestreport->prac_notes))
-                                <textarea name='pracnotes' class="form-control" rows="7"
-                                          readonly=""> {{ $latestreport->prac_notes }}</textarea>
-                            @else
-                                <textarea name='pracnotes' class="form-control" rows="7"
-                                          readonly=""> No Remarks.</textarea>
-                            @endif
-
-                        @endif
-                    </div>
-                    <!-- /#home -->
-
-                    <!-- report tab -->
-                    <div id="report" class="tab-pane fade">
-
-                        @if(empty($latestreport))
-                            <h3> No Reports found in our system. </h3>
                         @else
                             <h2>Report History</h2>
                             <hr>
@@ -141,6 +92,24 @@
                             </table>
 
                         @endif
+
+                    </div>  
+                    <!-- /#home -->
+
+                    <!-- report tab -->
+                    <div id="report" class="tab-pane fade">
+
+                         @if(empty($latestreport))
+                            <h3> No Reports found in our system. </h3>
+                            @else
+                                <br>
+                                <h4>
+                                    <span style="color:#000000">Report Overview: {{ $report->id}}</span>
+                                </h4>
+                            @include('partials.show_overview')
+
+                        @endif
+                    
                     </div>
                     <!-- /.report -->
                 </div>

@@ -2,7 +2,7 @@
 
 @section('sidemenubar')
 
- @if(Session::has('is_admin'))
+ @if((Session::has('prac_id')) && (Session::has('is_admin')))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -21,7 +21,7 @@
             </ul>
         </div>
     
- @else
+ @elseif(Session::has('prac_id'))
     
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -37,7 +37,20 @@
             </ul>
         </div>
 
-  @endif
+  @elseif(Auth::check())
+          
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul class="nav navbar-nav side-nav">
+                  <li>
+                      <a href="{{ url('home') }}"><i class="fa fa-home"></i> Dashboard</a>
+                  </li>
+                  <li class="active">
+                      <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
+                  </li>
+              </ul>
+          </div>
+
+@endif
 
    
 @endsection
@@ -92,13 +105,23 @@
                     <!-- Display client and practitioner name -->
 
                     <div>
-                        <br>
+                        <br>  
 
-                        <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}">
+                        @if(Auth::check())
+
+                          <a class="directionLinks pull-left" href="{{ url('/client/reportarchives') }}">
+                          <i class="fa fa-chevron-left"></i> Back 
+                          </a>
+
+                        @else
+
+                          <a class="directionLinks pull-left" href="{{ url('/reports/overview', $report->id) }}">
                           <i class="fa fa-chevron-left"></i> Back to Overview 
-                        </a>
+                          </a>
+
+                        @endif
                         
-                        <a class="pull-right" data-toggle="popover" data-html="true" data-trigger="click" data-animation="true" data-placement="left" title="Report Information" 
+                        <a class="pull-right" data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="left" title="Report Information" 
                           data-content="Report ID: {{ $report->id }} <br> <hr>
                           Practitioner: {{ $practitioner->fname }} {{ $practitioner->sname }} <br>
                           Practitioner email: {{ $practitioner->email }}<br><hr>
@@ -112,6 +135,7 @@
                         <a style="padding-right:30px;"class="pull-right" href="{{ url('/practitioner/reportpdf', $report->id) }}"> 
                         <i class="fa fa-file-pdf-o"></i>  Download PDF   </a>
 
+                        @unless(Auth::check())
                          <span class="version-control pull-left" style="padding-left:40px;">   
 
                             <div class="dropdown" >
@@ -162,6 +186,7 @@
                                         </ul>
                             </div>
                         </span>
+                      @endunless
 
                     </div>
                 </div>
@@ -169,20 +194,23 @@
                <br>
 
                   {!! Form::open(['url' => 'reports/stepAssessment/checkhistory']) !!}
-                  <input type="hidden" name="report_id" value={{$report->id}}>
-                  <input type="hidden" name="assessment_id" value={{$assessment->id}}>
-                  <input type="hidden" name="current_version" value={{$currentversion['version_number']}}>
+                    @unless(Auth::check())
+                        <input type="hidden" name="report_id" value={{$report->id}}>
+                        <input type="hidden" name="assessment_id" value={{$assessment->id}}>
+                        <input type="hidden" name="current_version" value={{$currentversion['version_number']}}>
+                    @endunless
                   @include('show_report')
 
             <!-- /.form-group -->
         </div>
         <!-- /.container-fluid -->
-
+        @unless(Auth::check())
          @foreach($versionlist as $version)
 
              @include('partials.changeVersionConfirmationModal')   
 
          @endforeach
+        @endunless
 
     </div>
 

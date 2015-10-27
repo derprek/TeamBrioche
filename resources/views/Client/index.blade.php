@@ -26,48 +26,26 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="#">Dashboard</a>
+                            <i class="fa fa-dashboard"></i> <a href="#">Home</a>
                         </li>
                     </ol>
                 </div>
             </div>
             <!-- /.row-->
 
-            <div class="col-lg-12">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
-                </ul>
-                <div class="tab-content">
-                    <!-- home tab -->
-                    <div id="home" class="tab-pane fade in active">
-                        <br>
+                <div class="col-lg-12">
+                    <div class="jumbotron">
+                        <div class="container">
+                            <h3>Greetings , {{ $username }}!</h3>
 
-                        <div class="jumbotron">
-                            <div class="container">
-                                <h3>Greetings , {{ $username }}!</h3>
-
-                                <p> Welcome to ATEST </p>
-                                <hr>
-                                <p><a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}"
-                                      role="button">View Reports</a></p>
-                            </div>
+                            <p> Welcome to ATEST </p>
+                            <hr>
+                            <p><a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}"
+                                  role="button">View Reports</a></p>
                         </div>
                     </div>
+                </div>
                     <!-- /.home-->
-
-                    <!-- Notifacation tab-->
-                    <div id="notification" class="tab-pane fade ">
-                        <br>
-
-                        <div class="jumbotron">
-                            <div class="container">
-                                <h3>Notification will be implemented here</h3>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.notification-->
                 </div>
             </div>
         </div>

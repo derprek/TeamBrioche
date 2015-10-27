@@ -33,9 +33,9 @@ class ReportAssessmentController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) {
-                    return redirect('/../');
+                if (Auth::guest()) 
+                {
+                   return redirect('/unauthorizedaccess');
                 }
         });
     }
@@ -50,8 +50,11 @@ class ReportAssessmentController extends Controller
 
         if($clients->isEmpty())
         {   
-            Session::flash('error_title', 'No Registered clients found.');
-            Session::flash('error_message', 'Please create one first.');
+            Session::put('info_title', 'No Registered clients found.');
+            Session::put('info_message', 'Please create one first.');
+            Session::put('missing_info', '1');
+            Session::put('report_noclients', '1');
+
             return redirect('practitioner/clientmanager');
         }
         else
@@ -154,37 +157,74 @@ class ReportAssessmentController extends Controller
     public function show($report_id)
     {   
         $report = Report::find($report_id);
-        $assessment = Assessment::GetAssessment($report_id)->first();
+        
+        if($report === null)
+        {
+            return redirect('/unauthorizedaccess');
+        }
+
         $client = User::find($report->userid);
+
+        if(Auth::check())
+        {
+            if(Auth::user()->id !== $report->userid)
+            { 
+                return redirect('/unauthorizedaccess');
+            }
+        }
+
+        $assessment = Assessment::GetAssessment($report_id)->first();
+        
+        if(Session::has('prac_id'))
+        {
+            $versions = Version::GetVersion($report->id)
+                        ->ByAssessment()
+                        ->orderBy('updated_at', 'asc')
+                        ->get(); 
+
+            $i =1;
+            $versionlist = array();
+            foreach ($versions as $version) 
+            {   
+                $practitioner = $practitioners->where('id', $version->prac_id)->first();
+                if($practitioner->id === Session::get('prac_id'))
+                {
+                    $practitioner_name = 'You';
+                }
+                else
+                {
+                    $practitioner_name = $practitioner->fname . " " . $practitioner->sname;
+                }
+
+                if($version->id === $assessment->current_version)
+                {
+                    $currentversion = ['id'=>$version->id,
+                        'practitioner_name'=> $practitioner_name,
+                        'version_number'=>$i,
+                        'updated_at'=>$version->updated_at];
+
+                    if($version->prac_id === Session::get('prac_id'))
+                    {
+                        $submitButtonText = "Click here to update or create a new version";
+                    }
+                    else
+                    {
+                        $submitButtonText = "Save as new version";
+                    }
+                }
+
+                $versionlist[] = ['id'=>$version->id,
+                        'practitioner_name'=> $practitioner_name,
+                        'version_number'=>$i,
+                        'updated_at'=>$version->updated_at];
+                 $i++;
+            }  
+        }
+
         $practitioners = Practitioner::all();
         $practitioner = $practitioners->where('id', $report->prac_id)->first();
 
         $categories_id = $assessment->questions()->where('version_id','=',$assessment->current_version)->distinct()->orderBy('category_id', 'ASC')->lists('category_id');
-
-        $versions = Version::GetVersion($report->id)
-                        ->ByAssessment()
-                        ->orderBy('updated_at', 'asc')
-                        ->get(); 
-        $i =1;
-        $versionlist = array();
-        foreach ($versions as $version) 
-        {   
-            $practitioner = $practitioners->where('id', $version->prac_id)->first();
-
-            if($version->id === $assessment->current_version)
-            {
-                $currentversion = ['id'=>$version->id,
-                    'practitioner_name'=> $practitioner->fname . " " . $practitioner->sname,
-                    'version_number'=>$i,
-                    'updated_at'=>$version->updated_at];
-            }
-
-            $versionlist[] = ['id'=>$version->id,
-                    'practitioner_name'=> $practitioner->fname . " " . $practitioner->sname,
-                    'version_number'=>$i,
-                    'updated_at'=>$version->updated_at];
-             $i++;
-        }  
 
         $categories = array();
         $answerlist = array();
@@ -198,7 +238,6 @@ class ReportAssessmentController extends Controller
                 ->get();
         }
 
-        $submitButtonText = "Click here to update or create a new version";
         $thumbnail_dist = 100 /count($categories_id);
 
         return view('reports.showAssessment', compact('answerlist','versionlist','currentversion','report','assessment', 'client', 'practitioner','thumbnail_dist','categories','submitButtonText'));
@@ -227,6 +266,17 @@ class ReportAssessmentController extends Controller
                                      ->where('version_id', '=', $assessment->current_version)
                                      ->orderBy('question_id', 'ASC')
                                      ->get();
+
+        $version = Version::find($assessment->current_version);    
+
+        if($version->prac_id === Session::get('prac_id'))
+        {
+            Session::put('is_owner','true');
+        } 
+        else
+        {
+            Session::forget('is_owner');
+        }                        
                                     
         $answercounter = count($answers);
         $i = 1;

@@ -4,12 +4,13 @@ messengerApp.controller('MailboxController', [ '$http', '$scope','toastr', funct
   $scope.pageSize = 10;
 
   $scope.errorText = "Talk to someone.";
-
+  
   angular.element(document).ready(function () {
         $scope.newMessage = {};
         $scope.getInbox();
         $scope.getSentBox();
-        $scope.getRecipients();   
+        $scope.getRecipients();  
+        
     });
 
 $scope.getfirstID = function() {
@@ -112,7 +113,13 @@ $scope.totalunread = function() {
     
   };
 
+  $scope.fuckhenry = function() {
+    alert('sup');
+    $scope.newWindow = true;
+  };
+
   $scope.startAdd = function() {
+    alert('sup');
     $scope.newWindow = true;
   };
 

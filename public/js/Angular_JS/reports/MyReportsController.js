@@ -9,6 +9,7 @@ reportApp.controller('MyReportsController', [ '$http', '$scope', function($http,
 
         document.getElementById("allReportsLoad_text").style.display = "none";
         document.getElementById("allReportsLoad").style.display = "none";
+        document.getElementById("addreport_btn").style.visibility = "visible";
 
         var count =0;
 
