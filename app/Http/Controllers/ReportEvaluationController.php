@@ -30,10 +30,12 @@ class ReportEvaluationController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) {
-                    return redirect('/../');
-                }
+            
+               if ((Auth::guest()) && (!Session::has('prac_id')))
+               {
+                    return redirect('/unauthorizedaccess');
+               }
+                
         });
     }
 

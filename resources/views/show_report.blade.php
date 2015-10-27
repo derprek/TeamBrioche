@@ -61,9 +61,10 @@
                         @if(isset($goals))
                         <div class="form-group" style="padding:10px;">
                             <label for="goals_typology">Goals:</label>
-                         <textarea readonly name="goals_typology"
+                          <textarea readonly name="goals_typology" 
                                    class="form-control" rows="5"
-                                   placeholder="Goals + Typology"> {{ $goals}}</textarea>
+                                   placeholder="Goals + Typology" data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="top" title="Information" 
+                          data-content=" Taken from Assessment step"> {{ $goals}}</textarea>
                         </div>
                         @endif                 
 
@@ -88,7 +89,9 @@
                              <textarea class="form-control"
                               name="answersid[{{ $answerbytype->id }}]"
                               rows="3" readonly="" 
-                              placeholder="No information found. Please go back to the Assessment section to add any missing information.">{{$answerbytype->pivot->answers}}</textarea>
+                              placeholder="No information found. Please go back to the Assessment section to add any missing information."
+                              data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="left" title="Information" 
+                              data-content=" Taken from Assessment step">{{$answerbytype->pivot->answers}}</textarea>
                            </div>
 
                         @else

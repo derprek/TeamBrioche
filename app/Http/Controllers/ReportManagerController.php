@@ -37,9 +37,9 @@ class ReportManagerController extends Controller
 	public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) {
-                    return redirect('/../');
+                if ((Auth::guest()) && (!Session::has('prac_id'))) 
+                {
+                    return redirect('/unauthorizedaccess');
                 }
         });
     }
@@ -63,13 +63,30 @@ class ReportManagerController extends Controller
     
 
     public function getMyReports()
-    {
-        $reports = Report::latest('updated_at')->practitioner()->get();
-
+    {  
+        if(Session::has('prac_id'))
+        {
+          $reports = Report::latest('updated_at')->practitioner()->get();
+        }
+        elseif(Auth::check())
+        {
+          $reports = Report::latest('updated_at')->GetUserReports()->get();
+        }
+        
         $reportlist = array();
         foreach($reports as $report)
         {       
+          if(Session::has('prac_id'))
+          {
             $client = User::find($report->userid);
+            $name = $client->fname . " " . $client->sname;
+          }
+          else
+          {
+            $practitioner = Practitioner::find($report->prac_id);
+            $name = $practitioner->fname . " " . $practitioner->sname;
+          }
+            
 
             if($report->updated_at->isToday())
             {
@@ -90,7 +107,7 @@ class ReportManagerController extends Controller
             }
            
             $reportlist[] = ['id'=>$report->id,
-                                'name'=>$client->fname . " " . $client->sname,
+                                'name'=>$name,
                                 'updated_at'=>$updated_date,
                                 'status'=>$report->status,
                                 'created_at'=>$created_date];

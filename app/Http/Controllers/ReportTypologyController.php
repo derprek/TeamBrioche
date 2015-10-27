@@ -33,7 +33,7 @@ class ReportTypologyController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-                if (Auth::guest()) 
+                if ((Auth::guest()) && (!Session::has('prac_id')))
                 {
                     return redirect('/unauthorizedaccess');
                 }

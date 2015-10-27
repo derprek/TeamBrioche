@@ -101,64 +101,76 @@
                                                 <i class="fa fa-balance-scale fa-3x"></i>
                                             </div>
                                         <div class="col-xs-9 text-right">
+
                                             @if (isset($evaluation_count))
-                                                    <h4> <strong>{{$evaluation_count}}</strong> evaluation report (s).</h4>
-                                                    </div>
-                                                </div>
+                                                
+                                                <h4> <strong>{{$evaluation_count}}</strong> evaluation report (s).</h4>
+
+                                            @else
+
+                                                <p style="color:#a94442">Incomplete</p>
+
+                                                @unless((Session::has('is_admin')) ||(Auth::check()))                         
+                                                <h6 style="color:#a94442"><br> * You need to
+                                                    complete a typology report
+                                                    first.</h6>
+                                                @endunless
+
+                                            @endif
+
+                                        </div>
+
+                                         </div>
+                             </div>
                                                 <!-- .row -->
-                                                </div>
                                             <!-- .panel-body -->
-                                            <div class="panel-footer">
-                                            <span class="pull-left"><a
-                                                        href="{{ url('/reports/evaluation/new',$report->id) }}">
-                                                    <i class="fa fa-plus"></i> Create New
-                                                </a></span>
-                                            <span class="pull-right"><a
+                                        
+
+                                            @if (isset($evaluation_count))
+
+                                                <div class="panel-footer">
+
+                                                @unless((Auth::check()) || (Session::has('is_admin')))
+                                                    <span class="pull-left"><a
+                                                            href="{{ url('/reports/evaluation/new',$report->id) }}">
+                                                        <i class="fa fa-plus"></i> Create New
+                                                    </a></span>
+                                                @endunless
+                                         
+                                                <span class="pull-right"><a
                                                         href="{{ url('/reports/evaluation/overview',$report->id) }}">
                                                     <i class="fa fa-arrow-right"></i> View </a></span>
                                                 <div class="clearfix"></div>
-                                            </div>
-                                            <!-- .panel-footer -->
+                                            
 
-                                            @else
-                                @if($report_step === 2)
-                                    <p>Incomplete</p>
+                                            @elseif($report_step === 2)
+
+                                                @unless((Auth::check()) || (Session::has('is_admin')))
+                                                    <span class="pull-left"><a
+                                                            href="{{ url('/reports/evaluation/new',$report->id) }}">
+                                                        <i class="fa fa-plus"></i> Create New
+                                                    </a></span>
+                                                @endunless
+
+                                                 </div>
+
+                                            @endif
+
                                        
-                                @unless((Session::has('is_admin')) ||(Auth::check()))
-                                <div class="panel-footer"><span class="pull-left"><a href="{{ url('/reports/evaluation/new',$report->id) }}"><i
-                                                    class="fa fa-plus"></i> Create New</a></span>
-                                                    <div class="clearfix"></div>
-                                </div>
-                                @endunless
-                                <!-- .footer -->
-                                @else
-                                    <p style="color:#a94442">Incomplete</p>
+                               
 
-                                    @unless((Session::has('is_admin')) ||(Auth::check()))                         
-                                    <h6 style="color:#a94442"><br> * You need to
-                                        complete a typology report
-                                        first.</h6>
-                                    @endunless
-                            
-                        
+                                          
+                                                <!-- .body -->
+                                    
 
-               
-                </div>
-                            <!-- .col-xs-9 -->
-                </div>
-                <!-- row -->
-                </div>
-
-              
-                    <!-- .body -->
-                    @endif
-
-                     </div>
-                                        <!-- .col-xs-9 -->
                                     </div>
-                                    <!-- .row -->
-                                </div>
-                                <!-- .body -->
-                    @endif
+
+                                 </div>
+
+                
                 </div>
                 <!-- .panel-atest-->
+
+                @unless(Auth::check())
+                    </div>
+                @endunless
