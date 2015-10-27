@@ -48,8 +48,11 @@
 
                     <div id="home"  class="tab-pane fade in active">
 
-                        @if(empty($latestreport))
-                            <h3> No Reports found in our system. </h3>
+                        @if(empty($reporthistory))
+                            <div class="emptymsg_container">
+                                <h3> No Reports found in our system. <br><br>
+                                <i class="fa fa-meh-o"></i></h3>
+                            </div>
                             @else
                                 <br>
                                 <h4>

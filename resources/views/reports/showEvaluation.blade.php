@@ -83,7 +83,7 @@
                             <i class="fa fa-chevron-left"></i> Back to Overview 
                         </a>
 
-                        <a class="pull-right" data-toggle="popover" data-html="true" data-animation="true" data-placement="left" title="Report Information" 
+                        <a class="pull-right" data-toggle="popover" data-trigger="hover" data-html="true" data-animation="true" data-placement="left" title="Report Information" 
                           data-content="Report ID: {{ $report->id }} <br>
                           Evaluation ID: {{ $evaluation->id }} <br><hr>
                           Practitioner: {{ $practitioner->fname }} {{ $practitioner->sname }} <br>

@@ -11,13 +11,13 @@
                   
                     @if($category === reset($categories))
 
-                      <li style = "width:{{$thumbnail_dist}}%;" class ="reportTabs" id="firstTab"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                      <li style = "width:{{$thumbnail_dist}}%;" class ="reportTabs" id="firstTab" data-toggle="tooltip" data-placement="top" title="{{$category->name}}"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
                       <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
                       </span> </a></li>
 
                     @else
 
-                     <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" ><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                     <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" data-toggle="tooltip" data-placement="top" title="{{$category->name}}"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
                      <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
                      </span> </a></li>    
 

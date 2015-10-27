@@ -62,8 +62,8 @@
                             <br>
 
                             <div class="modal-footer">
-                                <button type="submit" disabled id="submitBtn"class="btn btn-success pull-right">
-                                    <i class="fa fa-trash"></i></i>Update Password
+                                <button type="submit" disabled id="submitBtn" class="btn btn-success pull-right">
+                                    <i class="fa fa-pencil-square-o"></i></i>Update Password
                                 </button>
 
                                 @if((Auth::guest()) && (!Session::has('prac_id')))
@@ -74,9 +74,9 @@
 
                                 @endif
 
-                                @unless(Auth::guest())
+                                @unless((Auth::guest()) && (!Session::has('prac_id')))
 
-                                <button type="submit" class="btn btn-danger pull-left"
+                                <button class="btn btn-danger pull-left"
                                         data-dismiss="modal">
                                     <i class="fa fa-times"></i> Cancel
                                 </button>

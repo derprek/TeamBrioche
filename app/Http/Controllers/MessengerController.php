@@ -31,11 +31,10 @@ class MessengerController extends Controller
     {
         $this->beforeFilter(function(){
            
-                if ((Auth::guest()) && (!Session::has('prac_id')))
+               if ((Auth::guest()) && (!Session::has('prac_id')))
                {
                     return redirect('/unauthorizedaccess');
                }
-
         });
     }
 

@@ -148,22 +148,21 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                           
+                                <hr ng-cloak class="col-lg-12" style="border-top: solid 3px;">
 
-                            <hr class="col-lg-12" style="border-top: solid 3px;">
+                                <label ng-cloakfor="Delete" class="col-sm-2 control-label" style="text-align:right;" >Delete</label>
+                                <button ng-cloak data-toggle="modal" data-target="#deletepersonnel"
+                                        class="btn btn-danger col-sm-2 col-md-2 col-lg-2">
+                                    Delete Practitioner
+                                </button>
 
-                            <label for="Delete" class="col-sm-2 control-label" style="text-align:right;" >Delete</label>
-                            <button data-toggle="modal" data-target="#deletepersonnel"
-                                    class="btn btn-danger col-sm-2 col-md-2 col-lg-2">
-                                Delete Practitioner
-                            </button>
-
-                            <form role="form" method="POST" action="{{ url('/admin/deletePractitioner') }}">
-                                <input type="hidden" name="id" class="form-control" value="@{{ Practitioner.id }}"
-                                       required>
-                                @include('partials.deletePersonnel_modal')
-                            </form>
-
+                                <form role="form" method="POST" action="{{ url('/admin/deletePractitioner') }}">
+                                    <input type="hidden" name="id" class="form-control" value="@{{ Practitioner.id }}"
+                                           required>
+                                    @include('partials.deletePersonnel_modal')
+                                </form>
+                            
                         </div>
                     </div>
                     <!-- /.home -->
@@ -198,10 +197,10 @@
                                     <hr>
 
                                     <tr ng-show="Clients">
-                                        <th>Client ID</th>
-                                        <th>Client Name</th>
-                                        <th>Joined on</th>
-                                        <th></th>
+                                        <th class="smallRow">Client ID</th>
+                                        <th class="mediumRow">Client Name</th>
+                                        <th class="mediumRow">Joined on</th>
+                                        <th class="mediumRow">View</th>
                                     </tr>
 
                                     <!-- List out reports -->
@@ -212,7 +211,7 @@
                                         <td> @{{ client.name }} </td>
                                         <td> @{{ client.created_at }} </td>
                                         <td style="width:10%"><a
-                                                    href="/practitioner/overview/@{{ client.id }}"
+                                                    href="/admin/viewclient/@{{ client.id }}"
                                                     class="btn btn-success btn-sm"> View</a></td>
                                     </tr>
 
@@ -277,12 +276,12 @@
                                     <hr>
 
                                     <tr ng-show="Reports">
-                                        <th>Report Number</th>
-                                        <th>Client Name</th>
-                                        <th>Created on</th>
-                                        <th>Updated on</th>
-                                        <th>Status</th>
-                                        <th>Edit</th>
+                                        <th class="smallRow">Report Number</th>
+                                        <th class="mediumRow">Client Name</th>
+                                        <th class="mediumRow">Created on</th>
+                                        <th class="mediumRow">Updated on</th>
+                                        <th class="smallRow">Status</th>
+                                        <th class="smallRow">View</th>
                                     </tr>
 
                                     <!-- List out reports -->
@@ -295,8 +294,8 @@
                                         <td> @{{ report.updated_at }} </td>
                                         <td> @{{ report.status }} </td>
                                         <td style="width:10%"><a
-                                                    href="/practitioner/overview/@{{ report.id }}"
-                                                    class="btn btn-success btn-sm"> Edit</a></td>
+                                                    href="/reports/overview/@{{ report.id }}"
+                                                    class="btn btn-success btn-sm"> View</a></td>
                                     </tr>
 
                                 </table>

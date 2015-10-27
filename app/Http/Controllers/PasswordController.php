@@ -23,6 +23,17 @@ use Hash;
 
 class PasswordController extends Controller
 {
+    public function __construct()
+    {
+        $this->beforeFilter(function(){
+           
+               if ((Auth::guest()) && (!Session::has('prac_id')))
+               {
+                    return redirect('/unauthorizedaccess');
+               }
+        });
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -84,7 +95,7 @@ class PasswordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {   
+    {  
         if(isset($request->current_password))
         {
             $current_password = $request->current_password;
@@ -110,12 +121,12 @@ class PasswordController extends Controller
                      $practitioner->password = MD5($newpassword);
                      $practitioner->save();
 
-                     Session::flash('flash_message','Your password has been successfully updated');
+                     Session::put('flash_message','Your password has been successfully updated');
                      return redirect()->back();
                 }
                 else
                 {   
-                   Session::flash('password_error','Your current password is incorrect');
+                   Session::put('password_error','Your current password is incorrect');
                    return redirect()->back();
                 }
                 
@@ -133,7 +144,7 @@ class PasswordController extends Controller
 
                     if ($validator->fails()) 
                     {
-                        Session::flash('password_error','Your passwords do not match');
+                        Session::put('password_error','Your passwords do not match');
                         return redirect()->back();
                     }
 
@@ -142,12 +153,12 @@ class PasswordController extends Controller
                     $client->password = $newpassword;
                     $client->save();
 
-                    Session::flash('flash_message','Your password has been successfully updated');
+                    Session::put('flash_message','Your password has been successfully updated');
                     return redirect()->back();
                 }
                 else
                 {
-                    Session::flash('password_error','Your current password is incorrect');
+                    Session::put('password_error','Your current password is incorrect');
                     return redirect()->back();
                 }
                 
@@ -165,7 +176,7 @@ class PasswordController extends Controller
 
                  if ($validator->fails()) 
                  {
-                       Session::flash('password_error','Your passwords do not match');
+                       Session::put('password_error','Your passwords do not match');
                        return redirect()->back();
                  }
 
@@ -175,7 +186,7 @@ class PasswordController extends Controller
                $practitioner->verified = 1;
                $practitioner->save();
 
-               Session::flash('flash_message','Your password has been successfully updated');
+               Session::put('flash_message','Your password has been successfully updated');
                return redirect()->back();
            }
            elseif(Auth::check())
@@ -187,7 +198,7 @@ class PasswordController extends Controller
 
                 if ($validator->fails()) 
                 {
-                    Session::flash('password_error','Your passwords do not match');
+                    Session::put('password_error','Your passwords do not match');
                     return redirect()->back();
                 }
 
@@ -197,7 +208,7 @@ class PasswordController extends Controller
                 $client->verified = 1;
                 $client->save();
 
-                Session::flash('flash_message','Your password has been successfully updated');
+                Session::put('flash_message','Your password has been successfully updated');
                 return redirect()->back();
            }
         }
@@ -262,7 +273,7 @@ class PasswordController extends Controller
                     Auth::login($client);
                 }
 
-                Session::flash('flash_message','Congratulations on your new account!');
+                Session::put('flash_message','Welcome to ATEST');
                 return redirect('home');
             }
             else
@@ -280,7 +291,12 @@ class PasswordController extends Controller
                     $practitioner->verified = 1;
                     $saved = $practitioner->save();
 
-                    Session::flash('flash_message','Your password has been successfully updated');
+                    Session::put('prac_id', $practitioner->id);
+                    $prac_name = $practitioner->fname . " " . $practitioner->sname;
+                    Session::put('prac_name', $prac_name);
+                    Session::forget('is_admin');
+
+                    Session::put('flash_message','Welcome to ATEST');
                     
                     if($practitioner->usertype === 'admin')
                     {
@@ -321,7 +337,7 @@ class PasswordController extends Controller
             }
         }
 
-        if($get_new_user === null)
+        if(!isset($get_new_user))
         {
             $get_new_user = Practitioner::GetUnverified()->ValidatePassword(MD5($password))->first();
         }
