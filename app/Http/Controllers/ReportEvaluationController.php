@@ -204,13 +204,13 @@ class ReportEvaluationController extends Controller
 
         $evaluations = Evaluation::GetEvaluation($report_id)->latest('updated_at')->get();
 
-       
-        $client = User::find($report->id);
+
+        $client = User::find($report->userid);
         $practitioners = Practitioner::all();
 
         if(($report === null ) || ($client === null))
         {
-            Session::flash('error_message', 'There was an error creating your Evaluation Report :( ');
+            Session::put('error_message', 'There seems to be an problem retrieving this evaluation');
             return redirect()->back();
         }
         else

@@ -69,8 +69,6 @@
                 <div id="reportApp" class="tab-content">
                     <div ng-controller="MyReportsController" id="home" class="tab-pane fade in active">
 
-                        <br>
-
                         <div id="allReportsLoad" style="width:100%; ">
 
                             @include('partials.loadinganimation')
@@ -90,7 +88,7 @@
                         </div>
 
                         <div ng-cloak>
-
+                        <br>
                             <a ng-show="AllReports" id="addreport_btn" ng-cloak class="btn btn-success"
                                style="visibility:hidden;"
                                href="{{ url('reports/assessment/new') }}"

@@ -105,13 +105,14 @@
                             </div>
                         </div>
 
-                        <div ng-hide="Inbox" style="text-align:left" class="emptymsg_container" id="emptymsg" style="visibility:hidden;">
+                        <div ng-hide="Inbox" class="emptymsg_container" id="emptymsg" style="visibility:hidden;">
                             <h3>You have no mail.</h3>
                             <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
                         </div>
 
                         <div ng-show="Inbox" ng-cloak class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
                             <!-- Nav tabs -->
+                            <br>
                             <h3> Inbox </h3>
 
                             <br>

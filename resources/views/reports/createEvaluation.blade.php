@@ -48,7 +48,7 @@
             <div class="form-group">
                 <div>
                     <br>
-                    <a class="directionLinks pull-left" href="{{ URL::previous() }}">
+                    <a class="directionLinks pull-left" href="{{ url('reports/overview', $report->id) }}">
                       <i class="fa fa-chevron-left"></i> Back to Overview 
                     </a>
 

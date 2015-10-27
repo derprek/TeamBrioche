@@ -45,7 +45,7 @@ class ClientsReportController extends Controller
      */
     public function index()
     {
-        $report = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
+        $report = Report::GetUserReports()->Published()->orderBy('updated_at', 'desc')->first();
 
         if($report !== null)
         {   
@@ -55,12 +55,12 @@ class ClientsReportController extends Controller
             {
                 $evaluation_count = count(Evaluation::GetEvaluation($report->id)->get());
             }
+
+             $reporthistory = Report::GetUserReports()->get();
         }
         
 
-        $reporthistory = Report::GetUserReports()->get();
-
-        $latestreport = Report::GetUserReports()->orderBy('updated_at', 'desc')->first();
+       
 
         return view('Client.reportarchives', compact('report','report_step', 'reporthistory','latestreport', 'answerlist', 'questionlist', 'evaluation_count'));
 

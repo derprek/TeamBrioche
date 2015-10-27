@@ -156,7 +156,7 @@ class ReportOverviewController extends Controller
 
         $reports->save();
 
-        Session::flash('banner_message', 'Report successfully updated!');
+        Session::put('flash_message', 'Report successfully updated!');
         return redirect("reports/overview/" . $reportid);
     }
 }

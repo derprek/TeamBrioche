@@ -188,6 +188,24 @@ class ReportAssessmentController extends Controller
             }
         }
 
+        if((Session::has('prac_id')) && (!Session::has('is_admin')))
+        {
+            $allowed_list = $report->practitioners()->lists('practitioner_id');
+        
+            foreach($allowed_list as $practitioner)
+            {
+                if ($practitioner === Session::get('prac_id')) 
+                {
+                    $validated = true;
+                } 
+            }
+
+            if((!isset($validated)) && ($report->prac_id !== Session::get('prac_id')))
+            {
+                return redirect('/unauthorizedaccess');
+            }
+        }
+
          $practitioners = Practitioner::all();
          $practitioner = $practitioners->where('id', $report->prac_id)->first();
 

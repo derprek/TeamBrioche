@@ -149,7 +149,7 @@ class ClientManagerController extends Controller
         if($successful_registration)
         {   
             $message = "Hello, " . $newClient->fname .". Your account is ready for you! Please use this default password: " 
-             . $randomgeneratedpw;
+             . $randomgeneratedpw ."\r\n\r\n Click here: uqatest.com". $randomgeneratedpw ." to log in ";;
 
             $email = $newClient->email;
 
@@ -295,6 +295,11 @@ class ClientManagerController extends Controller
     public function deleteClient(Request $request)
     {     
        $client = User::find($request->id);
+
+       if($client === null)
+       {
+         return redirect('/unauthorizedaccess');
+       }
 
         if((Session::has('is_admin')) || ($client->prac_id === Session::get('prac_id')))
         {

@@ -18,8 +18,12 @@ Route::controllers([
 ]);
 
 Route::get('profile', 'ProfileController@show');
-Route::get('login/{password}', 'PasswordController@newuser');
+Route::get('login/{password}', 'PasswordController@validateuser');
+Route::get('setpassword', 'PasswordController@setpasswordpage');
 
+Route::get('validateuser', 'PasswordController@newuser');
+Route::post('validateuser', 'PasswordController@newuser');
+Route::post('setfirstpassword', 'PasswordController@setfirstpassword');
 Route::post('updateprofile', 'ProfileController@update');
 Route::post('updatepassword', 'PasswordController@update');
 

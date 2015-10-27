@@ -57,6 +57,10 @@ class Practitioner extends Model
         $query->where('id', '=', Session::get('prac_id'));
     }
 
+    public function scopeGetUnverified($query)
+    {
+        $query->where('verified', '=', 0);
+    }
     public function scopeNotCurrent($query)
     {
         $query->where('id', '!=', Session::get('prac_id'));

@@ -41,6 +41,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $query->where('prac_id', '=', Session::get('prac_id'));
     }
 
+    public function scopeGetUnverified($query)
+    {
+        $query->where('verified', '=', 0);
+    }
+
     public function scopeGetPractitionerClients($query,$prac_id)
     {
         $query->where('prac_id', '=', $prac_id);
@@ -49,6 +54,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function scopeValidateEmail($query, $email)
     {
         $query->where('email', '=', $email);
+    }
+
+    public function scopeValidatePassword($query, $password)
+    {
+        $query->where('password', '=', $password);
     }
 
 

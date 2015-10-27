@@ -2,8 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fc0280-7884-4728-9776-f1d355b4ee1b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/profile/setnewpassword.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/partials/validateNewUserModal.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/profile/validatenewuser.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.env" afterPath="$PROJECT_DIR$/.env" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientManagerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientManagerController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientsReportController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientsReportController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/MessengerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessengerController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PasswordController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/practitioner/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/practitioner/dashboard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PersonnelController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PersonnelController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Practitioner.php" afterPath="$PROJECT_DIR$/app/Practitioner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportAssessmentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportAssessmentController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportEvaluationController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportEvaluationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportOverviewController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportOverviewController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/partials/changePasswordModal.blade.php" afterPath="$PROJECT_DIR$/resources/views/partials/changePasswordModal.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/createEvaluation.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/createEvaluation.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/messages/mailbox.blade.php" afterPath="$PROJECT_DIR$/resources/views/messages/mailbox.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php" afterPath="$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/Client/reportarchives.blade.php" afterPath="$PROJECT_DIR$/resources/views/Client/reportarchives.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/reportmanager.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/reportmanager.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/showEvaluation.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/showEvaluation.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/show_report.blade.php" afterPath="$PROJECT_DIR$/resources/views/show_report.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php" />
     </list>
     <ignored path="TeamBrioche.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +60,9 @@
       <file leaf-file-name="practitionerProfile.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.791667">
-              <caret line="135" column="58" selection-start-line="135" selection-start-column="44" selection-end-line="135" selection-end-column="58" />
-              <folding>
-                <element signature="e#4357#4387#0#HTML" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-9.166667">
+              <caret line="134" column="58" selection-start-line="134" selection-start-column="58" selection-end-line="134" selection-end-column="58" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -61,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-3.4117646">
-              <caret line="22" column="16" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="16" />
+              <caret line="27" column="16" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -70,8 +90,8 @@
       <file leaf-file-name="PasswordController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PasswordController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.790909">
-              <caret line="205" column="4" selection-start-line="205" selection-start-column="4" selection-end-line="205" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.7818182">
+              <caret line="354" column="0" selection-start-line="354" selection-start-column="0" selection-end-line="354" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -102,29 +122,13 @@
       <file leaf-file-name="viewpractitioner.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.5882354">
-              <caret line="158" column="37" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
+            <state vertical-scroll-proportion="-4.2941175">
+              <caret line="157" column="37" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
               <folding>
                 <element signature="e#2859#2879#0#HTML" expanded="true" />
                 <element signature="e#3021#3045#0#HTML" expanded="true" />
                 <element signature="e#3090#3110#0#HTML" expanded="true" />
                 <element signature="e#3452#3478#0#HTML" expanded="true" />
-                <element signature="e#7109#7139#0#HTML" expanded="true" />
-                <element signature="e#7221#7246#0#HTML" expanded="true" />
-                <element signature="e#8214#8234#0#HTML" expanded="true" />
-                <element signature="e#8383#8407#0#HTML" expanded="true" />
-                <element signature="e#8452#8472#0#HTML" expanded="true" />
-                <element signature="e#8801#8827#0#HTML" expanded="true" />
-                <element signature="e#10336#10353#0#HTML" expanded="true" />
-                <element signature="e#11213#11233#0#HTML" expanded="true" />
-                <element signature="e#11382#11406#0#HTML" expanded="true" />
-                <element signature="e#11451#11471#0#HTML" expanded="true" />
-                <element signature="e#11800#11826#0#HTML" expanded="true" />
-                <element signature="e#12499#12529#0#HTML" expanded="true" />
-                <element signature="e#12582#12604#0#HTML" expanded="true" />
-                <element signature="e#13186#13216#0#HTML" expanded="true" />
-                <element signature="e#13269#13291#0#HTML" expanded="true" />
-                <element signature="e#15053#15070#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -713,12 +717,11 @@
         <state vertical-scroll-proportion="-2.5294118">
           <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
           <folding>
-            <element signature="e#4156#4179#0#HTML" expanded="false" />
-            <element signature="e#4221#4247#0#HTML" expanded="false" />
-            <element signature="e#8048#8068#0#HTML" expanded="false" />
-            <element signature="e#8193#8217#0#HTML" expanded="false" />
-            <element signature="e#8501#8527#0#HTML" expanded="false" />
-            <element signature="e#8561#8578#0#HTML" expanded="false" />
+            <element signature="e#4197#4223#0#HTML" expanded="false" />
+            <element signature="e#8057#8077#0#HTML" expanded="false" />
+            <element signature="e#8202#8226#0#HTML" expanded="false" />
+            <element signature="e#8510#8536#0#HTML" expanded="false" />
+            <element signature="e#8570#8587#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -728,7 +731,7 @@
         <state vertical-scroll-proportion="-9.705882">
           <caret line="85" column="3" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
           <folding>
-            <element signature="e#3632#3658#0#HTML" expanded="false" />
+            <element signature="e#3630#3656#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -926,29 +929,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/personnelManager/viewpractitioner.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.5882354">
-          <caret line="158" column="37" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
+        <state vertical-scroll-proportion="-4.2941175">
+          <caret line="157" column="37" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
           <folding>
             <element signature="e#2859#2879#0#HTML" expanded="true" />
             <element signature="e#3021#3045#0#HTML" expanded="true" />
             <element signature="e#3090#3110#0#HTML" expanded="true" />
             <element signature="e#3452#3478#0#HTML" expanded="true" />
-            <element signature="e#7109#7139#0#HTML" expanded="true" />
-            <element signature="e#7221#7246#0#HTML" expanded="true" />
-            <element signature="e#8214#8234#0#HTML" expanded="true" />
-            <element signature="e#8383#8407#0#HTML" expanded="true" />
-            <element signature="e#8452#8472#0#HTML" expanded="true" />
-            <element signature="e#8801#8827#0#HTML" expanded="true" />
-            <element signature="e#10336#10353#0#HTML" expanded="true" />
-            <element signature="e#11213#11233#0#HTML" expanded="true" />
-            <element signature="e#11382#11406#0#HTML" expanded="true" />
-            <element signature="e#11451#11471#0#HTML" expanded="true" />
-            <element signature="e#11800#11826#0#HTML" expanded="true" />
-            <element signature="e#12499#12529#0#HTML" expanded="true" />
-            <element signature="e#12582#12604#0#HTML" expanded="true" />
-            <element signature="e#13186#13216#0#HTML" expanded="true" />
-            <element signature="e#13269#13291#0#HTML" expanded="true" />
-            <element signature="e#15053#15070#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -993,11 +980,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/profile/practitionerProfile.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.791667">
-          <caret line="135" column="58" selection-start-line="135" selection-start-column="44" selection-end-line="135" selection-end-column="58" />
-          <folding>
-            <element signature="e#4357#4387#0#HTML" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-9.166667">
+          <caret line="134" column="58" selection-start-line="134" selection-start-column="58" selection-end-line="134" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,15 +997,15 @@
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.4117646">
-          <caret line="22" column="16" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="16" />
+          <caret line="27" column="16" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PasswordController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.790909">
-          <caret line="205" column="4" selection-start-line="205" selection-start-column="4" selection-end-line="205" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.7818182">
+          <caret line="354" column="0" selection-start-line="354" selection-start-column="0" selection-end-line="354" selection-end-column="0" />
           <folding />
         </state>
       </provider>
