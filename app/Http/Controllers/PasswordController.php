@@ -277,7 +277,7 @@ class PasswordController extends Controller
                 {
                     $practitioner = $get_user;
 
-                    $practitioner->password = $request->new_password;
+                    $practitioner->password = MD5($request->new_password);
                     $practitioner->verified = 1;
                     $saved = $practitioner->save();
 
