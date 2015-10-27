@@ -18,6 +18,7 @@ use App\User;
 use App\Product;
 use App\Category;
 use App\Selection;
+use Validator;
 
 class ProfileController extends Controller
 {
@@ -81,21 +82,60 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function update(Request $request)
     {
-        //
-    }
+        if(Session::has('prac_id'))
+        {
+            $practitioner = Practitioner::find(Session::get('prac_id'));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        if($practitioner->email !== $request->email)
+        {
+            $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:practitioners,email|unique:users,email'
+              ]);
+
+            if ($validator->fails())
+                {
+                   Session::put('practitioner_updateerror', $validator->messages()) ;
+                   return Redirect()->back()->withInput();
+                }
+        }
+        
+        $practitioner->fname = $request->fname;
+        $practitioner->sname = $request->sname;
+        $practitioner->email = $request->email;
+        $practitioner->save();
+
+        Session::put('flash_message', 'Your account has been successfully updated!');
+        return redirect("/profile");
+
+        }
+        elseif(Auth::check())
+        {
+            $client = Auth::user();
+
+            if($client->email !== $request->email)
+            {
+                $validator = Validator::make($request->all(), [
+                'email' => 'required|email|unique:practitioners,email|unique:users,email'
+                  ]);
+
+                if ($validator->fails())
+                    {
+                       Session::flash('client_updateerror', $validator->messages()) ;
+                       return Redirect()->back()->withInput();
+                    }
+            }
+            
+            $client->fname = $request->fname;
+            $client->sname = $request->sname;
+            $client->email = $request->email;
+            $client->save();
+
+        Session::put('flash_message', 'Your account has been successfully updated!');
+        return redirect("/profile");
+            
+        }
     }
 
     /**

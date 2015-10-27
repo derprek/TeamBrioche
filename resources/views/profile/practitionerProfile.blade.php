@@ -75,6 +75,7 @@
 
         <div class="row col-lg-12">
             @if (Session::has('practitioner_updateerror'))
+                {{Session::forget('practitioner_updateerror')}}
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> There were some problems with your input.<br><br>
                     <ul>
@@ -84,13 +85,8 @@
             @endif
 
             <br>
-
-
-            <form class="form-horizontal col-sm-12 col-md-10 col-lg-10">
-
-                <input type="hidden" name="id" class="form-control" value="{{ $practitioner->id }}"
-                       required>
-
+                <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+                      action="{{ url('updateprofile') }}">
 
                 <div class="form-group">
                     <label for="FirstName" class="col-sm-2 control-label">First Name</label>
@@ -128,7 +124,6 @@
 
         <hr class="col-lg-12" style="border-top: solid 3px;">
 
-
         <div class="row col-lg-12">
             <form class="form-horizontal col-sm-12 col-md-10 col-lg-10">
 
@@ -136,6 +131,9 @@
                     <label for="Password" class="col-sm-2 control-label">Password</label>
 
                     <div class="col-sm-4">
+                        <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+                            action="{{ url('updatepassword') }}">
+
                         <button type="button" data-toggle="modal" data-target="#updatepasswordModal"
                                 class="btn btn-default ">Change Password
                         </button>

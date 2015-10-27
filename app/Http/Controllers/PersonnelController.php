@@ -68,7 +68,7 @@ class PersonnelController extends Controller
      */
     public function storePractitioner(Request $request)
     {   
-         $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:practitioners,email|unique:users,email'
         ]);
 
@@ -143,7 +143,7 @@ class PersonnelController extends Controller
         if($successful_registration)
         {   
             $message = "Hello, " . $newClient->fname .". Your account is ready for you! Please use this default password: " 
-             . $randomgeneratedpw."\r\n\r\n Click here: uqatest.com to log in ";
+             . $randomgeneratedpw."\r\n\r\n Click here: uqatest.com/" .$randomgeneratedpw ." to log in ";
 
             $email = $newClient->email;
 
@@ -209,9 +209,6 @@ class PersonnelController extends Controller
     {
         $practitioner = Practitioner::find($request->id);
 
-        $practitioner->fname = $request->fname;
-        $practitioner->sname = $request->sname;
-
         if($practitioner->email !== $request->email)
         {
             $validator = Validator::make($request->all(), [
@@ -225,10 +222,12 @@ class PersonnelController extends Controller
                 }
         }
         
+        $practitioner->fname = $request->fname;
+        $practitioner->sname = $request->sname;
         $practitioner->email = $request->email;
         $practitioner->save();
 
-      Session::flash('flash_message', 'Practititioner has been successfully updated!');
+      Session::put('flash_message', 'Practititioner has been successfully updated!');
       return redirect("admin/viewpractitioner/" . $request->id);
 
     }
@@ -448,21 +447,22 @@ class PersonnelController extends Controller
        if($practitioner === null)
        {
             $error = true;
+            $result = false;
        }
        else
        {    
             $error = false;
             $practitioner_name = $practitioner->fname . " " . $practitioner->sname;
-            $practitioner->delete();
+            $result = $practitioner->delete();
        }
 
        if(($error === true) || ($result === false))
         {
             Session::put('error_message', 'There was an error in deleting the practitioner!');
         }
-        elseif($error === false)
+        elseif(($error === false) && ($result === true))
         {
-            Session::put('flash_message', '$practitioner_name has been successfully deleted!');
+            Session::put('flash_message', "$practitioner_name has been successfully deleted!");
         }
 
        return redirect("admin/personnelmanager/");
