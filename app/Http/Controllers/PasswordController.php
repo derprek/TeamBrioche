@@ -204,9 +204,4 @@ class PasswordController extends Controller
     }
 
     
-    public function newuser($password)
-    {
-        
-        dd($password);
-    }
 }

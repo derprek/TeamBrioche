@@ -49,7 +49,7 @@
                             <h3>Greetings, Practitioner!</h3>
 
                             <p> Who shall we help today?</p>
-                            
+
 
                             <hr>
                             <span class="pull-left">
