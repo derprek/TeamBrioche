@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fc0280-7884-4728-9776-f1d355b4ee1b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientAuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientAuthController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/blade.xml" afterPath="$PROJECT_DIR$/.idea/blade.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TeamBrioche.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reportoverview.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="reportoverview.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.166667">
-              <caret line="104" column="14" selection-start-line="104" selection-start-column="14" selection-end-line="104" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.48727274">
+              <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -97,10 +94,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientAuthController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientAuthController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientAuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42727274">
+            <state vertical-scroll-proportion="-9.791667">
               <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
               <folding />
             </state>
@@ -184,8 +181,8 @@
         <option value="$PROJECT_DIR$/resources/views/reports/showAssessment.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reports/showEvaluation.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reports/showTypology.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ClientAuthController.php" />
+        <option value="$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php" />
       </list>
     </option>
   </component>
@@ -1153,18 +1150,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientAuthController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.166667">
-          <caret line="104" column="14" selection-start-line="104" selection-start-column="14" selection-end-line="104" selection-end-column="14" />
+        <state vertical-scroll-proportion="-9.791667">
+          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientAuthController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/reports/reportoverview.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42727274">
-          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.48727274">
+          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
           <folding />
         </state>
       </provider>

@@ -102,7 +102,7 @@
                             </div>
                             <!-- end of selection panel -->
                             </div>
-        </div>
+
                             <!-- .row -->
                             </div>
                                     <!-- end of tab --><!-- end of testing-->
