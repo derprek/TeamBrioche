@@ -142,7 +142,7 @@
                                                     <i class="fa fa-arrow-right"></i> View </a></span>
                                                 <div class="clearfix"></div>
                                             
-
+                                                </div>
                                             @elseif($report_step === 2)
 
                                                 <div class="panel-footer">
@@ -162,12 +162,5 @@
               
                 <!-- .panel-atest-->
 </div>
-                @if(Auth::check())
-                  
-                 
-                  </div>  
-                  </div>
-                  </div>
-                 </div>
-                
-                @endunless
+</div>
+                      </div></div>

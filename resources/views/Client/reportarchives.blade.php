@@ -34,41 +34,9 @@
             </div>
             <!-- /.row -->
 
-            @unless(empty($report->id))
-                    <!-- Dynamic Table -->
-            <div class="col-lg-12">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Latest Report</a></li>
-                    <li><a data-toggle="tab" href="#report">View all Reports</a></li>
-                </ul>
-                @endunless
-
-                <div class="tab-content" id="reportApp">
-                    <!-- home tab  -->
-
-                    <div id="home"  class="tab-pane fade in active">
-
-                        @if(empty($reporthistory))
-                            <div class="emptymsg_container">
-                                <h3> No Reports found in our system. <br><br>
-                                <i class="fa fa-meh-o"></i></h3>
-                            </div>
-                            @else
-                                <br>
-                                <h4>
-                                    <span style="color:#000000">Report Overview: {{ $report->id}}</span>
-                                </h4>
-                            @include('partials.show_overview')
-
-                        @endif
-
-                        
-
-                    </div>  
-                    <!-- /#home -->
 
                     <!-- report tab -->
-                    <div id="report" class="tab-pane fade" ng-controller="MyReportsController">
+                    <div id="reportApp"  ng-controller="MyReportsController">
 
                         <div id="allReportsLoad" style="width:100%; ">
                             
@@ -83,7 +51,6 @@
 
                         <div id="emptymsg" ng-hide="AllReports" class="emptymsg_container" style="visibility:hidden;">
                             <h2>No Reports found.</h2>
-                            <h3><a href="{{ url('reports/assessment/new') }}" role="button">Start one by clicking here.</a></h3>
                         </div>
 
                         <div ng-cloak>
@@ -149,12 +116,12 @@
 
                         <dir-pagination-controls ng-if="AllReports" template-url="/dirPagination.tpl.html"
                                                  pagination-id="allReportsPagination"></dir-pagination-controls>
-
-                    
+<div style="display:none;">
+<button id="addreport_btn"></button>
+     </div>
                     </div>
                     <!-- /.report -->
-                </div>
-                <!-- /.container-fluid -->
+
             </div>
             <!-- /dynamic Table -->
         </div>
