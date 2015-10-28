@@ -102,6 +102,7 @@
                             </div>
                             <!-- end of selection panel -->
                             </div>
+        </div>
                             <!-- .row -->
                             </div>
                                     <!-- end of tab --><!-- end of testing-->
@@ -159,10 +160,10 @@
 
                         @if(Session::has('banner_message'))
                             @if(Session::get('banner_message') === "Report successfully updated!")
-                                <div id="menu2"
+                                < id="menu2"
                                      class="tab-pane fade">
                                     @else
-                                        <div id="menu2"
+                                        <div> id="menu2"
                                              class="tab-pane fade in active">
                                             @endif
                                             @else
@@ -235,7 +236,7 @@
                                         </div>
                                         </form>
 
-                                </div>
+
                     </div>
 
                     <!-- /.container -->
