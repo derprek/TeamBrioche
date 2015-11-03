@@ -95,19 +95,29 @@ class ProfileController extends Controller
               ]);
 
             if ($validator->fails())
-                {
+            {
                    Session::put('practitioner_updateerror', $validator->messages()) ;
                    return Redirect()->back()->withInput();
-                }
+            }
+            else
+            {
+                $change_password_validated = true;
+                $old_email = $practitioner->email;
+                $practitioner->email = $request->email;
+            }
         }
         
-        $practitioner->fname = $request->fname;
-        $practitioner->sname = $request->sname;
-        $practitioner->email = $request->email;
-        $practitioner->save();
+        if(($request->fname !== $practitioner->fname) || ($request->sname !== $practitioner->sname))
+        {
+            $practitioner->fname = $request->fname;
+            $practitioner->sname = $request->sname;
 
-        Session::put('flash_message', 'Your account has been successfully updated!');
-        return redirect("/profile");
+            Session::forget('prac_name');
+            $prac_name = $practitioner->fname . " " . $practitioner->sname;
+            Session::put('prac_name', $prac_name);
+        }
+        
+        $practitioner->save();
 
         }
         elseif(Auth::check())
@@ -121,31 +131,50 @@ class ProfileController extends Controller
                   ]);
 
                 if ($validator->fails())
-                    {
-                       Session::flash('client_updateerror', $validator->messages()) ;
-                       return Redirect()->back()->withInput();
-                    }
+                {
+                    Session::flash('client_updateerror', $validator->messages()) ;
+                    return Redirect()->back()->withInput();
+                }
+                else
+                {
+                    $change_password_validated = true;
+                    $old_email = $client->email;
+                    $client->email = $request->email;
+                }
             }
             
-            $client->fname = $request->fname;
-            $client->sname = $request->sname;
-            $client->email = $request->email;
+            if(($request->fname !== $client->fname) || ($request->sname !== $client->sname))
+            {
+                $client->fname = $request->fname;
+                $client->sname = $request->sname;
+            }
+
             $client->save();
+            
+        }
+
+        if(isset($change_password_validated))
+            {
+                DB::table('conversations')
+                    ->where('firstuser_email', $old_email)
+                    ->update(['firstuser_email' => $request->email]);
+
+                DB::table('conversations')
+                    ->where('seconduser_email', $old_email)
+                    ->update(['seconduser_email' => $request->email]);
+
+                DB::table('messages')
+                    ->where('sender_email', $old_email)
+                    ->update(['sender_email' => $request->email]);
+
+                DB::table('messages')
+                    ->where('receiver_email', $old_email)
+                    ->update(['receiver_email' => $request->email]);
+            }
 
         Session::put('flash_message', 'Your account has been successfully updated!');
         return redirect("/profile");
-            
-        }
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

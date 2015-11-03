@@ -1,43 +1,9 @@
-@extends('practitionermaster')
+@extends('master.practitioner')
 
 @section('sidemenubar')
-    @if(Session::has('is_admin'))
 
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
-                </li>
-                <li class="active">
-                    <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/questionmanager') }}"><i class="fa fa-pencil"></i> Question Manager</a>
-                </li>
-            </ul>
-        </div>
-
-    @else
-
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-                </li>
-                <li class="active">
-                    <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report
-                        Manager</a>
-                </li>
-            </ul>
-        </div>
-
-    @endif
+    @include('partials.sidebar_reports')
+    
 @endsection
 
 @section('content')
@@ -99,12 +65,12 @@
                                 <br>
 
                                 <input ng-show="AllReports" type="text" placeholder="Search...." class="form-control"
-                                       ng-model="searchInbox.text">
+                                       ng-model="searchReports.text">
 
                                 <div class="row">
                                     <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
                                         <label style="font-size: 1em">
-                                            <input type="checkbox" value="" checked ng-model='searchInbox.type'
+                                            <input type="checkbox" value="" checked ng-model='searchReports.type'
                                                    ng-true-value="'In Progress'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             <small> In Progress</small>
@@ -113,7 +79,7 @@
 
                                     <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
                                         <label style="font-size: 1em">
-                                            <input type="checkbox" value="" ng-model='searchInbox.type'
+                                            <input type="checkbox" value="" ng-model='searchReports.type'
                                                    ng-true-value="'Finished'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             <small> Finished</small>
@@ -121,7 +87,7 @@
                                     </div>
                                 </div>
 
-                                <tr ng-show="(AllReports| filter:searchInbox.text | filter:searchInbox.type).length > 0">
+                                <tr ng-show="(AllReports| filter:searchReports.text | filter:searchReports.type).length > 0">
                                     <th class="smallRow">Report Number @{{remaining()}}</th>
                                     <th class="normalRow">Client Name</th>
                                     <th class="mediumRow">Created on</th>
@@ -132,7 +98,7 @@
 
                                 <!-- List out reports -->
                                 <tr ng-if="AllReports"
-                                    dir-paginate="report in AllReports| filter:searchInbox.text | filter:searchInbox.type | itemsPerPage: 8"
+                                    dir-paginate="report in AllReports| filter:searchReports.text | filter:searchReports.type | itemsPerPage: 8"
                                     pagination-id="allReportsPagination">
                                     <td> @{{ report.id }} </td>
                                     <td> @{{ report.name }} </td>
@@ -150,7 +116,7 @@
 
                         <div ng-if="AllReports">
 
-                            <div ng-show="(AllReports| filter:searchInbox.text | filter:searchInbox.type).length == 0"
+                            <div ng-show="(AllReports| filter:searchReports.text | filter:searchReports.type).length == 0"
                                  class="emptyresults_container">
                                 <h3> No results found <i class="fa fa-meh-o"></i></h3>
                             </div>
@@ -187,12 +153,12 @@
                             <table ng-show="SharedReports" class="table table-bordered table-hover table-striped">
                                 <br>
                                 <input ng-show="SharedReports" type="text" placeholder="Search...." class="form-control"
-                                       ng-model="searchSent.text">
+                                       ng-model="SearchShared.text">
 
                                 <div class="row">
                                     <div ng-show="SharedReports" class="checkbox" style="display: inline-block;">
                                         <label style="font-size: 1em">
-                                            <input type="checkbox" value="" checked ng-model='searchSent.type'
+                                            <input type="checkbox" value="" checked ng-model='SearchShared.type'
                                                    ng-true-value="'In Progress'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             In Progress
@@ -201,7 +167,7 @@
 
                                     <div ng-show="SharedReports" class="checkbox" style="display: inline-block;">
                                         <label style="font-size: 1em">
-                                            <input type="checkbox" value="" ng-model='searchSent.type'
+                                            <input type="checkbox" value="" ng-model='SearchShared.type'
                                                    ng-true-value="'Finished'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             Finished
@@ -209,7 +175,7 @@
                                     </div>
                                 </div>
 
-                                <tr ng-show="(SharedReports| filter:searchSent.text | filter:searchSent.type).length > 0">
+                                <tr ng-show="(SharedReports| filter:SearchShared.text | filter:SearchShared.type).length > 0">
                                     <th class="smallRow">Report Number</th>
                                     <th class="normalRow">Client Name</th>
                                     <th class="mediumRow">Created on</th>
@@ -218,7 +184,7 @@
                                     <th class="smallRow">Options</th>
                                 </tr>
 
-                                <tr dir-paginate="report in SharedReports| filter:searchSent.text | filter:searchSent.type | itemsPerPage: 5"
+                                <tr dir-paginate="report in SharedReports| filter:SearchShared.text | filter:SearchShared.type | itemsPerPage: 5"
                                     pagination-id="sharedReportsPagination">
                                     <td> @{{ report.id }} </td>
                                     <td> @{{ report.name }} </td>
@@ -236,7 +202,7 @@
 
                         <div ng-if="SharedReports">
 
-                            <div ng-show="(SharedReports| filter:searchSent.text | filter:searchSent.type).length == 0"
+                            <div ng-show="(SharedReports| filter:SearchShared.text | filter:SearchShared.type).length == 0"
                                  class="emptyresults_container">
                                 <h3> No results found <i class="fa fa-meh-o"></i></h3>
                             </div>

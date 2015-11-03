@@ -1,4 +1,4 @@
-@extends('practitionermaster')
+@extends('master.practitioner')
 
 @section('sidemenubar')
 
@@ -97,9 +97,7 @@
 
         @endunless
 
-
-            @include('partials.show_overview')
-
+    @include('partials.show_overview')
 
     @if(Session::has('banner_message'))
         @if(Session::get('banner_message') === "Report successfully updated!")
@@ -182,7 +180,7 @@
                                                                 <br><br>
 
                                                                 <input type="hidden" name="reportid" value={{$report->id}}>
-                                                                <button type="submit" class="btn btn-primary">Sharenow</button>
+                                                                <button type="submit" class="btn btn-primary">Share now</button>
                                                             </div>
                                                             {!! Form::close() !!}
 
@@ -191,9 +189,9 @@
                                                                 <h6>
                                                                     You are currently sharing this report with: </h6>
                                                                 <table class="table table-striped">
-                                                                    @if(empty($shared_practitioners))
+                                                                    @if(($shared_practitioners->isEmpty()))
                                                                         <tr>
-                                                                            Nobody :)
+                                                                            <strong> Nobody </strong>
                                                                         </tr>
                                                                     @else
                                                                         <tr>

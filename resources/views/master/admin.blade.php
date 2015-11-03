@@ -30,8 +30,6 @@
 
 @endif
 
-
-
 @if(Session::has('error_message'))
 
     @include('partials.errorMessageModal');

@@ -1,54 +1,8 @@
-@extends('mailboxMaster')
+@extends('master.mailbox')
 
 @section('sidemenubar')
 
-    @if((Session::has('is_admin')) && (Session::has('prac_id')))
-
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-                </li>
-            </ul>
-        </div>
-
-    @elseif(Session::has('prac_id'))
-
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-                </li>
-                <li>
-                    <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report
-                        Manager</a>
-                </li>
-            </ul>
-        </div>
-
-    @elseif(Auth::check())
-
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
-                </li>
-                <li>
-                    <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
-                </li>
-            </ul>
-        </div>
-
-    @endif
+    @include('partials.sidebar_home')
 
 @endsection
 
@@ -107,7 +61,7 @@
                             <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
                         </div>
 
-                        <div ng-show="Inbox" ng-cloak class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                        <div ng-show="Inbox" ng-cloak class="col-xs-12 col-sm-9 col-md-10 col-lg-11">
                             <!-- Nav tabs -->
                             <br>
                             <h3> Inbox </h3>
@@ -188,7 +142,8 @@
                             <a href="#" role="button" ng-click="startAdd()"><h3>@{{errorText}}</h3></a>
                         </div>
 
-                        <div ng-show="Sentbox" ng-cloak class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                        <div ng-show="Sentbox" ng-cloak class="col-xs-12 col-sm-9 col-md-10 col-lg-11">
+                            <br>
                             <h3> Sent Box </h3>
 
                             <br>

@@ -19,14 +19,14 @@
 
         <div class="form-group">
             <div class="col-sm-10">
-               <input type="text" ng-model="newMessage.title" name="title" class="form-control" placeholder="Enter a Title." required>
+               <input type="text" required ng-model="newMessage.title" name="title" class="form-control" placeholder="Enter a Title." required>
             </div>
         </div> 
         <br>
 
         <div class="form-group">
           <div class="col-sm-10">
-           <textarea class="form-control" ng-model="newMessage.content" name="content" rows="5" placeholder="What do you wish to say :)"> </textarea>
+           <textarea required class="form-control" ng-model="newMessage.content" name="content" rows="5" placeholder="What do you wish to say :)"> </textarea>
           </div>
         </div>
 

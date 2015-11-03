@@ -1,17 +1,8 @@
-@extends('patientmaster')
+@extends('master.client')
 
 @section('sidemenubar')
 
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
-            </li>
-            <li>
-                <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
-            </li>
-        </ul>
-    </div>
+    @include('partials.sidebar_home')
 
 @endsection
 
@@ -27,10 +18,8 @@
 
     @endif
 
-
     <div class="container-fluid">
 
-        <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
@@ -43,7 +32,6 @@
                 </ol>
             </div>
         </div>
-        <!-- /.row -->
 
         <div class="col-lg-12">
             <div class="row">
@@ -82,7 +70,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
                             <label for="Email" class="col-sm-2 control-label">Email</label>
 
@@ -94,6 +81,7 @@
                                 <button type="submit" class="btn btn-primary "> Update</button>
                             </div>
                 </form>
+                
             </div>
             <hr style="border-top: solid 3px;">
             <div class="form-group">
@@ -115,10 +103,7 @@
     </div>
     </div>
 
-
     </div>
-
-
 
     <!-- -->
 @endsection

@@ -187,7 +187,7 @@ class ReportTypologyController extends Controller
             }
         
         Session::flash('flash_message', 'Typology successfully updated!');
-        return redirect("reports/Typology/" . $typology->report_id);
+        return redirect("reports/typology/view/" . $typology->report_id);
     }
 
     public function generatereport($report_id)

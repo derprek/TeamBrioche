@@ -1,44 +1,15 @@
-@extends('adminmaster')
+@extends('master.admin')
 
 @section('sidemenubar')
 
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
+    @include('partials.sidebar_reports')
 
-        <ul class="nav navbar-nav side-nav">
-            <li>
-                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
-            </li>
-            <li class="active">
-                <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-            </li>
-        </ul>
-    </div>
 @endsection
 
 @section('content')
 
-@if(Session::has('successful_registration'))
-    <script>
-        BootstrapDialog.show({
-            title: 'Success',
-            message: '{{ Session::pull('successful_registration')}} <strong>{{ Session::pull('email')}}.</strong> <br><br> <strong>The default password is: {{ Session::pull('defaultpassword')}}</strong>' ,
-            type: BootstrapDialog.TYPE_SUCCESS,
-            buttons: [{
-                label: 'Close',
-                cssClass: 'btn-default',
-                action: function (dialogItself) {
-                    dialogItself.close();
-                }
-
-            }]
-        });
-    </script>
-@endif
-            <div id="reportApp">
-            <div ng-controller="adminReportManagerController" class="container-fluid">
+        <div id="reportApp">
+        <div ng-controller="adminReportManagerController" class="container-fluid">
 
             <!-- Page Heading -->
             <div class="row">
@@ -55,7 +26,7 @@
             </div>
             <!-- /.row -->
 
-             <div id = "allReportsLoad" style = "width:100%; ">
+            <div id = "allReportsLoad" style = "width:100%; ">
                      
                 @include('partials.loadinganimation')
 
@@ -77,6 +48,7 @@
             <table ng-show="AllReports" class="table table-bordered table-hover table-striped">
 
                 <input ng-show="AllReports" type="text" placeholder="Search...." class="form-control" ng-model="search.text">
+                
                  <div class="row">
                     <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
                         <label style="font-size: 1em">
@@ -99,7 +71,7 @@
 
                 <br>
 
-                <tr ng-show="AllReports">
+                <tr ng-show="(AllReports| filter:search.text | filter:search.type).length > 0">
                     <th style="width:10%;">Report ID</th>
                     <th class="mediumRow">Client</th>
                     <th class="mediumRow">Supervised by</th>
@@ -122,8 +94,17 @@
 
             </table>
 
-              <dir-pagination-controls ng-if="AllReports" template-url="/dirPagination.tpl.html"
-                                                 pagination-id="ReportManagerPagination"></dir-pagination-controls>
+            <div ng-if="AllReports">
+
+                <div ng-show="(AllReports| filter:search.text | filter:search.type).length == 0"
+                     class="emptyresults_container">
+                    <h3> No results found <i class="fa fa-meh-o"></i></h3>
+                </div>
+
+            </div>
+
+            <dir-pagination-controls ng-if="AllReports" template-url="/dirPagination.tpl.html"
+                                            pagination-id="ReportManagerPagination"></dir-pagination-controls>
 
             <!-- /.table -->
             </div>

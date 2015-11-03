@@ -1,10 +1,11 @@
-@extends('practitionermaster')
+@extends('master.practitioner')
 
 @section('sidemenubar')
 
     @include('partials.sidebar_reports')
     
 @endsection
+
 @section('content')
 
     <div id="page-wrapper">

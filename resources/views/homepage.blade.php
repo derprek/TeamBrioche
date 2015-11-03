@@ -1,4 +1,4 @@
-@extends('master')
+@extends('master.home')
 
 @section('content')
         <!-- Header -->

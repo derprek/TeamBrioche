@@ -1,8 +1,8 @@
-@extends('practitionermaster')
+@extends('master.practitioner')
 
 @section('sidemenubar')
 
- @include('partials.sidebar_reports')
+   @include('partials.sidebar_reports')
    
 @endsection
 @section('content')

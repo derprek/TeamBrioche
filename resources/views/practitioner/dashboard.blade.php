@@ -1,20 +1,9 @@
-@extends('practitionermaster')
+@extends('master.practitioner')
 
 @section('sidemenubar')
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-
-        <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-            </li>
-            <li>
-                <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-            </li>
-        </ul>
-    </div>
+    
+    @include('partials.sidebar_home')
+        
 @endsection
 
 @section('content')
@@ -49,7 +38,6 @@
                             <h3>Greetings, Practitioner!</h3>
 
                             <p> Who shall we help today?</p>
-
 
                             <hr>
                             <span class="pull-left">

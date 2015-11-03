@@ -14,7 +14,6 @@
 <script src="/js/Angular_JS/messages/messengerApp.js"></script>
 <script src="/js/Angular_JS/messages/MailboxController.js"></script>
 <script src="/js/Angular_JS/messages/masterMessageController.js"></script>
-<script src="/js/Angular_JS/messages/quickMessageController.js"></script>
 <script src="/js/Angular_JS/reports/dirPagination.js"></script>
 <script src="/js/angular-toastr.tpls.js"></script>
 <script src="/js/angular-animate.min.js"></script>
@@ -32,7 +31,7 @@
 
 <script src="/js/Angular_JS/reports/reportApp.js"></script>
 <script src="/js/Angular_JS/reports/MyReportsController.js"></script>
-<script src="/js/Angular_JS/reports/sharedReports.js"></script>
+<script src="/js/Angular_JS/reports/sharedReportsController.js"></script>
 <script src="/js/Angular_JS/admin/adminReportManagerController.js"></script>
 
 

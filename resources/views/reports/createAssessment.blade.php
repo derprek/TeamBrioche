@@ -1,17 +1,9 @@
-@extends('practitionermaster')
+@extends('master.practitioner')
 
 @section('sidemenubar')
-    <ul class="nav navbar-nav side-nav">
-        <li>
-            <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
-        </li>
-        <li>
-            <a href="{{ url('practitioner/clientmanager') }}"><i class="fa fa-users"></i> Client Manager</a>
-        </li>
-        <li class="active">
-            <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-        </li>
-    </ul>
+    
+    @include('partials.sidebar_reports')
+
 @endsection
 
 @section('content')

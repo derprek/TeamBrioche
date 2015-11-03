@@ -419,7 +419,7 @@ class ReportAssessmentController extends Controller
             $assessment->current_version = $newversion->id;
             $assessment->save();
 
-          Session::flash('flash_message', 'New Version added!');
+          Session::put('flash_message', 'New Version added!');
 
           return Redirect::back();
         }

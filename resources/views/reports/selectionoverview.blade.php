@@ -1,4 +1,4 @@
-@extends('practitionermaster')
+@extends('master.practitioner')
 
 @section('sidemenubar')
 

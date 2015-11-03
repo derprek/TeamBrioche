@@ -1,20 +1,9 @@
-@extends('adminmaster')
+@extends('master.admin')
 
 @section('sidemenubar')
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-
-        <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="{{ url('admin/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="{{ url('admin/personnelmanager') }}"><i class="fa fa-users"></i> Personnel Manager</a>
-            </li>
-            <li>
-                <a href="{{ url('admin/reportmanager') }}"><i class="fa fa-bar-chart-o"></i> Report Manager</a>
-            </li>
-        </ul>
-    </div>
+    
+    @include('partials.sidebar_home')
+    
 @endsection
 
 @section('content')
@@ -37,37 +26,31 @@
             </div>
             <!-- /.row -->
 
-
             <div class="col-lg-12">
+            <br>
 
+                <div class="jumbotron">
+                    <div class="container">
+                        <h3>Greetings, Administrator!</h3>
 
-                @if ((count($errors) > 0) OR (Session::has('flash_message')))
-                    <div id="home" class="tab-pane fade">
-                        @else
-                                <!-- Home tab -->
-                        <div id="home" class="tab-pane fade in active">
-                            @endif
-                            <br>
+                        <p> Who shall we help today?</p>
+                        <hr>
 
-                            <div class="jumbotron">
-                                <div class="container">
-                                    <h3>Greetings, Administrator!</h3>
+                        <span class="pull-left">
+                                <a class="btn btn-success btn-lg"
+                                      href="{{ url('admin/reportmanager') }}"
+                                      role="button">View All Reports</a>
 
-                                    <p> Who shall we help today?</p>
-                                    <hr>
-                                    <p><a class="btn btn-success btn-lg"
-                                          href="{{ url('admin/reportmanager') }}"
-                                          role="button">View All Reports</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- notification tab -->
+                                <a class="btn btn-primary btn-lg"
+                                      href="{{ url('admin/personnelmanager') }}"
+                                      role="button">View All Personnel</a>
+                        </span>
 
                     </div>
-                    <hr>
-
+                </div>
 
             </div>
+             
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.container-fluid -->

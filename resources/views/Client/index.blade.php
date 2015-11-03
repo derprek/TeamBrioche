@@ -1,16 +1,9 @@
-@extends('patientmaster')
+@extends('master.client')
 
 @section('sidemenubar')
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="{{ url('home') }}"><i class="fa fa-home"></i> Home</a>
-            </li>
-            <li>
-                <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
-            </li>
-        </ul>
-    </div>
+    
+    @include('partials.sidebar_home')
+    
 @endsection
 
 @section('content')
