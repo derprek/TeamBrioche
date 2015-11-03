@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Report;
-use App\Question;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\Report;
+use App\Question;
 use DB;
 use App\User;
 use Auth;
@@ -222,7 +223,7 @@ class ReportAssessmentController extends Controller
             $versionlist = array();
             foreach ($versions as $version) 
             {   
-                $creator_name = $practitioners->where('id', $version->prac_id)->first();
+                $creator = $practitioners->where('id', $version->prac_id)->first();
 
                 if($version->prac_id === Session::get('prac_id'))
                 {

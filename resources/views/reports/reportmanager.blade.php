@@ -8,6 +8,9 @@
 
 @section('content')
 
+<script src="/js/Angular_JS/reports/MyReportsController.js"></script>
+<script src="/js/Angular_JS/reports/sharedReportsController.js"></script>
+
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- Page Heading -->
@@ -221,6 +224,7 @@
         <!-- /.container-fluid -->
     </div>
     <!-- #page-wrapper -->
+
 @endsection
 @stop
 

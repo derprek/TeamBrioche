@@ -8,22 +8,8 @@
 
 @section('content')
 
-    @if(Session::has('successful_registration'))
-        <script>
-            BootstrapDialog.show({
-                title: 'Success',
-                message: '{{ Session::pull('successful_registration')}} <strong>{{ Session::pull('email')}}.</strong> <br><br> <strong>The default password is: {{ Session::pull('defaultpassword')}}</strong>',
-                type: BootstrapDialog.TYPE_SUCCESS,
-                buttons: [{
-                    label: 'Close',
-                    cssClass: 'btn-default',
-                    action: function (dialogItself) {
-                        dialogItself.close();
-                    }
-                }]
-            });
-        </script>
-    @endif
+<script src="/js/Angular_JS/clientmanager/client_informationController.js"></script>
+<script src="/js/Angular_JS/clientmanager/client_reportsController.js"></script>
 
     <div>
         <div id="personnelmanagerApp" class="container-fluid">

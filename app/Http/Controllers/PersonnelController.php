@@ -8,21 +8,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Session;
-use DB;
-use Auth;
 use Carbon\Carbon;
 use App\Report;
-use App\Question;
-use App\Manager;
 use App\Practitioner;
 use App\User;
-use App\Product;
-use App\Tag;
-use App\Category;
-use App\Subcategory;
-use App\Selection;
-use App\Message;
-use App\Conversation;
 use Input;
 use Validator;
 use Mail;
@@ -48,16 +37,6 @@ class PersonnelController extends Controller
     public function index()
     {
         return view('admin.personnelManager.personnelmanager');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -188,17 +167,6 @@ class PersonnelController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
@@ -230,17 +198,6 @@ class PersonnelController extends Controller
       Session::put('flash_message', 'Practititioner has been successfully updated!');
       return redirect("admin/viewpractitioner/" . $request->id);
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function getAllPractitioners()

@@ -9,15 +9,9 @@ use App\Http\Controllers\Controller;
 use Session;
 use DB;
 use Auth;
-use Carbon\Carbon;
 use App\Report;
-use App\Question;
-use App\Manager;
 use App\Practitioner;
 use App\User;
-use App\Product;
-use App\Category;
-use App\Selection;
 use Validator;
 
 class ProfileController extends Controller
@@ -63,17 +57,6 @@ class ProfileController extends Controller
 
         }
        
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -174,7 +157,5 @@ class ProfileController extends Controller
 
         Session::put('flash_message', 'Your account has been successfully updated!');
         return redirect("/profile");
-
     }
-
 }

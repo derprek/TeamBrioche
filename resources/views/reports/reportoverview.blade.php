@@ -236,9 +236,6 @@
                         $('#prac_list').select2();
                         $('div.alert').delay(3000).slideUp(300);
 
-                        $(".thumbnail").height(Math.max.apply(null, $(".thumbnail").map(function () {
-                            return $(this).height();
-                        })));
                         $(function () {
                             $('[data-toggle="popover"]').popover()
                         })

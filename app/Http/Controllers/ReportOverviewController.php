@@ -12,7 +12,6 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\User;
 use Auth;
-use Carbon\Carbon;
 use Session;
 use App\Practitioner;
 use App\Evaluation;

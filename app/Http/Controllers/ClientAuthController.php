@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Session;
 use App\User;
 use Validator;
 use Illuminate\Support\Facades\Redirect;

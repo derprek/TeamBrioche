@@ -7,75 +7,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Session;
-use DB;
 use Auth;
-use Carbon\Carbon;
-use App\Report;
-use App\Question;
-use App\Manager;
 use App\Practitioner;
 use App\User;
-use App\Product;
-use App\Category;
-use App\Selection;
 use Validator;
 use Hash;
 
 class PasswordController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -203,8 +142,6 @@ class PasswordController extends Controller
         }
     }
 
-    
-
     public function newuser(Request $request)
     {
         if(isset($request->registered_email))
@@ -304,7 +241,6 @@ class PasswordController extends Controller
                 return redirect('/unauthorizedaccess');
             }
         
-
         return view('profile.setnewpassword',compact('is_verified'));     
 
     }

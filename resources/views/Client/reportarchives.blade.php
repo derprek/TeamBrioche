@@ -8,6 +8,8 @@
 
 @section('content')
 
+<script src="/js/Angular_JS/reports/MyReportsController.js"></script>
+
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- Page Heading -->
@@ -27,7 +29,6 @@
                 </div>
             </div>
             <!-- /.row -->
-
 
                     <!-- report tab -->
                     <div id="reportApp"  ng-controller="MyReportsController">
@@ -53,12 +54,12 @@
                                 <br>
 
                                 <input ng-show="AllReports" type="text" placeholder="Search...." class="form-control"
-                                       ng-model="searchInbox.text">
+                                       ng-model="searchReports.text">
 
                                 <div class="row">
                                     <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
                                         <label style="font-size: 1em">
-                                            <input type="checkbox" value="" checked ng-model='searchInbox.type'
+                                            <input type="checkbox" value="" checked ng-model='searchReports.type'
                                                    ng-true-value="'In Progress'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             <small> In Progress</small> 
@@ -67,7 +68,7 @@
 
                                     <div ng-show="AllReports" class="checkbox" style="display: inline-block;">
                                         <label style="font-size: 1em">
-                                            <input type="checkbox" value="" ng-model='searchInbox.type'
+                                            <input type="checkbox" value="" ng-model='searchReports.type'
                                                    ng-true-value="'Finished'" ng-false-value=''>
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                              <small> Finished </small> 
@@ -75,7 +76,7 @@
                                     </div>
                                 </div>
 
-                                <tr ng-show="(AllReports| filter:searchInbox.text | filter:searchInbox.type).length > 0">
+                                <tr ng-show="(AllReports| filter:searchReports.text | filter:searchReports.type).length > 0">
                                     <th class="smallRow">Report Number</th>
                                     <th class="normalRow">Practitioner Name</th>
                                     <th class="mediumRow">Created on</th>
@@ -85,7 +86,7 @@
                                 </tr>
 
                                 <!-- List out reports -->
-                                <tr ng-if="AllReports" dir-paginate="report in AllReports| filter:searchInbox.text | filter:searchInbox.type | itemsPerPage: 8"
+                                <tr ng-if="AllReports" dir-paginate="report in AllReports| filter:searchReports.text | filter:searchReports.type | itemsPerPage: 8"
                                     pagination-id="allReportsPagination">
                                     <td> @{{ report.id }} </td>
                                     <td> @{{ report.name }} </td>
@@ -102,7 +103,7 @@
 
                         <div ng-if="AllReports">
 
-                            <div ng-show="(AllReports| filter:searchInbox.text | filter:searchInbox.type).length == 0" class="emptyresults_container">
+                            <div ng-show="(AllReports| filter:searchReports.text | filter:searchReports.type).length == 0" class="emptyresults_container">
                                  <h3> No results found <i class="fa fa-meh-o"></i> </h3>
                             </div>
 
@@ -110,9 +111,11 @@
 
                         <dir-pagination-controls ng-if="AllReports" template-url="/dirPagination.tpl.html"
                                                  pagination-id="allReportsPagination"></dir-pagination-controls>
-<div style="display:none;">
-<button id="addreport_btn"></button>
-     </div>
+                    
+                    <div style="display:none;">
+                        <button id="addreport_btn"></button>
+                    </div>
+
                     </div>
                     <!-- /.report -->
 

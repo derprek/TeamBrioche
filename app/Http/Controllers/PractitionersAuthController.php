@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Practitioner;
-use App\Report;
-use App\Question;
 use Session;
-use Carbon\Carbon;
 
 /**
  * Class PractitionersAuthController

@@ -17,7 +17,6 @@ use App\Practitioner;
 use App\User;
 use App\Category;
 use App\Assessment;
-use App\Selection;
 use App\Evaluation;
 
 class ReportEvaluationController extends Controller
@@ -241,7 +240,7 @@ class ReportEvaluationController extends Controller
             }
         }
         
-        return view('reports.selectionoverview', compact('evaluationlist', 'report', 'clientname'));
+        return view('reports.evaluationoverview', compact('evaluationlist', 'report', 'clientname'));
         
     }
 
@@ -388,77 +387,4 @@ class ReportEvaluationController extends Controller
 
         return redirect()->action('ReportSelectionController@overview', [$reportid]);
     }
-
-        public function generatereport($select_id)
-    {
-
-        $selection = Selection::find($select_id);
-        $practitioner = Practitioner::find($selection->prac_id)->first();
-        $pracname = $practitioner->fname . " " . $practitioner->sname;
-        $report = Report::find($selection->report_id);      
-        $clientname = User::find($report->userid)->fname ." ". User::find($report->userid)->sname;
-        $arraycount = $selection->questions()->distinct()->Selection()->orderBy('category_id', 'ASC')->lists('category_id');
-        $bodyfunctions = $report->questions()->Assessment()->GetBodyStructure()->get();
-        $activities = $report->questions()->Assessment()->GetActivities()->get();
-        $envfactors = $report->questions()->Assessment()->GetEnvFactors()->get();
-        $personalfactors = $report->questions()->Assessment()->GetPersonalFactors()->get();
-        
-        $categories = array();
-        $answerlist = array();
-        foreach ($arraycount as $category_id)
-        {   
-            $categories[] = Category::find($category_id);
-            if($category_id === 2)
-            {   
-                $cat2 = $selection->questions()
-                ->Getquestionsbycat($category_id)
-                ->orderBy('type', 'DESC')
-                ->get();
-
-                $bodyfunctions = $bodyfunctions->merge($cat2);
-                $answerlist[] =  $bodyfunctions;
-            }
-            elseif($category_id === 3)
-            {
-                $cat3 = $selection->questions()
-                ->Getquestionsbycat($category_id)
-                ->orderBy('type', 'DESC')
-                ->get();
-
-                $activities = $activities->merge($cat3);
-                $answerlist[] =  $activities;
-
-            }
-            elseif($category_id === 4)
-            {   
-                 $cat4 = $selection->questions()
-                ->Getquestionsbycat($category_id)
-                ->orderBy('type', 'DESC')
-                ->get();
-
-                $envfactors = $envfactors->merge($cat4);
-                $answerlist[] =  $envfactors;
-
-            }   
-            elseif($category_id === 5)
-            {   
-                $cat5 = $selection->questions()
-                ->Getquestionsbycat($category_id)
-                ->orderBy('type', 'DESC')
-                ->get();
-
-                $personalfactors = $personalfactors->merge($cat5);
-                $answerlist[] =  $personalfactors;
-
-            }
-            else
-            { 
-                $answerlist[] = $selection->questions();
-            }            
-        }
-
-      $pdf = \PDF::loadView('practitioner.reportManager.reportSelectionPDF', compact('selection', 'clientname', 'answerlist','report','pracname','categories'));
-      return $pdf->stream('slectionReport.pdf',array("Attachment" => 0));
-    }
-
 }

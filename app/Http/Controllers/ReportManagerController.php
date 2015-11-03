@@ -9,23 +9,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Session;
-use DB;
 use Auth;
-use Carbon\Carbon;
 use App\Report;
 use App\Question;
-use App\Manager;
 use App\Practitioner;
 use App\User;
-use App\Product;
-use App\Tag;
-use App\Category;
-use App\Subcategory;
-use App\Selection;
 use App\Assessment;
-
-use DOMPDF;
-use Barryvdh\DomPDF\Facade as PDF;
 
 class ReportManagerController extends Controller
 {   
@@ -64,6 +53,37 @@ class ReportManagerController extends Controller
 
     public function getMyReports()
     {  
+
+      if((Session::has('prac_id')) && (Session::has('is_admin')))
+      {
+          $reports = Report::all();
+
+          $reportlist = array();
+          foreach($reports as $report)
+          {       
+              $client = User::find($report->userid);
+              $practitioner = Practitioner::find($report->prac_id);
+
+              if($report->updated_at->isToday())
+              {
+                  $updated_date = date('h:ia', strtotime($report->updated_at));
+              }
+              else
+              {
+                  $updated_date = date('F d, Y', strtotime($report->updated_at));
+              }
+             
+              $reportlist[] = ['id'=>$report->id,
+                                  'client_name'=>$client->fname . " " . $client->sname,
+                                  'prac_name'=>$practitioner->fname . " " . $practitioner->sname,
+                                  'updated_at'=>$updated_date,
+                                  'status'=>$report->status];
+                        
+          }
+      }
+      else
+      {
+
         if(Session::has('prac_id'))
         {
           $reports = Report::latest('updated_at')->practitioner()->get();
@@ -113,6 +133,7 @@ class ReportManagerController extends Controller
                                 'created_at'=>$created_date];
                       
         }
+      }
 
         if(count($reportlist) < 1)
         {

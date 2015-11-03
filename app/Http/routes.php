@@ -100,10 +100,6 @@ Route::post('practitioner/createUser', 'ClientManagerController@store');
 Route::post('reports/removeSharer', 'SharingController@removeSharer');
 Route::post('reports/shareReport', 'SharingController@addNewSharer');
 
-Route::get('practitioner/reportpdf/{report_id}', 'ReportManagerController@generatereport');
-Route::get('practitioner/Typology/reportpdf/{report_id}', 'ReportTypologyController@generatereport');
-Route::get('practitioner/selection/reportpdf/{select_id}', 'ReportSelectionController@generatereport');
-
 /**
  * Authentication routes
  *
@@ -112,8 +108,6 @@ Route::get('practitioner/selection/reportpdf/{select_id}', 'ReportSelectionContr
 Route::get('prac/logout', 'PractitionersAuthController@logout');
 Route::get('practitioner', 'PractitionersAuthController@index');
 Route::post('practitioner/login', 'PractitionersAuthController@login');
-
-Route::get('angular', 'PractitionersController@angular');
 
 Route::get('getMyReports', 'ReportManagerController@getMyReports');
 Route::get('getProgressReports', 'ReportManagerController@getProgressReports');
@@ -152,7 +146,6 @@ Route::post('admin/deletePractitioner', 'PersonnelController@deletePractitioner'
 
 Route::get('admin/questionmanager', 'QuestionManagerController@index');
 Route::get('admin/reportmanager', 'AdminReportManagerController@index');
-Route::get('getAllReports', 'AdminReportManagerController@getAllReports');
 
 Route::get('getUnsharedPractitioners', 'SharingController@getUnsharedPractitioners');
 
@@ -163,5 +156,3 @@ Route::post('assessment/update', 'ReportAssessmentController@update');
 Route::get('assessment/newversion', 'ReportAssessmentController@storeNewVersion');
 
 Route::post('assessment/setcurrentversion', 'ReportAssessmentController@setCurrentVersion');
-
-Route::get('reports/printsummary/{report_id}', 'ReportManagerController@printSummary');

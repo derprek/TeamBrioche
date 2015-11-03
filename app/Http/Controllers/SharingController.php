@@ -5,17 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Report;
-use App\Practitioner;
-use App\Question;
-use App\Manager;
-use App\Product;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use DB;
+use App\Report;
+use App\Practitioner;
 use App\User;
-use Auth;
-use Carbon\Carbon;
 use Session;
 
 /**
@@ -32,9 +28,10 @@ class SharingController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) {
-                    return redirect('/../');
+           
+                if (!Session::has('prac_id'))
+                {
+                    return redirect('/unauthorizedaccess');
                 }
         });
     }

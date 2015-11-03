@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+<script src="/js/Angular_JS/messages/MailboxController.js"></script>
 
     <div id="page-wrapper">
         <div class="container-fluid">

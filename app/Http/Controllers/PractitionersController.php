@@ -10,19 +10,9 @@ use App\Http\Controllers\Controller;
 use Input;
 
 use Session;
-use DB;
-use Auth;
-use Carbon\Carbon;
 use App\Report;
-use App\Question;
-use App\Manager;
 use App\Practitioner;
 use App\User;
-use App\Product;
-use App\Tag;
-use App\Category;
-
-
 
 /**
  * Class PractitionersController
@@ -38,9 +28,9 @@ class PractitionersController extends Controller
     public function __construct()
     {
         $this->beforeFilter(function(){
-            $value = Session::get('prac_id');
-                if (empty($value)) {
-                    return redirect('/../');
+                if (!Session::has('prac_id')) 
+                {
+                    return redirect('/unauthorizedaccess');
                 }
         });
     }
@@ -53,23 +43,16 @@ class PractitionersController extends Controller
     {   
         $latest_report = Report::latest('updated_at')->Practitioner()->first();
 
-        $my_reports = count(Report::Practitioner()->lists('id'));
-
         $practitioner = Practitioner::GetCurrent()->first();
-        $shared_reports = count($practitioner->reports()->lists('id'));
-
 
         if($latest_report !== null)
         {
-            return view('practitioner.dashboard',compact('latest_report','my_reports','shared_reports'));
+            return view('practitioner.dashboard',compact('latest_report'));
         }
         else
         {
             return view('practitioner.dashboard');
         }
 
-    }
-
-
-    
+    }    
 }

@@ -13,14 +13,8 @@ use DB;
 use Auth;
 use Carbon\Carbon;
 use App\Report;
-use App\Question;
-use App\Manager;
 use App\Practitioner;
 use App\User;
-use App\Product;
-use App\Tag;
-use App\Category;
-use App\Subcategory;
 use Input;
 use Validator;
 use Mail;
@@ -334,9 +328,6 @@ class ClientManagerController extends Controller
         {
             return redirect('/unauthorizedaccess');
         }
-
-       
-
        
     }
 

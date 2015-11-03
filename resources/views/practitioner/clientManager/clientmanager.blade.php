@@ -103,6 +103,9 @@
         <!-- /.container-fluid -->
     </div>
     <!-- #page-wrapper -->
+
+    <script src="/js/Angular_JS/clients/clientController.js"></script>
+    
     <script>
 
         $('.selectpicker').selectpicker();

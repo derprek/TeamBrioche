@@ -8,8 +8,10 @@
 
 @section('content')
 
+<script src="/js/Angular_JS/reports/MyReportsController.js"></script>
+
         <div id="reportApp">
-        <div ng-controller="adminReportManagerController" class="container-fluid">
+        <div ng-controller="MyReportsController" class="container-fluid">
 
             <!-- Page Heading -->
             <div class="row">
@@ -119,6 +121,7 @@
         <!-- /.container-fluid -->
     </div>
     <!-- #page-wrapper -->
+    
 @endsection
 @stop
 
