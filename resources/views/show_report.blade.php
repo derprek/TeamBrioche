@@ -1,36 +1,36 @@
 <link href="/css/main.css" rel="stylesheet">
-<div class="row">
 
+<div class="row">
     <div class="col-lg-12">
       <div class="well">
        
-      @unless(empty($categories))
-      
-      <ul class="nav nav-tabs" id="myTab">
+        @unless(empty($categories))
+        
+        <ul class="nav nav-tabs" id="myTab">
 
-        @foreach($categories as $category)
-          
-            @if($category === reset($categories))
+          @foreach($categories as $category)
+              @if($category === reset($categories))
+                <li style = "width:{{$thumbnail_dist}}%;" class ="reportTabs" id="firstTab" data-toggle="tooltip" data-placement="top" title="{{$category->name}}">
+                  <a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                     <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i></span> 
+                  </a>
+                </li>
+              @else
+                <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" data-toggle="tooltip" data-placement="top" title="{{$category->name}}">
+                   <a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                     <span class="round-tabs five">
+                       <i class="{{$category->thumbnail}}"></i>
+                     </span> 
+                   </a>
+                </li>    
+              @endif
+          @endforeach
 
-              <li style = "width:{{$thumbnail_dist}}%;" class ="reportTabs" id="firstTab" data-toggle="tooltip" data-placement="top" title="{{$category->name}}"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
-              <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
-              </span> </a></li>
+        </ul>
+       
+        @endunless
 
-            @else
-
-             <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" data-toggle="tooltip" data-placement="top" title="{{$category->name}}"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
-             <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
-             </span> </a></li>    
-
-            @endif
-
-        @endforeach
-
-      </ul>
-     
-      @endunless
-
-       </div>
+      </div>
 
       <div class="tab-content" id="answercontainer">
 
@@ -38,37 +38,34 @@
       @foreach($answerlist as $answerbycat)
 
           @if ($answerbycat === reset($answerlist))  
-
-               <div id="{{$answerbycat[0]->category_id}}" class="tab-pane fade in active">
-                <h3> {{$categories[$i]->name}}</h3>
-                <hr>
+             <div id="{{$answerbycat[0]->category_id}}" class="tab-pane fade in active">
+              <h3> {{$categories[$i]->name}}</h3>
+              <hr>
 
               @if(isset($clients))
-              <div class="form-group" style="padding-left:10px;padding-right:10px;">
-              <label for="client_list"> Select a Client:</label>
-                <select id="client_list" name="client" class="form-control">
-
-                  @unless($clients->isEmpty())
-                      @foreach($clients as $client)
-
-                          <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} </br>
-                              Email: {{ $client-> email }} </option>
-
-                      @endforeach
-                  @endunless
-
-                </select>    
+                <div class="form-group" style="padding-left:10px;padding-right:10px;">
+                <label for="client_list"> Select a Client:</label>
+                  <select id="client_list" name="client" class="form-control">
+                    @unless($clients->isEmpty())
+                        @foreach($clients as $client)
+                            <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} </br>
+                                Email: {{ $client-> email }} 
+                            </option>
+                        @endforeach
+                    @endunless
+                  </select>    
                 </div> 
               @endif    
 
               @if(isset($goals))
-              <div class="form-group" style="padding:10px;">
-                  <label for="goals_typology">Goals:</label>
-                <textarea readonly name="goals_typology" 
-                         class="form-control" rows="5"
-                         placeholder="Goals + Typology" data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="top" title="Information" 
-                data-content=" Taken from Assessment step"> {{ $goals}}</textarea>
-              </div>
+                <div class="form-group" style="padding:10px;">
+                    <label for="goals_typology">Goals:</label>
+                    <textarea readonly name="goals_typology" 
+                             class="form-control" rows="5"
+                             placeholder="Goals + Typology" data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="top" title="Information" 
+                             data-content=" Taken from Assessment step"> {{ $goals}}
+                    </textarea>
+                </div>
               @endif                 
 
           @else
@@ -88,23 +85,25 @@
               @if($answerbytype->step !== 3)
 
                  <div class="form-group" style="padding:10px;">
-                 <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
+                   <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
                    <textarea class="form-control"
                     name="answersid[{{ $answerbytype->id }}]"
                     rows="3" readonly="" 
                     placeholder="No information found. Please go back to the Assessment section to add any missing information."
                     data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="left" title="Information" 
-                    data-content=" Taken from Assessment step">{{$answerbytype->pivot->answers}}</textarea>
+                    data-content=" Taken from Assessment step">{{$answerbytype->pivot->answers}}
+                    </textarea>
                  </div>
 
               @else
 
                 <div class="form-group" style="padding:10px;">
-                <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                <textarea class="form-control"
-                  name="answersid[{{ $answerbytype->id }}]"
-                  rows="3"
-                  placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}</textarea>
+                  <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
+                  <textarea class="form-control"
+                    name="answersid[{{ $answerbytype->id }}]"
+                    rows="3"
+                    placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}
+                  </textarea>
                 </div>
                 <!-- /.form-group -->
               @endif
@@ -112,11 +111,12 @@
             @else
 
                 <div class="form-group" style="padding:10px;">
-                <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                <textarea class="form-control"
-                  name="answersid[{{ $answerbytype->id }}]"
-                  rows="3"
-                  placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}</textarea>
+                  <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
+                  <textarea class="form-control"
+                    name="answersid[{{ $answerbytype->id }}]"
+                    rows="3"
+                    placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}
+                  </textarea>
                 </div>
                 <!-- /.form-group -->
 
@@ -127,13 +127,14 @@
                     <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
                     @if($answerbytype->type === "tall")
                         <textarea name="answersid[{{ $answerbytype->id }}]"
-                                  class="form-control" rows="3"
-                                  placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}</textarea>
+                          class="form-control" rows="3"
+                          placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}
+                        </textarea>
                     @elseif($answerbytype->type === "regular")
                         <input type="text" name="answersid[{{ $answerbytype->id }}]"
-                               class="form-control"
-                               placeholder="{{ $answerbytype->placeholder }}"
-                               value ="{{$answerbytype->pivot->answers}}">
+                           class="form-control"
+                           placeholder="{{ $answerbytype->placeholder }}"
+                           value ="{{$answerbytype->pivot->answers}}">
                     @endif
                 </div>
                 <!-- /.form-group -->
@@ -157,8 +158,12 @@
               <a class="btn btn-primary btnNext" href="#">Next Section</a>
 
           @endif
+
           @unless(Auth::check())
-           <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-file-o"></i> {{$submitButtonText}}</button>
+            <button type="submit" class="btn btn-success pull-right"> 
+              <i class="fa fa-file-o"></i> {{$submitButtonText}}
+            </button>
+
           @endunless
           </div> 
 
@@ -174,7 +179,7 @@
   @if(Auth::check())
 
     <script>
-     $("#answercontainer").find(':text,textarea').prop('readonly',true);
+       $("#answercontainer").find(':text,textarea').prop('readonly',true);
     </script>
 
   @endif
@@ -190,13 +195,11 @@
     });
  
     $(document).ready(function() {
-
       TweenMax.staggerFrom(".reportTabs", 2, {scale:0.5, opacity:0, ease:Elastic.easeOut, force3D:true}, 0.2);
-
     });
       
     $('#firstTab').delay(2500).queue(function(){
-    $(this).addClass("active");
+      $(this).addClass("active");
     });       
 
   </script>

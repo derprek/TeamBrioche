@@ -24,16 +24,20 @@
     <div class="center_text">
     <h2> Please choose which account to log in to </h2>
     <br>
-        <p style="display:inline-block"><a class="btn btn-success btn-lg"
-          href="{{ url('admin/loginAsAdmin') }}"
-          role="button">Administrator Account</a></p>
+        <p style="display:inline-block">
+            <a class="btn btn-success btn-lg"
+            href="{{ url('admin/loginAsAdmin') }}"
+            role="button">Administrator Account
+            </a>
+        </p>
 
-         <p style="display:inline-block"><a class="btn btn-primary btn-lg"
-          href="{{ url('admin/loginAsPractitioner') }}"
-          role="button">Practitioner Account</a></p>
-          </div>
-
-
+        <p style="display:inline-block">
+            <a class="btn btn-primary btn-lg"
+            href="{{ url('admin/loginAsPractitioner') }}"
+            role="button">Practitioner Account
+            </a>
+        </p>
+    </div>
 
 </body>
 </html>

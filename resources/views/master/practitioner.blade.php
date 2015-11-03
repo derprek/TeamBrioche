@@ -14,7 +14,6 @@
 
 <body>
 
-
 @if(Session::has('flash_message'))
 
     @if(Session::get('flash_message') === 'Create_New_Version!')
@@ -47,8 +46,6 @@
 
     @endif
 @endif
-
-
 
 @if(Session::has('error_message'))
 
@@ -91,7 +88,6 @@
 @endif
 
 
-
 <div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -127,34 +123,26 @@
 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
                     @if(Auth::check())
-
                         <small>{{ Auth::user()->fname }} {{ Auth::user()->sname }}</small>
-
                     @else
-
                        <small>{{ Session::get('prac_name')  }}</small>
-
                     @endif
 
-                    
-                    <b class="caret"></b></a>
+                    <b class="caret"></b>
+
+                </a>
+
                 <ul class="dropdown-menu">
                     <li>
                         <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                    @if(Auth::check())
-
-                        <a href="/../auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-
-                    @else
-
-                        <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-
-                    @endif
-                    
-                        
+                        @if(Auth::check())
+                            <a href="/../auth/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        @else
+                            <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        @endif
                     </li>
                 </ul>
             </li>
@@ -170,17 +158,17 @@
         @yield('content')
     </div>
 
-     <script>
+<script>
 
-        $(function () {
-          $('[data-toggle="popover"]').popover()
-        });
+$(function () {
+  $('[data-toggle="popover"]').popover()
+});
 
-         $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-        });
-        
-   </script>
+ $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
+</script>
 
 </div>
 <!-- /#wrapper -->

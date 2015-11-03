@@ -42,16 +42,15 @@
                             <input type="hidden" name="version_id" value={{ $version['id']}} >
                             <input type="hidden" name="version_number" value={{ $version['version_number'] }} >
 
-                             <button type="submit" class="btn btn-success pull-right" style="margin-right:8px;">
-                                 <i class="fa fa-check"></i> Confirm</button>
-
+                            <button type="submit" class="btn btn-success pull-right" style="margin-right:8px;">
+                                 <i class="fa fa-check"></i> Confirm
+                            </button>
 
                             {!! Form::close() !!}
                                 
-                                <button type="submit"  class="btn btn-danger pull-left"
-                                        data-dismiss="modal">
-                                    <i class="fa fa-times"></i> Cancel
-                                </button>
+                            <button type="submit"  class="btn btn-danger pull-left" data-dismiss="modal">
+                                <i class="fa fa-times"></i> Cancel
+                            </button>
 
                             </div>
                             <!-- /.modal-footer -->

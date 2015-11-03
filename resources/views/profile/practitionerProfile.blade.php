@@ -8,113 +8,114 @@
 
 @section('content')
 
-    @if(Session::has('password_error') || (count($errors) > 0))
+@if(Session::has('password_error') || (count($errors) > 0))
 
-        <script>
-            $(document).ready(function () {
-                $("#updatepasswordModal").modal('show');
-            });
-        </script>
+    <script>
+        $(document).ready(function () {
+            $("#updatepasswordModal").modal('show');
+        });
+    </script>
 
-    @endif
+@endif
 
 
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    &nbsp;
-                </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-user"></i> My Profile
-                    </li>
-                </ol>
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                &nbsp;
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-user"></i> My Profile
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+    <div class="row col-lg-12">
+        @if (Session::has('practitioner_updateerror'))
+            {{Session::forget('practitioner_updateerror')}}
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.
+                <br><br>
+                <ul>
+                    <li>The email has already been taken.</li>
+                </ul>
             </div>
-        </div>
-        <!-- /.row -->
+        @endif
 
+        <br>
 
-        <div class="row col-lg-12">
-            @if (Session::has('practitioner_updateerror'))
-                {{Session::forget('practitioner_updateerror')}}
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        <li>The email has already been taken.</li>
-                    </ul>
+        <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+              action="{{ url('updateprofile') }}">
+
+            <div class="form-group">
+                <label for="FirstName" class="col-sm-2 control-label">First Name</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="fname" value="{{ $practitioner->fname }}"
+                           required>
                 </div>
-            @endif
+            </div>
 
-            <br>
 
-            <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
-                  action="{{ url('updateprofile') }}">
+            <div class="form-group">
+                <label for="Family Name" class="col-sm-2 control-label">Last Name</label>
 
-                <div class="form-group">
-                    <label for="FirstName" class="col-sm-2 control-label">First Name</label>
-
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="fname" value="{{ $practitioner->fname }}"
-                               required>
-                    </div>
+                <div class="col-sm-4">
+                    <input type="text" name="sname" class="form-control" value="{{ $practitioner->sname }}"
+                           required>
                 </div>
+            </div>
 
+            <div class="form-group">
+                <label for="Email" class="col-sm-2 control-label">Email</label>
 
-                <div class="form-group">
-                    <label for="Family Name" class="col-sm-2 control-label">Last Name</label>
-
-                    <div class="col-sm-4">
-                        <input type="text" name="sname" class="form-control" value="{{ $practitioner->sname }}"
-                               required>
-                    </div>
+                <div class="col-sm-4">
+                    <input type="email" name="email" class="form-control" value="{{ $practitioner->email }}"
+                           required>
                 </div>
-
-                <div class="form-group">
-                    <label for="Email" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-4">
-                        <input type="email" name="email" class="form-control" value="{{ $practitioner->email }}"
-                               required>
-                    </div>
-                    <div class="col-sm-4">
-                        <button type="submit" class="btn btn-primary "> Update</button>
-                    </div>
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary "> Update</button>
                 </div>
-            </form>
-
-        </div>
-
-        <hr class="col-lg-12" style="border-top: solid 3px;">
-
-        <div class="row col-lg-12">
-            <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
-                  action="{{ url('updatepassword') }}">
-                <div class="form-group">
-                    <label for="Password" class="col-sm-2 control-label">Password</label>
-
-                    <div class="col-sm-4">
-                        <button type="button" data-toggle="modal" data-target="#updatepasswordModal"
-                                class="btn btn-default ">Change Password
-                        </button>
-                    </div>
-
-                    @include('partials.changePasswordModal')
-                </div>
-            </form>
-        </div>
-
+            </div>
+        </form>
 
     </div>
-    <!-- /.home -->
+
+    <hr class="col-lg-12" style="border-top: solid 3px;">
+
+    <div class="row col-lg-12">
+        <form role="form" class="form-horizontal col-sm-12 col-md-10 col-lg-10" method="POST"
+              action="{{ url('updatepassword') }}">
+            <div class="form-group">
+                <label for="Password" class="col-sm-2 control-label">Password</label>
+
+                <div class="col-sm-4">
+                    <button type="button" data-toggle="modal" data-target="#updatepasswordModal"
+                            class="btn btn-default ">Change Password
+                    </button>
+                </div>
+
+                @include('partials.changePasswordModal')
+            </div>
+        </form>
+    </div>
 
 
-    <!-- /.reports -->
+</div>
+<!-- /.home -->
 
 
-    <!-- /.container-fluid -->
+<!-- /.reports -->
+
+
+<!-- /.container-fluid -->
 
 @endsection
 @stop

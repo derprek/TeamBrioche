@@ -1,31 +1,40 @@
 <link href="/css/main.css" rel="stylesheet">
-<div class="row">
 
+<div class="row">
     <div class="col-lg-12">
       <div class="well">
        
-      @unless(empty($categories))
+        @unless(empty($categories))
       
-      <ul class="nav nav-tabs" id="myTab">
+          <ul class="nav nav-tabs" id="myTab">
 
-      @foreach($categories as $category)
-        
-          @if($category === reset($categories))
+            @foreach($categories as $category)
+              
+                @if($category === reset($categories))
 
-            <li class ="reportTabs" id="firstTab" style = "width:{{$thumbnail_dist}}%;" class="active"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
-            <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
-            </span> </a></li>
+                  <li class ="reportTabs" id="firstTab" style = "width:{{$thumbnail_dist}}%;" class="active">
+                    <a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                      <span class="round-tabs five">
+                        <i class="{{$category->thumbnail}}"></i>
+                      </span> 
+                    </a>
+                  </li>
 
-          @else
+                @else
 
-           <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" ><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
-           <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
-           </span> </a></li>    
+                 <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" >
+                   <a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                     <span class="round-tabs five">
+                      <i class="{{$category->thumbnail}}"></i>
+                     </span> 
+                   </a>
+                 </li>    
 
-          @endif
+                @endif
 
-      @endforeach
-      </ul>
+            @endforeach
+
+          </ul>
      
       @endunless
        </div>
@@ -54,15 +63,11 @@
               <div class="form-group" style="padding-left:10px;padding-right:10px;">
               <label for="client_list"> Select a Client:</label>
                 <select id="client_list" name="client" class="form-control">
-
                   @unless($clients->isEmpty())
                       @foreach($clients as $client)
-
                           <option value= {{ $client-> id }}> {{ $client-> email }} </option>
-
                       @endforeach
                   @endunless
-
                 </select>    
                 </div> 
               @endif    
@@ -70,43 +75,43 @@
               @if(isset($goals))
                 <div class="form-group" style="padding:10px;">
                     <label for="goals_typology">Goals:</label>
-                 <textarea readonly name="goals_typology"
+                    <textarea readonly name="goals_typology"
                            class="form-control" rows="5"
-                           placeholder="Goals + Typology"> {{$goals}} </textarea>
+                           placeholder="Goals + Typology"> {{$goals}} 
+                    </textarea>
                 </div>
               @endif                 
 
           @else
-
             <div id="{{$questionbycat[0]->category_id}}" class="tab-pane fade"> 
             <h3> {{$categories[$i]->name}}</h3>
             <hr>
-
           @endif
 
       @foreach($questionbycat as $questionbytype)
 
            @if($questionbytype->type === "thumbnail")
-
             @if(isset($evaluation))
               @if($questionbytype->step !== 3)
 
                  <div class="form-group" style="padding:10px;">
-                 <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
-                   <textarea class="form-control"
-                    name="answersid[{{ $questionbytype->id }}]"
-                    rows="3" readonly="" 
-                    placeholder="{{ $questionbytype->placeholder }}">{{$questionbytype->pivot->answers}}</textarea>
+                    <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
+                    <textarea class="form-control"
+                      name="answersid[{{ $questionbytype->id }}]"
+                      rows="3" readonly="" 
+                      placeholder="{{ $questionbytype->placeholder }}">{{$questionbytype->pivot->answers}}
+                    </textarea>
                  </div>
 
               @else
 
                 <div class="form-group" style="padding:10px;">
-                <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
-                <textarea class="form-control"
-                  name="answersid[{{ $questionbytype->id }}]"
-                  rows="3"
-                  placeholder="{{ $questionbytype->placeholder }}" ></textarea>
+                  <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
+                  <textarea class="form-control"
+                    name="answersid[{{ $questionbytype->id }}]"
+                    rows="3"
+                    placeholder="{{ $questionbytype->placeholder }}" >
+                  </textarea>
                 </div>
                 <!-- /.form-group -->
               @endif
@@ -114,29 +119,32 @@
             @else
 
                 <div class="form-group" style="padding:10px;">
-                <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
-                <textarea class="form-control"
-                  name="answersid[{{ $questionbytype->id }}]"
-                  rows="3"
-                  placeholder="{{ $questionbytype->placeholder }}" autofocus></textarea>
+                  <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
+                  <textarea class="form-control"
+                    name="answersid[{{ $questionbytype->id }}]"
+                    rows="3"
+                    placeholder="{{ $questionbytype->placeholder }}" autofocus>
+                  </textarea>
                 </div>
                 <!-- /.form-group -->
 
-          @endif
+            @endif
 
           @else
-                  <div class="form-group" style="padding:10px;">
-                      <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
-                      @if($questionbytype->type === "tall")
-                          <textarea name="answersid[{{ $questionbytype->id }}]"
-                                    class="form-control" rows="3"
-                                    placeholder="{{$questionbytype->placeholder }}"></textarea>
-                      @elseif($questionbytype->type === "regular")
-                          <input type="text" name="answersid[{{ $questionbytype->id }}]"
-                                 class="form-control"
-                                 placeholder="{{ $questionbytype->placeholder }}">
-                      @endif
-                  </div>
+
+                <div class="form-group" style="padding:10px;">
+                    <label for="answersid[{{ $questionbytype->id }}]">{{ $questionbytype->question }}</label>
+                    @if($questionbytype->type === "tall")
+                        <textarea name="answersid[{{ $questionbytype->id }}]"
+                          class="form-control" rows="3"
+                          placeholder="{{$questionbytype->placeholder }}">
+                        </textarea>
+                    @elseif($questionbytype->type === "regular")
+                        <input type="text" name="answersid[{{ $questionbytype->id }}]"
+                           class="form-control"
+                           placeholder="{{ $questionbytype->placeholder }}">
+                    @endif
+                </div>
                   <!-- /.form-group -->
           @endif
 
@@ -145,9 +153,12 @@
           @if ($questionbycat === end($questionslist)) 
 
           <div class="form-group" style="padding:10px;">
-          <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
-          <button type="submit" class="btn btn-success pull-right"> <i class="fa fa-cloud-upload"></i> {{$submitButtonText}}</button>
-             </form>
+            <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
+            <button type="submit" class="btn btn-success pull-right"> 
+              <i class="fa fa-cloud-upload"></i> {{$submitButtonText}}
+            </button>
+            
+            </form>
           </div> 
 
           @elseif($questionbycat === reset($questionslist))

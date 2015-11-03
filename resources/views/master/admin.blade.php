@@ -16,17 +16,17 @@
 
 @if(Session::has('flash_message'))
 
-        @include('partials.flashMessageModal');
+    @include('partials.flashMessageModal');
 
-        <script>
-                
-            $('#flashMessageModal').modal('show');
-           
-           setTimeout(function(){
-              $('#flashMessageModal').modal('hide')
-            }, 3000);
+    <script>
+            
+        $('#flashMessageModal').modal('show');
+       
+       setTimeout(function(){
+          $('#flashMessageModal').modal('hide')
+        }, 3000);
 
-        </script>
+    </script>
 
 @endif
 
@@ -48,7 +48,7 @@
 
     <script>
                 
-            $('#infoMessageModal').modal('show');
+        $('#infoMessageModal').modal('show');
            
     </script>
 
@@ -57,8 +57,8 @@
         <script>
 
           setTimeout(function(){
-                  $('#infoMessageModal').modal('hide')
-                }, 10000);
+              $('#infoMessageModal').modal('hide')
+            }, 10000);
           
         </script>
 
@@ -90,6 +90,7 @@
                     <li>
                         <a href="#" ng-click="startAdd()"><i class="fa fa-pencil"></i> <small>Compose</small></a>
                     </li>
+                    
                     <li>
                         <a href="/../mailbox"><i class="fa fa-fw fa-envelope"></i> <small>Mailbox</small></a>
                     </li>
@@ -107,7 +108,9 @@
                     <li>
                         <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
+
                     <li class="divider"></li>
+
                     <li>
                         <a href="/../prac/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                     </li>

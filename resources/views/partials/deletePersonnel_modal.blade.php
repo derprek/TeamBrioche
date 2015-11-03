@@ -22,8 +22,7 @@
                                     <i class="fa fa-trash"></i></i>Delete Personnel
                                 </button>
 
-                                <button type="submit" class="btn btn-danger pull-left"
-                                        data-dismiss="modal">
+                                <button type="submit" class="btn btn-danger pull-left" data-dismiss="modal">
                                     <i class="fa fa-times"></i> Cancel
                                 </button>
 

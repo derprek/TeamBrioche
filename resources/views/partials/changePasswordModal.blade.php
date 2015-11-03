@@ -17,7 +17,6 @@
                                     <li> {{ Session::pull('password_error') }}</li>
 
                                  @endif
-                               
                             </ul>
                         </div>
                         <br>
@@ -132,14 +131,9 @@ function checkEmpty() {
        document.getElementById("submitBtn").disabled = true;
        $("#password_reminder").show();
     }
-
-
-
 }
 
 </script>
-
-
 
 @if((Session::has('password_error')) && (Session::get('password_error') === 'Your passwords do not match'))
 

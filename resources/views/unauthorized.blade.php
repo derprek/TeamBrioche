@@ -29,34 +29,29 @@
 
       @if($usertype === 'admin')
 
-        <p style="display:inline-block"><a class="btn btn-info btn-lg"
-          href="{{  url('/admin/dashboard') }}"
-          role="button">Take me back to my dashboard</a></p>
+        <p style="display:inline-block">
+          <a class="btn btn-info btn-lg"
+            href="{{  url('/admin/dashboard') }}"
+            role="button">Take me back to my dashboard
+          </a>
+        </p>
 
       @elseif($usertype === 'practitioner')
-
-          <button class="btn btn-info btn-lg" onclick="redirectBack()"> Take me back to the previous page </button>
-
-      @elseif($usertype === 'client')
-
          <button class="btn btn-info btn-lg" onclick="redirectBack()"> Take me back to the previous page </button>
-
+      @elseif($usertype === 'client')
+         <button class="btn btn-info btn-lg" onclick="redirectBack()"> Take me back to the previous page </button>
       @elseif($usertype === 'guest')
-
-        <p style="display:inline-block"><a class="btn btn-info btn-lg"
-          href="{{ url('/../') }}"
-          role="button">Take me to the home page</a></p>
+        <p style="display:inline-block">
+          <a class="btn btn-info btn-lg" href="{{ url('/../') }}" role="button">Take me to the home page </a>
+        </p>
 
       @endif
 
-      <script>
-
-        function redirectBack()
-        {
-          history.go(-1);
-        }
-
-      </script>
+<script>
+  function redirectBack(){
+    history.go(-1);
+  }
+</script>
 
 </body>
 </html>

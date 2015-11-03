@@ -21,8 +21,6 @@ class CreateQuestionsTable extends Migration
             $table->string('type');
             $table->string('question');
             $table->string('placeholder');
-            $table->string('imgpath');
-            $table->timestamp('modifydate');
             $table->timestamps();
         });
 

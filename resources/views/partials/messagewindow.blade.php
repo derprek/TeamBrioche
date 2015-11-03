@@ -3,7 +3,7 @@
 <form ng-show="newWindow" ng-cloak class="add-window" ng-submit="sendMessage()" class="form-horizontal">
     
         <div class='header' ng-click="cancelAdd()">Compose a new Message</div>
-          <br>
+        <br>
 
         <div class="form-group" > 
           <ui-select id="email" ng-model="newMessage.recipient" theme="bootstrap" ng-disabled="disabled" > 

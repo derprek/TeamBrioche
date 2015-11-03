@@ -11,7 +11,7 @@
 
                 <div class="modal-body">
 
-                    <div id="loadinganimation" style="width:100%; " ng-show="loadingSpinner">
+                    <div id="loadinganimation" ng-show="loadingSpinner">
 
                         @include('partials.loadinganimation')
 
@@ -23,7 +23,7 @@
 
                     </div>
 
-                    <div id="Registerform" style="width:100%;" ng-show="showForm">
+                    <div id="Registerform" ng-show="showForm">
 
                         @if (Session::has('client_registererrors'))
 
@@ -62,10 +62,10 @@
 
                                 <label for="prac_email"> Under the supervision of:*</label>
                                 <ui-select id="practitioner" name="prac_email" ng-model="selected.practitioner"
-                                           theme="bootstrap" class="form-group"
-                                           ng-required="true">
+                                           theme="bootstrap" class="form-group" ng-required="true">
                                     <ui-select-match
-                                            placeholder="Select a Practitioner.">@{{$select.selected.name}}</ui-select-match>
+                                            placeholder="Select a Practitioner.">@{{$select.selected.name}}
+                                    </ui-select-match>
                                     <ui-select-choices
                                             repeat="practitioner in AllPractitioners | filter: $select.search">
                                         <div ng-bind-html="practitioner.name | highlight: $select.search"></div>
@@ -83,20 +83,16 @@
 
                                 <br><br>
 
-
                                 <div class="modal-footer">
-                                    <button type="submit" ng-show="numberOfPractitioners()"
-                                            class="btn btn-success pull-right">
+                                    <button type="submit" ng-show="numberOfPractitioners()" class="btn btn-success pull-right">
                                         <i class="fa fa-check"></i> Register Client
                                     </button>
 
-                                    <button type="submit" class="btn btn-danger pull-left"
-                                            data-dismiss="modal">
+                                    <button type="submit" class="btn btn-danger pull-left" data-dismiss="modal">
                                         <i class="fa fa-times"></i> Cancel
                                     </button>
 
                                 </div>
-
 
                                 <!-- /.modal-footer -->
                             </form>

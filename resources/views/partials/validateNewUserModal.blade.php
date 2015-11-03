@@ -8,46 +8,40 @@
                 <div class="modal-body">
 
                     @if(Session::has('invalid_user'))
-
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> There were some problems with your input.<br><br>
                             <ul>
                                  @if(Session::has('invalid_user'))
-
                                     <li> {{ Session::pull('invalid_user') }}</li>
-
                                  @endif
                                
                             </ul>
                         </div>
                         <br>
-
                     @endif
 
-                                <!-- deletion form -->
-                            <h4 style="text-align:center;"> <i class="fa fa-lock"></i> Enter your email to confirm your identity</h4>
-                            <br><br>
-                            
-                            <input required type="email" name="email" class="form-control" maxlength="50"
-                                   value="" placeholder="Enter your registered email" autofocus>
+                        <!-- deletion form -->
+                    <h4 style="text-align:center;"> <i class="fa fa-lock"></i> Enter your email to confirm your identity</h4>
+                    <br><br>
+                    
+                    <input required type="email" name="email" class="form-control" maxlength="50"
+                           value="" placeholder="Enter your registered email" autofocus>
 
-                            <br>
+                    <br>
 
-                            <div class="modal-footer">
+                    <div class="modal-footer">
 
-                                <a href="/../"class="btn btn-primary pull-left">
-                                   <i class="fa fa-home"></i> Back to home page
-                                </a>
+                        <a href="/../"class="btn btn-primary pull-left">
+                           <i class="fa fa-home"></i> Back to home page
+                        </a>
 
-                                <button type="submit" class="btn btn-success pull-right">
-                                    <i class="fa fa-check"></i>Validate me
-                                </button>
+                        <button type="submit" class="btn btn-success pull-right">
+                            <i class="fa fa-check"></i>Validate me
+                        </button>
 
-                               
-
-                            </div>
-                            <!-- /.modal-footer -->
-                        </form>
+                    </div>
+                    <!-- /.modal-footer -->
+                </form>
                 </div>
                 <!-- /.modal-body -->
             </div>
