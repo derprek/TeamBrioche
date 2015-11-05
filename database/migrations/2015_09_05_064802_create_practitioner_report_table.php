@@ -22,7 +22,7 @@ class CreatePractitionerReportTable extends Migration
                 $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
 
 
-            }); //product and tag
+            }); 
     }
 
     /**

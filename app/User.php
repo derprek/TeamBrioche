@@ -41,6 +41,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $query->where('prac_id', '=', Session::get('prac_id'));
     }
 
+    public function scopeGetUnverified($query)
+    {
+        $query->where('verified', '=', 0);
+    }
+
+    public function scopeGetPractitionerClients($query,$prac_id)
+    {
+        $query->where('prac_id', '=', $prac_id);
+    }
+
+    public function scopeValidateEmail($query, $email)
+    {
+        $query->where('email', '=', $email);
+    }
+
+    public function scopeValidatePassword($query, $password)
+    {
+        $query->where('password', '=', $password);
+    }
+
+
     /**
      *
      * The attributes that are mass assignable.
@@ -60,5 +81,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('App\Report'); // form relation
 
+    }
+
+    public function getVerifiedAttribute($value)
+    {
+        return(boolean) $value;
     }
 }

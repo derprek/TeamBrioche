@@ -3,12 +3,13 @@ reportApp.controller('MyReportsController', [ '$http', '$scope', function($http,
   $scope.currentPage = 1;
   $scope.pageSize = 10;
 
-  $http.get('/getAllReports').success(function(fetchAllReports){
+  $http.get('/getMyReports').success(function(fetchMyReports){
 
-        $scope.AllReports = fetchAllReports;
+        $scope.AllReports = fetchMyReports;
 
         document.getElementById("allReportsLoad_text").style.display = "none";
         document.getElementById("allReportsLoad").style.display = "none";
+        document.getElementById("addreport_btn").style.visibility = "visible";
 
         var count =0;
 
@@ -17,10 +18,9 @@ reportApp.controller('MyReportsController', [ '$http', '$scope', function($http,
 
         });
 
-        if (count >= 1) {
-           
+        if (count >= 1)
+        {
            document.getElementById("emptymsg").style.display = "none";
-            
         }
         else
         {

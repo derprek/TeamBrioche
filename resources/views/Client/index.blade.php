@@ -1,82 +1,48 @@
-@extends('patientmaster')
+@extends('master.client')
 
 @section('sidemenubar')
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="{{ url('home') }}"><i class="fa fa-home"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="{{ url('client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> Reports</a>
-            </li>
-        </ul>
-    </div>
+    
+    @include('partials.sidebar_home')
+    
 @endsection
 
 @section('content')
 
-    <div id="page-wrapper">
-
-        <div class="container-fluid">
-            <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        &nbsp;
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i> <a href="#">Dashboard</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <!-- /.row-->
-
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
             <div class="col-lg-12">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    <li><a data-toggle="tab" href="#notification">Notification</a></li>
-                </ul>
-                <div class="tab-content">
-                    <!-- home tab -->
-                    <div id="home" class="tab-pane fade in active">
-                        <br>
-
-                        <div class="jumbotron">
-                            <div class="container">
-                                <h3>Greetings , {{ $username }}!</h3>
-
-                                <p> Welcome to ATEST </p>
-                                <hr>
-                                <p><a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}"
-                                      role="button">View Reports</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.home-->
-
-                    <!-- Notifacation tab-->
-                    <div id="notification" class="tab-pane fade ">
-                        <br>
-
-                        <div class="jumbotron">
-                            <div class="container">
-                                <h3>Notification will be implemented here</h3>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.notification-->
-                </div>
+                <h1 class="page-header">
+                    &nbsp;
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-home"></i>Home
+                    </li>
+                </ol>
             </div>
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.row-->
+
+        <div class="col-lg-12">
+            <div class="jumbotron">
+                <div class="container">
+                    <h3>Greetings , {{ $username }}!</h3>
+                    <p> Welcome to ATEST </p>
+                    <hr>
+                    <p>
+                        <a class="btn btn-success btn-lg" href="{{ url('client/reportarchives') }}" role="button">View Reports </a>
+                    </p>
+                </div>
+                 <!-- /.container-->
+            </div>
+            <!-- /.jumbotron-->
+        </div>
+<!-- /.col-lg-12-->
     </div>
-    <!-- #page-wrapper -->
-
-
-
-
+    <!-- /.container-fluid -->
+</div>
+<!-- #page-wrapper -->
 @endsection
 @stop

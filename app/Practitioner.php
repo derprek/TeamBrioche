@@ -10,7 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  */
 class Practitioner extends Model
-{
+{   
+    protected $casts = [
+        'verified' => 'boolean'
+    ];
+
     /**
      *Form the relationship between the practitioner and the reports model.
      *
@@ -51,6 +55,20 @@ class Practitioner extends Model
     public function scopeGetCurrent($query)
     {
         $query->where('id', '=', Session::get('prac_id'));
+    }
+
+    public function scopeGetUnverified($query)
+    {
+        $query->where('verified', '=', 0);
+    }
+    public function scopeNotCurrent($query)
+    {
+        $query->where('id', '!=', Session::get('prac_id'));
+    }
+
+    public function scopeGetThisPractitioner($query, $prac_id)
+    {
+        $query->where('id', '=', $prac_id);
     }
 
 }

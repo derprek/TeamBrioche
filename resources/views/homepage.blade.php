@@ -1,23 +1,22 @@
-@extends('master')
+@extends('master.home')
 
 @section('content')
         <!-- Header -->
 <header>
-    <div class="container">
-        <div class="row">
+    <div class="container" id="home">
+        <div class="row" >
             <div class="col-lg-12">
-                <img class="img-responsive" src="img/logo.png" alt="">
+                <img class="img-responsive" src="img/final_logo.png" style="width:30%;" alt="">
 
                 <div class="intro-text">
-                    <span class="name">A T E S T </span>
                     <hr class="star-light">
-                    <span class="skills">Assitive Technology Evaluation and Selection Tool</span>
+                    <span>Assistive Technology Evaluation and Selection Tool</span>
                 </div>
                 <br>
-                <button type="button" id="regbtn" class="btn btn-success"
+                <button type="button" id="regbtn" class="btn btn-primary"
                         data-toggle="modal" data-target="#praclogin">Practitioner Login
                 </button>
-                <button type="button" id="regbtn" class="btn btn-success"
+                <button type="button" id="regbtn" class="btn btn-primary"
                         data-toggle="modal" data-target="#clientlogin">Client Login
                 </button>
             </div>
@@ -32,20 +31,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Our Mission</h2>
-                <hr>
+               <h2>The Online Assistive Tool</h2>
+                <hr class="star-primary">
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-2">
-                <p>ATEST is an online assistive Tool</p>
-            </div>
-            <div class="col-lg-4">
-                <p> This project will assist many people with disabilities who require assistive technologies to match
-                    their lifestyle and needs. At the present moment people who need assistive technologies have to go
-                    through a system to attain these technologies which can take up to a year. This process despite its
-                    length does not guarantee that people are matched with the appropriate assistive technology. The
-                    application asks the users questions in order to generate a report. </p>
+
+
+        <div class="col-md-12 col-lg-12 text-center">
+                <p>
+                    Assistive Technology (AT) is regularly provided by health and social services to many people with a wide range of
+                    needs or disabilities, to overcome barriers and difficulties in daily life.<br><br>
+                    The tool aims to support practitioners to meet clients’ individual needs when selecting AT by using a
+                    common language and structure for the process.<br><br>
+                    Experts in the field of AT were consulted during the development of the tool and initial
+                    evaluation, and provided positive feedback on the research aims and approach.
+                    </p>
             </div>
         </div>
     </div>
@@ -85,7 +86,7 @@
                         <div class="form-group">
 
                             <div class="col-md-12">
-                                <input type="email" class="form-control" required name="email"
+                                <input type="email" class="form-control" required name="email" maxlength="30"
                                        value="{{ old('email') }}" placeholder="&#xF007; E-mail Address"
                                        style="font-family:Arial, FontAwesome" autofocus>
                             </div>
@@ -93,7 +94,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input type="password" required class="form-control" placeholder="&#xF023; Password"
+                                <input type="password" required class="form-control" maxlength="50" placeholder="&#xF023; Password"
                                        style="font-family:Arial, FontAwesome" name="password">
                             </div>
                         </div>
@@ -147,7 +148,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input type="email" class="form-control" required name="email"
+                                <input type="email" class="form-control" required name="email" maxlength="30"
                                        value="{{ old('email') }}" placeholder="&#xF007; E-mail Address"
                                        style="font-family:Arial, FontAwesome" autofocus>
 
@@ -157,7 +158,7 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <input type="password" required class="form-control" placeholder="&#xF023; Password"
-                                       style="font-family:Arial, FontAwesome" name="password">
+                                       maxlength="50" style="font-family:Arial, FontAwesome" name="password">
                             </div>
                         </div>
 

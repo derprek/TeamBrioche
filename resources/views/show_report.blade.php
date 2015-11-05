@@ -1,175 +1,190 @@
 <link href="/css/main.css" rel="stylesheet">
+
 <div class="row">
-                <div class="col-lg-12">
-                <div class="well">
-                 
-                @unless(empty($categories))
-                
-                <ul class="nav nav-tabs" id="myTab">
+    <div class="col-lg-12">
+      <div class="well">
+       
+        @unless(empty($categories))
+        
+        <ul class="nav nav-tabs" id="myTab">
 
-                @foreach($categories as $category)
-                  
-                    @if($category === reset($categories))
+          @foreach($categories as $category)
+              @if($category === reset($categories))
+                <li style = "width:{{$thumbnail_dist}}%;" class ="reportTabs" id="firstTab" data-toggle="tooltip" data-placement="top" title="{{$category->name}}">
+                  <a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                     <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i></span> 
+                  </a>
+                </li>
+              @else
+                <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" data-toggle="tooltip" data-placement="top" title="{{$category->name}}">
+                   <a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
+                     <span class="round-tabs five">
+                       <i class="{{$category->thumbnail}}"></i>
+                     </span> 
+                   </a>
+                </li>    
+              @endif
+          @endforeach
 
-                      <li style = "width:{{$thumbnail_dist}}%;" class ="reportTabs" id="firstTab"><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
-                      <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
-                      </span> </a></li>
+        </ul>
+       
+        @endunless
 
-                    @else
+      </div>
 
-                     <li class ="reportTabs" style = "width:{{$thumbnail_dist}}%;" ><a href="#{{$category->id}}" data-toggle="tab" title="{{$category->name}}">
-                     <span class="round-tabs five"><i class="{{$category->thumbnail}}"></i>
-                     </span> </a></li>    
+      <div class="tab-content" id="answercontainer">
 
-                    @endif
+      <?php $i = 0; ?>
+      @foreach($answerlist as $answerbycat)
 
-                @endforeach
-                </ul>
-               
-                @endunless
+          @if ($answerbycat === reset($answerlist))  
+             <div id="{{$answerbycat[0]->category_id}}" class="tab-pane fade in active">
+              <h3> {{$categories[$i]->name}}</h3>
+              <hr>
+
+              @if(isset($clients))
+                <div class="form-group" style="padding-left:10px;padding-right:10px;">
+                <label for="client_list"> Select a Client:</label>
+                  <select id="client_list" name="client" class="form-control">
+                    @unless($clients->isEmpty())
+                        @foreach($clients as $client)
+                            <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} </br>
+                                Email: {{ $client-> email }} 
+                            </option>
+                        @endforeach
+                    @endunless
+                  </select>    
+                </div> 
+              @endif    
+
+              @if(isset($goals))
+                <div class="form-group" style="padding:10px;">
+                    <label for="goals_typology">Goals:</label>
+                    <textarea readonly name="goals_typology" 
+                             class="form-control" rows="5"
+                             placeholder="Goals + Typology" data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="top" title="Information" 
+                             data-content=" Taken from Assessment step"> {{ $goals}}
+                    </textarea>
+                </div>
+              @endif                 
+
+          @else
+
+            <div id="{{$answerbycat[0]->category_id}}" class="tab-pane fade"> 
+            <h3> {{$categories[$i]->name}}</h3>
+            <hr>
+
+          @endif
+
+      @foreach($answerbycat as $answerbytype)
+
+           @if($answerbytype->type === "thumbnail")
+
+            @if(isset($is_evaluation))
+   
+              @if($answerbytype->step !== 3)
+
+                 <div class="form-group" style="padding:10px;">
+                   <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
+                   <textarea class="form-control"
+                    name="answersid[{{ $answerbytype->id }}]"
+                    rows="3" readonly="" 
+                    placeholder="No information found. Please go back to the Assessment section to add any missing information."
+                    data-toggle="popover" data-html="true" data-trigger="hover" data-animation="true" data-placement="left" title="Information" 
+                    data-content=" Taken from Assessment step">{{$answerbytype->pivot->answers}}
+                    </textarea>
                  </div>
 
-                <div class="tab-content" >
+              @else
 
-                <?php $i = 0; ?>
-                @foreach($answerlist as $answerbycat)
+                <div class="form-group" style="padding:10px;">
+                  <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
+                  <textarea class="form-control"
+                    name="answersid[{{ $answerbytype->id }}]"
+                    rows="3"
+                    placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}
+                  </textarea>
+                </div>
+                <!-- /.form-group -->
+              @endif
 
-                    @if ($answerbycat === reset($answerlist))  
+            @else
 
-                         <div id="{{$answerbycat[0]->category_id}}" class="tab-pane fade in active">
-                          <h3> {{$categories[$i]->name}}</h3>
-                          <hr>
+                <div class="form-group" style="padding:10px;">
+                  <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
+                  <textarea class="form-control"
+                    name="answersid[{{ $answerbytype->id }}]"
+                    rows="3"
+                    placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}
+                  </textarea>
+                </div>
+                <!-- /.form-group -->
 
-                        @if(isset($clients))
-                        <div class="form-group" style="padding-left:10px;padding-right:10px;">
-                        <label for="client_list"> Select a Client:</label>
-                          <select id="client_list" name="client" class="form-control">
+          @endif
 
-                            @unless($clients->isEmpty())
-                                @foreach($clients as $client)
-
-                                    <option value= {{ $client-> id }}>{{ $client->fname }} {{ $client-> sname }} </br>
-                                        Email: {{ $client-> email }} </option>
-
-                                @endforeach
-                            @endunless
-
-                          </select>    
-                          </div> 
-                        @endif    
-
-                        @if(isset($goals))
-                        <div class="form-group" style="padding:10px;">
-                            <label for="goals_typology">Goals:</label>
-                         <textarea readonly name="goals_typology"
-                                   class="form-control" rows="5"
-                                   placeholder="Goals + Typology"> {{ $goals}}</textarea>
-                        </div>
-                        @endif                 
-
-                    @else
-
-                      <div id="{{$answerbycat[0]->category_id}}" class="tab-pane fade"> 
-                      <h3> {{$categories[$i]->name}}</h3>
-                      <hr>
-
+         @else
+                <div class="form-group" style="padding:10px;">
+                    <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
+                    @if($answerbytype->type === "tall")
+                        <textarea name="answersid[{{ $answerbytype->id }}]"
+                          class="form-control" rows="3"
+                          placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}
+                        </textarea>
+                    @elseif($answerbytype->type === "regular")
+                        <input type="text" name="answersid[{{ $answerbytype->id }}]"
+                           class="form-control"
+                           placeholder="{{ $answerbytype->placeholder }}"
+                           value ="{{$answerbytype->pivot->answers}}">
                     @endif
-  
-                @foreach($answerbycat as $answerbytype)
+                </div>
+                <!-- /.form-group -->
+          @endif
 
-                     @if($answerbytype->type === "thumbnail")
+      @endforeach
+          
+          <div class="form-group" style="padding:10px;">
 
-                      @if(isset($evaluation))
-                        @if($answerbytype->step !== 3)
+          @if ($answerbycat === end($answerlist)) 
 
-                           <div class="form-group" style="padding:10px;">
-                           <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                            <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
-                             <textarea class="form-control"
-                              name="answersid[{{ $answerbytype->id }}]"
-                              rows="3" readonly="" 
-                              placeholder="No information found. Please go back to the Assessment section to add any missing information.">{{$answerbytype->pivot->answers}}</textarea>
-                           </div>
+              <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
+         
+          @elseif($answerbycat === reset($answerlist))
 
-                        @else
+               <a class="btn btn-primary btnNext" data-toggle="modal" data-target="#versionConfirmation" href="#">Next Section</a>
 
-                          <div class="form-group" style="padding:10px;">
-                          <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                           <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
-                          <textarea class="form-control"
-                            name="answersid[{{ $answerbytype->id }}]"
-                            rows="3"
-                            placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}</textarea>
-                          </div>
-                          <!-- /.form-group -->
-                        @endif
+          @else
 
-                      @else
+              <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
+              <a class="btn btn-primary btnNext" href="#">Next Section</a>
 
-                          <div class="form-group" style="padding:10px;">
-                          <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                           <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
-                          <textarea class="form-control"
-                            name="answersid[{{ $answerbytype->id }}]"
-                            rows="3"
-                            placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}</textarea>
-                          </div>
-                          <!-- /.form-group -->
+          @endif
 
-                    @endif
+          @unless(Auth::check())
+            <button type="submit" class="btn btn-success pull-right"> 
+              <i class="fa fa-file-o"></i> {{$submitButtonText}}
+            </button>
 
-                   @else
-                          <div class="form-group" style="padding:10px;">
-                              <label for="answersid[{{ $answerbytype->id }}]">{{ $answerbytype->question }}</label>
-                              @if($answerbytype->type === "tall")
-                               <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
-                                  <textarea name="answersid[{{ $answerbytype->id }}]"
-                                            class="form-control" rows="3"
-                                            placeholder="{{ $answerbytype->placeholder }}">{{$answerbytype->pivot->answers}}</textarea>
-                              @elseif($answerbytype->type === "regular")
-                               <input type="hidden" name="rqid[]" value={{ $answerbytype->pivot->rqid }}>
-                                  <input type="text" name="answersid[{{ $answerbytype->id }}]"
-                                         class="form-control"
-                                         placeholder="{{ $answerbytype->placeholder }}"
-                                         value ="{{$answerbytype->pivot->answers}}">
-                              @endif
-                          </div>
-                          <!-- /.form-group -->
-                    @endif
+          @endunless
+          </div> 
 
-                @endforeach
-               
-                    @if ($answerbycat === end($answerlist)) 
+          </form>
 
-                    <div class="form-group" style="padding:10px;">
-                    <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
-                        {!! Form:: submit('Update' , ['class' => 'btn btn-success ']) !!}
-                        {!! Form::close() !!}
-                    </div> 
+          </div>
+           <?php $i++; ?>
+      @endforeach
+      </div>    
+      <!-- old -->
+</div>      
 
-                    @elseif($answerbycat === reset($answerlist))
+  @if(Auth::check())
 
-                    <div class="form-group" style="padding:10px;">
-                         <a class="btn btn-primary btnNext" href="#">Next Section</a>
-                    </div> 
+    <script>
+       $("#answercontainer").find(':text,textarea').prop('readonly',true);
+    </script>
 
-                    @else
+  @endif
 
-                    <div class="form-group" style="padding:10px;">
-                        <a class="btn btn-primary btnPrevious" href="#">Previous Section</a>
-                        <a class="btn btn-primary btnNext" href="#">Next Section</a>
-                    </div> 
-
-                    @endif
-
-                    </div>
-                     <?php $i++; ?>
-                @endforeach
-                </div>    
-                <!-- old -->
-          </div>      
-
-          <script>
+  <script>
 
     $('.btnNext').click(function(){
       $('.nav-tabs > .active').next('li').find('a').trigger('click');
@@ -179,18 +194,12 @@
       $('.nav-tabs > .active').prev('li').find('a').trigger('click');
     });
  
-    $(function(){
-    $('a[title]').tooltip();
+    $(document).ready(function() {
+      TweenMax.staggerFrom(".reportTabs", 2, {scale:0.5, opacity:0, ease:Elastic.easeOut, force3D:true}, 0.2);
     });
-
-     $(document).ready(function() {
-
-         TweenMax.staggerFrom(".reportTabs", 2, {scale:0.5, opacity:0, delay:0.3, ease:Elastic.easeOut, force3D:true}, 0.2);
-
-        });
       
     $('#firstTab').delay(2500).queue(function(){
-    $(this).addClass("active");
+      $(this).addClass("active");
     });       
 
-    </script>
+  </script>
