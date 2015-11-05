@@ -27,7 +27,7 @@ class ClientsController extends Controller
         $this->beforeFilter(function(){
             if (Auth::guest()) 
                 {
-                    return redirect('/../');
+                    return redirect('/unauthorizedaccess');
                 }
         });
     }

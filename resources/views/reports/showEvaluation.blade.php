@@ -32,10 +32,6 @@
                         <a href="{{ url('/reports/evaluation/overview', $report->id) }}"> Evaluation Manager </a>
                     </li>
 
-                    <li>
-                        Viewing <strong> Evaluation: {{ $evaluation->id }}</strong> for Report: {{$report->id}}.
-                    </li>
-
                 @elseif(Session::has('prac_id'))
 
                     <li>
@@ -50,10 +46,6 @@
                         <a href="{{ url('/reports/evaluation/overview', $report->id) }}"> Evaluation Manager </a>
                     </li>
 
-                    <li >
-                        Viewing <strong> Evaluation: {{ $evaluation->id }}</strong> for Report: {{$report->id}}.
-                    </li>
-
                 @elseif(Auth::check())
 
                     <li>
@@ -64,11 +56,11 @@
                         <a href="{{ url('/reports/overview',$report->id ) }}"><i class="fa fa-search"></i>Report Overview</a>
                     </li>
 
-                    <li class="active">
-                         Viewing <strong> Evaluation: {{ $evaluation->id }}</strong> for Report: {{$report->id}}.
-                    </li>
-
                 @endif
+
+                <li class="active">
+                     Viewing <strong> Evaluation: {{ $evaluation->id }}</strong> for Report: {{$report->id}}.
+                </li>
                     
                 </ol>
             </div>

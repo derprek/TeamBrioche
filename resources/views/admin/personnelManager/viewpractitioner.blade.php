@@ -82,7 +82,6 @@
                                             </div>
                                         @endif
 
-
                                         <input type="hidden" name="id" class="form-control"
                                                value="@{{ Practitioner.id }}" required>
 
@@ -95,7 +94,6 @@
                                             </div>
                                         </div>
 
-
                                         <div class="form-group">
                                             <label for="LasttName" class="col-sm-2 control-label">Last Name</label>
 
@@ -104,7 +102,6 @@
                                                        value="@{{ Practitioner.sname }}" required>
                                             </div>
                                         </div>
-
 
                                         <div class="form-group">
                                             <label for="Email" class="col-sm-2 control-label">Email</label>
@@ -132,7 +129,7 @@
                                 <form role="form" method="POST" action="{{ url('/admin/deletePractitioner') }}">
                                     <input type="hidden" name="id" class="form-control" value="@{{ Practitioner.id }}"
                                            required>
-                                    @include('partials.deletePersonnel_modal')
+                                    @include('partials.deletePersonnelModal')
                                 </form>
                             </div>
                         </div>
@@ -168,7 +165,7 @@
                                            ng-model="searchclient.text">
                                     <hr>
 
-                                    <tr ng-show="Clients">
+                                    <tr ng-show="(Clients| filter:searchclient.text | filter:search.type).length > 0">
                                         <th class="smallRow">Client ID</th>
                                         <th class="mediumRow">Client Name</th>
                                         <th class="mediumRow">Joined on</th>
@@ -184,13 +181,19 @@
                                         <td> @{{ client.created_at }} </td>
                                         <td style="width:10%"><a
                                                     href="/admin/viewclient/@{{ client.id }}"
-                                                    class="btn btn-success btn-sm"> View</a></td>
+                                                    class="btn btn-primary btn-sm"> View</a></td>
                                     </tr>
 
                                 </table>
 
-                                <dir-pagination-controls ng-if="Clients" template-url="/dirPagination.tpl.html"
-                                                         pagination-id="allClientsPagination"></dir-pagination-controls>
+                                <div ng-if="Clients">
+                                    <div ng-show="(Clients| filter:searchclient.text | filter:search.type).length == 0"
+                                         class="emptyresults_container">
+                                        <h3> No results found <i class="fa fa-meh-o"></i></h3>
+                                    </div>
+                                </div>
+
+                                <dir-pagination-controls ng-if="Clients" template-url="/dirPagination.tpl.html" pagination-id="allClientsPagination"></dir-pagination-controls>
 
                             </div>
                         </div>
@@ -247,7 +250,7 @@
                                     </div>
                                     <hr>
 
-                                    <tr ng-show="Reports">
+                                    <tr ng-show="(Reports| filter:search.text | filter:search.type).length > 0">
                                         <th class="smallRow">Report Number</th>
                                         <th class="mediumRow">Client Name</th>
                                         <th class="mediumRow">Created on</th>
@@ -272,8 +275,14 @@
 
                                 </table>
 
-                                <dir-pagination-controls ng-if="Reports" template-url="/dirPagination.tpl.html"
-                                                         pagination-id="allReportsPagination"></dir-pagination-controls>
+                                <div ng-if="Reports">
+                                    <div ng-show="(Reports| filter:search.text | filter:search.type).length == 0"
+                                         class="emptyresults_container">
+                                        <h3> No results found <i class="fa fa-meh-o"></i></h3>
+                                    </div>
+                                </div>
+
+                                <dir-pagination-controls ng-if="Reports" template-url="/dirPagination.tpl.html" pagination-id="allReportsPagination"></dir-pagination-controls>
 
                             </div>
                         </div>

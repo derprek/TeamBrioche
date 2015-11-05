@@ -52,7 +52,6 @@
     </div>
 </section>
 
-
 <!-- Footer -->
 <footer class="text-center">
     <div class="footer-below">

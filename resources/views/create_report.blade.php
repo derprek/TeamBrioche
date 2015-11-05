@@ -45,7 +45,7 @@
                 You may come back and update this report in future. <hr>
                 <strong> You may also decide to share the report with other practitioners 
                 or your client after you have uploaded it.</strong> " class="pull-right"> Information
-       <i class="fa fa-info-circle"></i>
+         <i class="fa fa-info-circle"></i>
         </span>
         <br>
       <div class="tab-content" >
@@ -61,7 +61,7 @@
 
               @if(isset($clients))
               <div class="form-group" style="padding-left:10px;padding-right:10px;">
-              <label for="client_list"> Select a Client:</label>
+                <label for="client_list"> Select a Client:</label>
                 <select id="client_list" name="client" class="form-control">
                   @unless($clients->isEmpty())
                       @foreach($clients as $client)

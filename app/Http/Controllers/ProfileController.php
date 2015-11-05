@@ -16,14 +16,15 @@ use Validator;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->beforeFilter(function(){
+           
+               if ((Auth::guest()) && (!Session::has('prac_id')))
+               {
+                    return redirect('/unauthorizedaccess');
+               }
+        });
     }
 
     /**
@@ -52,11 +53,6 @@ class ProfileController extends Controller
             return view('profile.clientProfile', compact('client','my_practitioner','report_count','is_verified'));
 
         }
-        else
-        {
-
-        }
-       
     }
 
     /**
@@ -71,36 +67,36 @@ class ProfileController extends Controller
         {
             $practitioner = Practitioner::find(Session::get('prac_id'));
 
-        if($practitioner->email !== $request->email)
-        {
-            $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:practitioners,email|unique:users,email'
-              ]);
-
-            if ($validator->fails())
+            if($practitioner->email !== $request->email)
             {
-                   Session::put('practitioner_updateerror', $validator->messages()) ;
-                   return Redirect()->back()->withInput();
-            }
-            else
-            {
-                $change_password_validated = true;
-                $old_email = $practitioner->email;
-                $practitioner->email = $request->email;
-            }
-        }
-        
-        if(($request->fname !== $practitioner->fname) || ($request->sname !== $practitioner->sname))
-        {
-            $practitioner->fname = $request->fname;
-            $practitioner->sname = $request->sname;
+                $validator = Validator::make($request->all(), [
+                'email' => 'required|email|unique:practitioners,email|unique:users,email'
+                  ]);
 
-            Session::forget('prac_name');
-            $prac_name = $practitioner->fname . " " . $practitioner->sname;
-            Session::put('prac_name', $prac_name);
-        }
+                if ($validator->fails())
+                {
+                       Session::put('practitioner_updateerror', $validator->messages()) ;
+                       return Redirect()->back()->withInput();
+                }
+                else
+                {
+                    $change_password_validated = true;
+                    $old_email = $practitioner->email;
+                    $practitioner->email = $request->email;
+                }
+            }
+            
+            if(($request->fname !== $practitioner->fname) || ($request->sname !== $practitioner->sname))
+            {
+                $practitioner->fname = $request->fname;
+                $practitioner->sname = $request->sname;
+
+                Session::forget('prac_name');
+                $prac_name = $practitioner->fname . " " . $practitioner->sname;
+                Session::put('prac_name', $prac_name);
+            }
         
-        $practitioner->save();
+            $practitioner->save();
 
         }
         elseif(Auth::check())
@@ -133,7 +129,6 @@ class ProfileController extends Controller
             }
 
             $client->save();
-            
         }
 
         if(isset($change_password_validated))

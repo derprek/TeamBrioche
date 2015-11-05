@@ -7,12 +7,12 @@
 
         <div class="form-group" > 
           <ui-select id="email" ng-model="newMessage.recipient" theme="bootstrap" ng-disabled="disabled" > 
-            <ui-select-match placeholder="Select a Recipient.">@{{$select.selected.email}}</ui-select-match>
+            <ui-select-match placeholder="Select a Recipient."> <small style="text-transform:initial;">@{{$select.selected.email}}</small></ui-select-match>
             <ui-select-choices repeat="recipient in RecipientList | filter: $select.search" >
                <div ng-bind-html="recipient.name | highlight: $select.search"></div>
-              <small>
-                email: @{{recipient.email}}
-              </small>
+                <small style="text-transform:initial;">
+                  email: @{{recipient.email}}
+                </small>
             </ui-select-choices>
           </ui-select> 
         </div>

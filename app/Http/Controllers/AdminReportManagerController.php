@@ -7,14 +7,21 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Auth;
-use Carbon\Carbon;
-use App\Report;
-use App\Practitioner;
-use App\User;
+use Session;
 
 class AdminReportManagerController extends Controller
 {
+	public function __construct()
+    {
+        $this->beforeFilter(function(){
+
+            if(!Session::has('is_admin'))
+            {
+                return redirect('/unauthorizedaccess');
+            }   
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +29,6 @@ class AdminReportManagerController extends Controller
      */
     public function index()
     {
-        return view('admin.reportManager.reportmanager');
+        return view('admin.reportmanager');
     }
 }

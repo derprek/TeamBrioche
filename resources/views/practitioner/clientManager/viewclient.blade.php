@@ -158,7 +158,7 @@
                                             class="btn btn-danger  col-sm-2 col-md-2 col-lg-2">Delete Client
                                     </button>
 
-                                    @include('partials.deletePersonnel_modal')
+                                    @include('partials.deletePersonnelModal')
                                 </form>
                             </div>
                         </div>
@@ -240,18 +240,16 @@
                                 <td> @{{ report.status }} </td>
                                 <td style="width:10%"><a
                                             href="/reports/overview/@{{ report.id }}"
-                                            class="btn btn-success btn-sm"> View</a></td>
+                                            class="btn btn-primary btn-sm"> View</a></td>
                             </tr>
 
                         </table>
 
                         <div ng-if="Reports">
-
                             <div ng-show="(Reports| filter:search.text | filter:search.type).length == 0"
                                  class="emptyresults_container">
                                 <h3> No results found <i class="fa fa-meh-o"></i></h3>
                             </div>
-
                         </div>
 
                         <dir-pagination-controls ng-if="Reports" template-url="/dirPagination.tpl.html" pagination-id="allReportsPagination"></dir-pagination-controls>
