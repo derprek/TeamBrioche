@@ -35,10 +35,9 @@
                 <hr class="star-primary">
             </div>
         </div>
+
         <div class="row">
-
-
-        <div class="col-md-12 col-lg-12 text-center">
+            <div class="col-md-12 col-lg-12 text-center">
                 <p>
                     Assistive Technology (AT) is regularly provided by health and social services to many people with a wide range of
                     needs or disabilities, to overcome barriers and difficulties in daily life.<br><br>
@@ -46,7 +45,7 @@
                     common language and structure for the process.<br><br>
                     Experts in the field of AT were consulted during the development of the tool and initial
                     evaluation, and provided positive feedback on the research aims and approach.
-                    </p>
+                </p>
             </div>
         </div>
     </div>

@@ -91,9 +91,10 @@
             <!-- /.form-group -->
 
         <br>
+        
         {!! Form::open(['url' => 'reports/evaluation/update']) !!}
         <input type="hidden" name="evaluation_id" value= {{ $evaluation->id }}>
-        @include('show_report')
+        @include('partials.reports.show_report')
 
     </div>
     <!-- /.container-fluid -->

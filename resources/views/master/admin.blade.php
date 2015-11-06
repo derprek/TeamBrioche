@@ -19,13 +19,10 @@
     @include('partials.flashMessageModal');
 
     <script>
-            
         $('#flashMessageModal').modal('show');
-       
        setTimeout(function(){
           $('#flashMessageModal').modal('hide')
         }, 3000);
-
     </script>
 
 @endif
@@ -33,39 +30,28 @@
 @if(Session::has('error_message'))
 
     @include('partials.errorMessageModal');
-
     <script>
-
         $('#errorMessageModal').modal('show');
-
     </script>
-    
+
 @endif
 
 @if(Session::has('info_message'))
 
     @include('partials.infoMessageModal');
-
-    <script>
-                
+    <script>   
         $('#infoMessageModal').modal('show');
-           
     </script>
 
     @unless(Session::has('client_email'))
-
         <script>
-
           setTimeout(function(){
               $('#infoMessageModal').modal('hide')
             }, 10000);
-          
         </script>
-
     @endunless
     
 @endif
-
 
 <div id="wrapper">
     <!-- Navigation -->

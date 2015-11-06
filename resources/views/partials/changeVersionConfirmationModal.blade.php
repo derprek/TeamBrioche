@@ -12,13 +12,9 @@
                             <br>
 
                             @if($currentversion['updated_at'] > $version['updated_at'])
-
                                 <h5>Please confirm you want to rollback this assessment to a older <strong> version: {{ $version['version_number'] }}</strong></h5>
-
                             @else
-
                                 <h5>Please confirm you want to update this assessment to <strong>version: {{ $version['version_number'] }} </strong></h5>
-
                             @endif
 
                             <hr><br>
@@ -37,20 +33,20 @@
 
                             <div class="modal-footer">
 
-                            {!! Form::open(['url' => '/assessment/setcurrentversion']) !!}
-                            <input type="hidden" name="assessment_id" value={{ $assessment->id }} >
-                            <input type="hidden" name="version_id" value={{ $version['id']}} >
-                            <input type="hidden" name="version_number" value={{ $version['version_number'] }} >
+                                {!! Form::open(['url' => '/assessment/setcurrentversion']) !!}
+                                <input type="hidden" name="assessment_id" value={{ $assessment->id }} >
+                                <input type="hidden" name="version_id" value={{ $version['id']}} >
+                                <input type="hidden" name="version_number" value={{ $version['version_number'] }} >
 
-                            <button type="submit" class="btn btn-success pull-right" style="margin-right:8px;">
-                                 <i class="fa fa-check"></i> Confirm
-                            </button>
+                                <button type="submit" class="btn btn-success pull-right" style="margin-right:8px;">
+                                     <i class="fa fa-check"></i> Confirm
+                                </button>
 
-                            {!! Form::close() !!}
-                                
-                            <button type="submit"  class="btn btn-danger pull-left" data-dismiss="modal">
-                                <i class="fa fa-times"></i> Cancel
-                            </button>
+                                {!! Form::close() !!}
+                                    
+                                <button type="submit"  class="btn btn-danger pull-left" data-dismiss="modal">
+                                    <i class="fa fa-times"></i> Cancel
+                                </button>
 
                             </div>
                             <!-- /.modal-footer -->

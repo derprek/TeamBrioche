@@ -31,11 +31,8 @@
                         <button type="submit" class="btn btn-info pull-right" style="margin-right:8px;">
                         <i class="fa fa-pencil-square-o"></i> Overwrite</button>
                       {!! Form::close() !!}
-
                     @else
-
                         {{ Session::forget('current_version_number') }}
-
                     @endif
 
                     <button type="button"  class="btn btn-danger pull-left" data-dismiss="modal">

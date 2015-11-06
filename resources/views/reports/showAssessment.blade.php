@@ -150,7 +150,7 @@
             <input type="hidden" name="assessment_id" value={{$assessment->id}}>
             <input type="hidden" name="current_version" value={{$currentversion['version_number']}}>
         @endunless
-      @include('show_report')
+      @include('partials.reports.show_report')
 
     <!-- /.form-group -->
 </div>

@@ -43,7 +43,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">A T E S T</a>
+            <a class="navbar-brand" href="{{ url('home') }}">A T E S T</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">

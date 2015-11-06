@@ -22,19 +22,19 @@
                         </div>
                     </div>
 
-                <div id = "Registerform" style = "width:100%;" ng-show="showForm">
+                    <div id = "Registerform" style = "width:100%;" ng-show="showForm">
 
-                     @if(Session::has('client_registererrors'))
-                           {{Session::forget('client_registererrors')}}
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                            <ul>
-                               <li>The email has already been taken.</li>
-                            </ul>
-                        </div>
-                    @endif
+                        @if(Session::has('client_registererrors'))
+                               {{Session::forget('client_registererrors')}}
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                   <li>The email has already been taken.</li>
+                                </ul>
+                            </div>
+                        @endif
 
-                                <!-- Registration form -->
+                                    <!-- Registration form -->
                         <form role="form" method="POST" ng-submit="showLoadingAnimation()" action="{{ url('/practitioner/createUser') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="prac_id" value="{{ $prac_id }}">
@@ -77,7 +77,6 @@
                             <!-- /.modal-footer -->
                         </form>
                     </div>
-
                 </div>
                 <!-- /.modal-body -->
             </div>

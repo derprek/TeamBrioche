@@ -10,7 +10,12 @@ use App\Http\Controllers\Controller;
 use Session;
 
 class AdminReportManagerController extends Controller
-{
+{   
+    /**
+     *Redirects the user without admin rights
+     *
+     * @return Response
+     */
 	public function __construct()
     {
         $this->beforeFilter(function(){
@@ -23,7 +28,7 @@ class AdminReportManagerController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Redirects the admin to the admin report manager page
      *
      * @return Response
      */

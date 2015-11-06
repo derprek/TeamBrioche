@@ -94,7 +94,7 @@
     @endunless
 
     <!-- Overview tab -->
-    @include('partials.show_overview')
+    @include('partials.reports.show_overview')
     <!-- End -->
 
     @if(Session::has('banner_message'))
