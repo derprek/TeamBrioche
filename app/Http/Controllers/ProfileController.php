@@ -28,7 +28,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * loads the profile page that according to the user type
      *
      * @return \Illuminate\Http\Response
      */
@@ -56,7 +56,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * controls the updating of the user details
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

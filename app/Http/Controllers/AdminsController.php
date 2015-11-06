@@ -30,7 +30,7 @@ class AdminsController extends Controller
     /**
      * Redirects the admin to the admin dashboard page
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {

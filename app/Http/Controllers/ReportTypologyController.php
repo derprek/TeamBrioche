@@ -41,7 +41,7 @@ class ReportTypologyController extends Controller
     }
 
     /**
-     * Display report in step two.
+     * loads the view of creation of a new typology report
      *
      * @param $report_id
      * @return Response
@@ -79,7 +79,13 @@ class ReportTypologyController extends Controller
         return view('reports.createTypology', compact('questions', 'goals','questionslist', 'report_id','client','practitioner','thumbnail_dist','categories','submitButtonText'));
     }
 
-     public function show($report_id)
+    /**
+     * loads the view that displays the typology section of the report
+     *
+     * @param $report_id
+     * @return Redirect|\Illuminate\View\View
+     */
+    public function show($report_id)
     {
         $report = Report::find($report_id);
         $typology = Typology::GetTypology($report->id)->first();
@@ -142,7 +148,7 @@ class ReportTypologyController extends Controller
     }
 
     /**
-     * Store a report in step two.
+     * controls the storage of typologies
      *
      * @return Response
      */
@@ -172,6 +178,11 @@ class ReportTypologyController extends Controller
         return redirect()->action('ReportOverviewController@index', [$report_id]);
     }
 
+    /**
+     * controls the updating of typology answers
+     *
+     * @return Redirect
+     */
     public function update()
     {
         $typology = Typology::find($_POST['typology_id']);
@@ -188,35 +199,5 @@ class ReportTypologyController extends Controller
         
         Session::flash('flash_message', 'Typology successfully updated!');
         return redirect("reports/typology/view/" . $typology->report_id);
-    }
-
-    public function generatereport($report_id)
-    {
-        $report = Report::find($report_id);
-        $typology = Typology::GetTypology($report->id)->get();
-        $assessment = Assessment::GetAssessment($report->id)->get();
-        $clientinfo = User::find($report->userid);
-        $pracinfo = Practitioner::find($report->prac_id);
-
-        $fetchgoals = $assessment->questions()->GetGoals()->first();
-        $goals = $fetchgoals->pivot->answers;
-        $arraycount = $typology->questions()->distinct()->orderBy('category_id', 'ASC')->lists('category_id');
-
-        $categories = array();
-        $answerlist = array();
-        foreach ($arraycount as $ans) 
-        {
-            $categories[] = Category::find($ans);
-            $answerlist[] = $report->questions()
-                ->Getquestionsbycat($ans)
-                ->orderBy('type', 'DESC')
-                ->get();
-        }
-        //dd($categories);
-       
-       //'answerlist','report','goals', 'clientinfo', 'pracinfo','thumbnail_dist','categories'
-      $pdf = \PDF::loadView('practitioner.reportManager.reportTypologyPDF', compact('answerlist','report','clientinfo','pracinfo','goals'));
-
-      return $pdf->stream('trypologyReport.pdf',array("Attachment" => 0));
     }
 }

@@ -19,6 +19,10 @@ use App\Category;
 use App\Assessment;
 use App\Evaluation;
 
+/**
+ * Class ReportEvaluationController
+ * @package App\Http\Controllers
+ */
 class ReportEvaluationController extends Controller
 {   
      /**
@@ -39,7 +43,7 @@ class ReportEvaluationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * loads the view of creation of a new evaluation report
      *
      * @return Response
      */
@@ -128,7 +132,7 @@ class ReportEvaluationController extends Controller
     }
 
      /**
-     * Store a report in Evaluation.
+     * controls the storage of a new evaluation
      *
      * @return Response
      */
@@ -161,7 +165,7 @@ class ReportEvaluationController extends Controller
     }
 
      /**
-     * Load selection manager resources.
+     * loads the overview for all evaluation reports that is associated to this report
      *
      * @return Response
      */
@@ -244,6 +248,12 @@ class ReportEvaluationController extends Controller
         
     }
 
+    /**
+     * loads the view that displays the information of a evaluation
+     *
+     * @param $evaluation_id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function show($evaluation_id)
     {
         $evaluation = Evaluation::find($evaluation_id);
@@ -356,6 +366,12 @@ class ReportEvaluationController extends Controller
         return view('reports.showEvaluation', compact('evaluation', 'answerlist','report','client','practitioner','thumbnail_dist','categories','is_evaluation','submitButtonText'));
     }
 
+    /**
+     * controls the updating of evaluation answers
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request)
     {   
         $evaluation = Evaluation::find($request->evaluation_id);

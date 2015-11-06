@@ -18,7 +18,7 @@ use Illuminate\Support\MessageBag;
 class ClientAuthController extends Controller
 {   
     /**
-     *Check if user is logged in
+     * Check if user is logged in,redirects the user back to home page if so
      *
      * @return Response
      */
@@ -50,7 +50,5 @@ class ClientAuthController extends Controller
             $errors[] = 'Invalid Credentials! Please try again';
             return redirect()->back()->withInput()->withErrors($errors);
         }
-
     }
-
 }

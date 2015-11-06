@@ -54,17 +54,32 @@ class PractitionersAuthController extends Controller
         }
     }
 
+    /**
+     * Loads the view for users with admin rights to select which account to log on.
+     *
+     * @return \Illuminate\View\View
+     */
     public function chooseaccount()
     {
         return view('practitioner.chooseaccount');
     }
 
+    /**
+     * sets the login session for this user as practitioner
+     *
+     * @return Redirect
+     */
     public function loginAsPractitioner()
     {
         Session::forget('is_admin');
         return redirect('practitioner/dashboard');
     }
 
+    /**
+     * sets the login session for this user as an admin
+     *
+     * @return Redirect
+     */
     public function loginAsAdmin()
     {   
         Session::put('is_admin', 'true');

@@ -18,7 +18,7 @@ use Auth;
 class ClientsReportController extends Controller
 {   
     /**
-     *Check if user is logged in
+     * Redirects the user that isn't logged in.
      *
      * @return Response
      */
@@ -33,9 +33,9 @@ class ClientsReportController extends Controller
     }
 
     /**
-     * Display a listing of the client reports.
+     * Loads the client's reports view
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {

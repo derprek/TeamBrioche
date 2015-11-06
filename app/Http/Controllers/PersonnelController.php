@@ -16,9 +16,16 @@ use Input;
 use Validator;
 use Mail;
 
+/**
+ * Class PersonnelController
+ * @package App\Http\Controllers
+ */
 class PersonnelController extends Controller
-{   
-     public function __construct()
+{
+    /**
+     *
+     */
+    public function __construct()
     {
         $this->beforeFilter(function(){
 
@@ -93,6 +100,10 @@ class PersonnelController extends Controller
          return redirect("admin/personnelmanager");
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function storeClient(Request $request)
     {   
         $validator = Validator::make($request->all(), [
@@ -158,6 +169,10 @@ class PersonnelController extends Controller
         return view('admin.personnelManager.viewpractitioner');
     }
 
+    /**
+     * @param $client_id
+     * @return \Illuminate\View\View
+     */
     public function showClient($client_id)
     {   
         Session::forget('viewing_client');
@@ -200,6 +215,13 @@ class PersonnelController extends Controller
 
     }
 
+    /**
+     * fetches all the practitioners in the database
+     * used in: views/admin/personnelManager/personnelmanager
+     * used by: public/js/angular_js/personnelmanager/personnelmanagerController.js
+     *
+     * @return array|null
+     */
     public function getAllPractitioners()
     {
         $practitioners = Practitioner::latest('created_at')->get();
@@ -225,6 +247,13 @@ class PersonnelController extends Controller
 
     }
 
+    /**
+     * fetches all the clients in the database
+     * used in: views/admin/personnelManager/personnelmanager
+     * used by: public/js/angular_js/personnelmanager/personnelmanagerController.js
+     *
+     * @return array|null
+     */
     public function getAllClients()
     {
         $clients = User::latest('created_at')->get();
@@ -250,6 +279,13 @@ class PersonnelController extends Controller
 
     }
 
+    /**
+     * fetches the selected practitioner details
+     * used in: views/admin/personnelManager/viewpractitioner
+     * used by: public/js/angular_js/personnelmanager/practitioner/practitioner_informationController.js
+     *
+     * @return null
+     */
     public function getThisPractitioner()
     {     
         $practitioner = Practitioner::find(Session::get('viewing_practitioner'));
@@ -265,6 +301,13 @@ class PersonnelController extends Controller
 
     }
 
+    /**
+     * fetches the selected practitioner details
+     * used in: views/admin/personnelManager/viewpractitioner
+     * used by: public/js/angular_js/personnelmanager/practitioner/practitioner_clientController.js
+     *
+     * @return array|null
+     */
     public function getPractitionerClients()
     {     
         $practitioner = Practitioner::find(Session::get('viewing_practitioner'));
@@ -300,6 +343,13 @@ class PersonnelController extends Controller
         }
     }
 
+    /**
+     * fetches the selected practitioner details
+     * used in: views/admin/personnelManager/viewpractitioner
+     * used by: public/js/angular_js/personnelmanager/practitioner/practitioner_reportsController.js
+     *
+     * @return array|null
+     */
     public function getPractitionerReports()
     {     
         $practitioner = Practitioner::find(Session::get('viewing_practitioner'));
@@ -337,66 +387,13 @@ class PersonnelController extends Controller
         }
     }
 
-    public function getThisClient()
-    {    
-        $client = User::find(Session::get('viewing_client'));
-        $practitioner = Practitioner::find($client->prac_id);
-        $prac_name = $practitioner->fname . " " . $practitioner->sname;
-
-        $clientinfo = ['id'=>$client->id,
-                        'fname'=>$client->fname,
-                        'sname'=>$client->sname,
-                        'email'=>$client->email,
-                        'verified'=>$client->verified,
-                        'prac_name'=>$prac_name,
-                        'prac_email'=>$practitioner->email,
-                        'created_at'=>$client->created_at->diffForHumans()];
-
-        if($clientinfo === null)
-        {
-            return null;
-        }
-        else
-        {   
-            return $clientinfo;
-        }
-
-    }
-
-     public function getClientReports()
-    {     
-        $client = Practitioner::find(Session::get('viewing_client'));
-
-        if($client === null)
-        {
-            return null;
-        }
-        else
-        {   
-            $reports = Report::latest('updated_at')->GetClientReports($client->id)->get();
-
-            $reportlist = array();
-            foreach($reports as $report)
-            {       
-                $reportlist[] = ['id'=>$report->id,
-                                    'updated_at'=>$report->updated_at->diffForHumans(),
-                                    'status'=>$report->status,
-                                    'created_at'=>$report->created_at->diffForHumans()];
-                          
-            }
-
-            if(count($reportlist) < 1)
-            {
-                return null;
-            }
-            else
-            {
-                return $reportlist;
-            }
-            
-        }
-    }
-
+    /**
+     * controls the deletion of practitioners
+     * used in: views/admin/personnelManager/viewpractitioner
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function deletePractitioner(Request $request)
     {     
        $practitioner = Practitioner::find($request->id);

@@ -16,6 +16,10 @@ use App\Practitioner;
 use App\User;
 use App\Assessment;
 
+/**
+ * Class ReportManagerController
+ * @package App\Http\Controllers
+ */
 class ReportManagerController extends Controller
 {   
     /**
@@ -34,7 +38,7 @@ class ReportManagerController extends Controller
     }
     
     /**
-     * Display the report history.
+     * loads the view that displays all of the reports that is associated to the practitioner
      *
      * @return Response
      */
@@ -44,13 +48,15 @@ class ReportManagerController extends Controller
     }
 
      /**
-     * Show the form for editing the specified resource.
+     * Fetches the reports that belongs to the practitioner/admin
+     * used in: views/admin/reportmanager
+     * used in: views/reports/reportmanager
      *
+     * used by: public/js/angular_js/reports/MyReportsController.js
+      *
      * @param  int $id
      * @return Response
      */
-    
-
     public function getMyReports()
     {  
 
@@ -146,7 +152,12 @@ class ReportManagerController extends Controller
     }
 
 /**
-     * Display the specified resource.
+     * Fetches the reports that is shared with the practitioner/admin
+     *
+     * used in: views/admin/reportmanager
+     * used in: views/reports/reportmanager
+     *
+     * used by: public/js/angular_js/reports/SharedReportsController.js
      *
      * @param  int  $id
      * @return Response
@@ -197,54 +208,5 @@ class ReportManagerController extends Controller
         {
             return $reportlist;
         }
-    }
-
-    public function generatereport($report_id)
-    {
-        $pracinfo = Practitioner::find(Session::get('prac_id'));
-        
-        $assessment = Assessment::GetAssessment($report_id)->first();
-        $current_version = Version::find($assessment->current_version);
-        $creator_practitioner = Practitioner::GetThisPractitioner($current_version->prac_id)->first();
-        $clientinfo = User::find($report->userid);
-
-        $arraycount = $assessment->questions()->distinct()->GetCurrentVersion($assessment->current_version)->orderBy('category_id','ASC')->lists('category_id');
-
-         $answerlist = array();
-          foreach($arraycount as $ans)
-          {
-            $answerlist[] = $assessment->questions()
-                                   ->where('category_id','=', $ans)
-                                   ->orderBy('type','DESC')
-                                   ->get();
-          }
-       
-      $pdf = \PDF::loadView('report.reportPDF', compact('answerlist','assessment','clientinfo','pracinfo','creator_practitioner'));
-
-      return $pdf->stream('assessementReport.pdf',array("Attachment" => 0));
-    }
-
-    public function printSummary($report_id)
-    { 
-      $report = Report::find($report_id);
-      $practitioner = Practitioner::find($report->prac_id);
-      $client = User::find($report->userid);
-
-      $assessment = Assessment::GetAssessment($report_id)->first();  
-      $assessment_answers = $assessment->questions()->where('version_id','=', $assessment->version_id)->get();
-      dd($assessment_answers);
-          foreach($arraycount as $ans)
-          {
-            $answerlist[] = $report->questions()
-                                   ->where('category_id','=', $ans)
-                                   ->orderBy('type','DESC')
-                                   ->get();
-          }
-   
-      
-       
-      //$pdf = \PDF::loadView('report.reportPDF', compact('answerlist','report','clientinfo','pracinfo'));
-
-      //return $pdf->stream('file.pdf',array("Attachment" => 0));
     }
 }

@@ -13,10 +13,15 @@ use App\User;
 use Validator;
 use Hash;
 
+/**
+ * Class PasswordController
+ * @package App\Http\Controllers
+ */
 class PasswordController extends Controller
 {
     /**
-     * Update the specified resource in storage.
+     * controls the updating of passwords
+     * used in: views/profile/
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -142,6 +147,13 @@ class PasswordController extends Controller
         }
     }
 
+    /**
+     * validates if the provided email matches the registered email
+     * used in: views/profile/
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function newuser(Request $request)
     {
         if(isset($request->registered_email))
@@ -159,7 +171,12 @@ class PasswordController extends Controller
 
     }
 
-    public function setpasswordpage()
+    /**
+     * Loads the view to set the user's first password
+     *
+     * @return \Illuminate\View\View
+     */
+    public function firstpassword()
     {   
         $registered_email = Session::pull('registered_email');
         $is_verified = false;
@@ -167,7 +184,13 @@ class PasswordController extends Controller
         return view('profile.setnewpassword',compact('is_verified','registered_email'));     
     }
 
-    public function setfirstpassword(Request $request)
+    /**
+     * controls the storing of the user's first password
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function storefirstpassword(Request $request)
     {
          $validator = Validator::make($request->all(), [
            'new_password' => 'required|min:7',
@@ -245,13 +268,19 @@ class PasswordController extends Controller
 
     }
 
+    /**
+     * validates the link given, and fetches the email address related to the linked user
+     *
+     * @param $password
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function validateuser($password)
     {   
         Session::forget('new_user_email');
 
         if((Auth::check()) || (Session::has('prac_id')))
         {
-            $invalid = true;
+            return redirect('/unauthorizedaccess');
         }
         $clients = User::GetUnverified()->get();
 

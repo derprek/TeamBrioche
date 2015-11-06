@@ -15,10 +15,17 @@ use App\Practitioner;
 use App\User;
 use App\Message;
 use App\Conversation;
-use Input; 
+use Input;
 
+/**
+ * Class MessengerController
+ * @package App\Http\Controllers
+ */
 class MessengerController extends Controller
-{   
+{
+    /**
+     *
+     */
     public function __construct()
     {
         $this->beforeFilter(function(){
@@ -31,7 +38,7 @@ class MessengerController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Loads the mailbox page view.
      *
      * @return Response
      */
@@ -40,6 +47,13 @@ class MessengerController extends Controller
         return view('messages.mailbox');
     }
 
+    /**
+     * Puts the conversation id into the session to be retrieved later for a AngularJS get request
+     * Loads the view that loads all the messages of a conversation
+     *
+     * @param $conv_id
+     * @return \Illuminate\View\View
+     */
     public function show($conv_id)
     {
         Session::put('conv_id',$conv_id);
@@ -48,7 +62,8 @@ class MessengerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Fetches last messages for all conversations
+     * used in: views/messages/mailbox
      *
      * @return Response
      */
@@ -188,10 +203,15 @@ class MessengerController extends Controller
         {   
             return $conversationlist;
         }
-        
     }
 
-     public function getUnread()
+    /**
+     * Fetches all unread conversations
+     * used in: all views after logging in. Used to check for new mail
+     *
+     * @return null
+     */
+    public function getUnread()
     {
         if(Session::has('prac_id'))
         {
@@ -216,6 +236,12 @@ class MessengerController extends Controller
 
     }
 
+    /**
+     * fetches all messages associated with the conversation
+     * used in: views/messages/showthread
+     *
+     * @return array|null
+     */
     public function getAllMessages()
     {     
         if(Session::has('prac_id'))
@@ -262,8 +288,6 @@ class MessengerController extends Controller
                     $recipient_email = $recipient->email;
                     $recipient_name = $recipient->fname . " " . $recipient->sname;    
 
-                
-                    
                 }
                 
            if($message->receiver_email === $viewer->email)
@@ -335,6 +359,11 @@ class MessengerController extends Controller
         }
     }
 
+    /**
+     * Controls the storing of new messages
+     * used in: all views after logging in.
+     *
+     */
     public function store()
     {   
         if(Session::has('prac_id'))
@@ -385,7 +414,8 @@ class MessengerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * controls the marking of seen messages as read
+     * used in: views/messages/showthread
      *
      * @param  int  $id
      * @return Response
@@ -420,6 +450,12 @@ class MessengerController extends Controller
     }
 
 
+    /**
+     * Fetches the possible recipients that the user can communicate with
+     * used in: all views after logging in.
+     *
+     * @return array|null
+     */
     public function getAllRecipients()
     {   
         $recipientlist = array();
@@ -479,7 +515,8 @@ class MessengerController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Fetches the messages that has been sent by the user
+     * used in: views/messages/mailbox
      *
      * @param  int  $id
      * @return Response

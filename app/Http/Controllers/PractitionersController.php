@@ -35,7 +35,7 @@ class PractitionersController extends Controller
         });
     }
     /**
-     * Display the practitioner dashboard page.
+     * Loads the practitioner dashboard view
      *
      * @return Response
      */

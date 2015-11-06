@@ -18,7 +18,7 @@ use Carbon\Carbon;
 class ClientsController extends Controller
 {   
     /**
-     *Check if user is logged in
+     * Redirects the user that isn't logged in.
      *
      * @return Response
      */
@@ -33,9 +33,9 @@ class ClientsController extends Controller
     }
 
     /**
-     * Display a listing of the client reports.
+     * Loads the client home page view
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {

@@ -37,6 +37,12 @@ class ReportOverviewController extends Controller
         });
     }
 
+    /**
+     * loads the view that displays the overview information of a report
+     *
+     * @param $report_id
+     * @return Redirect|\Illuminate\View\View
+     */
     public function index($report_id)
     { 
         $report = Report::find($report_id);
@@ -71,7 +77,6 @@ class ReportOverviewController extends Controller
                 return redirect('/unauthorizedaccess');
             }
         }
-        
 
         $client = User::find($report->userid);
 
@@ -118,9 +123,8 @@ class ReportOverviewController extends Controller
         return view('reports.reportoverview', compact('client', 'report_step' ,'report', 'reportowner','evaluation_count', 'shareable_practitioners', 'shared_practitioners','can_view_client'));
     }
 
-
     /**
-     * Update a report.
+     * controls the updating of the overview information of a report
      *
      * @return Redirect
      */

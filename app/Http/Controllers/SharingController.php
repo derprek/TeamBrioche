@@ -37,7 +37,7 @@ class SharingController extends Controller
     }
     
     /**
-     * Add a new sharer to report.
+     * controls the adding of sharers to a report
      *
      * @return Response
      */
@@ -58,7 +58,7 @@ class SharingController extends Controller
     }
 
     /**
-     * Remove a sharer in the report.
+     * controls the deletion of sharers to a report
      *
      * @return Redirect
      */
@@ -79,44 +79,5 @@ class SharingController extends Controller
 
         Session::flash('banner_message', " $prac_email has been removed from the sharing list.");
         return redirect("reports/overview/" . $reportid);
-    }
-
-    public function getUnsharedPractitioners()
-    {
-        $praclist = DB::table('practitioners')
-        ->whereNotExists(function($query)
-        {
-            $query->select(DB::raw(1))
-                  ->from('practitioner_report')
-                  ->where('report_id','=',4)
-                  ->whereRaw('practitioner_report.practitioner_id = practitioners.id');
-        })
-        ->lists('email');
-
-        dd($praclist);
-
-      $prac_reports = Report::latest('updated_at')->practitioner()->get();
-
-        $reportlist = array();
-        foreach($prac_reports as $report)
-        {       
-            $username = User::find($report->userid);
-           
-            $reportlist[] = ['id'=>$report->id,
-                                'name'=>$username->fname . " " . $username->sname,
-                                'updated_at'=>$report->updated_at->diffForHumans(),
-                                'status'=>$report->status,
-                                'created_at'=>$report->created_at->diffForHumans()];
-                      
-        }
-
-        if(count($reportlist) < 1)
-        {
-            return null;
-        }
-        else
-        {   
-            return $reportlist;
-        }
     }
 }

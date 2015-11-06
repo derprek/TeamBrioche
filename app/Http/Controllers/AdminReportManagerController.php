@@ -30,7 +30,7 @@ class AdminReportManagerController extends Controller
     /**
      * Redirects the admin to the admin report manager page
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {

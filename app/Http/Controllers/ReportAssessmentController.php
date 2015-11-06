@@ -41,7 +41,7 @@ class ReportAssessmentController extends Controller
         });
     }
     /**
-     * Display a listing of the resource.
+     * loads the view of creation of a new assessment report
      *
      * @return Response
      */
@@ -86,6 +86,12 @@ class ReportAssessmentController extends Controller
         
     }
 
+    /**
+     * control the active/current version of an assessment
+     *
+     * @param Request $request
+     * @return Redirect
+     */
     public function setCurrentVersion(Request $request)
     {   
         if(Auth::check())
@@ -121,6 +127,8 @@ class ReportAssessmentController extends Controller
     }
 
     /**
+     * controls the storage of a new assessment
+     *
      * Store a report in step one.
      *
      * @return Response
@@ -165,7 +173,7 @@ class ReportAssessmentController extends Controller
     }
 
     /**
-     * Display a report.
+     * loads the view that displays the information of a assessment
      *
      * @param $report_id
      * @return Response
@@ -279,6 +287,8 @@ class ReportAssessmentController extends Controller
     }
 
     /**
+     * validates the answers against the database to seek a match, and provides options back to the user based on
+     * whether the user owns the current version or not.
      *
      * @return Redirect
      */
@@ -393,6 +403,11 @@ class ReportAssessmentController extends Controller
             
     }
 
+    /**
+     * controls the storage of a new version of an assessment
+     *
+     * @return mixed
+     */
     public function storeNewVersion()
     {   
         if((!Session::has('modified_answers')) || (!Session::has('current_assessment')))
@@ -427,6 +442,11 @@ class ReportAssessmentController extends Controller
        
     }
 
+    /**
+     * controls the updating of assessment answers
+     *
+     * @return mixed
+     */
     public function update()
     {   
         if((!Session::has('modified_answers')) || (!Session::has('current_assessment')))
@@ -456,7 +476,5 @@ class ReportAssessmentController extends Controller
             return Redirect::back();
 
         }
-       
-
     }
 }

@@ -26,7 +26,7 @@ use Mail;
 class ClientManagerController extends Controller
 {   
     /**
-     * Redirects the practitioner without practitioner rights
+     * Redirects the user without practitioner rights
      *
      * @return Response
      */
@@ -43,7 +43,7 @@ class ClientManagerController extends Controller
     /**
      * Loads the client manager view
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {   
@@ -185,14 +185,13 @@ class ClientManagerController extends Controller
          {
             return redirect("practitioner/clientmanager/");
          }
-
-        
     }
+
 
     /**
      * Fetches all of the clients associated with this practitioner
      *
-     * @return Response
+     * @return array|null
      */
     public function getAllClients()
     {
@@ -229,7 +228,7 @@ class ClientManagerController extends Controller
     /**
      * Fetches the information regarding the selected client
      *
-     * @return array
+     * @return array|null
      */
     public function getThisClient()
     {    
@@ -260,7 +259,7 @@ class ClientManagerController extends Controller
     /**
      * Fetches the reports associated to the selected client
      *
-     * @return Response
+     * @return array|null
      */
     public function getClientReports()
     {     
