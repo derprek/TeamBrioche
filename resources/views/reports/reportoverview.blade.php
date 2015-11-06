@@ -119,7 +119,7 @@
         </div>
         <hr/>
 
-        @if($reportowner->id === Session::get('prac_id'))
+        @if(($reportowner->id === Session::get('prac_id')) && (!Session::has('is_admin')))
             <div class="checkbox">
                 <label style="font-size: 1.2em">
                     @if($report->status === "Finished")
@@ -142,8 +142,9 @@
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>Share this report with Client.
                 </label>
             </div>
+                <hr/>
         @endif
-        <hr/>
+
         {!! Form:: submit('Update Report' , ['class' => 'btn btn-primary form-control']) !!}
         {!! Form::close() !!}
 
@@ -162,7 +163,7 @@
         <div id="sharingTab" class="tab-pane fade">
     @endif
 
-        @if($reportowner->id === Session::get('prac_id'))
+        @if(($reportowner->id === Session::get('prac_id')) && (!Session::has('is_admin')))
             <div class="form-group" style="padding:10px;">
                 <h3> Sharing</h3>
                 <p> Who shall we share this report with?</p>

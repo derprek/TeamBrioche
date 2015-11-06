@@ -159,7 +159,7 @@
 
           @endif
 
-          @unless(Auth::check())
+          @unless((Auth::check()) || (Session::has('is_admin')))
             <button type="submit" class="btn btn-success pull-right"> 
               <i class="fa fa-file-o"></i> {{$submitButtonText}}
             </button>
