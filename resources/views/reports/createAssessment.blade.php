@@ -18,9 +18,6 @@
                   &nbsp;
               </h1>
               <ol class="breadcrumb">
-                  <li>
-                       <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a>
-                  </li>
 
                   <li class="active">
                       <i class="fa fa-pencil"></i> Create a new Report
@@ -29,9 +26,14 @@
               </ol>
           </div>
       </div>
- 
+
+      <a class="directionLinks pull-left" href="{{ URL::previous() }}">
+        <i class="fa fa-chevron-left"></i> Back
+      </a>
+
+      <br><br>
       {!! Form::open(['url' => 'reports']) !!} 
-      @include('create_report')
+      @include('partials.reports.create_report')
 
     </div>
 </div>

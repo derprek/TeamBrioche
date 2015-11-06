@@ -14,14 +14,12 @@
                         <h4 class="modal-title">Ooops look like there was an issue</h4>
                     @endif
 
-                  </div>
+                </div>
 
                 <div class="modal-body" style="text-align:center;">
-
                     <br>
                         <h1> <i style="color:#26A65B;"class="fa fa-check"></i> </h1>
                     <br>
-
                     <h5> {{ Session::pull('error_message')}} </h5>
                    
                 </div>

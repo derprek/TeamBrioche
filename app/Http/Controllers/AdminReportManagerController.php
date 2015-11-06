@@ -7,21 +7,33 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Auth;
-use Carbon\Carbon;
-use App\Report;
-use App\Practitioner;
-use App\User;
+use Session;
 
 class AdminReportManagerController extends Controller
-{
+{   
     /**
-     * Display a listing of the resource.
+     *Redirects the user without admin rights
+     *
+     * @return Response
+     */
+	public function __construct()
+    {
+        $this->beforeFilter(function(){
+
+            if(!Session::has('is_admin'))
+            {
+                return redirect('/unauthorizedaccess');
+            }   
+        });
+    }
+
+    /**
+     * Redirects the admin to the admin report manager page
      *
      * @return Response
      */
     public function index()
     {
-        return view('admin.reportManager.reportmanager');
+        return view('admin.reportmanager');
     }
 }

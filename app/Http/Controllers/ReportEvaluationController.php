@@ -286,7 +286,7 @@ class ReportEvaluationController extends Controller
         $client = User::find($report->userid); 
         $assessment = Assessment::GetAssessment($report->id)->first();
 
-        $arraycount = $evaluation->questions()->distinct()->orderBy('category_id', 'ASC')->lists('category_id');
+        $categories_id = $evaluation->questions()->distinct()->orderBy('category_id', 'ASC')->lists('category_id');
 
         $bodyfunctions = $assessment->questions()->GetBodyStructure()->get();
         $activities = $assessment->questions()->GetActivities()->get();
@@ -295,7 +295,7 @@ class ReportEvaluationController extends Controller
         
         $categories = array();
         $answerlist = array();
-        foreach ($arraycount as $category_id)
+        foreach ($categories_id as $category_id)
         {   
             $categories[] = Category::find($category_id);
             if($category_id === 2)
@@ -321,7 +321,7 @@ class ReportEvaluationController extends Controller
             }
             elseif($category_id === 4)
             {   
-                 $cat4 = $evaluation->questions()
+                $cat4 = $evaluation->questions()
                 ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
@@ -343,7 +343,7 @@ class ReportEvaluationController extends Controller
             }
             else
             {
-             $answerlist[] = $evaluation->questions()
+                $answerlist[] = $evaluation->questions()
                 ->Getquestionsbycat($category_id)
                 ->orderBy('type', 'DESC')
                 ->get();
@@ -352,7 +352,7 @@ class ReportEvaluationController extends Controller
 
         $is_evaluation = true;
         $submitButtonText = "Update Evaluation Report";
-        $thumbnail_dist = 100 /count($arraycount);
+        $thumbnail_dist = 100 /count($categories_id);
         return view('reports.showEvaluation', compact('evaluation', 'answerlist','report','client','practitioner','thumbnail_dist','categories','is_evaluation','submitButtonText'));
     }
 
@@ -374,17 +374,5 @@ class ReportEvaluationController extends Controller
         Session::flash('flash_message', 'Evaluation successfully updated!');
 
         return redirect()->action('ReportEvaluationController@show', [$evaluation->id]);
-    }
-
-    public function delete()
-    {
-        $selectionid = $_POST['selectid'];
-        $reportid = $_POST['reportid'];
-        $deleteselection = Selection::find($selectionid);
-        $deleteselection->delete();
-
-        Session::flash('flash_message', "Report number $selectionid has been successfully deleted.");
-
-        return redirect()->action('ReportSelectionController@overview', [$reportid]);
     }
 }

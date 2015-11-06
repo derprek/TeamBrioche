@@ -28,10 +28,6 @@
                           <a href="{{ url('/reports/overview', $report->id) }} "><i class="fa fa-search"></i>Report Overview</a>
                       </li>
 
-                      <li>
-                          Viewing <strong>Assessment</strong> for Report: {{$report->id}}. 
-                      </li>
-
                   @elseif(Session::has('prac_id'))
 
                      <li>
@@ -42,25 +38,22 @@
                           <a href="{{ url('/reports/overview', $report->id) }} "><i class="fa fa-search"></i>Report Overview</a>
                       </li>
 
+                  @elseif(Auth::check())
+                     
                       <li>
-                          Viewing <strong>Assessment</strong> for Report: {{$report->id}}.
+                           <a href="{{ url('/client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> View all reports</a>
                       </li>
 
-                     @elseif(Auth::check())
-                     
-                        <li>
-                             <a href="{{ url('/client/reportarchives') }}"><i class="fa fa-bar-chart-o"></i> View all reports</a>
-                        </li>
-
-                        <li>
-                             <a href="{{ url('/reports/overview',$report->id ) }}"><i class="fa fa-search"></i>Report Overview</a>
-                        </li>
-
-                        <li class="active">
-                            Viewing <strong>Assessment</strong> for Report: {{$report->id}}.
-                        </li>
+                      <li>
+                           <a href="{{ url('/reports/overview',$report->id ) }}"><i class="fa fa-search"></i>Report Overview</a>
+                      </li>
 
                   @endif
+
+                  <li class="active">
+                      Viewing <strong>Assessment</strong> for Report: {{$report->id}}.
+                  </li>
+
                   </ol>
               </div>
           </div>
@@ -157,7 +150,7 @@
             <input type="hidden" name="assessment_id" value={{$assessment->id}}>
             <input type="hidden" name="current_version" value={{$currentversion['version_number']}}>
         @endunless
-      @include('show_report')
+      @include('partials.reports.show_report')
 
     <!-- /.form-group -->
 </div>

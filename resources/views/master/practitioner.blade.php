@@ -99,7 +99,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{url('practitioner/dashboard')}}">A T E S T</a>
+            @if(Session::has('is_admin'))
+                <a class="navbar-brand" href="{{url('admin/dashboard')}}">A T E S T</a>
+            @else
+                <a class="navbar-brand" href="{{url('practitioner/dashboard')}}">A T E S T</a>
+            @endif
+            
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">

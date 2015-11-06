@@ -57,7 +57,7 @@
         {!! Form::open(['url' => 'reports/evaluation/new']) !!}
         <input type="hidden" name="report_id" value= {{ $report->id }}>
 
-        @include('create_report')
+        @include('partials.reports.create_report')
 
     </div>
 <!-- /.container-fluid -->

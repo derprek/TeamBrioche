@@ -5,10 +5,10 @@
             <!-- Modal content-->
             <div class="modal-content">
                  
-                 <div class="modal-header">
+                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">{{ Session::pull('info_title')}}</h4>
-                  </div>
+                </div>
 
                 <div class="modal-body text-center">
                     
@@ -17,27 +17,19 @@
                         <br>
                             <h1> <i class="fa fa-meh-o"></i> </h1>
                         <br>
-
                     @else
-
                         <br>
                             <h1> <i style="color:#26A65B;"class="fa fa-check"></i> </h1>
                         <br>
-
                     @endif
 
                     @if(Session::has('client_email'))
-
                         <h5> {{ Session::pull('info_message')}} </h5>
                         <strong>{{ Session::pull('client_email')}}.</strong> 
                         <br>
-
                     @else
-
                         <h5> {{ Session::pull('info_message')}} </h5>
-
                     @endif
-                    
                    
                 </div>
                 <!-- /.modal-body -->

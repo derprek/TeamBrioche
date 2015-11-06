@@ -1,7 +1,5 @@
 @if ($errors-> any())
-
 	@foreach ($errors->all() as $error)
-		
 		@if($error === "Invalid Credentials! Please try again")
 			<script>
                 $(document).ready(function () {
@@ -15,9 +13,6 @@
                 });
             </script>
 		@endif
-
 	@endforeach
-
-		
 @endif
 

@@ -10,12 +10,17 @@ use App\Http\Controllers\Controller;
 use Session;
 
 class AdminsController extends Controller
-{
+{   
+    /**
+     * Redirects the user without admin rights
+     *
+     * @return Response
+     */
     public function __construct()
     {
         $this->beforeFilter(function(){
 
-            if((!Session::has('prac_id')) || (!Session::has('is_admin')))
+            if(!Session::has('is_admin'))
             {
                 return redirect('/unauthorizedaccess');
             }   
@@ -23,7 +28,7 @@ class AdminsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Redirects the admin to the admin dashboard page
      *
      * @return Response
      */

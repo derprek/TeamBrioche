@@ -20,10 +20,6 @@
                 <ol class="breadcrumb">
 
                     <li>
-                         <a href="{{ url('practitioner/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
-                    </li>
-
-                    <li>
                         <a href="{{ url('practitioner/reportmanager') }}"><i class="fa fa-bar-chart"></i>Report Manager</a>
                     </li>
 
@@ -65,7 +61,7 @@
         <input type="hidden" name="reportid" value= {{ $report_id }}>
 
         <div class="form-group">
-            @include('create_report')
+            @include('partials.reports.create_report')
         </div>
 
     </div>

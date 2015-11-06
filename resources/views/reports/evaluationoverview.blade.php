@@ -28,10 +28,6 @@
                         <a href="{{ url('/reports/overview', $report->id) }} "><i class="fa fa-search"></i>Report Overview</a>
                     </li>
 
-                    <li class="active">
-                         Viewing all <strong>Evaluation</strong> for Report: {{$report->id}}.
-                    </li>
-
                 @elseif(Session::has('prac_id'))
 
                     <li>
@@ -40,10 +36,6 @@
 
                     <li>
                         <a href="{{ url('/reports/overview', $report->id) }} "> <i class="fa fa-search"></i>Report Overview</a>
-                    </li>
-
-                    <li class="active">
-                        Viewing all <strong>Evaluation(s)</strong> for Report: {{$report->id}}.
                     </li>
 
                  @elseif(Auth::check())
@@ -56,11 +48,11 @@
                         <a href="{{ url('/reports/overview',$report->id ) }}"><i class="fa fa-search"></i>Report Overview</a>
                     </li>
 
-                     <li class="active">
-                        Viewing all <strong>Evaluation(s)</strong> for Report: {{$report->id}}.
-                    </li>
-
                 @endif
+
+                <li class="active">
+                    Viewing all <strong>Evaluation(s)</strong> for Report: {{$report->id}}.
+                </li>
 
                 </ol>
             </div>
@@ -111,7 +103,7 @@
                                     <td> {{ $evaluation['date'] }}</td>
                                     <td><a
                                          href="{{ url('/reports/evaluation/view',$evaluation['id']) }}"
-                                        class="btn btn-info btn-sm"> View</a></td>
+                                        class="btn btn-primary btn-sm"> View</a></td>
 
                             @endforeach
                         @endif

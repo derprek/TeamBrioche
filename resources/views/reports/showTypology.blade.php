@@ -97,7 +97,7 @@
         {!! Form::open(['url' => 'reports/Typology/update']) !!}
         <input type="hidden" name="typology_id" value={{$typology->id}}>
 
-        @include('show_report')
+        @include('partials.reports.show_report')
            
     </div>
     <!-- /.container-fluid -->

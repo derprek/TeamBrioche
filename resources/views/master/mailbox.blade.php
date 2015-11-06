@@ -25,12 +25,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{url('practitioner/dashboard')}}">A T E S T</a>
+
+            @if((Session::has('prac_id')) && (Session::has('is_admin')))
+                <a class="navbar-brand" href="{{url('admin/dashboard')}}">A T E S T</a>
+            @elseif(Session::has('prac_id'))
+                <a class="navbar-brand" href="{{url('practitioner/dashboard')}}">A T E S T</a>
+            @elseif(Auth::check())
+                <a class="navbar-brand" href="{{url('home')}}">A T E S T</a>
+            @endif
+
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
 
-        <li class="dropdown">
+            <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge pull-left " ng-if="totalunread()"> @{{ totalunread() }} </span> <i class="fa fa-envelope-o"></i>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -43,7 +51,6 @@
                 </ul>
                 @include('partials.messagewindow')
             </li>
-
 
             <li class="dropdown">
 

@@ -26,7 +26,7 @@ use Mail;
 class ClientManagerController extends Controller
 {   
     /**
-     *Check if user is logged in
+     * Redirects the practitioner without practitioner rights
      *
      * @return Response
      */
@@ -41,7 +41,7 @@ class ClientManagerController extends Controller
     }
 
     /**
-     * Display the list of clients.
+     * Loads the client manager view
      *
      * @return Response
      */
@@ -52,6 +52,11 @@ class ClientManagerController extends Controller
         return view('practitioner.clientManager.clientmanager', compact('prac_id'));
     }
 
+    /**
+     * Loads the client manager view
+     *
+     * @return Response
+     */
     public function show($client_id)
     {   
       $client = User::find($client_id);
@@ -80,9 +85,13 @@ class ClientManagerController extends Controller
       {
           return redirect('/unauthorizedaccess');
       }
-       
     }
 
+    /**
+     * controls the updating of client details
+     *
+     * @return Response
+     */
     public function update(Request $request)
     {  
        $client = User::find($request->id);
@@ -90,6 +99,7 @@ class ClientManagerController extends Controller
         $client->fname = $request->fname;
         $client->sname = $request->sname;
 
+        // Checks if a new email is provided and if so, validates it
         if($client->email !== $request->email)
         {
             $validator = Validator::make($request->all(), [
@@ -111,12 +121,13 @@ class ClientManagerController extends Controller
     }
 
     /**
-     *Store client information.
+     * controls the storing of a new client
      *
      * @return Response
      */
     public function store(Request $request)
     {   
+        //validates the provided email against all existing emails in the database
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:practitioners,email|unique:users,email'
         ]);
@@ -127,6 +138,7 @@ class ClientManagerController extends Controller
                return Redirect()->back()->withInput();
             }
 
+        // Generates a random 10-digit string as the default password
         $randomgeneratedpw = str_random(10);
 
         $newClient = new User;
@@ -140,6 +152,7 @@ class ClientManagerController extends Controller
         $newClient->verified = 0;
         $successful_registration = $newClient->save();
 
+        // Sends an email to the registered email address with the default password.
         if($successful_registration)
         {   
             $message = "Hello, " . $newClient->fname .". Your account is ready for you! Please use this default password: " 
@@ -176,6 +189,11 @@ class ClientManagerController extends Controller
         
     }
 
+    /**
+     * Fetches all of the clients associated with this practitioner
+     *
+     * @return Response
+     */
     public function getAllClients()
     {
         $clients = User::latest('created_at')->MyClient()->get();
@@ -208,6 +226,11 @@ class ClientManagerController extends Controller
         }
     }
 
+    /**
+     * Fetches the information regarding the selected client
+     *
+     * @return array
+     */
     public function getThisClient()
     {    
         $client = User::find(Session::get('viewing_client'));
@@ -234,7 +257,12 @@ class ClientManagerController extends Controller
 
     }
 
-     public function getClientReports()
+    /**
+     * Fetches the reports associated to the selected client
+     *
+     * @return Response
+     */
+    public function getClientReports()
     {     
         $client = User::find(Session::get('viewing_client'));
 
@@ -286,6 +314,11 @@ class ClientManagerController extends Controller
         }
     }
 
+    /**
+     * controls the deletion of clients
+     *
+     * @return Response
+     */
     public function deleteClient(Request $request)
     {     
        $client = User::find($request->id);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use Auth;
 use App\User;
 use Validator;
@@ -31,14 +33,14 @@ class ClientAuthController extends Controller
     }
 
     /**
-     *Client login.
+     * Validates the client credentials for logging in
      *
      * @return Response
      */
-    public function login()
-    {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+    public function login(Request $request)
+    { 
+        $email = $request->email;
+        $password = $request->password;
         if (Auth::attempt(['email' => $email, 'password' => $password]))
         {
             return redirect()->action('ClientsController@index');
@@ -46,7 +48,7 @@ class ClientAuthController extends Controller
         else
         {
             $errors[] = 'Invalid Credentials! Please try again';
-            return redirect()->back()->withErrors($errors);
+            return redirect()->back()->withInput()->withErrors($errors);
         }
 
     }
